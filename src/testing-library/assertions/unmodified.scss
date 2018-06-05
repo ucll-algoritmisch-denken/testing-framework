@@ -1,0 +1,19 @@
+.unmodified-assertion {
+    margin: 0.5em auto;
+    width: 60%;
+
+    th {
+        text-align: right;
+        min-width: 8em;
+        font-variant: small-caps;
+        text-transform: lowercase;
+        background: #AAF;
+        padding: 0.1em 0.2em;
+    }
+
+    td {
+        text-align: center;
+        width: 100%;
+        border: #AAA solid 1px;
+    }
+}

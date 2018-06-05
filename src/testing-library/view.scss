@@ -1,0 +1,35 @@
+.section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1em;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    background: black;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    height: 5em;
+    margin: 0px;
+    z-index: 1;
+
+    span {
+        font-size: 4em;
+    }
+}
+
+.top-container {
+    position: fixed;
+    top: 5em;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}

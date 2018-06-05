@@ -1,0 +1,20 @@
+.hint-viewer {
+    width: 80%;
+    margin: 1em auto;
+    background: #CCF;
+    box-shadow: 5px 5px #DDF;    
+
+    .header {
+        background: #AAF;
+        text-align: center;
+        font-size: 2em;
+        padding: 0.2em;
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .contents {
+        margin: 0em 1em;
+    }
+}
