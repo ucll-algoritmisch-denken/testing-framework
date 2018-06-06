@@ -1,11 +1,11 @@
 import React from 'react';
-import { parseFunction, formatFunction, FunctionInformation, namedCallFunction, INamedFunctionCallResults } from 'function-util';
-import { ISection, IScoredSection } from 'chapter';
-import { ValidatedInput } from 'components/ValidatedInput';
-import * as Formatters from 'formatters/jsx-formatters';
-import { deepEqual } from 'equality';
-import { SourceCodeViewer } from 'components/sourcecode-viewer';
-import { HintViewer } from 'components/hint-viewer';
+import { parseFunction, formatFunction, FunctionInformation, namedCallFunction, INamedFunctionCallResults } from '../../function-util';
+import { ISection, IScoredSection } from '../../chapter';
+import { ValidatedInput } from '../../components/ValidatedInput';
+import * as Formatters from '../../formatters/jsx-formatters';
+import { deepEqual } from '../../equality';
+import { SourceCodeViewer } from '../../components/sourcecode-viewer';
+import { HintViewer } from '../../components/hint-viewer';
 import './interpretation.scss';
 
 

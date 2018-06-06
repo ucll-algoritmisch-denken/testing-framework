@@ -1,7 +1,7 @@
 import React from 'react';
-import { code } from 'formatters/jsx-formatters';
+import { convertToString } from '../formatters/string-formatters';
+import { code } from '../formatters/jsx-formatters';
 import './invalid.scss';
-import { convertToString } from 'formatters/string-formatters';
 
 
 export interface IProps

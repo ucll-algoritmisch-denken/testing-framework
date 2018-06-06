@@ -1,40 +1,40 @@
-import { isUndefined } from "type";
+import { isUndefined } from "./type";
 
-export abstract class IMaybe<T>
+export abstract class Maybe<T>
 {
     abstract hasValue() : this is Just<T>;
 
-    abstract bind<U>(f : (x : T) => IMaybe<U>) : IMaybe<U>;
+    abstract bind<U>(f : (x : T) => Maybe<U>) : Maybe<U>;
 
-    static of<T>(x : T) : IMaybe<T>
+    static of<T>(x : T) : Maybe<T>
     {
         return new Just<T>(x);
     }
 
-    static nothing<T>() : IMaybe<T>
+    static nothing<T>() : Maybe<T>
     {
         return new Nothing<T>();
     }
 
-    static fromUndefined<T>(x : T | undefined) : IMaybe<T>
+    static fromUndefined<T>(x : T | undefined) : Maybe<T>
     {
         if ( isUndefined(x) )
         {
-            return IMaybe.nothing<T>();
+            return Maybe.nothing<T>();
         }
         else
         {
-            return IMaybe.of<T>(x);
+            return Maybe.of<T>(x);
         }
     }
 
-    lift<U>(f : (t : T) => U) : IMaybe<U>
+    lift<U>(f : (t : T) => U) : Maybe<U>
     {
-        return this.bind(x => IMaybe.of(f(x)));
+        return this.bind(x => Maybe.of(f(x)));
     }
 }
 
-export class Just<T> extends IMaybe<T>
+export class Just<T> extends Maybe<T>
 {
     constructor(public value : T)
     {
@@ -46,21 +46,21 @@ export class Just<T> extends IMaybe<T>
         return true;
     }
 
-    bind<U>(f : (x : T) => IMaybe<U>) : IMaybe<U>
+    bind<U>(f : (x : T) => Maybe<U>) : Maybe<U>
     {
         return f(this.value);
     }
 
 }
 
-export class Nothing<T> extends IMaybe<T>
+export class Nothing<T> extends Maybe<T>
 {
     hasValue() : this is Just<T>
     {
         return false;
     }    
 
-    bind<U>(_ : (x: T) => IMaybe<U>) : IMaybe<U>
+    bind<U>(_ : (x: T) => Maybe<U>) : Maybe<U>
     {
         return new Nothing<U>();
     }

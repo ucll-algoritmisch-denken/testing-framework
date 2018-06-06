@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'assertions';
-import { Outcome } from 'outcome';
-import { IToJsxElement, simple } from 'formatters/jsx-formatters';
-import { deepEqual } from 'equality';
-import { IMaybe } from 'maybe';
+import { IResult, IAssertion } from '../assertions';
+import { Outcome } from '../outcome';
+import { IToJsxElement, simple } from '../formatters/jsx-formatters';
+import { deepEqual } from '../equality';
+import { Maybe } from '../maybe';
 import './equality.scss';
 
 
@@ -17,7 +17,7 @@ class EqualityAssertion implements IAssertion
 {
     constructor(private expected : any, private options : IEqualityAssertionOptions) {  }
 
-    check(actual : IMaybe<any>) : IResult
+    check(actual : Maybe<any>) : IResult
     {
         return new EqualityAssertionResult(this.expected, actual, this.options);
     }
@@ -25,7 +25,7 @@ class EqualityAssertion implements IAssertion
 
 class EqualityAssertionResult implements IResult
 {
-    constructor(private expected : any, private actual : IMaybe<any>, private options : IEqualityAssertionOptions) { }
+    constructor(private expected : any, private actual : Maybe<any>, private options : IEqualityAssertionOptions) { }
 
     get result(): Outcome
     {

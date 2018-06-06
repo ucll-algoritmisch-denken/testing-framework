@@ -1,13 +1,13 @@
 import React from 'react';
-import { ISection } from 'chapter';
+import { ISection } from '../../chapter';
+import { isUndefined } from '../../type';
+import * as Assertions from '../../assertions';
+import { simple, code } from '../../formatters/jsx-formatters';
+import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from '../../function-util';
+import * as CodingExercise from './coding';
+import { Maybe } from '../../maybe';
+import { convertToString } from '../../formatters/string-formatters';
 import './coding.scss';
-import { isUndefined } from 'type';
-import * as Assertions from 'assertions';
-import { simple, code } from 'formatters/jsx-formatters';
-import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from 'function-util';
-import * as CodingExercise from 'sections/exercises/coding';
-import { IMaybe } from 'maybe';
-import { convertToString } from 'formatters/string-formatters';
 
 
 export interface IByReferenceImplementationBuilder
@@ -27,14 +27,14 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 {
     private cases : IFunctionCallResults[];
 
-    private testCaseBuilder : (index : number, tcb : CodingExercise.ITestCaseBuilder, reference : IFunctionCallResults, tested : IMaybe<IFunctionCallResults>) => void;
+    private testCaseBuilder : (index : number, tcb : CodingExercise.ITestCaseBuilder, reference : IFunctionCallResults, tested : Maybe<IFunctionCallResults>) => void;
 
     private referenceFunctionInformation : FunctionInformation;
 
     constructor(
         private description : JSX.Element,
         private referenceImplementation : (...args : any[]) => any,
-        private testedImplementation : IMaybe<(...args : any[]) => any>,
+        private testedImplementation : Maybe<(...args : any[]) => any>,
         private headerGenerator : (expected: IFunctionCallResults) => JSX.Element,
         private showSolution : boolean)
     {
@@ -60,7 +60,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         this.testCaseBuilder = newBuilder;
 
 
-        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
+        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>) : void
         {
             oldBuilder(testCaseIndex, tcb, expected, actual);
 
@@ -87,7 +87,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         this.testCaseBuilder = newBuilder;        
 
 
-        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
+        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>) : void
         {
             oldBuilder(testCaseIndex, tcb, expected, actual);
 
@@ -135,7 +135,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 export function build( args : {
     description : JSX.Element,
     referenceImplementation : (...args : any[]) => any, 
-    testedImplementation : IMaybe<((...args : any[]) => any)>,
+    testedImplementation : Maybe<((...args : any[]) => any)>,
     headerGenerator ?: (expected: IFunctionCallResults) => JSX.Element,
     showSolution ?: boolean },
     func : (b : IByReferenceImplementationBuilder) => void ) : ISection

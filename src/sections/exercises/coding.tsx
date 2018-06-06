@@ -1,13 +1,13 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { ISection } from 'chapter';
-import { Score } from 'score';
-import { isUndefined } from 'type';
-import { IResult } from 'assertions';
-import { Outcome, combineAssertionOutcomes } from 'outcome';
-import { jsxify } from 'formatters/jsx-formatters';
-import { SolutionViewer } from 'components/solution-viewer';
-import { Exercise } from 'sections/exercises/exercise';
+import { ISection } from '../../chapter';
+import { Score } from '../../score';
+import { isUndefined } from '../../type';
+import { IResult } from '../../assertions';
+import { Outcome, combineAssertionOutcomes } from '../../outcome';
+import { jsxify } from '../../formatters/jsx-formatters';
+import { SolutionViewer } from '../../components/solution-viewer';
+import { Exercise } from '../../sections/exercises/exercise';
 import './coding.scss';
 
 

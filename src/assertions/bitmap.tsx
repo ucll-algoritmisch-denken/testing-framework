@@ -1,5 +1,5 @@
-import { IAssertion, createEqualityAssertion } from 'assertions';
-import * as Formatters from 'formatters/jsx-formatters';
+import { IAssertion, createEqualityAssertion } from '../assertions';
+import * as Formatters from '../formatters/jsx-formatters';
 
 
 export function createGrayscaleBitmapAssertion(expected : number[][], original ?: number[][]) : IAssertion

@@ -1,5 +1,5 @@
-import { ISection } from 'chapter';
-import { Score } from 'score';
+import { ISection } from './chapter';
+import { Score } from './score';
 
 
 export interface IChapter

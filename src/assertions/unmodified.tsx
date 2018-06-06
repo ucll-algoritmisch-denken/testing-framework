@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'assertions';
-import { Outcome } from 'outcome';
-import { IToJsxElement, simple } from 'formatters/jsx-formatters';
-import { deepEqual } from 'equality';
-import { IMaybe } from 'maybe';
+import { IResult, IAssertion } from '../assertions';
+import { Outcome } from '../outcome';
+import { IToJsxElement, simple } from '../formatters/jsx-formatters';
+import { deepEqual } from '../equality';
+import { Maybe } from '../maybe';
 import './unmodified.scss';
 
 
@@ -19,7 +19,7 @@ class UnmodifiedAssertion implements IAssertion
 
 class UnmodifiedAssertionResult implements IResult
 {
-    constructor(private original : any, private actual : IMaybe<any>, private formatter : IToJsxElement<any>) { }
+    constructor(private original : any, private actual : Maybe<any>, private formatter : IToJsxElement<any>) { }
 
     get result(): Outcome
     {

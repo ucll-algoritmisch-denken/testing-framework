@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import dedent from 'dedent';
-import { IMaybe } from 'maybe';
+import { Maybe } from './maybe';
 
 
 export class FunctionInformation
@@ -61,9 +61,9 @@ export function callFunction(func : (...args : any[]) => any, ...args : any[]) :
     };
 }
 
-export function monadicCallFunction(func : IMaybe<(...args : any[]) => any>, ...args : any[]) : IMaybe<IFunctionCallResults>
+export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<IFunctionCallResults>
 {
-    return func.bind(f => IMaybe.of(callFunction(f, ...args)));
+    return func.bind(f => Maybe.of(callFunction(f, ...args)));
 }
 
 export interface INamedFunctionCallResults

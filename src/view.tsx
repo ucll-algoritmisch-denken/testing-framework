@@ -1,9 +1,9 @@
 import React from 'react';
-import { ISection } from 'chapter';
 import Sidebar from 'react-sidebar';
-import { TableOfContents } from 'components/table-of-contents';
+import { ISection } from './chapter';
+import { TableOfContents } from './components/table-of-contents';
+import { IChapter } from './chapter';
 import './view.scss';
-import { IChapter } from 'chapter';
 
 
 export interface IProps

@@ -1,11 +1,11 @@
 import React from 'react';
-import { isArray, isString, isNumber } from 'type';
-import { allEqual } from 'atf-util';
-import { Bitmap } from 'bitmap';
-import { BitmapViewer } from 'components/bitmap-viewer';
+import { isArray, isString, isNumber } from '../type';
+import { allEqual } from '../atf-util';
+import { Bitmap } from '../bitmap';
+import { BitmapViewer } from '../components/bitmap-viewer';
+import { Invalid } from '../components/invalid';
+import { convertToString } from './string-formatters';
 import _ from 'lodash';
-import { Invalid } from 'components/invalid';
-import { convertToString } from 'formatters/string-formatters';
 
 
 export function jsxify(x : JSX.Element | string)

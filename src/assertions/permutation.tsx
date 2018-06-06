@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'assertions';
-import { Outcome } from 'outcome';
-import { IToJsxElement, simple } from 'formatters/jsx-formatters';
-import { isPermutation } from 'atf-util';
-import { IMaybe } from 'maybe';
+import { IResult, IAssertion } from '../assertions';
+import { Outcome } from '../outcome';
+import { IToJsxElement, simple } from '../formatters/jsx-formatters';
+import { isPermutation } from '../atf-util';
+import { Maybe } from '../maybe';
 import './permutation.scss';
 
 
@@ -19,7 +19,7 @@ class PermutationAssertion implements IAssertion
 
 class PermutationAssertionResult implements IResult
 {
-    constructor(private expected : any, private actual : IMaybe<any>, private formatter : IToJsxElement<any>) { }
+    constructor(private expected : any, private actual : Maybe<any>, private formatter : IToJsxElement<any>) { }
 
     get result(): Outcome
     {

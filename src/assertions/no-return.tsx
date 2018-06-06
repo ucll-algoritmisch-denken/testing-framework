@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'assertions';
-import { Outcome } from 'outcome';
-import { simple } from 'formatters/jsx-formatters';
-import { isUndefined } from 'type';
-import { IMaybe } from 'maybe';
+import { IResult, IAssertion } from '../assertions';
+import { Outcome } from '../outcome';
+import { simple } from '../formatters/jsx-formatters';
+import { isUndefined } from '../type';
+import { Maybe } from '../maybe';
 import './no-return.scss';
 
 
@@ -11,7 +11,7 @@ class NoReturnAssertion implements IAssertion
 {
     constructor() { }
 
-    check(actual : IMaybe<any>): IResult
+    check(actual : Maybe<any>): IResult
     {
         return new NoReturnAssertionResult(actual);
     }
@@ -19,7 +19,7 @@ class NoReturnAssertion implements IAssertion
 
 class NoReturnAssertionResult implements IResult
 {
-    constructor(private actual : IMaybe<any>) { }
+    constructor(private actual : Maybe<any>) { }
 
     get content(): JSX.Element
     {
