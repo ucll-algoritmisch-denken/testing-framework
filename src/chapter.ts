@@ -1,5 +1,5 @@
-import { ISection } from "testing-library/chapter";
-import { Score } from 'testing-library/score';
+import { ISection } from 'chapter';
+import { Score } from 'score';
 
 
 export interface IChapter

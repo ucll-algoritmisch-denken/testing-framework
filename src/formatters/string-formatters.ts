@@ -1,4 +1,4 @@
-import { isArray, isString, isUndefined, isNumber, isBoolean } from "testing-library/type";
+import { isArray, isString, isUndefined, isNumber, isBoolean } from "type";
 import _ from 'lodash';
 
 

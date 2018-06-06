@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'testing-library/assertions';
-import { Outcome } from 'testing-library/outcome';
-import { IToJsxElement, simple } from 'testing-library/formatters/jsx-formatters';
-import { isPermutation } from 'testing-library/util';
-import { IMaybe } from 'testing-library/maybe';
+import { IResult, IAssertion } from 'assertions';
+import { Outcome } from 'outcome';
+import { IToJsxElement, simple } from 'formatters/jsx-formatters';
+import { isPermutation } from 'atf-util';
+import { IMaybe } from 'maybe';
 import './permutation.scss';
 
 

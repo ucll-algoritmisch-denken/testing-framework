@@ -1,4 +1,4 @@
-import { IChapter } from "testing-library/chapter";
+import { IChapter } from "chapter";
 
 
 export class Shell

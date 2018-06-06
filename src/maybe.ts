@@ -1,4 +1,4 @@
-import { isUndefined } from "testing-library/type";
+import { isUndefined } from "type";
 
 export abstract class IMaybe<T>
 {

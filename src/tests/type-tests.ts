@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { isArray } from 'testing-library/type';
-import { convertToString } from 'testing-library/formatters/string-formatters';
+import { isArray } from 'type';
+import { convertToString } from 'formatters/string-formatters';
 
 
 describe('isArray', () => {

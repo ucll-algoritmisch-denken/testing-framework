@@ -1,15 +1,14 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { ISection } from 'testing-library/chapter';
-import { Score } from 'testing-library/score';
-import 'testing-library/sections/exercises/coding.scss';
-import { isUndefined } from 'testing-library/type';
-import { IResult } from 'testing-library/assertions';
-import { Outcome, combineAssertionOutcomes } from 'testing-library/outcome';
-import { jsxify } from 'testing-library/formatters/jsx-formatters';
-import { SolutionViewer } from 'testing-library/components/solution-viewer';
-import { Exercise } from 'testing-library/sections/exercises/exercise';
-import { ITest } from 'mocha';
+import { ISection } from 'chapter';
+import { Score } from 'score';
+import { isUndefined } from 'type';
+import { IResult } from 'assertions';
+import { Outcome, combineAssertionOutcomes } from 'outcome';
+import { jsxify } from 'formatters/jsx-formatters';
+import { SolutionViewer } from 'components/solution-viewer';
+import { Exercise } from 'sections/exercises/exercise';
+import './coding.scss';
 
 
 function assertionResultToClass(result : Outcome)

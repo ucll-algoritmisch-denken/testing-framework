@@ -1,8 +1,8 @@
 import React from 'react';
-import { Score } from 'testing-library/score';
-import { ISection, selectScoredSections } from 'testing-library/chapter';
+import { Score } from 'score';
+import { ISection, selectScoredSections } from 'chapter';
 import './table-of-contents.scss';
-import { ScoreViewer } from 'testing-library/components/score-viewer';
+import { ScoreViewer } from 'components/score-viewer';
 
 
 export interface IProps

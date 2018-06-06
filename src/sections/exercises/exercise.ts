@@ -1,5 +1,5 @@
-import { IScoredSection } from "testing-library/chapter";
-import { Score } from "testing-library/score";
+import { IScoredSection } from "chapter";
+import { Score } from "score";
 
 
 export abstract class Exercise implements IScoredSection

@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'testing-library/assertions';
-import { Outcome } from 'testing-library/outcome';
-import { simple } from 'testing-library/formatters/jsx-formatters';
-import { isUndefined } from 'testing-library/type';
-import { IMaybe } from 'testing-library/maybe';
+import { IResult, IAssertion } from 'assertions';
+import { Outcome } from 'outcome';
+import { simple } from 'formatters/jsx-formatters';
+import { isUndefined } from 'type';
+import { IMaybe } from 'maybe';
 import './no-return.scss';
 
 

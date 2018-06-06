@@ -1,13 +1,13 @@
 import React from 'react';
-import { ISection } from 'testing-library/chapter';
-import 'testing-library/sections/exercises/coding.scss';
-import { isUndefined } from 'testing-library/type';
-import * as Assertions from 'testing-library/assertions';
-import { simple, code } from 'testing-library/formatters/jsx-formatters';
-import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from 'testing-library/function-util';
-import * as CodingExercise from 'testing-library/sections/exercises/coding';
-import { IMaybe } from 'testing-library/maybe';
-import { convertToString } from 'testing-library/formatters/string-formatters';
+import { ISection } from 'chapter';
+import './coding.scss';
+import { isUndefined } from 'type';
+import * as Assertions from 'assertions';
+import { simple, code } from 'formatters/jsx-formatters';
+import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from 'function-util';
+import * as CodingExercise from 'sections/exercises/coding';
+import { IMaybe } from 'maybe';
+import { convertToString } from 'formatters/string-formatters';
 
 
 export interface IByReferenceImplementationBuilder

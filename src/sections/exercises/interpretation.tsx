@@ -1,12 +1,12 @@
 import React from 'react';
-import { parseFunction, formatFunction, FunctionInformation, namedCallFunction, INamedFunctionCallResults } from 'testing-library/function-util';
-import { ISection, IScoredSection } from 'testing-library/chapter';
-import { ValidatedInput } from 'testing-library/components/ValidatedInput';
-import * as Formatters from 'testing-library/formatters/jsx-formatters';
-import 'testing-library/sections/exercises/interpretation.scss';
-import { deepEqual } from 'testing-library/equality';
-import { SourceCodeViewer } from 'testing-library/components/sourcecode-viewer';
-import { HintViewer } from 'testing-library/components/hint-viewer';
+import { parseFunction, formatFunction, FunctionInformation, namedCallFunction, INamedFunctionCallResults } from 'function-util';
+import { ISection, IScoredSection } from 'chapter';
+import { ValidatedInput } from 'components/ValidatedInput';
+import * as Formatters from 'formatters/jsx-formatters';
+import { deepEqual } from 'equality';
+import { SourceCodeViewer } from 'components/sourcecode-viewer';
+import { HintViewer } from 'components/hint-viewer';
+import './interpretation.scss';
 
 
 export interface IBuilder

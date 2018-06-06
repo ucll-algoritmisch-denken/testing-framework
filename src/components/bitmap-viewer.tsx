@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Bitmap } from 'testing-library/bitmap';
+import { Bitmap } from 'bitmap';
 
 
 export interface IProps

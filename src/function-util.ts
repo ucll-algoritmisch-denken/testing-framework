@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import dedent from 'dedent';
-import { IMaybe } from 'testing-library/maybe';
+import { IMaybe } from 'maybe';
 
 
 export class FunctionInformation

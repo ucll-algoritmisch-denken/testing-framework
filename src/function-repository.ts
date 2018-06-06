@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { IMaybe } from 'testing-library/maybe';
+import { IMaybe } from 'maybe';
 
 
 export interface IFunctionRepository

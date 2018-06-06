@@ -1,9 +1,9 @@
 import React from 'react';
-import { IResult, IAssertion } from 'testing-library/assertions';
-import { Outcome } from 'testing-library/outcome';
-import { IToJsxElement, simple } from 'testing-library/formatters/jsx-formatters';
-import { deepEqual } from 'testing-library/equality';
-import { IMaybe } from 'testing-library/maybe';
+import { IResult, IAssertion } from 'assertions';
+import { Outcome } from 'outcome';
+import { IToJsxElement, simple } from 'formatters/jsx-formatters';
+import { deepEqual } from 'equality';
+import { IMaybe } from 'maybe';
 import './unmodified.scss';
 
 
