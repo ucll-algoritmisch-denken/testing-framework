@@ -27,7 +27,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 {
     private cases : IFunctionCallResults[];
 
-    private testCaseBuilder : (index : number, tcb : CodingExercise.TestCaseBuilder, reference : IFunctionCallResults, tested : IMaybe<IFunctionCallResults>) => void;
+    private testCaseBuilder : (index : number, tcb : CodingExercise.ITestCaseBuilder, reference : IFunctionCallResults, tested : IMaybe<IFunctionCallResults>) => void;
 
     private referenceFunctionInformation : FunctionInformation;
 
@@ -60,7 +60,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         this.testCaseBuilder = newBuilder;
 
 
-        function newBuilder(testCaseIndex : number, tcb : CodingExercise.TestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
+        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
         {
             oldBuilder(testCaseIndex, tcb, expected, actual);
 
@@ -87,7 +87,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         this.testCaseBuilder = newBuilder;        
 
 
-        function newBuilder(testCaseIndex : number, tcb : CodingExercise.TestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
+        function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : IMaybe<IFunctionCallResults>) : void
         {
             oldBuilder(testCaseIndex, tcb, expected, actual);
 

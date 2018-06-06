@@ -9,7 +9,7 @@ import { SourceCodeViewer } from 'testing-library/components/sourcecode-viewer';
 import { HintViewer } from 'testing-library/components/hint-viewer';
 
 
-export interface IInterpretationExerciseBuilder
+export interface IBuilder
 {
     header : JSX.Element;
 
@@ -185,7 +185,7 @@ class InterpretationExercise implements ISection
     }
 }
 
-class InterpretationExerciseBuilder
+class InterpretationExerciseBuilder implements IBuilder
 {
     private cases : INamedFunctionCallResults[];
 
@@ -236,7 +236,7 @@ class InterpretationExerciseBuilder
     }
 }
 
-export function build(func : (...args : any[]) => any, b : (builder : IInterpretationExerciseBuilder) => void) : ISection
+export function build(func : (...args : any[]) => any, b : (builder : IBuilder) => void) : ISection
 {
     const builder = new InterpretationExerciseBuilder(func);
 

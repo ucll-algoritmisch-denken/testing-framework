@@ -9,6 +9,7 @@ import { Outcome, combineAssertionOutcomes } from 'testing-library/outcome';
 import { jsxify } from 'testing-library/formatters/jsx-formatters';
 import { SolutionViewer } from 'testing-library/components/solution-viewer';
 import { Exercise } from 'testing-library/sections/exercises/exercise';
+import { ITest } from 'mocha';
 
 
 function assertionResultToClass(result : Outcome)
@@ -31,6 +32,31 @@ function assertionResultToClass(result : Outcome)
     }
 }
 
+export interface IBuilder
+{
+    description: string | JSX.Element | undefined;
+
+    header : JSX.Element;
+
+    solution ?: string;
+
+    tocEntry : JSX.Element;
+
+    addTestCase(func : (tcb : ITestCaseBuilder) => void) : void;
+
+    build() : ISection;
+}
+
+export interface ITestCaseBuilder
+{
+    header : string | JSX.Element | undefined;
+
+    addReturnValueAssertionResult(assertion : IResult) : void;
+
+    addParameterValueAssertion(name : string, assertion : IResult) : void;
+}
+
+
 export interface ITestCase
 {
     readonly header : JSX.Element;
@@ -40,7 +66,7 @@ export interface ITestCase
     readonly result : Outcome;
 }
 
-export class TestCase implements ITestCase
+class TestCase implements ITestCase
 {
     constructor(public header : JSX.Element, public body : JSX.Element, public result : Outcome) { }
 }
@@ -141,7 +167,7 @@ class CodingExercise extends Exercise
     }
 }
 
-export class CodingExerciseBuilder
+class CodingExerciseBuilder implements IBuilder
 {
     private readonly testCases : TestCase[];
 
@@ -192,7 +218,7 @@ export class CodingExerciseBuilder
     }
 }
 
-export class TestCaseBuilder
+class TestCaseBuilder
 {
     private readonly assertions : IResult[];
 
@@ -285,7 +311,7 @@ export class TestCaseBuilder
     }
 }
 
-export function build(testedFunctionName : string, b : (builder : CodingExerciseBuilder) => void) : ISection
+export function build(testedFunctionName : string, b : (builder : IBuilder) => void) : ISection
 {
     const builder = new CodingExerciseBuilder(testedFunctionName, testedFunctionName);
 
