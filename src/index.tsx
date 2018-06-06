@@ -11,25 +11,30 @@ export { IChapter, ISection } from './chapter';
 export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow } from './function-repository';
 
 
-// Interpretation exercise
 import * as InterpretationExercise from './sections/exercises/interpretation';
-export { InterpretationExercise };
-
-// Test-based coding exercise
 import * as TestBasedCodingExercise from './sections/exercises/coding';
-export { TestBasedCodingExercise };
+import * as ReferenceImplementationBasedCodingExercise from './sections/exercises/by-reference-implementation';
 
-export { build as buildReferenceImplementationExercise } from './sections/exercises/by-reference-implementation';
+export const Exercise = {
+    Interpretation: InterpretationExercise,
+    Coding: {
+        TestBased: TestBasedCodingExercise,
+        ReferenceImplementationBased : ReferenceImplementationBasedCodingExercise
+    }
+};
+
 
 export { code } from './formatters/jsx-formatters';
-export { convertToString } from 'formatters/string-formatters';
+export { convertToString } from './formatters/string-formatters';
 
-export { callFunction, IFunctionCallResults, monadicCallFunction, formatFunction } from 'function-util';
+export { callFunction, IFunctionCallResults, monadicCallFunction, formatFunction, parseFunction } from './function-util';
 
 import * as Assertions from './assertions';
 export { Assertions };
 
-export { Maybe, Just, Nothing } from './maybe';
+// export { Maybe, Just, Nothing } from './maybe';
+
+export { loadImage } from './bitmap';
 
 export async function initialize(chapter : IChapter)
 {
