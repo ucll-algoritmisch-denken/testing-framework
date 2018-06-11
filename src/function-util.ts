@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import dedent from 'dedent';
-import { Maybe } from './maybe';
+import { Maybe } from 'maybe-monad';
 
 
 export class FunctionInformation
@@ -38,6 +38,7 @@ export function parseFunction(func : (...args : any[]) => any) : FunctionInforma
     }
     else
     {
+        console.log(`Failed to parse\n${func.toString()}`);
         throw new Error("Could not parse function source");
     }
 }
@@ -63,7 +64,7 @@ export function callFunction(func : (...args : any[]) => any, ...args : any[]) :
 
 export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<IFunctionCallResults>
 {
-    return func.bind(f => Maybe.of(callFunction(f, ...args)));
+    return func.and(f => Maybe.justAllowNull(callFunction(f, ...args)));
 }
 
 export interface INamedFunctionCallResults

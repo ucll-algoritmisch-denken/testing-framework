@@ -9,6 +9,7 @@
     "start": "npm run build",
     "clean": "rm -r dist",
     "build": "webpack --mode development",
+    "production": "webpack --mode production",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register src/tests/*"
   },
   "keywords": [],
@@ -59,6 +60,7 @@
     "react-codemirror2": "^5.0.1",
     "react-collapsible": "^2.2.0",
     "react-sidebar": "^2.3.2",
-    "foo": "^1.0.0"
-  }
+    "maybe-monad": "^1.1.0"
+  },
+  "peerDependencies": {}
 }

@@ -1,5 +1,5 @@
 import { Outcome } from './outcome';
-import { Maybe } from './maybe';
+import { Maybe } from 'maybe-monad';
 
 export { createEqualityAssertion } from './assertions/equality';
 export { createNoReturnAssertion } from './assertions/no-return';

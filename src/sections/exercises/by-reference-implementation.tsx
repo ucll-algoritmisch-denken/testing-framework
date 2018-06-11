@@ -5,7 +5,7 @@ import * as Assertions from '../../assertions';
 import { simple, code } from '../../formatters/jsx-formatters';
 import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from '../../function-util';
 import * as CodingExercise from './coding';
-import { Maybe } from '../../maybe';
+import { Maybe } from 'maybe-monad';
 import { convertToString } from '../../formatters/string-formatters';
 import './coding.scss';
 
@@ -65,7 +65,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
             oldBuilder(testCaseIndex, tcb, expected, actual);
 
             const assertion = assertionConstructor(expected, testCaseIndex);
-            const result = assertion.check(actual.lift(x => x.returnValue));
+            const result = assertion.check(actual.mapAllowNull(x => x.returnValue));
 
             tcb.addReturnValueAssertionResult(result);
         }
@@ -91,9 +91,9 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         {
             oldBuilder(testCaseIndex, tcb, expected, actual);
 
-            const namedActual = actual.lift(x => nameResults(x, me.referenceFunctionInformation));
+            const namedActual = actual.mapAllowNull(x => nameResults(x, me.referenceFunctionInformation));
             const assertion = assertionConstructor(expected, testCaseIndex);
-            const result = assertion.check(namedActual.lift(x => x.argumentsAfterCall['parameterName']));
+            const result = assertion.check(namedActual.mapAllowNull(x => x.argumentsAfterCall['parameterName']));
 
             tcb.addParameterValueAssertion(parameterName, result);
         }

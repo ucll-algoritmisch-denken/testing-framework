@@ -3,7 +3,7 @@ import { IResult, IAssertion } from '../assertions';
 import { Outcome } from '../outcome';
 import { IToJsxElement, simple } from '../formatters/jsx-formatters';
 import { isPermutation } from '../atf-util';
-import { Maybe } from '../maybe';
+import { Maybe } from 'maybe-monad';
 import './permutation.scss';
 
 
@@ -23,7 +23,7 @@ class PermutationAssertionResult implements IResult
 
     get result(): Outcome
     {
-        if ( this.actual.hasValue() )
+        if ( this.actual.hasValue )
         {
             return isPermutation(this.expected, this.actual.value) ? Outcome.Pass : Outcome.Fail;
         }
@@ -61,7 +61,7 @@ class PermutationAssertionResult implements IResult
 
     private createActualRow() : JSX.Element
     {
-        if ( this.actual.hasValue() )
+        if ( this.actual.hasValue )
         {
             return (
                 <tr key="actual">

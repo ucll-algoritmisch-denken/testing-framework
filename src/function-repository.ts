@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Maybe } from './maybe';
+import { Maybe } from 'maybe-monad';
 
 
 export interface IFunctionRepository
@@ -15,7 +15,7 @@ class ObjectFunctionRepository implements IFunctionRepository
     {
         if ( _.has(this.obj, name) )
         {
-            return Maybe.of( this.obj[name] );
+            return Maybe.justAllowNull( this.obj[name] );
         }
         else
         {

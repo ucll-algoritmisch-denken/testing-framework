@@ -3,7 +3,7 @@ import { IResult, IAssertion } from '../assertions';
 import { Outcome } from '../outcome';
 import { IToJsxElement, simple } from '../formatters/jsx-formatters';
 import { deepEqual } from '../equality';
-import { Maybe } from '../maybe';
+import { Maybe } from 'maybe-monad';
 import './equality.scss';
 
 
@@ -29,7 +29,7 @@ class EqualityAssertionResult implements IResult
 
     get result(): Outcome
     {
-        if ( this.actual.hasValue() )
+        if ( this.actual.hasValue )
         {
             return deepEqual(this.expected, this.actual.value) ? Outcome.Pass : Outcome.Fail;
         }
@@ -80,7 +80,7 @@ class EqualityAssertionResult implements IResult
 
     private createActualRow() : JSX.Element
     {
-        if ( this.actual.hasValue() )
+        if ( this.actual.hasValue )
         {
             return (
                 <tr key="actual">

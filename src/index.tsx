@@ -7,7 +7,7 @@ import { App } from './view';
 import { IChapter } from './chapter';
 
 export { Score } from './score';
-export { IChapter, ISection } from './chapter';
+export { IChapter, ISection, IScoredSection } from './chapter';
 export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow } from './function-repository';
 
 
@@ -24,17 +24,24 @@ export const Exercise = {
 };
 
 
-export { code } from './formatters/jsx-formatters';
-export { convertToString } from './formatters/string-formatters';
+import * as JsxFormatters from './formatters/jsx-formatters';
+import * as StringFormatters from './formatters/string-formatters';
 
-export { callFunction, IFunctionCallResults, monadicCallFunction, formatFunction, parseFunction } from './function-util';
+export const Formatters = {
+    Jsx: JsxFormatters,
+    String: StringFormatters
+};
+
+import * as Functional from './function-util';
+export { Functional };
 
 import * as Assertions from './assertions';
 export { Assertions };
 
-// export { Maybe, Just, Nothing } from './maybe';
-
-export { loadImage } from './bitmap';
+import { loadImage } from './bitmap';
+export const Imaging = {
+    loadImage
+};
 
 export async function initialize(chapter : IChapter)
 {

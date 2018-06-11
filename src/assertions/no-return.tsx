@@ -3,7 +3,7 @@ import { IResult, IAssertion } from '../assertions';
 import { Outcome } from '../outcome';
 import { simple } from '../formatters/jsx-formatters';
 import { isUndefined } from '../type';
-import { Maybe } from '../maybe';
+import { Maybe } from 'maybe-monad';
 import './no-return.scss';
 
 
@@ -23,7 +23,7 @@ class NoReturnAssertionResult implements IResult
 
     get content(): JSX.Element
     {
-        if ( this.actual.hasValue() && !isUndefined(this.actual.value) )
+        if ( this.actual.hasValue && !isUndefined(this.actual.value) )
         {        
             return (
                 <React.Fragment>
@@ -47,7 +47,7 @@ class NoReturnAssertionResult implements IResult
 
     get result() : Outcome
     {
-        if ( this.actual.hasValue() )
+        if ( this.actual.hasValue )
         {
             if ( isUndefined( this.actual.value ) )
             {
