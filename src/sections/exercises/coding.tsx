@@ -73,14 +73,14 @@ class TestCase implements ITestCase
 class CodingExercise extends Exercise
 {
     constructor(
-        public readonly id : string,
+        id : string,
         tocEntry : JSX.Element,
         private readonly header : JSX.Element,
         private readonly description : JSX.Element,
         private readonly testCases : ITestCase[],
         private readonly solution ?: string)
     {
-        super(tocEntry);
+        super(id, tocEntry);
     }
 
     get content() : JSX.Element

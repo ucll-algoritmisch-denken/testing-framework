@@ -14,13 +14,15 @@ export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow }
 import * as InterpretationExercise from './sections/exercises/interpretation';
 import * as TestBasedCodingExercise from './sections/exercises/coding';
 import * as ReferenceImplementationBasedCodingExercise from './sections/exercises/by-reference-implementation';
+import * as CarSimulatingExercise from './sections/exercises/car-exercise';
 
 export const Exercise = {
     Interpretation: InterpretationExercise,
     Coding: {
         TestBased: TestBasedCodingExercise,
         ReferenceImplementationBased : ReferenceImplementationBasedCodingExercise
-    }
+    },
+    CarSimulation: CarSimulatingExercise
 };
 
 
@@ -42,6 +44,9 @@ import { loadImage } from './bitmap';
 export const Imaging = {
     loadImage
 };
+
+import * as CarSimulation from './car-simulation';
+export { CarSimulation };
 
 export async function initialize(chapter : IChapter)
 {

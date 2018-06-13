@@ -1,0 +1,18 @@
+.car.exercise {
+    .test-case {
+        width: 80%;
+        margin: 1em auto;
+        padding: 1em;
+        border: 1px black solid;        
+
+        &.success {
+            border-left: 20px green solid;
+            background: #AFA;
+        }
+
+        &.failure {
+            border-left: 20px red solid;
+            background: #FAA;
+        }
+    }
+}

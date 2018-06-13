@@ -3,7 +3,7 @@ import { IResult, IAssertion } from '../assertions';
 import { Outcome } from '../outcome';
 import { IToJsxElement, simple } from '../formatters/jsx-formatters';
 import { deepEqual } from '../equality';
-import { Maybe } from 'maybe-monad';
+import { Maybe } from 'tsmonad';
 import './equality.scss';
 
 
@@ -29,14 +29,10 @@ class EqualityAssertionResult implements IResult
 
     get result(): Outcome
     {
-        if ( this.actual.hasValue )
-        {
-            return deepEqual(this.expected, this.actual.value) ? Outcome.Pass : Outcome.Fail;
-        }
-        else
-        {
-            return Outcome.Skip;
-        }
+        return this.actual.caseOf({
+            just: value => deepEqual(this.expected, value) ? Outcome.Pass : Outcome.Fail,
+            nothing: () => Outcome.Skip
+        });
     }
 
     get content() : JSX.Element
@@ -80,19 +76,15 @@ class EqualityAssertionResult implements IResult
 
     private createActualRow() : JSX.Element
     {
-        if ( this.actual.hasValue )
-        {
-            return (
+        return this.actual.caseOf({
+            just: value => (
                 <tr key="actual">
                     <th>Actual</th>
-                    <td>{this.formatter(this.actual.value)}</td>
+                    <td>{this.formatter(value)}</td>
                 </tr>
-            );
-        }
-        else
-        {
-            return <React.Fragment />;
-        }
+            ),
+            nothing: () => <React.Fragment />
+        });
     }
 
     private createTable() : JSX.Element

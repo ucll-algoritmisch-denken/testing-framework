@@ -4,7 +4,7 @@ import { Score } from "score";
 
 export abstract class Exercise implements IScoredSection
 {
-    constructor(public tocEntry : JSX.Element) { }
+    constructor(public id : string, public tocEntry : JSX.Element) { }
 
     abstract content : JSX.Element;
 
@@ -14,6 +14,4 @@ export abstract class Exercise implements IScoredSection
     }
 
     abstract score : Score;
-
-    abstract id : string;
 }

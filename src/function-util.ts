@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import dedent from 'dedent';
-import { Maybe } from 'maybe-monad';
+import { Maybe } from 'tsmonad';
 
 
 export class FunctionInformation
@@ -64,7 +64,7 @@ export function callFunction(func : (...args : any[]) => any, ...args : any[]) :
 
 export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<IFunctionCallResults>
 {
-    return func.and(f => Maybe.justAllowNull(callFunction(f, ...args)));
+    return func.bind(f => Maybe.just(callFunction(f, ...args)));
 }
 
 export interface INamedFunctionCallResults

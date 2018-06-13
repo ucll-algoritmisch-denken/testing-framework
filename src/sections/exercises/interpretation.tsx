@@ -79,7 +79,13 @@ class InterpretationExercise implements ISection
 {
     private readonly functionInformation : FunctionInformation;
 
-    constructor(public tocEntry : JSX.Element, private header : JSX.Element, private func : (...args : any[]) => any, private cases : INamedFunctionCallResults[], private columns : IColumn[], private hint : JSX.Element | undefined)
+    constructor(
+        public readonly tocEntry : JSX.Element,
+        private readonly header : JSX.Element,
+        private readonly func : (...args : any[]) => any,
+        private readonly cases : INamedFunctionCallResults[],
+        private readonly columns : IColumn[],
+        private readonly hint : JSX.Element | undefined)
     {
         this.functionInformation = parseFunction(func);
     }

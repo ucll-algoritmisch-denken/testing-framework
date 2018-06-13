@@ -23,6 +23,7 @@
     "@types/mocha": "^5.2.0",
     "@types/node": "^10.0.4",
     "@types/prop-types": "^15.5.2",
+    "@types/rc-slider": "^8.2.3",
     "@types/react": "^16.3.14",
     "@types/react-collapsible": "^2.2.0",
     "@types/react-dom": "^16.0.5",
@@ -57,10 +58,11 @@
     "codemirror": "^5.37.0",
     "dedent": "^0.7.0",
     "lodash": "^4.17.10",
+    "rc-slider": "^8.6.1",
     "react-codemirror2": "^5.0.1",
     "react-collapsible": "^2.2.0",
     "react-sidebar": "^2.3.2",
-    "maybe-monad": "^1.1.0"
+    "tsmonad": "^0.8.0"
   },
   "peerDependencies": {}
 }
