@@ -9,6 +9,8 @@ import { isString } from 'type';
 import { Exercise } from './exercise';
 import * as _ from 'lodash';
 import { Outcome } from '../../outcome';
+import { functionality } from '../../car-simulation';
+import { CarSimulationSummary } from 'components/car-simulation-summary';
 
 
 class CarExercise extends Exercise
@@ -18,7 +20,8 @@ class CarExercise extends Exercise
         tocEntry : JSX.Element,
         private readonly testedFunction : Maybe<() => void>,
         private readonly simulations : CarSim.Simulation[],
-        private readonly description : JSX.Element) 
+        private readonly description : JSX.Element,
+        private readonly allowedFunctionality : functionality[])
     { 
         super(id, tocEntry);
     }
@@ -29,6 +32,7 @@ class CarExercise extends Exercise
         const contents = (
             <React.Fragment>
                 {this.createDescriptionContainer(this.description)}
+                <CarSimulationSummary allowedFunctionality={this.allowedFunctionality} />
                 {this.createTestCasesContainer(createTestCases())}
             </React.Fragment>
         );
@@ -153,19 +157,10 @@ function executeInstructions(simulation : CarSim.Simulation, testedFunction : (s
 }
 
 
-export const functionality = {
-    turnLeft: 'turnLeft',
-    turnRight: 'turnRight',
-    forward: 'forward',
-    sensor: 'sensor'
-};
-
 export function parseSimulations(...strings : string[])
 {
     return strings.map(CarSim.Simulation.parse);
 }
-
-export type functionality = ("forward" | "turnLeft" | "turnRight" | "sensor");
 
 export interface IBuilder
 {
@@ -254,7 +249,8 @@ class Builder implements IBuilder
                 tocEntry,
                 this.testedFunction,
                 this.simulations,
-                this.description
+                this.description,
+                this.__functionality
             );
         }
     }

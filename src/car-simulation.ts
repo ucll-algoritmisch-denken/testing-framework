@@ -3,7 +3,6 @@ import { Position2D } from "./position2d";
 import { Direction2D } from "./direction2d";
 import * as _ from 'lodash';
 
-
 export class CarCrashException extends Error { }
 
 export class CarState
@@ -342,3 +341,4 @@ export class Simulation
     }
 }
 
+export type functionality = "forward" | "turnLeft" | "turnRight" | "sensor";
