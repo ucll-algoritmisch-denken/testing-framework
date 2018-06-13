@@ -2,7 +2,6 @@ import { Grid } from "./grid";
 import { Position2D } from "./position2d";
 import { Direction2D } from "./direction2d";
 import * as _ from 'lodash';
-import { posix } from "path";
 
 
 export class CarCrashException extends Error { }

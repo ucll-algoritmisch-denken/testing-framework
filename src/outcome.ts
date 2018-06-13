@@ -29,3 +29,23 @@ export function combineAssertionOutcomes(rs : Outcome[])
         return results[x];
     }
 }
+
+export function outcomeToHtmlClass(result : Outcome)
+{
+    if ( result === Outcome.Pass )
+    {
+        return 'pass';
+    }
+    else if ( result === Outcome.Fail )
+    {
+        return 'fail';
+    }
+    else if ( result === Outcome.Skip )
+    {
+        return 'skip';
+    }
+    else
+    {
+        throw new Error("Invalid AssertionResult");
+    }
+}

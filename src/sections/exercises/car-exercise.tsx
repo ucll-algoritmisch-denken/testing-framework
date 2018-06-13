@@ -8,6 +8,7 @@ import { Maybe } from 'tsmonad';
 import { isString } from 'type';
 import { Exercise } from './exercise';
 import * as _ from 'lodash';
+import { Outcome } from '../../outcome';
 
 
 class CarExercise extends Exercise
@@ -15,6 +16,7 @@ class CarExercise extends Exercise
     constructor(
         id : string,
         tocEntry : JSX.Element,
+        private readonly testedFunction : Maybe<() => void>,
         private readonly simulations : CarSim.Simulation[],
         private readonly description : JSX.Element) 
     { 
@@ -24,29 +26,42 @@ class CarExercise extends Exercise
     get content() : JSX.Element
     {
         const me = this;
-
-        return (
-            <section className="car exercise">
-                {this.description}
-                {createTestCases()}
-            </section>
+        const contents = (
+            <React.Fragment>
+                {this.createDescriptionContainer(this.description)}
+                {this.createTestCasesContainer(createTestCases())}
+            </React.Fragment>
         );
 
+        return this.createExerciseContainer("car", contents);
 
-        function createTestCases() : JSX.Element[]
+
+        function createTestCases() : JSX.Element
         {
-            return me.simulations.map( createTestCase );
+            return (
+                <React.Fragment>
+                    {me.simulations.map( createTestCase )}
+                </React.Fragment>
+            );
         }
 
         function createTestCase(simulation : CarSim.Simulation) : JSX.Element
         {
             const className = simulation.isSuccessful ? 'test-case success' : 'test-case failure';
-
-            return (
-                <div className={className}>
-                    <CarSimulationViewer simulation={simulation} cellSize={64} animationSpeed={4} />
-                </div>
+            const content = (
+                <CarSimulationViewer simulation={simulation} cellSize={64} animationSpeed={4} />
             );
+
+            return me.createTestCaseContainer(determineOutcome(), content);
+
+
+            function determineOutcome() : Outcome
+            {
+                return me.testedFunction.caseOf({
+                    just: _ => simulation.isSuccessful ? Outcome.Pass : Outcome.Fail,
+                    nothing: () => Outcome.Skip
+                });
+            }
         }
     }
 
@@ -237,6 +252,7 @@ class Builder implements IBuilder
             return new CarExercise(
                 this.id,
                 tocEntry,
+                this.testedFunction,
                 this.simulations,
                 this.description
             );

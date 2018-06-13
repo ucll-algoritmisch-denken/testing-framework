@@ -4,32 +4,12 @@ import { ISection } from '../../chapter';
 import { Score } from '../../score';
 import { isUndefined } from '../../type';
 import { IResult } from '../../assertions';
-import { Outcome, combineAssertionOutcomes } from '../../outcome';
+import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../outcome';
 import { jsxify } from '../../formatters/jsx-formatters';
 import { SolutionViewer } from '../../components/solution-viewer';
 import { Exercise } from '../../sections/exercises/exercise';
 import './coding.scss';
 
-
-function assertionResultToClass(result : Outcome)
-{
-    if ( result === Outcome.Pass )
-    {
-        return 'pass';
-    }
-    else if ( result === Outcome.Fail )
-    {
-        return 'fail';
-    }
-    else if ( result === Outcome.Skip )
-    {
-        return 'skip';
-    }
-    else
-    {
-        throw new Error("Invalid AssertionResult");
-    }
-}
 
 export interface IBuilder
 {
@@ -86,21 +66,18 @@ class CodingExercise extends Exercise
     get content() : JSX.Element
     {
         const me = this;
-
-        return (
-            <section className="coding exercise">
+        const contents = (
+            <React.Fragment>
                 <header>
                     {this.header}
                 </header>
-                <div className="description" key="description">
-                    {this.description}
-                </div>
-                <div className="test-cases" key="test-cases">
-                    {visualizeTestCases()}
-                </div>
+                {this.createDescriptionContainer(this.description)}
+                {this.createTestCasesContainer(visualizeTestCases())}
                 {createSolution()}
-            </section>
+            </React.Fragment>
         );
+
+        return this.createExerciseContainer("coding", contents);
 
 
         function createSolution()
@@ -117,17 +94,21 @@ class CodingExercise extends Exercise
 
         function visualizeTestCases()
         {
-            return me.testCases.map(visualizeTestCase);
+            return (
+                <React.Fragment>
+                    {me.testCases.map(visualizeTestCase)}
+                </React.Fragment>
+            );
 
             function visualizeTestCase(testCase : ITestCase, index : number)
             {
-                return (
-                    <section className={determineTestCaseClassName()} key={`testcase${index}`}>
-                        <Collapsible trigger={createHeader()} transitionTime={100}>
-                            {testCase.body}
-                        </Collapsible>
-                    </section>
+                const contents = (
+                    <Collapsible trigger={createHeader()} transitionTime={100}>
+                        {testCase.body}
+                    </Collapsible>
                 );
+
+                return me.createTestCaseContainer(testCase.result, contents);
 
 
                 function createHeader()
@@ -141,13 +122,13 @@ class CodingExercise extends Exercise
 
                     function determineHeaderClassName()
                     {
-                        return `header ${assertionResultToClass(testCase.result)}`;
+                        return `header ${outcomeToHtmlClass(testCase.result)}`;
                     }
                 }
 
                 function determineTestCaseClassName()
                 {
-                    return `test-case ${assertionResultToClass(testCase.result)}`;
+                    return `test-case ${outcomeToHtmlClass(testCase.result)}`;
                 }
             }
         }
@@ -251,7 +232,7 @@ class TestCaseBuilder
 
         function determineClassName()
         {
-            return `assertion ${assertionResultToClass(assertion.result)}`;
+            return `assertion ${outcomeToHtmlClass(assertion.result)}`;
         }
     }
 
@@ -278,7 +259,7 @@ class TestCaseBuilder
 
         function determineClassName()
         {
-            return `assertion ${assertionResultToClass(assertion.result)}`;
+            return `assertion ${outcomeToHtmlClass(assertion.result)}`;
         }
     }
 

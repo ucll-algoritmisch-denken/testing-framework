@@ -4,37 +4,14 @@
 .coding.exercise {
     @extend .exercise;
 
-    .description {
-        margin: 0.25em 1em;
-    }
-
     .test-cases {
-        width: 80%;
-        margin: 1em auto;
-
         .test-case {
-            margin: 0.2em 0em;
-            border: #555 solid 1px;
-            border-radius: 0.2em;
-
             .header {
                 padding: 0.2em;
                 font-weight: bold;
                 font-size: 1.2em;
                 user-select: none;
                 cursor: pointer;
-            }
-
-            .header.pass {
-                background: #AFA;
-            }
-
-            .header.fail {
-                background: #FAA;
-            }
-
-            .header.skip {
-                background: #AAA;
             }
 
             .assertions {
