@@ -1,6 +1,6 @@
 import React from 'react';
-import * as CarSim from '../../carsim';
-import { functionality } from '../../carsim';
+import * as CarSim from '../../car-simulation';
+import { functionality } from '../../car-simulation';
 import { CarSimulationViewer } from '../../components/car-simulation-viewer';
 import './car-exercise.scss';
 import { IScoredSection } from '../../chapter';

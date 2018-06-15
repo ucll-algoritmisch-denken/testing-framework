@@ -1,5 +1,5 @@
 import React from 'react';
-import { functionality } from '../carsim';
+import { functionality } from '../car-simulation';
 import './car-functionality-symbol.scss';
 
 
