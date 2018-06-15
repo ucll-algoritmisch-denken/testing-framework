@@ -25,6 +25,7 @@ export const Exercise = {
     CarSimulation: CarSimulatingExercise
 };
 
+export { build as createExplanations } from './sections/explanations';
 
 import * as JsxFormatters from './formatters/jsx-formatters';
 import * as StringFormatters from './formatters/string-formatters';
