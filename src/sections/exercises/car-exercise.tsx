@@ -32,7 +32,7 @@ class CarExercise extends Exercise
         const contents = (
             <React.Fragment>
                 {this.createDescriptionContainer(this.description)}
-                <CarSimulationSummary allowedFunctionality={this.allowedFunctionality} />
+                <CarSimulationSummary allowedFunctionality={this.allowedFunctionality} maxSteps={this.simulations[0].maximumSteps} />
                 {this.createTestCasesContainer(createTestCases())}
             </React.Fragment>
         );
@@ -144,7 +144,7 @@ function executeInstructions(simulation : CarSim.Simulation, testedFunction : (s
     }
     catch ( e )
     {
-        if ( !(e instanceof CarSim.CarCrashException ) )
+        if ( !(e instanceof CarSim.CarSimulationException ) )
         {
             throw e;
         }
@@ -168,7 +168,7 @@ export interface IBuilder
 
     description : JSX.Element;
     
-    addSimulation(simulation : CarSim.Simulation | string) : void;
+    addSimulation(world : string, maximumSteps ?: number) : void;
 
     functionality : functionality[];
 }
@@ -191,21 +191,9 @@ class Builder implements IBuilder
         this.description = <React.Fragment></React.Fragment>;
     }
 
-    addSimulation(simulation : CarSim.Simulation | string) : void
+    addSimulation(world : string, maximumSteps ?: number) : void
     {
-        this.simulations.push( convertToSimulation(simulation) );
-
-        function convertToSimulation(simulation : CarSim.Simulation | string) : CarSim.Simulation
-        {
-            if ( isString(simulation) )
-            {
-                return CarSim.Simulation.parse(simulation);
-            }
-            else
-            {
-                return simulation;
-            }
-        }
+        this.simulations.push( CarSim.Simulation.parse(world, maximumSteps) );
     }
 
     header : JSX.Element;

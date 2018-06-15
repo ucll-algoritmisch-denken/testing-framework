@@ -3,7 +3,8 @@ import { Position2D } from "./position2d";
 import { Direction2D } from "./direction2d";
 import * as _ from 'lodash';
 
-export class CarCrashException extends Error { }
+
+export class CarSimulationException extends Error { }
 
 export class CarState
 {
@@ -189,7 +190,7 @@ export class Simulation
 
     private crashed : boolean;
 
-    constructor(public readonly world : World, initialCarState : CarState)
+    constructor(public readonly world : World, initialCarState : CarState, public readonly maximumSteps ?: number)
     {
         this.history = new Trace(initialCarState);
         this.crashed = false;
@@ -218,7 +219,7 @@ export class Simulation
     private crash()
     {
         this.crashed = true;
-        throw new CarCrashException();
+        throw new CarSimulationException();
     }
 
     turnCarLeft() : void
@@ -250,9 +251,9 @@ export class Simulation
         return !this.crashed && this.world.at(this.carState.position).isDestination();
     }
 
-    static parse(str : string) : Simulation
+    static parse(worldString : string, maximumSteps ?: number) : Simulation
     {
-        const lines = str.trim().split('\n').map(s => s.trim().split(''));
+        const lines = worldString.trim().split('\n').map(s => s.trim().split(''));
         const height = lines.length;
         const width = lines[0].length;
 
@@ -322,7 +323,7 @@ export class Simulation
             }
             else
             {
-                return new Simulation(world, initialCarState);
+                return new Simulation(world, initialCarState, maximumSteps);
             }
 
             function registerInitialCarState(s : CarState)
