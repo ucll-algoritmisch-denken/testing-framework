@@ -1,188 +1,13 @@
-import { Grid } from "./grid";
-import { Position2D } from "./position2d";
-import { Direction2D } from "./direction2d";
+import { World } from './world';
+import { Empty, Wall, Destination } from './cell';
+import { Direction2D } from '../direction2d';
+import { Trace } from './trace';
+import { CarState } from './car-state';
 import * as _ from 'lodash';
+import { ForwardTraceStep, TurnLeftTraceStep, TurnRightTraceStep } from './trace-step';
+import { CarSimulationException } from './car-exception';
 
 
-export class CarSimulationException extends Error { }
-
-export class CarState
-{
-    constructor(public readonly position : Position2D, public readonly direction : Direction2D) { }
-}
-
-export abstract class Cell
-{
-    abstract canBeDrivenOnto : boolean;
-
-    /**
-     * Whether the sensor senses this cell.
-     */
-    abstract isSensed() : boolean;
-
-    abstract isDestination() : boolean;
-}
-
-export class Wall extends Cell
-{
-    get canBeDrivenOnto() : boolean
-    {
-        return false;
-    }
-
-    isSensed() : boolean
-    {
-        return true;
-    }
-
-    isDestination() : boolean
-    {
-        return false;
-    }
-}
-
-export class Empty extends Cell
-{
-    get canBeDrivenOnto() : boolean
-    {
-        return true;
-    }
-
-    isSensed() : boolean
-    {
-        return false;
-    }
-
-    isDestination() : boolean
-    {
-        return false;
-    }
-}
-
-export class Destination extends Cell
-{
-    get canBeDrivenOnto() : boolean
-    {
-        return true;
-    }
-
-    isSensed() : boolean
-    {
-        return false;
-    }
-
-    isDestination() : boolean
-    {
-        return true;
-    }
-}
-
-export class World
-{
-    private readonly grid : Grid<Cell>;
-
-    constructor(width : number, height : number, initializer : (p : Position2D) => Cell)
-    {
-        this.grid = new Grid<Cell>(width, height, initializer);
-    }
-
-    at(position : Position2D) : Cell
-    {
-        return this.grid.at(position);
-    }
-
-    get width() : number
-    {
-        return this.grid.width;
-    }
-
-    get height() : number
-    {
-        return this.grid.height;
-    }
-
-    isValidPosition(position : Position2D) : boolean
-    {
-        return 0 <= position.x && position.x < this.width && 0 <= position.y && position.y < this.height;
-    }
-}
-
-export class Trace
-{
-    public readonly steps : TraceStep[];
-
-    constructor(public readonly initialState : CarState)
-    {
-        this.steps = [];
-    }
-
-    get currentState() : CarState
-    {
-        if ( this.steps.length > 0 )
-        {
-            return this.steps[this.steps.length-1].endState;
-        }
-        else
-        {
-            return this.initialState;
-        }
-    }
-}
-
-export interface ITraceStepVisitor<T>
-{
-    forward(trace : ForwardTraceStep) : T;
-
-    turnLeft(trace : TurnRightTraceStep) : T;
-
-    turnRight(trace : TurnRightTraceStep) : T;
-}
-
-export abstract class TraceStep
-{
-    constructor(public readonly startState : CarState, public readonly endState : CarState) { }
-
-    abstract visit<T>(visitor : ITraceStepVisitor<T>) : T;
-}
-
-export class ForwardTraceStep extends TraceStep
-{
-    constructor(public readonly from : Position2D, public readonly to : Position2D, public readonly direction : Direction2D)
-    {
-        super( new CarState(from, direction), new CarState(to, direction) );
-    }
-
-    visit<T>(visitor : ITraceStepVisitor<T>) : T
-    {
-        return visitor.forward(this);
-    }
-}
-
-export class TurnLeftTraceStep extends TraceStep
-{
-    constructor(public readonly position : Position2D, public readonly from : Direction2D, public readonly to : Direction2D)
-    {
-        super( new CarState(position, from), new CarState(position, to) );
-    }
-
-    visit<T>(visitor : ITraceStepVisitor<T>) : T
-    {
-        return visitor.turnLeft(this);
-    }
-}
-
-export class TurnRightTraceStep extends TraceStep
-{
-    constructor(public readonly position : Position2D, public readonly from : Direction2D, public readonly to : Direction2D)
-    {
-        super( new CarState(position, from), new CarState(position, to) );
-    }
-    
-    visit<T>(visitor : ITraceStepVisitor<T>) : T
-    {
-        return visitor.turnRight(this);
-    }
-}
 
 export class Simulation
 {
@@ -219,6 +44,7 @@ export class Simulation
     private crash()
     {
         this.crashed = true;
+        
         throw new CarSimulationException();
     }
 
@@ -341,5 +167,3 @@ export class Simulation
         
     }
 }
-
-export type functionality = "forward" | "turnLeft" | "turnRight" | "sensor";

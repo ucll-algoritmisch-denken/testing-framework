@@ -1,5 +1,6 @@
 import React from 'react';
-import * as CarSim from '../../car-simulation';
+import * as CarSim from '../../carsim';
+import { functionality } from '../../carsim';
 import { CarSimulationViewer } from '../../components/car-simulation-viewer';
 import './car-exercise.scss';
 import { IScoredSection } from '../../chapter';
@@ -9,7 +10,6 @@ import { isString } from 'type';
 import { Exercise } from './exercise';
 import * as _ from 'lodash';
 import { Outcome } from '../../outcome';
-import { functionality } from '../../car-simulation';
 import { CarSimulationSummary } from 'components/car-simulation-summary';
 
 

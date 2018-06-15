@@ -45,7 +45,7 @@ export const Imaging = {
     loadImage
 };
 
-import * as CarSimulation from './car-simulation';
+import * as CarSimulation from './carsim';
 export { CarSimulation };
 
 export async function initialize(chapter : IChapter)

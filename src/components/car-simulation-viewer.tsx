@@ -1,9 +1,8 @@
 import React from 'react';
 import { AnimationViewer } from './animation-viewer';
 import * as Animation from '../animation';
-import * as CarSim from '../car-simulation';
+import * as CarSim from '../carsim';
 import { IAnimation } from '../animation';
-import { Direction2D } from '../direction2d';
 import { Position2D } from '../position2d';
 const car = require('../images/car.png');
 
