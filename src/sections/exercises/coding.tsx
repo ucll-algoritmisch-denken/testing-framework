@@ -2,7 +2,7 @@ import React from 'react';
 import Collapsible from 'react-collapsible';
 import { ISection } from '../../chapter';
 import { Score } from '../../score';
-import { isUndefined } from '../../type';
+import { isUndefined, isInteger } from '../../type';
 import { IResult } from '../../assertions';
 import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../outcome';
 import { jsxify } from '../../formatters/jsx-formatters';
@@ -20,6 +20,8 @@ export interface IBuilder
     solution ?: string;
 
     tocEntry : JSX.Element;
+
+    difficulty : number;
 
     addTestCase(func : (tcb : ITestCaseBuilder) => void) : void;
 
@@ -55,12 +57,13 @@ class CodingExercise extends Exercise
     constructor(
         id : string,
         tocEntry : JSX.Element,
+        difficulty : number,
         private readonly header : JSX.Element,
         private readonly description : JSX.Element,
         private readonly testCases : ITestCase[],
         private readonly solution ?: string)
     {
-        super(id, tocEntry);
+        super(id, tocEntry, difficulty);
     }
 
     get content() : JSX.Element
@@ -68,9 +71,7 @@ class CodingExercise extends Exercise
         const me = this;
         const contents = (
             <React.Fragment>
-                <header>
-                    {this.header}
-                </header>
+                {this.createExerciseHeader(this.header)}
                 {this.createDescriptionContainer(this.description)}
                 {this.createTestCasesContainer(visualizeTestCases())}
                 {createSolution()}
@@ -159,6 +160,20 @@ class CodingExerciseBuilder implements IBuilder
 
     public tocEntry : JSX.Element;
 
+    private __difficulty ?: number;
+
+    public set difficulty(value : number)
+    {
+        if ( !isInteger(value) )
+        {
+            throw new Error("Difficulty should be integral");
+        }
+        else
+        {
+            this.__difficulty = value;
+        }
+    }
+
     constructor(private readonly id : string, testedFunctionName : string)
     {
         this.testCases = [];
@@ -189,11 +204,15 @@ class CodingExerciseBuilder implements IBuilder
         {
             throw new Error(`Missing description`);
         }
+        else if ( !this.__difficulty )
+        {
+            throw new Error(`Missing difficilty`);
+        }
         else
         {
             const description = jsxify(this.description);
 
-            return new CodingExercise(this.id, this.tocEntry, this.header, description, this.testCases, this.solution);
+            return new CodingExercise(this.id, this.tocEntry, this.__difficulty, this.header, description, this.testCases, this.solution);
         }
     }
 }

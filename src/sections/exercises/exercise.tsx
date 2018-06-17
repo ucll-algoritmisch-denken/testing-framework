@@ -1,16 +1,30 @@
 import React from 'react';
-import { IScoredSection } from "chapter";
+import { IScoredSection, IDifficultySection } from "chapter";
 import { Score } from "score";
 import { Outcome, outcomeToHtmlClass } from '../../outcome';
+import { isInteger } from '../../type';
+import { DifficultyViewer } from '../../components/difficulty-viewer';
 
 
-export abstract class Exercise implements IScoredSection
+export abstract class Exercise implements IScoredSection, IDifficultySection
 {
     private testCaseIndex : number;
 
-    constructor(public id : string, public tocEntry : JSX.Element)
+    constructor(public id : string, public tocEntry : JSX.Element, public difficulty : number)
     { 
-        this.testCaseIndex = 0;
+        if ( !isInteger( difficulty ) )
+        {
+            throw new Error(`Difficulty should be integer`);
+        }
+        else
+        {
+            this.testCaseIndex = 0;
+        }
+    }
+
+    hasDifficulty() : boolean
+    {
+        return true;
     }
 
     abstract readonly content : JSX.Element;
@@ -36,6 +50,16 @@ export abstract class Exercise implements IScoredSection
             <section className={className}>
                 {contents}
             </section>
+        );
+    }
+
+    protected createExerciseHeader(header : JSX.Element) : JSX.Element
+    {
+        return (
+            <header>
+                <DifficultyViewer difficulty={this.difficulty} />
+                {header}
+            </header>
         );
     }
 

@@ -5,7 +5,7 @@ import './explanations.scss';
 
 class ExplanationSection implements ISection
 {
-    constructor(public readonly tocEntry : JSX.Element, public readonly header : JSX.Element, public readonly explanation : JSX.Element) { }
+    constructor(public readonly id : string, public readonly tocEntry : JSX.Element, public readonly header : JSX.Element, public readonly explanation : JSX.Element) { }
 
     isScored() : this is IScoredSection
     {
@@ -25,9 +25,14 @@ class ExplanationSection implements ISection
             </section>
         );
     }
+
+    hasDifficulty() : boolean
+    {
+        return false;
+    }
 }
 
-export function build(tocEntry : JSX.Element, header : JSX.Element, explanation : JSX.Element) : ISection
+export function build(id : string, tocEntry : JSX.Element, header : JSX.Element, explanation : JSX.Element) : ISection
 {
-    return new ExplanationSection(tocEntry, header, explanation);
+    return new ExplanationSection(id, tocEntry, header, explanation);
 }

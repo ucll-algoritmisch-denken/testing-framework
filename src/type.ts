@@ -16,6 +16,11 @@ export function isNumber(x : any) : x is number
     return _.isNumber(x);
 }
 
+export function isInteger(x : any) : x is number
+{
+    return _.isInteger(x);
+}
+
 export function isBoolean(x : any) : x is boolean
 {
     return _.isBoolean(x);

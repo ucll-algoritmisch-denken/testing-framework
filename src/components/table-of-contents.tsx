@@ -3,11 +3,13 @@ import { Score } from '../score';
 import { ISection, selectScoredSections } from '../chapter';
 import './table-of-contents.scss';
 import { ScoreViewer } from '../components/score-viewer';
+import { DifficultyViewer } from './difficulty-viewer';
 
 
 export interface IProps
 {
     sections : ISection[];
+
     onSectionSelected : (index : number, section : ISection) => void;
 }
 
@@ -62,7 +64,8 @@ export class TableOfContents extends React.Component<IProps, IState>
         function createRow(section : ISection, index : number)
         {
             return (
-                <tr className={determineClass()} key={`toc-entry-${index}`}>
+                <tr className={determineClass()} key={`toc-entry-${section.id}`}>
+                    {/* {createDifficulty()} */}
                     {createCaption()}
                     {createScore()}
                 </tr>
@@ -80,6 +83,14 @@ export class TableOfContents extends React.Component<IProps, IState>
 
                 return result.join(' ');
             }
+
+            // function createDifficulty()
+            // {
+            //     return (
+                    
+            //         <DifficultyViewer difficulty={section.}
+            //     );
+            // }
 
             function createCaption()
             {

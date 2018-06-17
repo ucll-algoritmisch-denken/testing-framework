@@ -16,12 +16,19 @@ export interface ISection
     readonly content : JSX.Element;
 
     isScored() : this is IScoredSection;
+
+    hasDifficulty() : this is IDifficultySection;
+
+    readonly id : string;
+}
+
+export interface IDifficultySection extends ISection
+{
+    readonly difficulty : number;
 }
 
 export interface IScoredSection extends ISection
 {
-    readonly id : string;
-    
     readonly score : Score;
 }
 

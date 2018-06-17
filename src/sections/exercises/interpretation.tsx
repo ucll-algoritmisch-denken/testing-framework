@@ -1,6 +1,6 @@
 import React from 'react';
 import { parseFunction, formatFunction, FunctionInformation, namedCallFunction, INamedFunctionCallResults } from '../../function-util';
-import { ISection, IScoredSection } from '../../chapter';
+import { ISection, IScoredSection, IDifficultySection } from '../../chapter';
 import { ValidatedInput } from '../../components/ValidatedInput';
 import * as Formatters from '../../formatters/jsx-formatters';
 import { deepEqual } from '../../equality';
@@ -16,6 +16,8 @@ export interface IBuilder
     hint : JSX.Element | undefined;
 
     caption : JSX.Element;
+
+    difficulty ?: number;
 
     addInput(...args : any[]) : void;
 
@@ -75,11 +77,13 @@ class ParameterValueColumn implements IColumn
     }
 }
 
-class InterpretationExercise implements ISection
+class InterpretationExercise implements ISection, IDifficultySection
 {
     private readonly functionInformation : FunctionInformation;
 
     constructor(
+        public readonly id : string,
+        public readonly difficulty : number,
         public readonly tocEntry : JSX.Element,
         private readonly header : JSX.Element,
         private readonly func : (...args : any[]) => any,
@@ -88,6 +92,11 @@ class InterpretationExercise implements ISection
         private readonly hint : JSX.Element | undefined)
     {
         this.functionInformation = parseFunction(func);
+    }
+
+    hasDifficulty() : boolean
+    {
+        return true;
     }
 
     isScored() : this is IScoredSection
@@ -203,7 +212,9 @@ class InterpretationExerciseBuilder implements IBuilder
 
     public caption : JSX.Element;
 
-    constructor(private func : (...args : any[]) => any)
+    public difficulty ?: number;
+
+    constructor(public id : string, private func : (...args : any[]) => any)
     {
         this.cases = [];
         this.columns = [];
@@ -238,13 +249,20 @@ class InterpretationExerciseBuilder implements IBuilder
 
     public build()
     {
-        return new InterpretationExercise(this.caption, this.header, this.func, this.cases, this.columns, this.hint);
+        if ( !this.difficulty )
+        {
+            throw new Error(`Missing difficulty`);
+        }
+        else
+        {
+            return new InterpretationExercise(this.id, this.difficulty, this.caption, this.header, this.func, this.cases, this.columns, this.hint);
+        }
     }
 }
 
-export function build(func : (...args : any[]) => any, b : (builder : IBuilder) => void) : ISection
+export function build(id : string, func : (...args : any[]) => any, b : (builder : IBuilder) => void) : ISection
 {
-    const builder = new InterpretationExerciseBuilder(func);
+    const builder = new InterpretationExerciseBuilder(id, func);
 
     b(builder);
 

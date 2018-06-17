@@ -4,11 +4,12 @@ import * as Animation from '../animation';
 import * as CarSim from '../car-simulation';
 import { IAnimation } from '../animation';
 import { Position2D } from '../position2d';
-const car = require('../images/car.png');
 
 
 export interface IProps
 {
+    carImage : string;
+
     simulation : CarSim.Simulation;
 
     cellSize : number;
@@ -61,7 +62,7 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
         return (
             <svg width={worldWidth} height={worldHeight}>
                 {renderWorld()}
-                <image xlinkHref={car} width={carWidth * 0.8} height={carHeight * 0.8} x={carPositionX + 0.1 * carWidth} y={carPositionY + 0.1 * carHeight} transform={rotate} />
+                <image xlinkHref={this.props.carImage} width={carWidth * 0.8} height={carHeight * 0.8} x={carPositionX + 0.1 * carWidth} y={carPositionY + 0.1 * carHeight} transform={rotate} />
             </svg>
         );
 

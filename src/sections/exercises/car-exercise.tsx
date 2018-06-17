@@ -6,7 +6,7 @@ import './car-exercise.scss';
 import { IScoredSection } from '../../chapter';
 import { Score } from '../../score';
 import { Maybe } from 'tsmonad';
-import { isString } from 'type';
+import { isString, isInteger } from 'type';
 import { Exercise } from './exercise';
 import * as _ from 'lodash';
 import { Outcome } from '../../outcome';
@@ -18,12 +18,15 @@ class CarExercise extends Exercise
     constructor(
         id : string,
         tocEntry : JSX.Element,
+        difficulty : number,
+        private readonly header : JSX.Element,
         private readonly testedFunction : Maybe<() => void>,
         private readonly simulations : CarSim.Simulation[],
         private readonly description : JSX.Element,
-        private readonly allowedFunctionality : functionality[])
+        private readonly allowedFunctionality : functionality[],
+        private readonly carImage : string)
     { 
-        super(id, tocEntry);
+        super(id, tocEntry, difficulty);
     }
 
     get content() : JSX.Element
@@ -31,6 +34,9 @@ class CarExercise extends Exercise
         const me = this;
         const contents = (
             <React.Fragment>
+                <header>
+                    {this.header}
+                </header>
                 {this.createDescriptionContainer(this.description)}
                 <CarSimulationSummary allowedFunctionality={this.allowedFunctionality} maxSteps={this.simulations[0].maximumSteps} />
                 {this.createTestCasesContainer(createTestCases())}
@@ -53,7 +59,7 @@ class CarExercise extends Exercise
         {
             const className = simulation.isSuccessful ? 'test-case success' : 'test-case failure';
             const content = (
-                <CarSimulationViewer simulation={simulation} cellSize={64} animationSpeed={4} />
+                <CarSimulationViewer simulation={simulation} cellSize={64} animationSpeed={4} carImage={me.carImage} />
             );
 
             return me.createTestCaseContainer(determineOutcome(), content);
@@ -167,10 +173,14 @@ export interface IBuilder
     header : JSX.Element;
 
     description : JSX.Element;
+
+    difficulty : number;
     
     addSimulation(world : string, maximumSteps ?: number) : void;
 
     functionality : functionality[];
+
+    carImage ?: string;
 }
 
 class Builder implements IBuilder
@@ -200,6 +210,22 @@ class Builder implements IBuilder
 
     description : JSX.Element;
 
+    carImage ?: string;
+
+    private __difficulty ?: number;
+
+    set difficulty(value : number)
+    {
+        if ( !isInteger(value) )
+        {
+            throw new Error(`Difficulty should be integer`);
+        }
+        else
+        {
+            this.__difficulty = value;
+        }
+    }
+
     get functionality() : functionality[]
     {
         return this.__functionality;
@@ -216,9 +242,17 @@ class Builder implements IBuilder
         {
             throw new Error("No simulations specified");
         }
-        if ( this.functionality.length === 0 )
+        else if ( this.functionality.length === 0 )
         {
             throw new Error("No functionality specified");
+        }
+        else if ( !this.carImage )
+        {
+            throw new Error("No car image specified");
+        }
+        else if ( !this.__difficulty )
+        {
+            throw new Error(`Missing difficulty`);
         }
         else
         {
@@ -235,10 +269,13 @@ class Builder implements IBuilder
             return new CarExercise(
                 this.id,
                 tocEntry,
+                this.__difficulty,
+                this.header,
                 this.testedFunction,
                 this.simulations,
                 this.description,
-                this.__functionality
+                this.__functionality,
+                this.carImage
             );
         }
     }

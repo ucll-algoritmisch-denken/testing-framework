@@ -32,6 +32,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
     private referenceFunctionInformation : FunctionInformation;
 
     constructor(
+        private difficulty : number,
         private description : JSX.Element,
         private referenceImplementation : (...args : any[]) => any,
         private testedImplementation : Maybe<(...args : any[]) => any>,
@@ -112,6 +113,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
     {
         return CodingExercise.build( parseFunction(this.referenceImplementation).functionName, builder => {
             builder.description = this.description;
+            builder.difficulty = this.difficulty;
 
             if ( this.showSolution )
             {
@@ -133,6 +135,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 }
 
 export function build( args : {
+    difficulty : number,
     description : JSX.Element,
     referenceImplementation : (...args : any[]) => any, 
     testedImplementation : Maybe<((...args : any[]) => any)>,
@@ -142,7 +145,7 @@ export function build( args : {
 {
     const headerGenerator = args.headerGenerator || defaultHeaderGenerator;
     const showSolution = isUndefined(args.showSolution) ? true : args.showSolution;
-    const builder = new ByReferenceImplementationBuilder(args.description, args.referenceImplementation, args.testedImplementation, headerGenerator, showSolution);
+    const builder = new ByReferenceImplementationBuilder(args.difficulty, args.description, args.referenceImplementation, args.testedImplementation, headerGenerator, showSolution);
 
     func(builder);
 
