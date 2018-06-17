@@ -3,7 +3,7 @@ import * as CarSim from '../../car-simulation';
 import { functionality } from '../../car-simulation';
 import { CarSimulationViewer } from '../../components/car-simulation-viewer';
 import './car-exercise.scss';
-import { IScoredSection } from '../../chapter';
+import { IScoredSection, IDifficultySection } from '../../chapter';
 import { Score } from '../../score';
 import { Maybe } from 'tsmonad';
 import { isString, isInteger } from 'type';
@@ -27,6 +27,11 @@ class CarExercise extends Exercise
         private readonly carImage : string)
     { 
         super(id, tocEntry, difficulty);
+    }
+
+    hasDifficulty() : this is IDifficultySection
+    {
+        return false;
     }
 
     get content() : JSX.Element

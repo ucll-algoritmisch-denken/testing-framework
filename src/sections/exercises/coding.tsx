@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { ISection } from '../../chapter';
+import { ISection, IScoredSection, IDifficultySection } from '../../chapter';
 import { Score } from '../../score';
 import { isUndefined, isInteger } from '../../type';
 import { IResult } from '../../assertions';
@@ -52,7 +52,7 @@ class TestCase implements ITestCase
     constructor(public header : JSX.Element, public body : JSX.Element, public result : Outcome) { }
 }
 
-class CodingExercise extends Exercise
+class CodingExercise extends Exercise implements IScoredSection, IDifficultySection
 {
     constructor(
         id : string,
@@ -64,6 +64,16 @@ class CodingExercise extends Exercise
         private readonly solution ?: string)
     {
         super(id, tocEntry, difficulty);
+    }
+
+    isScored() : this is IScoredSection
+    {
+        return true;
+    }
+
+    hasDifficulty() : this is IDifficultySection
+    {
+        return true;
     }
 
     get content() : JSX.Element
