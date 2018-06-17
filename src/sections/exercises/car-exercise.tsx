@@ -14,7 +14,7 @@ import { CarSimulationSummary } from 'components/car-simulation-summary';
 import { difficulty, IHasDifficulty } from '../../difficulty';
 
 
-class CarExercise extends Exercise
+class CarExercise extends Exercise implements IHasDifficulty
 {
     constructor(
         id : string,
@@ -40,9 +40,7 @@ class CarExercise extends Exercise
         const me = this;
         const contents = (
             <React.Fragment>
-                <header>
-                    {this.header}
-                </header>
+                {createHeader()}
                 {this.createDescriptionContainer(this.description)}
                 <CarSimulationSummary allowedFunctionality={this.allowedFunctionality} maxSteps={this.simulations[0].maximumSteps} />
                 {this.createTestCasesContainer(createTestCases())}
@@ -51,6 +49,11 @@ class CarExercise extends Exercise
 
         return this.createExerciseContainer("car", contents);
 
+
+        function createHeader()
+        {
+            return me.createExerciseHeader(me.header);
+        }
 
         function createTestCases() : JSX.Element
         {

@@ -7,7 +7,6 @@ import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction,
 import * as CodingExercise from './coding';
 import { Maybe } from 'tsmonad';
 import { convertToString } from '../../formatters/string-formatters';
-import './coding.scss';
 import { difficulty } from 'difficulty';
 
 
@@ -86,7 +85,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
         options = options || {};
         const assertionConstructor = options.assertionConstructor || defaultAssertionConstructor;
         const oldBuilder = this.testCaseBuilder;
-        this.testCaseBuilder = newBuilder;        
+        this.testCaseBuilder = newBuilder;
 
 
         function newBuilder(testCaseIndex : number, tcb : CodingExercise.ITestCaseBuilder, expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>) : void
