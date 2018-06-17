@@ -19,7 +19,7 @@ class CarExercise extends Exercise
     constructor(
         id : string,
         tocEntry : JSX.Element,
-        difficulty : difficulty,
+        public readonly difficulty : difficulty,
         private readonly header : JSX.Element,
         private readonly testedFunction : Maybe<() => void>,
         private readonly simulations : CarSim.Simulation[],
@@ -27,7 +27,7 @@ class CarExercise extends Exercise
         private readonly allowedFunctionality : functionality[],
         private readonly carImage : string)
     { 
-        super(id, tocEntry, difficulty);
+        super(id, tocEntry);
     }
 
     hasDifficulty() : this is IHasDifficulty

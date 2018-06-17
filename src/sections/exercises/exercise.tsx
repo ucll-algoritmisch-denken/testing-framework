@@ -11,16 +11,9 @@ export abstract class Exercise implements ISection
 {
     private testCaseIndex : number;
 
-    constructor(public id : string, public tocEntry : JSX.Element, public difficulty : difficulty)
+    constructor(public id : string, public tocEntry : JSX.Element)
     { 
-        if ( !isInteger( difficulty ) )
-        {
-            throw new Error(`Difficulty should be integer`);
-        }
-        else
-        {
-            this.testCaseIndex = 0;
-        }
+        this.testCaseIndex = 0;
     }
 
     abstract hasDifficulty() : this is IHasDifficulty;
@@ -48,12 +41,29 @@ export abstract class Exercise implements ISection
 
     protected createExerciseHeader(header : JSX.Element) : JSX.Element
     {
+        const me = this;
+
         return (
             <header>
-                <DifficultyViewer difficulty={this.difficulty} />
+                {difficultyViewer()}
                 {header}
             </header>
         );
+
+
+        function difficultyViewer()
+        {
+            if ( me.hasDifficulty() )
+            {
+                return (
+                    <DifficultyViewer difficulty={me.difficulty} />
+                );
+            }
+            else
+            {
+                return <React.Fragment />;
+            }
+        }
     }
 
     protected createDescriptionContainer(contents : JSX.Element) : JSX.Element

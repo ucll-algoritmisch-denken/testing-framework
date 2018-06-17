@@ -1,8 +1,9 @@
 import React from 'react';
-import { namedCallFunction, INamedFunctionCallResults } from '../../../function-util';
-import { ISection } from '../../../chapter';
-import { deepEqual } from '../../../equality';
-import { IColumn, InterpretationExercise } from './exercise';
+import { namedCallFunction, INamedFunctionCallResults } from 'function-util';
+import { ISection } from 'chapter';
+import { deepEqual } from 'equality';
+import { IColumn, InterpretationExercise } from 'sections/exercises/interpretation/exercise';
+import { difficulty } from 'difficulty';
 
 
 export interface IBuilder
@@ -13,7 +14,7 @@ export interface IBuilder
 
     caption : JSX.Element;
 
-    difficulty ?: number;
+    difficulty ?: difficulty;
 
     addInput(...args : any[]) : void;
 
@@ -80,7 +81,7 @@ class InterpretationExerciseBuilder implements IBuilder
 
     public caption : JSX.Element;
 
-    public difficulty ?: number;
+    public difficulty ?: difficulty;
 
     constructor(public id : string, private func : (...args : any[]) => any)
     {
@@ -123,7 +124,7 @@ class InterpretationExerciseBuilder implements IBuilder
         }
         else
         {
-            return new InterpretationExercise(this.id, this.difficulty, this.caption, this.header, this.func, this.cases, this.columns, this.hint);
+            return new InterpretationExercise(this.id, this.caption, this.difficulty, this.header, this.func, this.cases, this.columns, this.hint);
         }
     }
 }

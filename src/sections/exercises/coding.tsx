@@ -58,13 +58,13 @@ class CodingExercise extends Exercise implements IScored, IHasDifficulty
     constructor(
         id : string,
         tocEntry : JSX.Element,
-        difficulty : difficulty,
+        public readonly difficulty : difficulty,
         private readonly header : JSX.Element,
         private readonly description : JSX.Element,
         private readonly testCases : ITestCase[],
         private readonly solution ?: string)
     {
-        super(id, tocEntry, difficulty);
+        super(id, tocEntry);
     }
 
     isScored() : this is IScored

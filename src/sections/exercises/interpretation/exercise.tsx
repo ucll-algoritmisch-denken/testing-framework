@@ -1,12 +1,12 @@
 import React from 'react';
-import { parseFunction, formatFunction, FunctionInformation, INamedFunctionCallResults } from '../../../function-util';
-import { ISection } from '../../../chapter';
-import { ValidatedInput } from '../../../components/ValidatedInput';
-import * as Formatters from '../../../formatters/jsx-formatters';
-import { SourceCodeViewer } from '../../../components/sourcecode-viewer';
-import { HintViewer } from '../../../components/hint-viewer';
-import { IScored } from '../../../score';
-import { IHasDifficulty, difficulty } from '../../../difficulty';
+import { parseFunction, formatFunction, FunctionInformation, INamedFunctionCallResults } from 'function-util';
+import { ValidatedInput } from 'components/ValidatedInput';
+import * as Formatters from 'formatters/jsx-formatters';
+import { SourceCodeViewer } from 'components/sourcecode-viewer';
+import { HintViewer } from 'components/hint-viewer';
+import { IScored } from 'score';
+import { IHasDifficulty, difficulty } from 'difficulty';
+import { Exercise } from 'sections/exercises/exercise';
 
 
 export interface IColumn
@@ -16,20 +16,22 @@ export interface IColumn
     validate(expected : INamedFunctionCallResults, input : string) : boolean;
 }
 
-export class InterpretationExercise implements ISection, IHasDifficulty
+export class InterpretationExercise extends Exercise
 {
     private readonly functionInformation : FunctionInformation;
 
     constructor(
-        public readonly id : string,
+        id : string,
+        tocEntry : JSX.Element,
         public readonly difficulty : difficulty,
-        public readonly tocEntry : JSX.Element,
         private readonly header : JSX.Element,
         private readonly func : (...args : any[]) => any,
         private readonly cases : INamedFunctionCallResults[],
         private readonly columns : IColumn[],
         private readonly hint : JSX.Element | undefined)
     {
+        super(id, tocEntry);
+        
         this.functionInformation = parseFunction(func);
     }
 
@@ -49,15 +51,18 @@ export class InterpretationExercise implements ISection, IHasDifficulty
 
         return (
             <section className='interpretation exercise'>
-                <header>
-                    {this.header}
-                </header>
+                {createHeader()}
                 <SourceCodeViewer sourceCode={createCode()} />
                 {createForm()}
                 {createHint()}
             </section>
         );
 
+
+        function createHeader()
+        {
+            return me.createExerciseHeader(me.header);
+        }
 
         function createHint()
         {
