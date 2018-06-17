@@ -1,5 +1,6 @@
 import { ISection } from './chapter';
 import { Score, IScored } from './score';
+import { IHasDifficulty } from 'difficulty';
 
 
 export interface IChapter
@@ -17,14 +18,9 @@ export interface ISection
 
     isScored() : this is IScored;
 
-    hasDifficulty() : this is IDifficultySection;
+    hasDifficulty() : this is IHasDifficulty;
 
     readonly id : string;
-}
-
-export interface IDifficultySection extends ISection
-{
-    readonly difficulty : number;
 }
 
 export function selectScoredSections(sections : ISection[]) : (ISection & IScored)[]

@@ -1,16 +1,17 @@
 import React from 'react';
-import { ISection, IDifficultySection } from "chapter";
+import { ISection } from "chapter";
 import { Outcome, outcomeToHtmlClass } from '../../outcome';
 import { isInteger } from '../../type';
 import { DifficultyViewer } from '../../components/difficulty-viewer';
 import { IScored } from '../../score';
+import { IHasDifficulty, difficulty } from '../../difficulty';
 
 
 export abstract class Exercise implements ISection
 {
     private testCaseIndex : number;
 
-    constructor(public id : string, public tocEntry : JSX.Element, public difficulty : number)
+    constructor(public id : string, public tocEntry : JSX.Element, public difficulty : difficulty)
     { 
         if ( !isInteger( difficulty ) )
         {
@@ -22,7 +23,7 @@ export abstract class Exercise implements ISection
         }
     }
 
-    abstract hasDifficulty() : this is IDifficultySection;
+    abstract hasDifficulty() : this is IHasDifficulty;
 
     abstract readonly content : JSX.Element;
 

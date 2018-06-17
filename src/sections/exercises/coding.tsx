@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { ISection, IDifficultySection } from '../../chapter';
+import { ISection } from '../../chapter';
 import { Score, IScored } from '../../score';
 import { isUndefined, isInteger } from '../../type';
 import { IResult } from '../../assertions';
@@ -9,6 +9,7 @@ import { jsxify } from '../../formatters/jsx-formatters';
 import { SolutionViewer } from '../../components/solution-viewer';
 import { Exercise } from '../../sections/exercises/exercise';
 import './coding.scss';
+import { IHasDifficulty, difficulty } from '../../difficulty';
 
 
 export interface IBuilder
@@ -21,7 +22,7 @@ export interface IBuilder
 
     tocEntry : JSX.Element;
 
-    difficulty : number;
+    difficulty : difficulty;
 
     addTestCase(func : (tcb : ITestCaseBuilder) => void) : void;
 
@@ -52,12 +53,12 @@ class TestCase implements ITestCase
     constructor(public header : JSX.Element, public body : JSX.Element, public result : Outcome) { }
 }
 
-class CodingExercise extends Exercise implements IScored, IDifficultySection
+class CodingExercise extends Exercise implements IScored, IHasDifficulty
 {
     constructor(
         id : string,
         tocEntry : JSX.Element,
-        difficulty : number,
+        difficulty : difficulty,
         private readonly header : JSX.Element,
         private readonly description : JSX.Element,
         private readonly testCases : ITestCase[],
@@ -71,7 +72,7 @@ class CodingExercise extends Exercise implements IScored, IDifficultySection
         return true;
     }
 
-    hasDifficulty() : this is IDifficultySection
+    hasDifficulty() : this is IHasDifficulty
     {
         return true;
     }

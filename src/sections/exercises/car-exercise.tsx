@@ -3,7 +3,7 @@ import * as CarSim from '../../car-simulation';
 import { functionality } from '../../car-simulation';
 import { CarSimulationViewer } from '../../components/car-simulation-viewer';
 import './car-exercise.scss';
-import { IDifficultySection, ISection } from '../../chapter';
+import { ISection } from '../../chapter';
 import { Score, IScored } from '../../score';
 import { Maybe } from 'tsmonad';
 import { isInteger } from 'type';
@@ -11,6 +11,7 @@ import { Exercise } from './exercise';
 import * as _ from 'lodash';
 import { Outcome } from '../../outcome';
 import { CarSimulationSummary } from 'components/car-simulation-summary';
+import { difficulty, IHasDifficulty } from '../../difficulty';
 
 
 class CarExercise extends Exercise
@@ -18,7 +19,7 @@ class CarExercise extends Exercise
     constructor(
         id : string,
         tocEntry : JSX.Element,
-        difficulty : number,
+        difficulty : difficulty,
         private readonly header : JSX.Element,
         private readonly testedFunction : Maybe<() => void>,
         private readonly simulations : CarSim.Simulation[],
@@ -29,9 +30,9 @@ class CarExercise extends Exercise
         super(id, tocEntry, difficulty);
     }
 
-    hasDifficulty() : this is IDifficultySection
+    hasDifficulty() : this is IHasDifficulty
     {
-        return false;
+        return true;
     }
 
     get content() : JSX.Element
@@ -179,7 +180,7 @@ export interface IBuilder
 
     description : JSX.Element;
 
-    difficulty : number;
+    difficulty : difficulty;
     
     addSimulation(world : string, maximumSteps ?: number) : void;
 

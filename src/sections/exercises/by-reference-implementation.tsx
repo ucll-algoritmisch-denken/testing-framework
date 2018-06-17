@@ -8,6 +8,7 @@ import * as CodingExercise from './coding';
 import { Maybe } from 'tsmonad';
 import { convertToString } from '../../formatters/string-formatters';
 import './coding.scss';
+import { difficulty } from 'difficulty';
 
 
 export interface IByReferenceImplementationBuilder
@@ -32,7 +33,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
     private referenceFunctionInformation : FunctionInformation;
 
     constructor(
-        private difficulty : number,
+        private difficulty : difficulty,
         private description : JSX.Element,
         private referenceImplementation : (...args : any[]) => any,
         private testedImplementation : Maybe<(...args : any[]) => any>,
@@ -135,7 +136,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 }
 
 export function build( args : {
-    difficulty : number,
+    difficulty : difficulty,
     description : JSX.Element,
     referenceImplementation : (...args : any[]) => any, 
     testedImplementation : Maybe<((...args : any[]) => any)>,
