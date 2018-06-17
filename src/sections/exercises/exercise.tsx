@@ -1,8 +1,9 @@
 import React from 'react';
-import { ISection, IDifficultySection, IScoredSection } from "chapter";
+import { ISection, IDifficultySection } from "chapter";
 import { Outcome, outcomeToHtmlClass } from '../../outcome';
 import { isInteger } from '../../type';
 import { DifficultyViewer } from '../../components/difficulty-viewer';
+import { IScored } from '../../score';
 
 
 export abstract class Exercise implements ISection
@@ -25,7 +26,7 @@ export abstract class Exercise implements ISection
 
     abstract readonly content : JSX.Element;
 
-    abstract isScored() : this is IScoredSection;
+    abstract isScored() : this is IScored;
 
     /**
      * Creates the container in which the exercise resides.

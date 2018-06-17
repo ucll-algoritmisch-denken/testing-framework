@@ -45,3 +45,8 @@ export class Score
         return total;
     }
 }
+
+export interface IScored
+{
+    readonly score : Score;
+}

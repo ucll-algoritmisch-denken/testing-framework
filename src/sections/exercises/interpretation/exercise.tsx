@@ -1,10 +1,11 @@
 import React from 'react';
 import { parseFunction, formatFunction, FunctionInformation, INamedFunctionCallResults } from '../../../function-util';
-import { ISection, IScoredSection, IDifficultySection } from '../../../chapter';
+import { ISection, IDifficultySection } from '../../../chapter';
 import { ValidatedInput } from '../../../components/ValidatedInput';
 import * as Formatters from '../../../formatters/jsx-formatters';
 import { SourceCodeViewer } from '../../../components/sourcecode-viewer';
 import { HintViewer } from '../../../components/hint-viewer';
+import { IScored } from '../../../score';
 
 
 export interface IColumn
@@ -36,7 +37,7 @@ export class InterpretationExercise implements ISection, IDifficultySection
         return true;
     }
 
-    isScored() : this is IScoredSection
+    isScored() : this is IScored
     {
         return false;
     }

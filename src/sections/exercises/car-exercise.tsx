@@ -3,10 +3,10 @@ import * as CarSim from '../../car-simulation';
 import { functionality } from '../../car-simulation';
 import { CarSimulationViewer } from '../../components/car-simulation-viewer';
 import './car-exercise.scss';
-import { IScoredSection, IDifficultySection } from '../../chapter';
-import { Score } from '../../score';
+import { IDifficultySection, ISection } from '../../chapter';
+import { Score, IScored } from '../../score';
 import { Maybe } from 'tsmonad';
-import { isString, isInteger } from 'type';
+import { isInteger } from 'type';
 import { Exercise } from './exercise';
 import * as _ from 'lodash';
 import { Outcome } from '../../outcome';
@@ -80,7 +80,7 @@ class CarExercise extends Exercise
         }
     }
 
-    isScored() : this is IScoredSection
+    isScored() : this is IScored
     {
         return true;
     }
@@ -286,7 +286,7 @@ class Builder implements IBuilder
     }
 }
 
-export function build(id : string, testedFunction : Maybe<() => void>, func : (builder : IBuilder) => void) : IScoredSection
+export function build(id : string, testedFunction : Maybe<() => void>, func : (builder : IBuilder) => void) : ISection
 {
     const builder = new Builder(id, testedFunction);
     func(builder);

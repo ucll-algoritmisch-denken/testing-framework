@@ -7,7 +7,7 @@ import { App } from './view';
 import { IChapter } from './chapter';
 
 export { Score } from './score';
-export { IChapter, ISection, IScoredSection } from './chapter';
+export { IChapter, ISection } from './chapter';
 export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow } from './function-repository';
 
 

@@ -1,13 +1,14 @@
 import React from 'react';
-import { ISection, IScoredSection } from '../chapter';
+import { ISection } from '../chapter';
 import './explanations.scss';
+import { IScored } from '../score';
 
 
 class ExplanationSection implements ISection
 {
     constructor(public readonly id : string, public readonly tocEntry : JSX.Element, public readonly header : JSX.Element, public readonly explanation : JSX.Element) { }
 
-    isScored() : this is IScoredSection
+    isScored() : this is IScored
     {
         return false;
     }

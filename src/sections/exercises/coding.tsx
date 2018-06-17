@@ -1,7 +1,7 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { ISection, IScoredSection, IDifficultySection } from '../../chapter';
-import { Score } from '../../score';
+import { ISection, IDifficultySection } from '../../chapter';
+import { Score, IScored } from '../../score';
 import { isUndefined, isInteger } from '../../type';
 import { IResult } from '../../assertions';
 import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../outcome';
@@ -52,7 +52,7 @@ class TestCase implements ITestCase
     constructor(public header : JSX.Element, public body : JSX.Element, public result : Outcome) { }
 }
 
-class CodingExercise extends Exercise implements IScoredSection, IDifficultySection
+class CodingExercise extends Exercise implements IScored, IDifficultySection
 {
     constructor(
         id : string,
@@ -66,7 +66,7 @@ class CodingExercise extends Exercise implements IScoredSection, IDifficultySect
         super(id, tocEntry, difficulty);
     }
 
-    isScored() : this is IScoredSection
+    isScored() : this is IScored
     {
         return true;
     }

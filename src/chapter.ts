@@ -1,5 +1,5 @@
 import { ISection } from './chapter';
-import { Score } from './score';
+import { Score, IScored } from './score';
 
 
 export interface IChapter
@@ -15,7 +15,7 @@ export interface ISection
 
     readonly content : JSX.Element;
 
-    isScored() : this is IScoredSection;
+    isScored() : this is IScored;
 
     hasDifficulty() : this is IDifficultySection;
 
@@ -27,14 +27,9 @@ export interface IDifficultySection extends ISection
     readonly difficulty : number;
 }
 
-export interface IScoredSection extends ISection
+export function selectScoredSections(sections : ISection[]) : (ISection & IScored)[]
 {
-    readonly score : Score;
-}
-
-export function selectScoredSections(sections : ISection[]) : IScoredSection[]
-{
-    const result : IScoredSection[] = [];
+    const result : (ISection & IScored)[] = [];
 
     for ( let section of sections )
     {
