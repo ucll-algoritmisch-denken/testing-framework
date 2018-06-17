@@ -45,6 +45,7 @@ export class TableOfContents extends React.Component<IProps, IState>
         {
             return (
                 <tr className="total" key="total">
+                    <td />
                     <td className="caption">
                         Total
                     </td>
@@ -65,7 +66,7 @@ export class TableOfContents extends React.Component<IProps, IState>
         {
             return (
                 <tr className={determineClass()} key={`toc-entry-${section.id}`}>
-                    {/* {createDifficulty()} */}
+                    {createDifficulty()}
                     {createCaption()}
                     {createScore()}
                 </tr>
@@ -84,13 +85,23 @@ export class TableOfContents extends React.Component<IProps, IState>
                 return result.join(' ');
             }
 
-            // function createDifficulty()
-            // {
-            //     return (
-                    
-            //         <DifficultyViewer difficulty={section.}
-            //     );
-            // }
+            function createDifficulty()
+            {
+                if ( section.hasDifficulty() )
+                {
+                    return (
+                        <td className="difficulty">
+                            <DifficultyViewer difficulty={section.difficulty} />
+                        </td>
+                    );
+                }
+                else
+                {
+                    return (
+                        <td className="difficulty" />
+                    );
+                }
+            }
 
             function createCaption()
             {
