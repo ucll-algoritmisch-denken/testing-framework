@@ -53,7 +53,7 @@ export class CarSimulationSummary extends React.Component<IProps, IState>
             {
                 return me.props.allowedFunctionality.map(functionality => {
                     return (
-                        <CarFunctionalitySymbol functionality={functionality} />
+                        <CarFunctionalitySymbol functionality={functionality} key={functionality} />
                     );
                 });
             }
