@@ -3,7 +3,7 @@ import { ISection } from '../../chapter';
 import { isUndefined } from '../../type';
 import * as Assertions from '../../assertions';
 import { simple, code } from '../../formatters/jsx-formatters';
-import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, formatFunction, FunctionInformation, nameResults } from '../../function-util';
+import { IFunctionCallResults, callFunction, parseFunction, monadicCallFunction, FunctionInformation, nameResults } from '../../function-util';
 import * as CodingExercise from './coding';
 import { Maybe } from 'tsmonad';
 import { convertToString } from '../../formatters/string-formatters';
@@ -117,7 +117,7 @@ class ByReferenceImplementationBuilder implements IByReferenceImplementationBuil
 
             if ( this.showSolution )
             {
-                builder.solution = formatFunction(this.referenceImplementation);
+                builder.solution = this.referenceImplementation.toString();
             }
 
             for ( let testCaseIndex = 0; testCaseIndex !== this.cases.length; ++testCaseIndex )

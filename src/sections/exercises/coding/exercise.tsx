@@ -16,6 +16,7 @@ export interface ITestCase
 
     readonly result : Outcome;
 }
+
 export class CodingExercise extends Exercise implements IScored, IHasDifficulty
 {
     constructor(

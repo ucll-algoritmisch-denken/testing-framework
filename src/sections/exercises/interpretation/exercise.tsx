@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseFunction, formatFunction, FunctionInformation, INamedFunctionCallResults } from 'function-util';
+import { parseFunction, FunctionInformation, INamedFunctionCallResults } from 'function-util';
 import { ValidatedInput } from 'components/ValidatedInput';
 import * as Formatters from 'formatters/jsx-formatters';
 import { SourceCodeViewer } from 'components/sourcecode-viewer';
@@ -139,7 +139,7 @@ export class InterpretationExercise extends Exercise
 
         function createCode() : string
         {
-            return formatFunction(me.func);
+            return me.func.toString();
         }
     }
 }

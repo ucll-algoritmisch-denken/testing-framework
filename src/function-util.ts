@@ -114,8 +114,3 @@ export function namedCallFunction(func : (...args : any[]) => any, ...args : any
 
     return named;
 }
-
-export function formatFunction(func : (...args : any[]) => any) : string
-{
-    return dedent(func.toString());
-}
