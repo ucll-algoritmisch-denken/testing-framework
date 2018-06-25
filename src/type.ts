@@ -30,3 +30,8 @@ export function isUndefined(x : any) : x is undefined
 {
     return _.isUndefined(x);
 }
+
+export function isFunction(x : any) : x is ((...args : any[]) => any)
+{
+    return _.isFunction(x);
+}

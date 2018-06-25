@@ -1,4 +1,4 @@
-import { isArray, isString, isUndefined, isNumber, isBoolean } from "type";
+import { isArray, isString, isUndefined, isNumber, isBoolean, isFunction } from "type";
 import _ from 'lodash';
 
 
@@ -25,6 +25,10 @@ export function convertToString(x : any) : string
         return x.toString();
     }
     else if ( isBoolean(x) )
+    {
+        return x.toString();
+    }
+    else if ( isFunction(x) )
     {
         return x.toString();
     }

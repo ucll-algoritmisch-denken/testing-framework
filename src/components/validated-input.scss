@@ -1,0 +1,12 @@
+.validated-input {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+
+    &.correct {
+        background: #AFA;
+    }
+
+    &.incorrect {
+        background: #FAA;
+    }
+}

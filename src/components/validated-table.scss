@@ -1,0 +1,19 @@
+.validated-table {
+    margin: 1em auto;
+    border-collapse: collapse;
+    border: 1px solid black;
+    box-shadow: 5px 5px gray;
+
+    tr {
+        th {
+            border-bottom: 1px solid black;
+            background: #AAA;
+        }
+
+        td {
+            padding: 0.25em 1em;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    }
+}

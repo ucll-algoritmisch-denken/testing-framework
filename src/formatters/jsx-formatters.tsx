@@ -6,6 +6,8 @@ import { BitmapViewer } from '../components/bitmap-viewer';
 import { Invalid } from '../components/invalid';
 import { convertToString } from './string-formatters';
 import _ from 'lodash';
+import { MultiView } from 'components/multiview';
+import { DiceViewer } from 'components/dice-viewer';
 
 
 export function jsxify(x : JSX.Element | string)
@@ -98,7 +100,7 @@ export function grayscaleBitmap(x : any) : JSX.Element
     }
 }
 
-export function RgbBitmap(x : any) : JSX.Element
+export function rgbBitmap(x : any) : JSX.Element
 {
     if ( !isArray(x) )
     {        
@@ -133,4 +135,11 @@ export function RgbBitmap(x : any) : JSX.Element
             <Invalid message={message} value={x} />
         );
     }
+}
+
+export function dice(ns : number[]) : JSX.Element
+{
+    return (
+        <DiceViewer dice={ns} />
+    );
 }

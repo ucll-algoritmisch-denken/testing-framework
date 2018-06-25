@@ -1,12 +1,13 @@
 import React from 'react';
 import { parseFunction, FunctionInformation, INamedFunctionCallResults } from 'function-util';
-import { ValidatedInput } from 'components/ValidatedInput';
+import { ValidatedInput } from 'components/validated-input';
 import * as Formatters from 'formatters/jsx-formatters';
 import { SourceCodeViewer } from 'components/sourcecode-viewer';
 import { HintViewer } from 'components/hint-viewer';
 import { IScored } from 'score';
 import { IHasDifficulty, difficulty } from 'difficulty';
 import { Exercise } from 'sections/exercises/exercise';
+import { ValidatedTable } from 'components';
 
 
 export interface IColumn
@@ -25,7 +26,9 @@ export class InterpretationExercise extends Exercise
         tocEntry : JSX.Element,
         public readonly difficulty : difficulty,
         private readonly header : JSX.Element,
+        private readonly explanations : JSX.Element,
         private readonly func : (...args : any[]) => any,
+        private readonly showSourceCode : boolean,
         private readonly cases : INamedFunctionCallResults[],
         private readonly columns : IColumn[],
         private readonly hint : JSX.Element | undefined)
@@ -52,7 +55,8 @@ export class InterpretationExercise extends Exercise
         return (
             <section className='interpretation exercise'>
                 {createHeader()}
-                <SourceCodeViewer sourceCode={createCode()} />
+                {createExplanations()}
+                {createSourceCodeViewer()}
                 {createForm()}
                 {createHint()}
             </section>
@@ -62,6 +66,27 @@ export class InterpretationExercise extends Exercise
         function createHeader()
         {
             return me.createExerciseHeader(me.header);
+        }
+
+        function createExplanations()
+        {
+            return me.createDescriptionContainer( me.explanations );
+        }
+
+        function createSourceCodeViewer()
+        {
+            if ( me.showSourceCode )
+            {
+                return (
+                    <SourceCodeViewer sourceCode={createCode()} />
+                );
+            }
+            else
+            {
+                return (
+                    <React.Fragment />
+                );
+            }
         }
 
         function createHint()
@@ -83,7 +108,7 @@ export class InterpretationExercise extends Exercise
         function createForm()
         {
             return (
-                <table className='form'>
+                <table className={ValidatedTable.className}>
                     <tbody>
                         {createHeaders()}
                         {createRows()}

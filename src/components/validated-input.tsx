@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import PropTypes from 'prop-types';
+import './validated-input.scss';
 
 
 export interface IProps
@@ -34,18 +35,21 @@ export class ValidatedInput extends React.Component<IProps, IState>
 
         function determineClass()
         {
-            if ( me.state.input.length === 0 )
+            const classNames : string[] = [ 'validated-input' ];
+
+            if ( me.state.input.length !== 0 )
             {
-                return '';
+                 if ( me.isCorrect() )
+                {
+                    classNames.push('correct');
+                }
+                else
+                {
+                    classNames.push('incorrect');
+                }
             }
-            else if ( me.isCorrect() )
-            {
-                return 'correct';
-            }
-            else
-            {
-                return 'incorrect';
-            }
+
+            return classNames.join(" ");
         }
 
         function onChange(e : ChangeEvent<HTMLInputElement>) : void

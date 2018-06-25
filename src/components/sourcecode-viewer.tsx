@@ -1,5 +1,6 @@
 import React from 'react';
-import { Controlled as CodeMirror } from 'react-codemirror2';
+import * as codemirror from 'codemirror';
+import { Controlled as CodeMirror, ISetSelectionOptions } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/theme/neat.css';
@@ -32,7 +33,13 @@ export class SourceCodeViewer extends React.Component<IProps, IState>
         }
 
         return (
-            <CodeMirror value={sourceCode} onBeforeChange={() => {}} options={{mode: 'javascript', theme: 'neat', readOnly: true, lineNumbers: true}} className='source-code-viewer' />
+            <CodeMirror value={sourceCode} onBeforeChange={() => {}} options={options()} className='source-code-viewer' />
         );
+
+
+        function options() : codemirror.EditorConfiguration
+        {
+            return { mode: 'javascript', theme: 'neat', readOnly: true, lineNumbers: true };
+        }
     }
 }

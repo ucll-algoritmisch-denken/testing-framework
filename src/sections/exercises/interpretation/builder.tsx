@@ -12,9 +12,13 @@ export interface IBuilder
 
     hint : JSX.Element | undefined;
 
-    caption : JSX.Element;
+    tocEntry : JSX.Element;
 
     difficulty ?: difficulty;
+
+    explanations : JSX.Element;
+
+    showSourceCode : boolean;
 
     addInput(...args : any[]) : void;
 
@@ -79,9 +83,13 @@ class InterpretationExerciseBuilder implements IBuilder
 
     public hint : JSX.Element | undefined;
 
-    public caption : JSX.Element;
+    public tocEntry : JSX.Element;
 
     public difficulty ?: difficulty;
+
+    public explanations : JSX.Element;
+
+    public showSourceCode : boolean;
 
     constructor(public id : string, private func : (...args : any[]) => any)
     {
@@ -92,11 +100,15 @@ class InterpretationExerciseBuilder implements IBuilder
                 Wat doet deze code?
             </React.Fragment>
         );
-        this.caption = (
+        this.tocEntry = (
             <React.Fragment>
                 Interpretation
             </React.Fragment>
         );
+        this.explanations = (
+            <React.Fragment />
+        );
+        this.showSourceCode = true;
     }
 
     public addInput(...args : any[]) : void
@@ -124,7 +136,7 @@ class InterpretationExerciseBuilder implements IBuilder
         }
         else
         {
-            return new InterpretationExercise(this.id, this.caption, this.difficulty, this.header, this.func, this.cases, this.columns, this.hint);
+            return new InterpretationExercise(this.id, this.tocEntry, this.difficulty, this.header, this.explanations, this.func, this.showSourceCode, this.cases, this.columns, this.hint);
         }
     }
 }

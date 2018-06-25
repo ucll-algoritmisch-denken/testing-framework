@@ -16,7 +16,7 @@ export function createRgbBitmapAssertion(expected : number[][][], original ?: nu
 {
     const options = {
         original,
-        formatter: Formatters.RgbBitmap
+        formatter: Formatters.rgbBitmap
     };
 
     return createEqualityAssertion(expected, options);
