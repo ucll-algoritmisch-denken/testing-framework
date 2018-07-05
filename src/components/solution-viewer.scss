@@ -4,22 +4,25 @@
     background: #CCF;
     box-shadow: 5px 5px #DDF;
 
-    .header {
-        background: #AAF;
-        text-align: center;
-        font-size: 2em;
-        padding: 0.2em;
-        font-variant: small-caps;
-        font-weight: bold;
-        user-select: none;
-        cursor: pointer;
-    }
+    .Collapsible {
+        .Collapsible__trigger {
+            display: block;
+            background: #AAF;
+            text-align: center;
+            font-size: 2em;
+            padding: 0.2em;
+            font-variant: small-caps;
+            font-weight: bold;
+            user-select: none;
+            cursor: pointer;
 
-    .header:hover {
-        background: #CCF;
-    }
+            &:hover {
+                background: #88F;
+            }
+        }
 
-    .contents {
-        margin: 0em 1em;
+        .Collapsible__contentInner {
+            padding: 1em;
+        }
     }
 }

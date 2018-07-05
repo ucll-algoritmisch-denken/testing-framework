@@ -1,21 +1,11 @@
-import { Outcome } from 'outcome';
-import { Maybe } from 'tsmonad';
-
-export { createEqualityAssertion } from './equality';
-export { createNoReturnAssertion } from './no-return';
-export { createPermutationAssertion } from './permutation';
-export { createUnmodifiedAssertion } from './unmodified';
-export { createGrayscaleBitmapAssertion, createRgbBitmapAssertion } from './bitmap';
-
-
-export interface IResult
-{
-    result : Outcome;
-
-    content : JSX.Element;
-}
-
-export interface IAssertion
-{
-    check(x : Maybe<any>) : IResult;
-}
+export { IResult } from './result';
+export { IAssertion } from './assertion';
+export { equality } from './equality';
+export { noReturn } from './no-return';
+export { permutation } from './permutation';
+export { unmodified } from './unmodified';
+// export { createGrayscaleBitmapAssertion, createRgbBitmapAssertion } from './bitmap';
+export { returnValue } from './return-value';
+export { parameter } from './parameter';
+export { decorate } from './decorator';
+export { sequence } from './sequence';

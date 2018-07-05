@@ -1,124 +1,105 @@
 import React from 'react';
+import { Exercise as BaseExercise } from "../exercise";
+import { outcomeToHtmlClass } from 'outcome';
+import { HintViewer, SolutionViewer } from 'components';
+import classNames from 'classnames';
+import { ITestCase } from './test-case';
 import Collapsible from 'react-collapsible';
-import { Score, IScored } from 'score';
-import { isUndefined } from 'type';
-import { Outcome, outcomeToHtmlClass } from 'outcome';
-import { SolutionViewer } from 'components/solution-viewer';
-import { Exercise } from 'sections/exercises/exercise';
-import { IHasDifficulty, difficulty } from 'difficulty';
 
 
-export interface ITestCase
+export abstract class Exercise extends BaseExercise
 {
-    readonly header : JSX.Element;
+    protected abstract readonly description : JSX.Element;
 
-    readonly body : JSX.Element;
+    protected abstract generateTestCases() : Iterable<ITestCase>;
 
-    readonly result : Outcome;
-}
+    protected get hint() : JSX.Element | null { return null; }
 
-export class CodingExercise extends Exercise implements IScored, IHasDifficulty
-{
-    constructor(
-        id : string,
-        tocEntry : JSX.Element,
-        public readonly difficulty : difficulty,
-        private readonly header : JSX.Element,
-        private readonly description : JSX.Element,
-        private readonly testCases : ITestCase[],
-        private readonly solution ?: string)
+    protected get solution() : string | null { return null; }
+
+    get exerciseContent() : JSX.Element
     {
-        super(id, tocEntry);
-    }
-
-    isScored() : this is IScored
-    {
-        return true;
-    }
-
-    hasDifficulty() : this is IHasDifficulty
-    {
-        return true;
-    }
-
-    get content() : JSX.Element
-    {
-        const me = this;
-        const contents = (
+        return (
             <React.Fragment>
-                {this.createExerciseHeader(this.header)}
-                {this.createDescriptionContainer(this.description)}
-                {this.createTestCasesContainer(visualizeTestCases())}
-                {createSolution()}
+                {this.renderDescription()}
+                {this.renderTestCases()}
+                {this.renderHint()}
+                {this.renderSolution()}
             </React.Fragment>
         );
-
-        return this.createExerciseContainer("coding", contents);
-
-
-        function createSolution()
-        {
-            if ( isUndefined(me.solution) )
-            {
-                return <React.Fragment />;
-            }
-            else
-            {
-                return <SolutionViewer sourceCode={me.solution} />;
-            }
-        }
-
-        function visualizeTestCases()
-        {
-            return (
-                <React.Fragment>
-                    {me.testCases.map(visualizeTestCase)}
-                </React.Fragment>
-            );
-
-            function visualizeTestCase(testCase : ITestCase, index : number)
-            {
-                const contents = (
-                    <Collapsible trigger={createHeader()} transitionTime={100}>
-                        {testCase.body}
-                    </Collapsible>
-                );
-
-                return me.createTestCaseContainer(testCase.result, contents);
-
-
-                function createHeader()
-                {
-                    return (
-                        <div className={determineHeaderClassName()}>
-                            {testCase.header}
-                        </div>
-                    );
-
-
-                    function determineHeaderClassName()
-                    {
-                        return `header ${outcomeToHtmlClass(testCase.result)}`;
-                    }
-                }
-
-                function determineTestCaseClassName()
-                {
-                    return `test-case ${outcomeToHtmlClass(testCase.result)}`;
-                }
-            }
-        }
     }
 
-    get score() : Score
+    protected renderDescription() : JSX.Element
     {
-        if ( this.testCases.every(testCase => testCase.result === Outcome.Pass) )
+        return (
+            <div className="description">
+                {this.description}
+            </div>
+        );
+    }
+
+    protected renderTestCases() : JSX.Element
+    {        
+        const testCases = Array.from(this.generateTestCases()).map( (testCase, testCaseIndex) => {
+            return (
+                <React.Fragment key={`test-case-${testCaseIndex}`}>
+                    {this.renderTestCase(testCase)}
+                </React.Fragment>
+            );
+        });
+
+        return (
+            <div className="test-cases">
+                {testCases}
+            </div>
+        );
+    }
+
+    protected renderTestCase(testCase : ITestCase) : JSX.Element
+    {
+        const htmlClass = classNames('test-case', outcomeToHtmlClass(testCase.outcome));
+
+        return (
+            <div className={htmlClass}>
+                <Collapsible trigger={testCase.header} transitionTime={100}>
+                    {testCase.content}
+                </Collapsible>
+            </div>
+        );
+    }
+
+    protected renderHint() : JSX.Element
+    {
+        if ( this.hint )
         {
-            return new Score(1, 1);
+            return (
+                <HintViewer>
+                    {this.hint}
+                </HintViewer>
+            );
         }
         else
         {
-            return new Score(0, 1);
+            return <React.Fragment />;
         }
+    }
+
+    protected renderSolution() : JSX.Element
+    {
+        if ( this.solution )
+        {
+            return (
+                <SolutionViewer sourceCode={this.solution} />
+            );
+        }
+        else
+        {
+            return <React.Fragment />;
+        }
+    }
+
+    protected get htmlClasses() : string[]
+    {
+        return super.htmlClasses.concat('coding');
     }
 }

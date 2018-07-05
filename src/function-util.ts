@@ -1,6 +1,8 @@
 import { cloneDeep } from 'lodash';
-import dedent from 'dedent';
 import { Maybe } from 'tsmonad';
+import _ from 'lodash';
+import { IType } from 'type';
+import { deepEqual } from 'equality';
 
 
 export class FunctionInformation
@@ -12,6 +14,57 @@ export class FunctionInformation
         const parameterString = this.parameterNames.join(", ");
 
         return `${this.functionName}(${parameterString})`;
+    }
+
+    get parameterCount() : number
+    {
+        return this.parameterNames.length;
+    }
+
+    parameterWithNameExists(parameterName : string) : boolean
+    {
+        return _.includes(this.parameterNames, parameterName);
+    }
+
+    specifyTypes(parameterTypes : IType<any>[], returnType : IType<any>) : TypedFunctionInformation
+    {
+        return new TypedFunctionInformation(this.functionName, this.parameterNames, parameterTypes, returnType);
+    }
+
+    verifyCall(fcr : IFunctionCallResults, ignoredParameters : string[] = []) : boolean
+    {
+        const r = callFunction(fcr.func, ...fcr.argumentsBeforeCall);
+
+        if ( !deepEqual(fcr.returnValue, r.returnValue) )
+        {
+            return false;
+        }
+        else
+        {
+            return this.parameterNames.every( (parameterName, parameterIndex) => {
+                if ( _.includes(ignoredParameters, parameterName) )
+                {
+                    return true;
+                }
+                else
+                {
+                    return deepEqual(fcr.argumentsAfterCall[parameterIndex], r.argumentsAfterCall[parameterIndex]);
+                }
+            } );
+        }
+    }
+}
+
+export class TypedFunctionInformation extends FunctionInformation
+{
+    constructor(functionName : string, parameterNames : string[], public readonly parameterTypes : IType<any>[], public readonly returnType : IType<any>)
+    {
+        super(functionName, parameterNames);
+
+        if ( parameterNames.length !== parameterTypes.length )
+        {
+            throw new Error(`Parameter count mismatch`);
+        }
     }
 }
 
@@ -38,16 +91,18 @@ export function parseFunction(func : (...args : any[]) => any) : FunctionInforma
     }
     else
     {
-        console.log(`Failed to parse\n${func.toString()}`);
+        console.error(`Failed to parse\n${func.toString()}`);
+
         throw new Error("Could not parse function source");
     }
 }
 
 export interface IFunctionCallResults
 {
-    argumentsBeforeCall : any[];
-    argumentsAfterCall : any[];
-    returnValue : any;
+    readonly func : (...args : any[]) => any;
+    readonly argumentsBeforeCall : any[];
+    readonly argumentsAfterCall : any[];
+    readonly returnValue : any;
 }
 
 export function callFunction(func : (...args : any[]) => any, ...args : any[]) : IFunctionCallResults
@@ -56,6 +111,7 @@ export function callFunction(func : (...args : any[]) => any, ...args : any[]) :
     const returnValue = func(...copiedArguments);
 
     return {
+        func,
         argumentsBeforeCall: args,
         argumentsAfterCall: copiedArguments,
         returnValue
@@ -69,9 +125,9 @@ export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...a
 
 export interface INamedFunctionCallResults
 {
-    argumentsBeforeCall : { [key : string] : any };
-    argumentsAfterCall : { [key : string] : any };
-    returnValue : any;
+    readonly argumentsBeforeCall : { [key : string] : any };
+    readonly argumentsAfterCall : { [key : string] : any };
+    readonly returnValue : any;
 }
 
 export function nameResults(results : IFunctionCallResults, info : FunctionInformation)

@@ -1,0 +1,70 @@
+@function shade($base, $amount){
+    @return $base + (invert($base) * $amount);
+}
+
+.coding.exercise {
+    .description {
+        width: 95%;
+        background: #AAF;
+        padding: 0.5em;
+        margin: 0px auto;
+    }
+
+    .test-cases {
+        width: 80%;
+        margin: 1em auto 0em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        .test-case {
+            $header-start-amount: 0.5;
+            $header-end-amount: 0.7;
+            $highlight-amount: 0.4;
+
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            margin: 0.2em;
+
+            .Collapsible__trigger {
+                display: block;
+                font-size: 1.25em;
+                font-weight: bold;
+                padding: 0.2em;
+                user-select: none;
+                cursor: pointer;
+            }
+
+            $types: (
+                pass: green,
+                fail: red,
+                skip: gray
+            );
+
+            @each $type in map_keys($types) {
+                $color: map_get($types, $type);
+
+                &.#{$type} {
+                    border-left: $color 0.5em solid;
+
+                    .Collapsible__trigger {
+                        background: linear-gradient(to right, shade($color, $header-start-amount), shade($color, $header-end-amount));
+
+                        &:hover {
+                            background: shade($color, $highlight-amount);
+                        }
+                    }
+
+                    .Collapsible__contentInner {
+                        background: #EEE;
+                    }
+                }
+            }
+
+            .Collapsible__contentInner {
+                padding: 0.25em;
+            }
+        }
+    }
+}

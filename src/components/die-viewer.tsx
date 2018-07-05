@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNumber } from 'type';
+import * as Type from 'type';
 
 
 export interface IProps
@@ -32,7 +32,7 @@ export class DieViewer extends React.Component<IProps, IState>
         die: function(props : any, propName : string, componentName : string) : Error | undefined {
             const value = props[propName];
 
-            if ( !isNumber(value) || value < 1 || value > 6 )
+            if ( !Type.number.hasType(value) || value < 1 || value > 6 )
             {
                 return new Error(`${propName} should be assigned a value between 1 and 6`);
             }

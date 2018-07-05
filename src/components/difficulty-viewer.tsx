@@ -6,7 +6,7 @@ import { difficulty } from 'difficulty';
 
 export interface IProps
 {
-    difficulty : difficulty;
+    difficulty : difficulty | null;
 }
 
 export interface IState
@@ -24,7 +24,8 @@ export class DifficultyViewer extends React.Component<IProps, IState>
     public render()
     {
         const star = String.fromCharCode(0x2605);
-        const difficultyString = _.repeat(star, this.props.difficulty);
+        const difficulty : number = this.props.difficulty || 0;
+        const difficultyString = _.repeat(star, difficulty);
 
         return (
             <span className="difficulty-viewer">

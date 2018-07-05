@@ -7,7 +7,7 @@ import { Maybe } from 'tsmonad';
 import './permutation.scss';
 
 
-class PermutationAssertion implements IAssertion
+class PermutationAssertion<T> implements IAssertion<T>
 {
     constructor(private expected : any, private formatter : IToJsxElement<any>) {  }
 
@@ -21,7 +21,7 @@ class PermutationAssertionResult implements IResult
 {
     constructor(private expected : any, private actual : Maybe<any>, private formatter : IToJsxElement<any>) { }
 
-    get result(): Outcome
+    get outcome(): Outcome
     {
         return this.actual.caseOf({
             just: value => isPermutation(this.expected, value) ? Outcome.Pass : Outcome.Fail,
@@ -85,7 +85,7 @@ class PermutationAssertionResult implements IResult
 
 }
 
-export function createPermutationAssertion(expected : any, formatter ?: IToJsxElement<any>) : IAssertion
+export function permutation<T>(expected : T, formatter ?: IToJsxElement<any>) : IAssertion<T>
 {
-    return new PermutationAssertion(expected, formatter || simple);
+    return new PermutationAssertion<T>(expected, formatter || simple);
 }

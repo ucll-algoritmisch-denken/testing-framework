@@ -1,0 +1,1 @@
+export { ColumnBasedExercise, IColumn, IRow } from './column-based-exercise';

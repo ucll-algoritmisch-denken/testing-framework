@@ -1,5 +1,5 @@
+import './exercise.scss';
 
-import './coding.scss';
 
-
-export { build, IBuilder, ITestCaseBuilder } from './builder';
+export { ITestCase } from './test-case';
+export { Exercise } from './exercise';

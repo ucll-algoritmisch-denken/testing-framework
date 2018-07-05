@@ -1,18 +1,18 @@
 import React from 'react';
-import { isArray, isString, isNumber } from '../type';
+import * as Type from 'type';
 import { allEqual } from '../atf-util';
 import { Bitmap } from '../bitmap';
 import { BitmapViewer } from '../components/bitmap-viewer';
 import { Invalid } from '../components/invalid';
 import { convertToString } from './string-formatters';
 import _ from 'lodash';
-import { MultiView } from 'components/multiview';
 import { DiceViewer } from 'components/dice-viewer';
+import { InlineCode } from 'components/inline-code';
 
 
 export function jsxify(x : JSX.Element | string)
 {
-    if ( isString(x) )
+    if ( Type.string.hasType(x) )
     {
         return (
             <React.Fragment>
@@ -39,28 +39,20 @@ export function simple(x : any) : JSX.Element
     );
 }
 
-export function code(str : string | JSX.Element) : JSX.Element
+export function code(str : string) : JSX.Element
 {
     return (
-        <span style={createStyle()}>{jsxify(str)}</span>
+        <InlineCode content={str} />
     );
-
-
-    function createStyle()
-    {
-        return {
-            fontFamily: 'monospace'
-        };
-    }
 }
 
 export function grayscaleBitmap(x : any) : JSX.Element
 {
-    if ( !isArray(x) )
+    if ( !Type.array(Type.any).hasType(x) )
     {
         return invalid("Should be an array");
     }
-    else if ( !_.every(x, isArray) )
+    else if ( !_.every(x, y => Type.array(Type.any).hasType(y) ) )
     {
         return invalid("All elements should be arrays");
     }
@@ -89,7 +81,7 @@ export function grayscaleBitmap(x : any) : JSX.Element
 
     function isValidPixelValue(x : any)
     {
-        return isNumber(x) && 0 <= x && x <= 255 && Math.floor(x) === x;
+        return Type.number.hasType(x) && 0 <= x && x <= 255 && Math.floor(x) === x;
     }
 
     function invalid(message : string)
@@ -102,11 +94,11 @@ export function grayscaleBitmap(x : any) : JSX.Element
 
 export function rgbBitmap(x : any) : JSX.Element
 {
-    if ( !isArray(x) )
+    if ( !Type.array(Type.any).hasType(x) )
     {        
         return invalid("Should be an array");
     }
-    else if ( !_.every(x, isArray) )
+    else if ( !_.every(x, elt => Type.array(Type.any).hasType(elt)) )
     {
         return invalid("All elements should be arrays");
     }

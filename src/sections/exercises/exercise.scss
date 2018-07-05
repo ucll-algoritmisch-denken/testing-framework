@@ -1,0 +1,27 @@
+.exercise {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 80%;
+    border: black solid 1px;
+    box-shadow: 5px 5px #AAA;
+
+    & > header {
+        padding: 0.2em;
+        background: black;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        user-select: none;
+        cursor: default;
+
+        .difficulty-viewer {
+            width: 4em;
+        }
+    }
+
+    & > .content {
+        padding: 1em;
+    }
+}

@@ -1,0 +1,19 @@
+.comparison.assertion {
+    &.pass {
+        .actual {
+            background: #AFA;
+        }
+    }
+
+    &.fail {
+        .actual {
+            background: #FAA;
+        }
+    }
+
+    &.skip {
+        .actual {
+            background: #AAA;
+        }
+    }
+}

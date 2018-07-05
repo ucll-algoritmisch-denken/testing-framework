@@ -24,20 +24,20 @@ export class SolutionViewer extends React.Component<IProps, IState>
     public render()
     {
         return (
-            <section className="solution-viewer">
+            <div className="solution-viewer">
                 <Collapsible trigger={createHeader()} transitionTime={100}>
                     <SourceCodeViewer sourceCode={this.props.sourceCode} />
                 </Collapsible>
-            </section>
+            </div>
         );
 
 
         function createHeader()
         {
             return (
-                <div className="header">
+                <React.Fragment>
                     solution
-                </div>
+                </React.Fragment>
             );
         }
     }

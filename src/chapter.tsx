@@ -1,4 +1,4 @@
-import { ISection } from './chapter';
+import React from 'react';
 import { Score, IScored } from './score';
 import { IHasDifficulty } from 'difficulty';
 
@@ -10,17 +10,17 @@ export interface IChapter
     readonly sections : ISection[];
 }
 
-export interface ISection
+export abstract class ISection
 {
-    readonly tocEntry: JSX.Element;
+    readonly abstract id : string;
 
-    readonly content : JSX.Element;
+    readonly abstract tocEntry: JSX.Element;
 
-    isScored() : this is IScored;
+    get content() : JSX.Element { return <React.Fragment />; }
 
-    hasDifficulty() : this is IHasDifficulty;
+    abstract isScored() : this is IScored;
 
-    readonly id : string;
+    abstract hasDifficulty() : this is IHasDifficulty;
 }
 
 export function selectScoredSections(sections : ISection[]) : (ISection & IScored)[]

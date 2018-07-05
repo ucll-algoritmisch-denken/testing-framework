@@ -1,0 +1,20 @@
+.assertion-box {
+    width: 80%;
+    margin: 0.2em auto;
+    border: 1px solid black;
+
+    & > header {
+        padding: 0.2em;
+        color: white;
+        background: black;
+        font-weight: bold;
+        font-size: 1em;
+        user-select: none;
+        text-transform: lowercase;
+        font-variant: small-caps;
+    }
+
+    .assertion-box-contents {
+        padding: 0.5em;
+    }
+}

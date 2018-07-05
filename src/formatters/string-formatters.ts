@@ -1,18 +1,18 @@
-import { isArray, isString, isUndefined, isNumber, isBoolean, isFunction } from "type";
+import * as Type from "type";
 import _ from 'lodash';
 
 
 export function convertToString(x : any) : string
 {    
-    if ( isArray(x) )
+    if ( Type.array(Type.any).hasType(x) )
     {
         return formatArray(x);
     }
-    else if ( isString(x) )
+    else if ( Type.string.hasType(x) )
     {
         return formatString(x);
     }
-    else if ( isUndefined(x) )
+    else if ( Type.undef.hasType(x) )
     {
         return 'undefined';
     }
@@ -20,15 +20,15 @@ export function convertToString(x : any) : string
     {
         return 'null';
     }
-    else if ( isNumber(x) )
+    else if ( Type.number.hasType(x) )
     {
         return x.toString();
     }
-    else if ( isBoolean(x) )
+    else if ( Type.boolean.hasType(x) )
     {
         return x.toString();
     }
-    else if ( isFunction(x) )
+    else if ( Type.func.hasType(x) )
     {
         return x.toString();
     }

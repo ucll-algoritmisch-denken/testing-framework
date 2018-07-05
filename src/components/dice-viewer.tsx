@@ -1,5 +1,5 @@
 import React from 'react';
-import { isArray, isNumber } from 'type';
+import * as Type from 'type';
 import { DieViewer } from './die-viewer';
 
 
@@ -46,7 +46,7 @@ export class DiceViewer extends React.Component<IProps, IState>
         dice: function(props : any, propName : string, componentName : string) : Error | undefined {
             const value = props[propName];
 
-            if ( !isArray(value) || !value.every(x => isNumber(x) && 1 <= x && x <= 6) )
+            if ( !Type.array(Type.number).hasType(value) || !value.every(x => 1 <= x && x <= 6) )
             {
                 return new Error(`${propName} should be assigned an array of values between 1 and 6`);
             }

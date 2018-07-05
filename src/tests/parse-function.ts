@@ -1,4 +1,4 @@
-import { parseFunction, callFunction, namedCallFunction } from '../function-util';
+import { parseFunction, callFunction, namedCallFunction } from 'function-util';
 import { expect } from 'chai';
 
 

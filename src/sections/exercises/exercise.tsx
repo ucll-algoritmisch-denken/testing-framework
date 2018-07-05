@@ -1,97 +1,58 @@
 import React from 'react';
 import { ISection } from "chapter";
-import { Outcome, outcomeToHtmlClass } from '../../outcome';
-import { isInteger } from '../../type';
 import { DifficultyViewer } from '../../components/difficulty-viewer';
 import { IScored } from '../../score';
-import { IHasDifficulty, difficulty } from '../../difficulty';
+import { IHasDifficulty } from '../../difficulty';
+import './exercise.scss';
+import classNames from 'classnames';
 
 
 export abstract class Exercise implements ISection
 {
-    private testCaseIndex : number;
+    public abstract readonly id : string;
 
-    constructor(public id : string, public tocEntry : JSX.Element)
-    { 
-        this.testCaseIndex = 0;
-    }
+    public abstract readonly tocEntry: JSX.Element;
 
-    abstract hasDifficulty() : this is IHasDifficulty;
+    protected abstract header : JSX.Element;
 
-    abstract readonly content : JSX.Element;
+    protected abstract exerciseContent : JSX.Element;
 
-    abstract isScored() : this is IScored;
+    public abstract hasDifficulty() : this is IHasDifficulty;
 
-    /**
-     * Creates the container in which the exercise resides.
-     * 
-     * @param exerciseHtmlClass Extra class name to identify the type of exercise.
-     * @param contents Contents of the container.
-     */
-    protected createExerciseContainer(exerciseHtmlClass : string, contents : JSX.Element) : JSX.Element
+    public abstract isScored() : this is IScored;
+
+    public get content() : JSX.Element
     {
-        const className : string = [ exerciseHtmlClass, "exercise" ].join(" ");
-
         return (
-            <section className={className}>
-                {contents}
+            <section className={classNames(this.htmlClasses)}>
+                <header>
+                    {this.renderDifficultyViewer()} {this.header}
+                </header>
+                <div className="content">
+                    {this.exerciseContent}
+                </div>
             </section>
         );
     }
 
-    protected createExerciseHeader(header : JSX.Element) : JSX.Element
+    protected renderDifficultyViewer() : JSX.Element
     {
-        const me = this;
-
-        return (
-            <header>
-                {difficultyViewer()}
-                {header}
-            </header>
-        );
-
-
-        function difficultyViewer()
+        if ( this.hasDifficulty() )
         {
-            if ( me.hasDifficulty() )
-            {
-                return (
-                    <DifficultyViewer difficulty={me.difficulty} />
-                );
-            }
-            else
-            {
-                return <React.Fragment />;
-            }
+            return (
+                <DifficultyViewer difficulty={this.difficulty} />
+            );
+        }
+        else
+        {
+            return (
+                <DifficultyViewer difficulty={null} />
+            );
         }
     }
 
-    protected createDescriptionContainer(contents : JSX.Element) : JSX.Element
+    protected get htmlClasses() : string[]
     {
-        return (
-            <div className="description">
-                {contents}
-            </div>
-        );
-    }
-
-    protected createTestCasesContainer(contents : JSX.Element) : JSX.Element
-    {
-        return (
-            <div className="test-cases">
-                {contents}
-            </div>
-        );
-    }
-
-    protected createTestCaseContainer(outcome : Outcome, contents : JSX.Element) : JSX.Element
-    {
-        const className : string = [ 'test-case', outcomeToHtmlClass(outcome) ].join(' ');
-
-        return (
-            <section className={className} key={`test-case-${this.testCaseIndex++}`}>
-                {contents}
-            </section>
-        );
+        return [ "exercise" ];
     }
 }

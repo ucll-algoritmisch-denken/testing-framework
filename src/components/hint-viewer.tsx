@@ -23,22 +23,20 @@ export class HintViewer extends React.Component<IProps, IState>
     public render()
     {
         return (
-            <section className="hint-viewer">
+            <div className="hint-viewer">
                 <Collapsible trigger={createHeader()} transitionTime={100}>
-                    <div className="contents">
-                        {this.props.children}
-                    </div>
+                    {this.props.children}
                 </Collapsible>
-            </section>
+            </div>
         );
 
 
         function createHeader()
         {
             return (
-                <div className="header">
-                    Hint
-                </div>
+                <React.Fragment>
+                    hint
+                </React.Fragment>
             );
         }
     }

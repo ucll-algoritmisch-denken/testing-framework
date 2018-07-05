@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { isPermutation } from '../atf-util';
-import { convertToString } from '../formatters/string-formatters';
+import { isPermutation } from 'atf-util';
+import { convertToString } from 'formatters/string-formatters';
 
 
 describe('isPermutation', () => {
