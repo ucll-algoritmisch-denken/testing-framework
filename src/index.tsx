@@ -11,22 +11,6 @@ export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow }
 
 export { Outcome } from './outcome';
 
-// import * as ExerciseBase from './sections/exercises/exercise';
-// import * as InterpretationExercise from './sections/exercises/interpretation';
-// import * as TestBasedCodingExercise from './sections/exercises/coding';
-// import * as ReferenceImplementationBasedCodingExercise from './sections/exercises/by-reference-implementation';
-// import * as CarSimulatingExercise from './sections/exercises/car-exercise';
-
-// export const Exercise = {
-//     Base : ExerciseBase,
-//     Interpretation: InterpretationExercise,
-//     Coding: {
-//         TestBased: TestBasedCodingExercise,
-//         ReferenceImplementationBased : ReferenceImplementationBasedCodingExercise
-//     },
-//     CarSimulation: CarSimulatingExercise
-// };
-
 import * as Exercises from './sections/exercises';
 export { Exercises };
 
