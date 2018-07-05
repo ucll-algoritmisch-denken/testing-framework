@@ -1,5 +1,6 @@
 import React from 'react';
-import { Exercise as CodingExercise, ITestCase } from '../coding';
+import { Exercise as CodingExercise } from '../exercise';
+import { ITestCase } from '../test-case';
 import { Maybe } from 'tsmonad';
 import { ITestCaseInput } from './test-case-input';
 import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from 'function-util';
@@ -7,7 +8,7 @@ import { code } from 'formatters/jsx-formatters';
 
 
 
-export abstract class Exercise<T> extends CodingExercise
+export abstract class Exercise<META = {}> extends CodingExercise
 {
     private __referenceInformation ?: FunctionInformation;
 
@@ -15,9 +16,9 @@ export abstract class Exercise<T> extends CodingExercise
 
     protected abstract testedImplementation : Maybe<(...args : any[]) => any>;
 
-    protected abstract generateTestCaseInputs() : Iterable<ITestCaseInput & T>;
+    protected abstract generateTestCaseInputs() : Iterable<ITestCaseInput<META>>;
 
-    protected abstract createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : T) : ITestCase;
+    protected abstract createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase;
     
     protected get solution() : string | null
     {
@@ -36,7 +37,7 @@ export abstract class Exercise<T> extends CodingExercise
             const expected = callFunction(this.referenceImplementation, ...testCaseInput.args);
             const actual = this.testedImplementation.lift( f => callFunction(f, ...testCaseInput.args) );
 
-            yield this.createTestCaseFromInputs(expected, actual, testCaseInput);
+            yield this.createTestCaseFromInputs(expected, actual, testCaseInput.meta);
         }
     }
 

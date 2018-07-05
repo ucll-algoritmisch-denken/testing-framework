@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITestCase } from '../coding';
+import { ITestCase } from '../test-case';
 import { Maybe } from 'tsmonad';
 import { IFunctionCallResults } from 'function-util';
 import { Exercise } from './exercise';
@@ -10,10 +10,9 @@ import _ from 'lodash';
 import { code } from 'formatters/jsx-formatters';
 
 
-
-export abstract class ReturnValue<T> extends Exercise<T>
+export abstract class ReturnValue<META = {}> extends Exercise<META>
 {
-    protected createAssertion(expected : IFunctionCallResults, metadata : T) : IAssertion<IFunctionCallResults>
+    protected createAssertion(expected : IFunctionCallResults, metadata : META) : IAssertion<IFunctionCallResults>
     {
         const returnValueAssertion = this.createReturnValueAssertion(expected.returnValue, metadata);
         const unmodifiedArgumentsAssertion = _.range(0, expected.argumentsBeforeCall.length).map( parameterIndex => {
@@ -26,7 +25,7 @@ export abstract class ReturnValue<T> extends Exercise<T>
         return Assertions.sequence( [ returnValueAssertion ].concat(unmodifiedArgumentsAssertion) );
     }
 
-    protected createReturnValueAssertion(returnValue : any, _metadata : T) : IAssertion<IFunctionCallResults>
+    protected createReturnValueAssertion(returnValue : any, _metadata : META) : IAssertion<IFunctionCallResults>
     {
         return Assertions.returnValue(Assertions.equality(returnValue));
     }
@@ -36,7 +35,7 @@ export abstract class ReturnValue<T> extends Exercise<T>
         return Assertions.parameter(parameterIndex, parameterName, Assertions.unmodified(value));
     }
 
-    protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : T) : JSX.Element
+    protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : META) : JSX.Element
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
         const returnValue = code(convertToString(expected.returnValue));
@@ -49,7 +48,7 @@ export abstract class ReturnValue<T> extends Exercise<T>
         );
     }
 
-    protected createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : T) : ITestCase
+    protected createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase
     {
         const assertion = this.createAssertion(expected, metadata);
         const result = assertion.check(actual);
@@ -69,5 +68,4 @@ export abstract class ReturnValue<T> extends Exercise<T>
             };
         }
     }
-
 }
