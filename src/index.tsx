@@ -14,7 +14,7 @@ export { Outcome } from './outcome';
 import * as Exercises from './sections/exercises';
 export { Exercises };
 
-export { build as createExplanations } from './sections/explanations';
+export { Explanations } from './sections/explanations';
 
 import * as JsxFormatters from './formatters/jsx-formatters';
 import * as StringFormatters from './formatters/string-formatters';
@@ -40,6 +40,7 @@ export { CarSimulation };
 
 export async function initialize(chapter : IChapter)
 {
+    document.title = chapter.title;
     (window as any).shell = createShell(chapter);
     
     ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
