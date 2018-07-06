@@ -38,6 +38,8 @@ export abstract class FunctionBasedExercise<META> extends ColumnBasedExercise<st
 
     protected abstract readonly explanations : JSX.Element;
 
+    protected readonly showFunction = true;
+
     protected get htmlClasses() : string[]
     {
         return super.htmlClasses.concat('function-based');
@@ -45,14 +47,30 @@ export abstract class FunctionBasedExercise<META> extends ColumnBasedExercise<st
 
     protected get description() : JSX.Element
     {
+        const me = this;
+
         return (
             <React.Fragment>
                 <div className="explanations">
                     {this.explanations}
                 </div>
-                <SourceCodeViewer sourceCode={this.func.toString()} />
+                {sourceCodeViewer()}
             </React.Fragment>
         );
+
+        function sourceCodeViewer()
+        {
+            if ( me.showFunction )
+            {
+                return (
+                    <SourceCodeViewer sourceCode={me.func.toString()} />
+                );
+            }
+            else
+            {
+                return <React.Fragment />;
+            }
+        }
     }
 
     protected forwardInputCase(args : any[], meta : META) : InputCase<META>

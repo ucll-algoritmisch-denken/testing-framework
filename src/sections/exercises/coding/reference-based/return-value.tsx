@@ -39,11 +39,11 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
         const returnValue = code(convertToString(expected.returnValue));
-        const call = `${this.referenceName}(${argumentsString})`;
+        const call = code(`${this.referenceName}(${argumentsString})`);
 
         return (
             <React.Fragment>
-                {call} should return {returnValue}
+                {call} should return {returnValue}.
             </React.Fragment>
         );
     }

@@ -13,9 +13,9 @@ export abstract class Exercise implements ISection
 
     public abstract readonly tocEntry: JSX.Element;
 
-    protected abstract header : JSX.Element;
+    protected abstract readonly header : JSX.Element;
 
-    protected abstract exerciseContent : JSX.Element;
+    protected abstract readonly exerciseContent : JSX.Element;
 
     public abstract hasDifficulty() : this is IHasDifficulty;
 
