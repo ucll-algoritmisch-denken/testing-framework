@@ -51,9 +51,7 @@ export abstract class FunctionBasedExercise<META> extends ColumnBasedExercise<st
 
         return (
             <React.Fragment>
-                <div className="explanations">
-                    {this.explanations}
-                </div>
+                {this.explanations}
                 {sourceCodeViewer()}
             </React.Fragment>
         );
