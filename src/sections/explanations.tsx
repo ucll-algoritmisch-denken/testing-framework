@@ -2,11 +2,18 @@ import React from 'react';
 import { ISection } from '../chapter';
 import './explanations.scss';
 import { IScored } from '../score';
+import { DescriptionBox } from 'components/description-box';
 
 
-class ExplanationSection implements ISection
+export abstract class Explanations implements ISection
 {
-    constructor(public readonly id : string, public readonly tocEntry : JSX.Element, public readonly header : JSX.Element, public readonly explanation : JSX.Element) { }
+    public abstract readonly id : string;
+
+    public abstract readonly tocEntry: JSX.Element;
+
+    protected abstract readonly header : JSX.Element;
+
+    protected abstract readonly explanations : JSX.Element;
 
     isScored() : this is IScored
     {
@@ -16,13 +23,13 @@ class ExplanationSection implements ISection
     get content() : JSX.Element
     {
         return (
-            <section className="explanation">
+            <section className="explanations">
                 <header>
                     {this.header}
                 </header>
-                <div className="explanation-container">
-                    {this.explanation}
-                </div>
+                <DescriptionBox>
+                    {this.explanations}
+                </DescriptionBox>
             </section>
         );
     }
@@ -31,9 +38,4 @@ class ExplanationSection implements ISection
     {
         return false;
     }
-}
-
-export function build(id : string, tocEntry : JSX.Element, header : JSX.Element, explanation : JSX.Element) : ISection
-{
-    return new ExplanationSection(id, tocEntry, header, explanation);
 }
