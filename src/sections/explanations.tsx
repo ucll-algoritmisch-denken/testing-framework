@@ -2,7 +2,6 @@ import React from 'react';
 import { ISection } from '../chapter';
 import './explanations.scss';
 import { IScored } from '../score';
-import { DescriptionBox } from 'components/description-box';
 
 
 export abstract class Explanations implements ISection
@@ -27,9 +26,7 @@ export abstract class Explanations implements ISection
                 <header>
                     {this.header}
                 </header>
-                <DescriptionBox>
-                    {this.explanations}
-                </DescriptionBox>
+                {this.explanations}
             </section>
         );
     }
