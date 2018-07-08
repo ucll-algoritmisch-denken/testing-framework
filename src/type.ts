@@ -115,3 +115,16 @@ export const func = new class implements IType<(...args : any[]) => any>
         return false;
     }
 };
+
+export const object = new class implements IType< { [key : string] : any } >
+{
+    hasType(x : any) : x is { [key : string] : any }
+    {
+        return _.isObject(x);
+    }
+
+    get isMutable() : boolean
+    {
+        return true;
+    }
+};
