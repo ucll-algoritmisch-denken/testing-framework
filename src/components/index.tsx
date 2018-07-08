@@ -12,6 +12,8 @@ export { SolutionViewer } from './solution-viewer';
 export { SourceCodeViewer } from './sourcecode-viewer';
 export { TableOfContents } from './table-of-contents';
 export { ValidatedInput } from './validated-input';
+export { ArrayViewer } from './array-viewer';
+export { ObjectViewer } from './object-viewer';
 
 import * as ValidatedTable from './validated-table';
 export { ValidatedTable };
