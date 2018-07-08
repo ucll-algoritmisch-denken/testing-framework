@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import { Exercise as ColumnBasedExercise, IColumn as IBaseColumn, IRow as IBaseRow } from '../column-based/exercise';
+// import { Exercise as ColumnBasedExercise, IColumn as IBaseColumn, IRow as IBaseRow } from '../column-based/exercise';
+import { Exercise as BaseExercise } from "../../exercise";
+import { FunctionBasedForm, IColumn, IRow, IParameters } from '../../../../components/function-based-form';
 import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from 'function-util';
 import { deepEqual } from 'equality';
 import { InlineCode } from 'components/inline-code';
@@ -10,21 +12,22 @@ import { InputCase } from './input-case';
 import { Parameter } from './parameter';
 import { ReturnValue } from './return-value';
 import { evalm } from 'evalm';
+import { DescriptionBox } from '../../../../components/description-box';
+
+export { IParameters, IColumn, IRow };
+// export interface IParameters<META = {}>
+// {
+//     [id : string] : Parameter<META>;
+// }
+
+// type Data<META> = { fcr : IFunctionCallResults, meta : META };
+
+// export type IRow<META> = IBaseRow<string, Data<META>>;
+
+// export type IColumn<META> = IBaseColumn<string, Data<META>>;
 
 
-export interface IParameters<DATA = {}>
-{
-    [id : string] : Parameter<DATA>;
-}
-
-type Data<META> = { fcr : IFunctionCallResults, meta : META };
-
-export type IRow<META> = IBaseRow<string, Data<META>>;
-
-export type IColumn<META> = IBaseColumn<string, Data<META>>;
-
-
-export abstract class Exercise<META> extends ColumnBasedExercise<string, Data<META>>
+export abstract class Exercise<META> extends BaseExercise
 {
     private __funcInformation ?: FunctionInformation;
 
@@ -42,7 +45,29 @@ export abstract class Exercise<META> extends ColumnBasedExercise<string, Data<ME
 
     protected get htmlClasses() : string[]
     {
-        return super.htmlClasses.concat('function-based');
+        return super.htmlClasses.concat('function-based', 'interpretation');
+    }
+
+    protected get exerciseContent() : JSX.Element
+    {
+        return (
+            <React.Fragment>
+                <DescriptionBox>
+                    {this.description}
+                </DescriptionBox>
+                {this.renderForm()}
+            </React.Fragment>
+        );
+    }
+
+    protected renderForm() : JSX.Element
+    {
+        class Form extends FunctionBasedForm<META> { }
+        const inputCases = Array.from(this.generateCases());
+
+        return (
+            <Form className="interpretation-form" func={this.func} parameters={this.parameters} returnValue={this.returnValue} inputCases={inputCases} />
+        );
     }
 
     protected get description() : JSX.Element
@@ -88,7 +113,7 @@ export abstract class Exercise<META> extends ColumnBasedExercise<string, Data<ME
 
             get blankColumns() : string[]
             {
-                const result = [];
+                const result : string[] = [];
 
                 if ( me.returnValue )
                 {
@@ -146,243 +171,243 @@ export abstract class Exercise<META> extends ColumnBasedExercise<string, Data<ME
         }
     }
 
-    protected *generateRows() : Iterable<IRow<META>>
-    {
-        for ( let input of this.generateCases() )
-        {
-            yield this.createRow(input);
-        }
-    }
+    // protected *generateRows() : Iterable<IRow<META>>
+    // {
+    //     for ( let input of this.generateCases() )
+    //     {
+    //         yield this.createRow(input);
+    //     }
+    // }
 
-    protected createRow(input : InputCase<META>) : IRow<META>
-    {
-        const fcr = callFunction(this.func, ...input.args);
+    // protected createRow(input : InputCase<META>) : IRow<META>
+    // {
+    //     const fcr = callFunction(this.func, ...input.args);
 
-        return new class implements IRow<META> {
-            get data() : { fcr : IFunctionCallResults, meta : META }
-            {
-                return { fcr, meta: input.meta };
-            }
+    //     return new class implements IRow<META> {
+    //         get data() : { fcr : IFunctionCallResults, meta : META }
+    //         {
+    //             return { fcr, meta: input.meta };
+    //         }
 
-            get blankColumns() : string[]
-            {
-                return input.blankColumns;
-            }
-        };
-    }
+    //         get blankColumns() : string[]
+    //         {
+    //             return input.blankColumns;
+    //         }
+    //     };
+    // }
     
     protected get functionInformation() : FunctionInformation
     {
         return (this.__funcInformation = this.__funcInformation || parseFunction(this.func));
     }
 
-    protected *generateColumns() : Iterable<IColumn<META>>
-    {
-        yield *this.generateInputColumns();
-        yield *this.generateReturnValueColumn();
-        yield *this.generateOutputColumns();
-    }
+    // protected *generateColumns() : Iterable<IColumn<META>>
+    // {
+    //     yield *this.generateInputColumns();
+    //     yield *this.generateReturnValueColumn();
+    //     yield *this.generateOutputColumns();
+    // }
 
-    protected *generateInputColumns() : Iterable<IColumn<META>>
-    {
-        for ( let i of _.range(0, this.functionInformation.parameterCount) )
-        {
-            yield this.createInputColumn(i);
-        }
-    }
+    // protected *generateInputColumns() : Iterable<IColumn<META>>
+    // {
+    //     for ( let i of _.range(0, this.functionInformation.parameterCount) )
+    //     {
+    //         yield this.createInputColumn(i);
+    //     }
+    // }
 
-    protected createInputColumn(parameterIndex : number) : IColumn<META>
-    {
-        if ( parameterIndex < 0 || parameterIndex >= this.functionInformation.parameterCount )
-        {
-            throw new Error(`Invalid parameter index ${parameterIndex}; should be between 0 and ${this.functionInformation.parameterCount}`);
-        }
-        else
-        {
-            const me = this;
-            const parameterName = this.functionInformation.parameterNames[parameterIndex];
-            const parameterInfo = this.parameters[parameterName];
+    // protected createInputColumn(parameterIndex : number) : IColumn<META>
+    // {
+    //     if ( parameterIndex < 0 || parameterIndex >= this.functionInformation.parameterCount )
+    //     {
+    //         throw new Error(`Invalid parameter index ${parameterIndex}; should be between 0 and ${this.functionInformation.parameterCount}`);
+    //     }
+    //     else
+    //     {
+    //         const me = this;
+    //         const parameterName = this.functionInformation.parameterNames[parameterIndex];
+    //         const parameterInfo = this.parameters[parameterName];
 
-            if ( !parameterInfo )
-            {
-                throw new Error(`Missing information about parameter ${parameterName}`);
-            }
-            else
-            {
-                return new class implements IColumn<META> {
-                    get name() : string
-                    {
-                        return me.nameInputParameter(parameterName);
-                    }
+    //         if ( !parameterInfo )
+    //         {
+    //             throw new Error(`Missing information about parameter ${parameterName}`);
+    //         }
+    //         else
+    //         {
+    //             return new class implements IColumn<META> {
+    //                 get name() : string
+    //                 {
+    //                     return me.nameInputParameter(parameterName);
+    //                 }
 
-                    get header() : JSX.Element
-                    {
-                        return (
-                            <React.Fragment>
-                                {parameterName}
-                            </React.Fragment>
-                        );
-                    }
+    //                 get header() : JSX.Element
+    //                 {
+    //                     return (
+    //                         <React.Fragment>
+    //                             {parameterName}
+    //                         </React.Fragment>
+    //                     );
+    //                 }
 
-                    validate(data : { fcr: IFunctionCallResults, meta: META }, value : string) : boolean
-                    {
-                        return evalm(value).caseOf({
-                            just: validate,
-                            nothing: () => false
-                        });
+    //                 validate(data : { fcr: IFunctionCallResults, meta: META }, value : string) : boolean
+    //                 {
+    //                     return evalm(value).caseOf({
+    //                         just: validate,
+    //                         nothing: () => false
+    //                     });
 
 
-                        function validate(x : any) : boolean
-                        {
-                            const args = data.fcr.argumentsBeforeCall.slice();
-                            args.splice(parameterIndex, 1, x);
+    //                     function validate(x : any) : boolean
+    //                     {
+    //                         const args = data.fcr.argumentsBeforeCall.slice();
+    //                         args.splice(parameterIndex, 1, x);
 
-                            const toBeChecked = {
-                                func: me.func,
-                                argumentsBeforeCall: args,
-                                argumentsAfterCall: data.fcr.argumentsAfterCall,
-                                returnValue: data.fcr.returnValue
-                            };
+    //                         const toBeChecked = {
+    //                             func: me.func,
+    //                             argumentsBeforeCall: args,
+    //                             argumentsAfterCall: data.fcr.argumentsAfterCall,
+    //                             returnValue: data.fcr.returnValue
+    //                         };
 
-                            const ignoredParameters = me.functionInformation.parameterNames.filter( (pn, i) => {
-                                const info = me.parameters[pn];
+    //                         const ignoredParameters = me.functionInformation.parameterNames.filter( (pn, i) => {
+    //                             const info = me.parameters[pn];
 
-                                return i === parameterIndex && !info.canBeModifiedByFunction;
-                            } );
+    //                             return i === parameterIndex && !info.canBeModifiedByFunction;
+    //                         } );
 
-                            return me.functionInformation.verifyCall(toBeChecked, ignoredParameters);
-                        }
-                    }
+    //                         return me.functionInformation.verifyCall(toBeChecked, ignoredParameters);
+    //                     }
+    //                 }
 
-                    render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
-                    {
-                        return parameterInfo.render(data.fcr.argumentsBeforeCall[parameterIndex], data.meta);
-                    }
-                };
-            }
-        }
-    }
+    //                 render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+    //                 {
+    //                     return parameterInfo.render(data.fcr.argumentsBeforeCall[parameterIndex], data.meta);
+    //                 }
+    //             };
+    //         }
+    //     }
+    // }
 
-    protected *generateReturnValueColumn() : Iterable<IColumn<META>>
-    {
-        if ( this.returnValue )
-        {
-            const me = this;
+    // protected *generateReturnValueColumn() : Iterable<IColumn<META>>
+    // {
+    //     if ( this.returnValue )
+    //     {
+    //         const me = this;
 
-            yield new class implements IColumn<META> {
-                get name() : string
-                {
-                    return me.nameReturnValue;
-                }
+    //         yield new class implements IColumn<META> {
+    //             get name() : string
+    //             {
+    //                 return me.nameReturnValue;
+    //             }
 
-                get header() : JSX.Element
-                {
-                    return (
-                        <React.Fragment>
-                            return value
-                        </React.Fragment>
-                    );
-                }
+    //             get header() : JSX.Element
+    //             {
+    //                 return (
+    //                     <React.Fragment>
+    //                         return value
+    //                     </React.Fragment>
+    //                 );
+    //             }
 
-                validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
-                {
-                    const expected = data.fcr.returnValue;
+    //             validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
+    //             {
+    //                 const expected = data.fcr.returnValue;
 
-                    return evalm(value).caseOf({
-                        just: x => deepEqual(x, expected),
-                        nothing: () => false
-                    });
-                }
+    //                 return evalm(value).caseOf({
+    //                     just: x => deepEqual(x, expected),
+    //                     nothing: () => false
+    //                 });
+    //             }
 
-                render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
-                {
-                    if ( me.returnValue )
-                    {
-                        return me.returnValue.render(data.fcr.returnValue, data.meta);
-                    }
-                    else
-                    {
-                        return (
-                            <InlineCode content={convertToString(data.fcr.returnValue)} />
-                        );
-                    }
-                }
-            };
-        }
-    }
+    //             render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+    //             {
+    //                 if ( me.returnValue )
+    //                 {
+    //                     return me.returnValue.render(data.fcr.returnValue, data.meta);
+    //                 }
+    //                 else
+    //                 {
+    //                     return (
+    //                         <InlineCode content={convertToString(data.fcr.returnValue)} />
+    //                     );
+    //                 }
+    //             }
+    //         };
+    //     }
+    // }
 
-    protected *generateOutputColumns() : Iterable<IColumn<META>>
-    {
-        for ( let i of _.range(0, this.functionInformation.parameterCount) )
-        {
-            const parameterName = this.functionInformation.parameterNames[i];
-            const parameterInfo = this.parameters[parameterName];
+    // protected *generateOutputColumns() : Iterable<IColumn<META>>
+    // {
+    //     for ( let i of _.range(0, this.functionInformation.parameterCount) )
+    //     {
+    //         const parameterName = this.functionInformation.parameterNames[i];
+    //         const parameterInfo = this.parameters[parameterName];
 
-            if ( !parameterInfo )
-            {
-                throw new Error(`Missing information about parameter ${parameterName}`);
-            }
-            else
-            {
-                if ( parameterInfo.canBeModifiedByFunction )
-                {
-                    yield this.createOutputColumn(i);
-                }
-            }
-        }
-    }
+    //         if ( !parameterInfo )
+    //         {
+    //             throw new Error(`Missing information about parameter ${parameterName}`);
+    //         }
+    //         else
+    //         {
+    //             if ( parameterInfo.canBeModifiedByFunction )
+    //             {
+    //                 yield this.createOutputColumn(i);
+    //             }
+    //         }
+    //     }
+    // }
 
-    protected createOutputColumn(parameterIndex : number) : IColumn<META>
-    {
-        if ( parameterIndex < 0 || parameterIndex >= this.functionInformation.parameterCount )
-        {
-            throw new Error(`Invalid parameter index ${parameterIndex}; should be between 0 and ${this.functionInformation.parameterCount}`);
-        }
-        else
-        {
-            const me = this;
-            const parameterName = me.functionInformation.parameterNames[parameterIndex];
-            const parameterInfo = me.parameters[parameterName];
+    // protected createOutputColumn(parameterIndex : number) : IColumn<META>
+    // {
+    //     if ( parameterIndex < 0 || parameterIndex >= this.functionInformation.parameterCount )
+    //     {
+    //         throw new Error(`Invalid parameter index ${parameterIndex}; should be between 0 and ${this.functionInformation.parameterCount}`);
+    //     }
+    //     else
+    //     {
+    //         const me = this;
+    //         const parameterName = me.functionInformation.parameterNames[parameterIndex];
+    //         const parameterInfo = me.parameters[parameterName];
 
-            if ( !parameterInfo )
-            {
-                throw new Error(`Missing information about parameter ${parameterName}`);
-            }
-            else
-            {
-                return new class implements IColumn<META> {
-                    get name() : string
-                    {
-                        return me.nameOutputParameter(parameterName);
-                    }
+    //         if ( !parameterInfo )
+    //         {
+    //             throw new Error(`Missing information about parameter ${parameterName}`);
+    //         }
+    //         else
+    //         {
+    //             return new class implements IColumn<META> {
+    //                 get name() : string
+    //                 {
+    //                     return me.nameOutputParameter(parameterName);
+    //                 }
 
-                    get header() : JSX.Element
-                    {
-                        return (
-                            <React.Fragment>
-                                {parameterName}
-                            </React.Fragment>
-                        );
-                    }
+    //                 get header() : JSX.Element
+    //                 {
+    //                     return (
+    //                         <React.Fragment>
+    //                             {parameterName}
+    //                         </React.Fragment>
+    //                     );
+    //                 }
 
-                    validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
-                    {
-                        const expected = data.fcr.argumentsAfterCall[parameterIndex];
+    //                 validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
+    //                 {
+    //                     const expected = data.fcr.argumentsAfterCall[parameterIndex];
 
-                        return evalm(value).caseOf({
-                            just: x => deepEqual(x, expected),
-                            nothing: () => false
-                        });
-                    }
+    //                     return evalm(value).caseOf({
+    //                         just: x => deepEqual(x, expected),
+    //                         nothing: () => false
+    //                     });
+    //                 }
 
-                    render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
-                    {
-                        return parameterInfo.render(data.fcr.argumentsAfterCall[parameterIndex], data.meta);
-                    }
-                };
-            }
-        }
-    }
+    //                 render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+    //                 {
+    //                     return parameterInfo.render(data.fcr.argumentsAfterCall[parameterIndex], data.meta);
+    //                 }
+    //             };
+    //         }
+    //     }
+    // }
 
     protected nameInputParameter(parameterName : string) : string
     {
