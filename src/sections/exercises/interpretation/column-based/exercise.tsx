@@ -1,5 +1,5 @@
 import React from 'react';
-import { InterpretationExercise } from "../interpretation-exercise";
+import { Exercise as BaseExercise } from "../exercise";
 import _ from 'lodash';
 import { ValidatedInput } from 'components';
 
@@ -22,7 +22,7 @@ export interface IRow<COLUMN, INPUT>
     blankColumns : COLUMN[];
 }
 
-export abstract class ColumnBasedExercise<COLUMN, INPUT> extends InterpretationExercise
+export abstract class Exercise<COLUMN, INPUT> extends BaseExercise
 {
     // Cache for generateColumns()
     private __columns ?: IColumn<COLUMN, INPUT>[];

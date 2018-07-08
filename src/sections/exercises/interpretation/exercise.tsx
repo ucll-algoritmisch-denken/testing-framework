@@ -1,9 +1,9 @@
 import React from 'react';
-import { Exercise } from "../exercise";
+import { Exercise as ExerciseBase } from "../exercise";
 import { DescriptionBox } from 'components/description-box';
 
 
-export abstract class InterpretationExercise extends Exercise
+export abstract class Exercise extends ExerciseBase
 {
     protected abstract readonly description : JSX.Element;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { ColumnBasedExercise as ColumnBasedExercise, IColumn as IBaseColumn, IRow as IBaseRow } from '../column-based/column-based-exercise';
+import { Exercise as ColumnBasedExercise, IColumn as IBaseColumn, IRow as IBaseRow } from '../column-based/exercise';
 import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from 'function-util';
 import { deepEqual } from 'equality';
 import { InlineCode } from 'components/inline-code';
@@ -24,7 +24,7 @@ export type IRow<META> = IBaseRow<string, Data<META>>;
 export type IColumn<META> = IBaseColumn<string, Data<META>>;
 
 
-export abstract class FunctionBasedExercise<META> extends ColumnBasedExercise<string, Data<META>>
+export abstract class Exercise<META> extends ColumnBasedExercise<string, Data<META>>
 {
     private __funcInformation ?: FunctionInformation;
 

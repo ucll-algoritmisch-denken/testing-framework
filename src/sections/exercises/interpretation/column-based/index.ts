@@ -1,1 +1,1 @@
-export { ColumnBasedExercise, IColumn, IRow } from './column-based-exercise';
+export { Exercise, IColumn, IRow } from './exercise';

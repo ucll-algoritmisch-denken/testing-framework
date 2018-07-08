@@ -21,7 +21,10 @@
             margin: 0.2em;
 
             .Collapsible__trigger {
-                display: block;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
                 font-size: 1.25em;
                 font-weight: bold;
                 padding: 0.2em;

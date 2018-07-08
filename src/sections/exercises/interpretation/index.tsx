@@ -1,7 +1,7 @@
 import './exercise.scss';
 
 
-export { InterpretationExercise } from './interpretation-exercise';
+export { Exercise } from './exercise';
 
 import * as ColumnBased from './column-based';
 export { ColumnBased };

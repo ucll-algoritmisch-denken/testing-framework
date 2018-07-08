@@ -3,8 +3,8 @@ import { Exercise as CodingExercise } from '../exercise';
 import { ITestCase } from '../test-case';
 import { Maybe } from 'tsmonad';
 import { ITestCaseInput } from './test-case-input';
-import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from 'function-util';
-import { code } from 'formatters/jsx-formatters';
+import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from '../../../../function-util';
+import { code } from '../../../../formatters/jsx-formatters';
 
 
 

@@ -1,13 +1,13 @@
 import React from 'react';
+import _ from 'lodash';
 import { ITestCase } from '../test-case';
 import { Maybe } from 'tsmonad';
-import { IFunctionCallResults } from 'function-util';
+import { IFunctionCallResults } from '../../../../function-util';
 import { Exercise } from './exercise';
-import { IAssertion } from 'assertions';
-import { Assertions } from 'index';
-import { convertToString } from 'formatters/string-formatters';
-import _ from 'lodash';
-import { code } from 'formatters/jsx-formatters';
+import { IAssertion } from '../../../../assertions';
+import { convertToString } from '../../../../formatters/string-formatters';
+import { code } from '../../../../formatters/jsx-formatters';
+import * as Assertions from '../../../../assertions';
 
 
 export abstract class ReturnValue<META = {}> extends Exercise<META>
@@ -43,7 +43,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
 
         return (
             <React.Fragment>
-                {call} should return {returnValue}.
+                {call}&nbsp;should return&nbsp;{returnValue}.
             </React.Fragment>
         );
     }
