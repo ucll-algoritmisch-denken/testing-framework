@@ -1,6 +1,6 @@
 import React from 'react';
 import { Score, IScored } from './score';
-import { IHasDifficulty } from 'difficulty';
+import { IHasDifficulty } from './difficulty';
 
 
 export interface IChapter

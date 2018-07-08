@@ -46,7 +46,7 @@ export async function initialize(chapter : IChapter)
     ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
 }
 
-import * as Components from 'components';
+import * as Components from './components';
 export { Components };
 
 export { IHasDifficulty, difficulty } from './difficulty';

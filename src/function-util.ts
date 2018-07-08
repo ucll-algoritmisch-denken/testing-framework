@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash';
 import { Maybe } from 'tsmonad';
 import _ from 'lodash';
-import { IType } from 'type';
-import { deepEqual } from 'equality';
+import { IType } from './type';
+import { deepEqual } from './equality';
 
 
 export class FunctionInformation

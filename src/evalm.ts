@@ -1,4 +1,4 @@
-import { Maybe } from "tsmonad";
+import { Maybe } from 'tsmonad';
 
 
 export function evalm(input : string) : Maybe<any>
