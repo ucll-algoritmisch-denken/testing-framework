@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form } from './form';
-import { ValidatedInput } from './validated-input';
 import _ from 'lodash';
+import { Form as FormBase } from './form';
+import { ValidatedInput } from '../validated-input';
 
 
 export interface IColumn<COLUMN, INPUT>
@@ -36,7 +36,7 @@ export interface IState
     
 }
 
-export class ColumnBasedForm<COLUMN, INPUT> extends React.Component<IProps<COLUMN, INPUT>, IState>
+export class Form<COLUMN, INPUT> extends React.Component<IProps<COLUMN, INPUT>, IState>
 {
     constructor(props : IProps<COLUMN, INPUT>)
     {
@@ -46,7 +46,7 @@ export class ColumnBasedForm<COLUMN, INPUT> extends React.Component<IProps<COLUM
     public render()
     {
         return (
-            <Form className={this.props.className} headers={this.headers} rows={this.rows} />
+            <FormBase className={this.props.className} headers={this.headers} rows={this.rows} />
         );
     }
 

@@ -15,4 +15,6 @@ export { ValidatedInput } from './validated-input';
 export { ArrayViewer } from './array-viewer';
 export { ObjectViewer } from './object-viewer';
 export { DescriptionBox } from './description-box';
-export { FunctionBasedForm, FunctionBasedFormBuilder, InputCase, Parameter, ReturnValue } from './function-based-form';
+
+import * as Forms from './forms';
+export { Forms };

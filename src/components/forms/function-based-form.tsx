@@ -1,13 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import { ColumnBasedForm } from './column-based-form';
+import { Form as ColumnBasedForm, IRow as IBaseRow, IColumn as IBaseColumn } from './column-based-form';
 import { code } from "formatters/jsx-formatters";
 import { convertToString } from "formatters/string-formatters";
-import { IFunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../function-util';
-import { IRow as IBaseRow, IColumn as IBaseColumn } from './column-based-form';
-import { InlineCode } from './inline-code';
-import { evalm } from '../evalm';
-import { deepEqual } from '../equality';
+import { IFunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
+import { InlineCode } from '../inline-code';
+import { evalm } from '../../evalm';
+import { deepEqual } from '../../equality';
 
 
 export abstract class InputCase<META>
@@ -66,7 +65,7 @@ export interface IState
 
 }
 
-export class FunctionBasedForm<META> extends React.Component<IProps<META>, IState>
+export class Form<META> extends React.Component<IProps<META>, IState>
 {
     private readonly functionInformation : FunctionInformation;
 
@@ -144,7 +143,7 @@ export class FunctionBasedForm<META> extends React.Component<IProps<META>, IStat
                 return new class implements IColumn<META> {
                     get name() : string
                     {
-                        return FunctionBasedForm.nameInputParameter(parameterName);
+                        return Form.nameInputParameter(parameterName);
                     }
 
                     get header() : JSX.Element
@@ -204,7 +203,7 @@ export class FunctionBasedForm<META> extends React.Component<IProps<META>, IStat
             yield new class implements IColumn<META> {
                 get name() : string
                 {
-                    return FunctionBasedForm.nameReturnValue;
+                    return Form.nameReturnValue;
                 }
 
                 get header() : JSX.Element
@@ -285,7 +284,7 @@ export class FunctionBasedForm<META> extends React.Component<IProps<META>, IStat
                 return new class implements IColumn<META> {
                     get name() : string
                     {
-                        return FunctionBasedForm.nameOutputParameter(parameterName);
+                        return Form.nameOutputParameter(parameterName);
                     }
 
                     get header() : JSX.Element
@@ -332,7 +331,7 @@ export class FunctionBasedForm<META> extends React.Component<IProps<META>, IStat
     }
 }
 
-export abstract class FunctionBasedFormBuilder<META>
+export abstract class FormBuilder<META>
 {
     protected abstract readonly func : (...args : any[]) => any;
 
@@ -374,7 +373,7 @@ export abstract class FunctionBasedFormBuilder<META>
 
                 if ( me.returnValue )
                 {
-                    result.push(FunctionBasedForm.nameReturnValue);
+                    result.push(Form.nameReturnValue);
                 }
 
                 for ( let parameterName of me.functionInformation.parameterNames )
@@ -389,7 +388,7 @@ export abstract class FunctionBasedFormBuilder<META>
                     {
                         if ( info.canBeModifiedByFunction )
                         {
-                            result.push(FunctionBasedForm.nameOutputParameter(parameterName));
+                            result.push(Form.nameOutputParameter(parameterName));
                         }
                     }
                 }
@@ -422,7 +421,7 @@ export abstract class FunctionBasedFormBuilder<META>
 
                 get blankColumns() : string[]
                 {
-                    return [ FunctionBasedForm.nameInputParameter(parameterName) ];
+                    return [ Form.nameInputParameter(parameterName) ];
                 }
             };
         }
@@ -436,7 +435,7 @@ export abstract class FunctionBasedFormBuilder<META>
         const inputCases = Array.from(this.generateCases());       
 
         return (
-            <FunctionBasedForm className={this.className} {...{func, parameters, returnValue, inputCases}} />
+            <Form className={this.className} {...{func, parameters, returnValue, inputCases}} />
         );
     }
 }
