@@ -1,19 +1,22 @@
-.validated-table {
+.form {
     margin: 1em auto;
     border-collapse: collapse;
     border: 1px solid black;
     box-shadow: 5px 5px gray;
-
-    tr {
-        th {
+    background: #CCC;
+    
+    & > tbody > tr {
+        & > th {
             border-bottom: 1px solid black;
             background: #AAA;
+            padding: 0em 1em;
+            user-select: none;
+            cursor: default;
         }
-
-        td {
+    
+        & > td {
             padding: 0.25em 1em;
             text-align: center;
-            font-family: 'Courier New', Courier, monospace;
         }
     }
 }
