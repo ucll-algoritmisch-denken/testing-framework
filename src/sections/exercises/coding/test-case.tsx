@@ -1,4 +1,4 @@
-import { Outcome } from 'outcome';
+import { Outcome } from '../../../outcome';
 
 
 export interface ITestCase

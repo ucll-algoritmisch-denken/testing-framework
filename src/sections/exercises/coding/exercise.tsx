@@ -1,12 +1,12 @@
 import React from 'react';
-import { Exercise as BaseExercise } from "../exercise";
-import { outcomeToHtmlClass, combineAssertionOutcomes, Outcome } from 'outcome';
-import { HintViewer, SolutionViewer } from 'components';
 import classNames from 'classnames';
-import { ITestCase } from './test-case';
 import Collapsible from 'react-collapsible';
-import { IHasDifficulty, difficulty } from 'difficulty';
-import { IScored, Score } from 'score';
+import { Exercise as BaseExercise } from "../exercise";
+import { outcomeToHtmlClass, combineAssertionOutcomes, Outcome } from '../../../outcome';
+import { HintViewer, SolutionViewer } from '../../../components';
+import { ITestCase } from './test-case';
+import { IHasDifficulty, difficulty } from '../../../difficulty';
+import { IScored, Score } from '../../../score';
 
 
 export abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored
