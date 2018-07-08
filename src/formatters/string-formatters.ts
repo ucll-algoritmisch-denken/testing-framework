@@ -32,6 +32,10 @@ export function convertToString(x : any) : string
     {
         return x.toString();
     }
+    else if ( Type.object.hasType(x) )
+    {
+        return formatObject(x);
+    }
     else
     {
         throw new Error(`Could not determine type of ${x}`);
@@ -49,5 +53,14 @@ export function convertToString(x : any) : string
         const nonBreakingSpaces = x.replace(/ /g, "&#9251;");
 
         return `"${nonBreakingSpaces}"`;
+    }
+
+    function formatObject(x : { [key : string] : any }) : string
+    {
+        const members = Object.keys(x).map( k => {
+            return `${k}: ${convertToString(x[k])}`;
+        }).join(", ");
+
+        return `{${members}}`;
     }
 }
