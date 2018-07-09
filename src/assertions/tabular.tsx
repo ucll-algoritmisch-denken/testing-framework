@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outcome, outcomeToHtmlClass } from '../outcome';
-import { Maybe } from 'tsmonad';
 import classNames from 'classnames';
-import './tabular.scss';
 import { Assertion } from './assertion';
+import { Maybe } from '../monad';
+import './tabular.scss';
 
 
 export interface IRow

@@ -1,7 +1,6 @@
 import { IAssertion } from "./assertion";
-import { IFunctionCallResults } from "function-util";
 import { IResult } from "./result";
-import { Maybe } from "tsmonad";
+import { Maybe } from "../monad";
 
 
 class LiftAssertion<T, U> implements IAssertion<T>

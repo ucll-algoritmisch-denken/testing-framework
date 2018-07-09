@@ -1,14 +1,21 @@
 import { IAssertion } from '../assertions';
 import { deepEqual } from '../equality';
-import { Maybe } from 'tsmonad';
 import { ComparisonAssertion } from './comparison';
+import { Maybe } from '../monad';
 
 
 export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
 {
     protected isCorrect(actual: T): boolean
     {
-        return deepEqual(this.expected.valueOrThrow(), actual);
+        if ( this.expected.isJust() )
+        {
+            return deepEqual(this.expected.value, actual);
+        }
+        else
+        {
+            throw new Error(`Bug detected in testing framework`);
+        }
     }
 }
 

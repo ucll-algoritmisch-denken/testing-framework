@@ -1,28 +1,29 @@
 import React from 'react';
-import { IResult, IAssertion } from '../assertions';
-import { Outcome } from '../outcome';
+import { IAssertion } from '../assertions';
 import * as Type from 'type';
-import { Maybe } from 'tsmonad';
-import './no-return.scss';
 import { IFunctionCallResults } from 'function-util';
 import { ComparisonAssertion } from './comparison';
+import { Maybe } from '../monad';
+import { returnValue } from './return-value';
+import './no-return.scss';
+import { Outcome } from '../outcome';
 
 
-class NoReturnAssertion extends ComparisonAssertion<IFunctionCallResults>
+class NoReturnAssertion extends ComparisonAssertion<any>
 {
-    protected get original() : Maybe<IFunctionCallResults>
+    protected get original() : Maybe<any>
     {
         return Maybe.nothing();
     }
 
-    protected get expected() : Maybe<IFunctionCallResults>
+    protected get expected() : Maybe<any>
     {
         return Maybe.nothing();
     }
 
-    protected isCorrect(x: IFunctionCallResults): boolean
+    protected isCorrect(x: any): boolean
     {
-        return Type.undef.hasType(x.returnValue);
+        return Type.undef.hasType(x);
     }
     
     protected get explanations() : JSX.Element
@@ -33,9 +34,14 @@ class NoReturnAssertion extends ComparisonAssertion<IFunctionCallResults>
             </React.Fragment>
         );
     }
+
+    protected shouldBeShown(_actual : Maybe<any>, outcome : Outcome) : boolean
+    {
+        return outcome !== Outcome.Pass;
+    }
 }
 
 export function noReturn() : IAssertion<IFunctionCallResults>
 {
-    return new NoReturnAssertion();
+    return returnValue( new NoReturnAssertion() );
 }

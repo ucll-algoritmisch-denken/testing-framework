@@ -1,8 +1,8 @@
 import React from 'react';
-import { Maybe } from 'tsmonad';
 import { IAssertion } from './assertion';
 import { IResult } from './result';
 import { Outcome, combineAssertionOutcomes } from 'outcome';
+import { Maybe } from '../monad';
 
 
 class Sequence<T> implements IAssertion<T>

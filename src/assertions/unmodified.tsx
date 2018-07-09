@@ -1,10 +1,10 @@
 import React from 'react';
 import { IAssertion } from '../assertions';
 import { deepEqual } from '../equality';
-import { Maybe } from 'tsmonad';
 import { ComparisonAssertion } from './comparison';
-import './unmodified.scss';
 import { Outcome } from 'outcome';
+import { Maybe } from '../monad';
+import './unmodified.scss';
 
 
 export abstract class UnmodifiedAssertion<T> extends ComparisonAssertion<T>
@@ -18,7 +18,14 @@ export abstract class UnmodifiedAssertion<T> extends ComparisonAssertion<T>
     
     protected isCorrect(actual: T): boolean
     {
-        return deepEqual(this.original.valueOrThrow(), actual);
+        if ( this.original.isJust() )
+        {
+            return deepEqual(this.original.value, actual);
+        }
+        else
+        {
+            throw new Error(`Bug in testing framework`);
+        }
     }
 
     protected shouldBeShown(_actual : Maybe<T>, outcome : Outcome) : boolean

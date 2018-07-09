@@ -1,8 +1,8 @@
 import { Outcome } from '../outcome';
 import { simple } from '../formatters/jsx-formatters';
-import { Maybe } from 'tsmonad';
 import './comparison.scss';
 import { TabularAssertion, IRow } from './tabular';
+import { Maybe } from '../monad';
 
 
 export abstract class ComparisonAssertion<T> extends TabularAssertion<T>
@@ -25,30 +25,30 @@ export abstract class ComparisonAssertion<T> extends TabularAssertion<T>
 
     protected *generateRows(actual : Maybe<any>, outcome : Outcome) : Iterable<IRow>
     {
-        if ( Maybe.isJust(this.original) )
+        if ( this.original.isJust() )
         {
             yield {
                 header: 'original',
                 htmlClasses: [ 'original' ],
-                content: this.renderOriginalRow(this.original.valueOrThrow())
+                content: this.renderOriginalRow(this.original.value)
             };
         }
 
-        if ( Maybe.isJust(this.expected) )
+        if ( this.expected.isJust() )
         {
             yield {
                 header: 'expected',
                 htmlClasses: [ 'expected' ],
-                content: this.renderOriginalRow(this.expected.valueOrThrow())
+                content: this.renderOriginalRow(this.expected.value)
             };
         }
 
-        if ( Maybe.isJust(actual) )
+        if ( actual.isJust() )
         {
             yield {
                 header: 'actual',
                 htmlClasses: [ 'actual' ],
-                content: this.renderOriginalRow(actual.valueOrThrow())
+                content: this.renderOriginalRow(actual.value)
             };
         }
     }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Exercise as CodingExercise } from '../exercise';
 import { ITestCase } from '../test-case';
-import { Maybe } from 'tsmonad';
 import { ITestCaseInput } from './test-case-input';
 import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from '../../../../function-util';
 import { code } from '../../../../formatters/jsx-formatters';
+import { Maybe } from '../../../../monad';
 
 
 
@@ -65,9 +65,16 @@ export abstract class Exercise<META = {}> extends CodingExercise
         return this.__referenceInformation = (this.__referenceInformation || parseFunction(this.referenceImplementation));
     }
 
+    // TODO Remove
     protected get referenceName() : string
     {
         return this.referenceInformation.functionName;
+    }
+
+    // TODO Remove
+    protected get referenceSignature() : string
+    {
+        return this.referenceInformation.format();
     }
 
     protected referenceParameterName(parameterIndex : number) : string

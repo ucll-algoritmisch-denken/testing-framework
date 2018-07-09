@@ -52,5 +52,5 @@ export { Components };
 export { IHasDifficulty, difficulty } from './difficulty';
 export { IScored, Score } from './score';
 
-import { Maybe } from 'tsmonad'; // TODO Should be peer dependency
+import { Maybe } from './monad';
 export { Maybe };

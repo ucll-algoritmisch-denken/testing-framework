@@ -3,7 +3,7 @@ import { IResult, IAssertion } from '../assertions';
 import { Outcome } from '../outcome';
 import { IToJsxElement, simple } from '../formatters/jsx-formatters';
 import { isPermutation } from '../atf-util';
-import { Maybe } from 'tsmonad';
+import { Maybe } from '../monad';
 import './permutation.scss';
 
 

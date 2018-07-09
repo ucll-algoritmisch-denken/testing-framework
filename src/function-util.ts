@@ -1,15 +1,21 @@
 import { cloneDeep } from 'lodash';
-import { Maybe } from 'tsmonad';
 import _ from 'lodash';
 import { IType } from './type';
 import { deepEqual } from './equality';
+import { Maybe } from './monad';
 
 
 export class FunctionInformation
 {
     constructor(public readonly functionName : string, public readonly parameterNames : string[]) { }
 
+    // TODO Remove, has been replaced by signature
     format() : string
+    {
+        return this.signature;
+    }
+
+    get signature() : string
     {
         const parameterString = this.parameterNames.join(", ");
 

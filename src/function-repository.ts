@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Maybe } from 'tsmonad';
+import { Maybe } from './monad';
 
 
 export interface IFunctionRepository
