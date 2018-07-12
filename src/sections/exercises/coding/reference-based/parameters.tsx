@@ -25,7 +25,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
 
     protected createAssertion(expected : IFunctionCallResults, metadata : META) : IAssertion<IFunctionCallResults>
     {
-        const returnValueAssertion = this.createReturnValueAssertion();
+        const returnValueAssertion = Assertions.returnValue( this.createReturnValueAssertion() );
 
         const argumentAssertions = this.referenceInformation.parameterNames.map( (parameterName, parameterIndex) => {
             const checker = this.parameterCheckers[parameterName];
@@ -41,7 +41,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
             {
                 const originalValue = expected.argumentsBeforeCall[parameterIndex];
 
-                return this.createUnmodifiedArgumentAssertion(parameterIndex, parameterName, originalValue);
+                return Assertions.parameter(parameterIndex, parameterName, Assertions.unmodified(originalValue));
             }
         });
 
@@ -51,11 +51,6 @@ export abstract class Parameters<META = {}> extends Exercise<META>
     protected createReturnValueAssertion() : IAssertion<IFunctionCallResults>
     {
         return Assertions.noReturn();
-    }
-
-    protected createUnmodifiedArgumentAssertion(parameterIndex : number, parameterName : string, originalValue : any) : IAssertion<IFunctionCallResults>
-    {
-        return Assertions.parameter(parameterIndex, parameterName, Assertions.unmodified(originalValue));
     }
 
     protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : META) : JSX.Element
