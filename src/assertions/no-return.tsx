@@ -37,11 +37,11 @@ class NoReturnAssertion extends ComparisonAssertion<any>
 
     protected shouldBeShown(_actual : Maybe<any>, outcome : Outcome) : boolean
     {
-        return outcome !== Outcome.Pass;
+        return outcome === Outcome.Fail;
     }
 }
 
 export function noReturn() : IAssertion<IFunctionCallResults>
 {
-    return returnValue( new NoReturnAssertion() );
+    return new NoReturnAssertion();
 }
