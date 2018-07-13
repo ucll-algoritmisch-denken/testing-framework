@@ -1,7 +1,7 @@
-import { IAssertion } from '../assertions';
-import { deepEqual } from '../equality';
+import { IAssertion } from '.';
+import { deepEqual } from 'equality';
 import { ComparisonAssertion } from './comparison';
-import { Maybe } from '../monad';
+import { Maybe } from 'monad';
 
 
 export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>

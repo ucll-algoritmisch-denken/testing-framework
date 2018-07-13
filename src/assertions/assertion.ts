@@ -1,6 +1,6 @@
 import { IResult } from "./result";
 import { Outcome } from "outcome";
-import { Maybe } from "../monad";
+import { Maybe } from "monad";
 
 
 export interface IAssertion<T>

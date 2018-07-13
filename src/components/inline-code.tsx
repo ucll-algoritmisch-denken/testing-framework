@@ -1,6 +1,6 @@
 import React from 'react';
-import { convertToString } from '../formatters/string-formatters';
-import { code } from '../formatters/jsx-formatters';
+import { convertToString } from 'formatters/string-formatters';
+import { code } from 'formatters/jsx-formatters';
 import './inline-code.scss';
 
 

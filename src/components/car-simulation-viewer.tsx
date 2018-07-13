@@ -1,9 +1,9 @@
 import React from 'react';
 import { AnimationViewer } from './animation-viewer';
-import * as Animation from '../animation';
-import * as CarSim from '../car-simulation';
-import { IAnimation } from '../animation';
-import { Position2D } from '../position2d';
+import * as Animation from 'animation';
+import * as CarSim from 'car-simulation';
+import { IAnimation } from 'animation';
+import { Position2D } from 'position2d';
 
 
 export interface IProps

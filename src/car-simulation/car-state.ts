@@ -1,5 +1,5 @@
-import { Position2D } from '../position2d';
-import { Direction2D } from '../direction2d';
+import { Position2D } from "../position2d";
+import { Direction2D } from "../direction2d";
 
 
 export class CarState

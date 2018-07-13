@@ -1,14 +1,11 @@
-import { IAssertion } from '../assertions';
+import { IAssertion } from '.';
 import { ComparisonAssertion } from './comparison';
-import { Maybe } from '../monad';
+import { Maybe } from 'monad';
 
 
 export abstract class ApproximatelyAssertion extends ComparisonAssertion<number>
 {
-    protected get epsilon()
-    {
-        return 0.0001;
-    }
+    protected abstract readonly epsilon : number;
 
     protected isCorrect(actual: number): boolean
     {
@@ -23,10 +20,15 @@ export abstract class ApproximatelyAssertion extends ComparisonAssertion<number>
     }
 }
 
-export function approximately(expected : number) : IAssertion<number>
+export function approximately(expected : number, epsilon : number = 0.0001) : IAssertion<number>
 {
     return new class extends ApproximatelyAssertion
     {
+        protected get epsilon() : number
+        {
+            return epsilon;
+        }
+
         protected get original() : Maybe<number>
         {
             return Maybe.nothing();

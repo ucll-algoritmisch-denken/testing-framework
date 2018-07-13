@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import { Form as ColumnBasedForm, IRow as IBaseRow, IColumn as IBaseColumn } from './column-based-form';
-import { code } from "formatters/jsx-formatters";
-import { convertToString } from "formatters/string-formatters";
-import { IFunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
 import { InlineCode } from '../inline-code';
+import { code } from '../../formatters/jsx-formatters';
+import { convertToString } from '../../formatters/string-formatters';
+import { IFunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
 import { evalm } from '../../evalm';
 import { deepEqual } from '../../equality';
 

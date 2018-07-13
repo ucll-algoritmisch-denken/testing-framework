@@ -1,4 +1,4 @@
-import { Position2D } from "./position2d";
+import { Position2D } from "position2d";
 
 
 export class Grid<T>

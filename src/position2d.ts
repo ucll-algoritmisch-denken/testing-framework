@@ -1,4 +1,4 @@
-import { Direction2D } from "./direction2d";
+import { Direction2D } from "direction2d";
 
 
 export class Position2D

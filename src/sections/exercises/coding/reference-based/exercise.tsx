@@ -2,9 +2,9 @@ import React from 'react';
 import { Exercise as CodingExercise } from '../exercise';
 import { ITestCase } from '../test-case';
 import { ITestCaseInput } from './test-case-input';
-import { FunctionInformation, parseFunction, IFunctionCallResults, callFunction } from '../../../../function-util';
-import { code } from '../../../../formatters/jsx-formatters';
+import { FunctionInformation, IFunctionCallResults, callFunction, parseFunction } from '../../../../function-util';
 import { Maybe } from '../../../../monad';
+import { code } from '../../../../formatters/jsx-formatters';
 
 
 

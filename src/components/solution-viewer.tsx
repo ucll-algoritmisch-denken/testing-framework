@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import { SourceCodeViewer } from '../components/sourcecode-viewer';
+import { SourceCodeViewer } from './sourcecode-viewer';
 import './solution-viewer.scss';
 
 

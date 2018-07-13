@@ -33,7 +33,7 @@ export interface IProps<COLUMN, INPUT>
 
 export interface IState
 {
-    
+
 }
 
 export class Form<COLUMN, INPUT> extends React.Component<IProps<COLUMN, INPUT>, IState>

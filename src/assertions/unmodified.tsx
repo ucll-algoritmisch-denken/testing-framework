@@ -1,9 +1,9 @@
 import React from 'react';
-import { IAssertion } from '../assertions';
-import { deepEqual } from '../equality';
+import { IAssertion } from '.';
+import { deepEqual } from 'equality';
 import { ComparisonAssertion } from './comparison';
 import { Outcome } from 'outcome';
-import { Maybe } from '../monad';
+import { Maybe } from 'monad';
 import './unmodified.scss';
 
 

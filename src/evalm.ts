@@ -1,4 +1,4 @@
-import { Maybe } from "./monad";
+import { Maybe } from "monad";
 
 
 export function evalm(input : string) : Maybe<any>

@@ -1,4 +1,4 @@
-import * as Formatters from '../formatters/jsx-formatters';
+import * as Formatters from 'formatters/jsx-formatters';
 import { IAssertion } from './assertion';
 import { equality } from './equality';
 

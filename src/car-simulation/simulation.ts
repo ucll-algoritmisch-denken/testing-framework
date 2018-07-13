@@ -1,9 +1,9 @@
+import * as _ from 'lodash';
 import { World } from './world';
 import { Empty, Wall, Destination } from './cell';
 import { Direction2D } from '../direction2d';
 import { Trace } from './trace';
 import { CarState } from './car-state';
-import * as _ from 'lodash';
 import { ForwardTraceStep, TurnLeftTraceStep, TurnRightTraceStep } from './trace-step';
 import { CarSimulationException } from './car-exception';
 

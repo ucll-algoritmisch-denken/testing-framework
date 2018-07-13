@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'rc-slider';
-import { Mode, PlayPauseButton } from './play-pause-button';
 import 'rc-slider/assets/index.css';
+import { Mode, PlayPauseButton } from './play-pause-button';
 import './animation-viewer.scss';
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ISection } from '../chapter';
+import { ISection } from 'chapter';
 import './explanations.scss';
-import { IScored } from '../score';
+import { IScored } from 'score';
 
 
 export abstract class Explanations implements ISection

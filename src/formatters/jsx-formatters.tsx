@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Type from 'type';
-import { allEqual } from '../atf-util';
-import { Bitmap } from '../bitmap';
-import { BitmapViewer } from '../components/bitmap-viewer';
-import { Invalid } from '../components/invalid';
+import { allEqual } from 'atf-util';
+import { Bitmap } from 'bitmap';
+import { BitmapViewer } from 'components/bitmap-viewer';
+import { Invalid } from 'components/invalid';
 import { convertToString } from './string-formatters';
 import _ from 'lodash';
 import { DiceViewer } from 'components/dice-viewer';

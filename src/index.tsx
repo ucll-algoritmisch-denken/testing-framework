@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { createShell } from './shell';
 import { App } from './view';
 
-import { IChapter } from './chapter';
-
 export { IChapter, ISection } from './chapter';
 export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow } from './function-repository';
 
@@ -37,6 +35,8 @@ export const Imaging = {
 
 import * as CarSimulation from './car-simulation';
 export { CarSimulation };
+
+import { IChapter } from './chapter';
 
 export async function initialize(chapter : IChapter)
 {

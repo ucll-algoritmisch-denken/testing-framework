@@ -1,11 +1,11 @@
 import React from 'react';
 import { ITestCase } from '../test-case';
-import { IFunctionCallResults } from '../../../../function-util';
 import { Exercise } from './exercise';
+import { IFunctionCallResults } from '../../../../function-util';
+import * as Assertions from '../../../../assertions';
 import { IAssertion } from '../../../../assertions';
 import { convertToString } from '../../../../formatters/string-formatters';
 import { code } from '../../../../formatters/jsx-formatters';
-import * as Assertions from '../../../../assertions';
 import { Maybe } from '../../../../monad';
 
 

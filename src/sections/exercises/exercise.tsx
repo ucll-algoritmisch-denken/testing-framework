@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import { DifficultyViewer } from '../../components/difficulty-viewer';
-import { IScored } from '../../score';
-import { IHasDifficulty } from '../../difficulty';
 import { ISection } from '../../chapter';
+import { IHasDifficulty } from '../../difficulty';
+import { IScored } from '../../score';
 import './exercise.scss';
+import { DifficultyViewer } from '../../components';
 
 
 export abstract class Exercise implements ISection

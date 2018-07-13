@@ -1,8 +1,8 @@
-import { Outcome } from '../outcome';
-import { simple } from '../formatters/jsx-formatters';
+import { Outcome } from 'outcome';
+import { simple } from 'formatters/jsx-formatters';
 import './comparison.scss';
 import { TabularAssertion, IRow } from './tabular';
-import { Maybe } from '../monad';
+import { Maybe } from 'monad';
 
 
 export abstract class ComparisonAssertion<T> extends TabularAssertion<T>
