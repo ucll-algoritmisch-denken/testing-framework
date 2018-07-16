@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import Collapsible from 'react-collapsible';
 import { Exercise as BaseExercise } from "../exercise";
 import { ITestCase } from './test-case';
 import { IScored, Score } from '../../../score';
@@ -51,7 +50,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
         }
     }
 
-    get exerciseContent() : JSX.Element
+    protected get exerciseContent() : JSX.Element
     {
         return (
             <React.Fragment>
@@ -95,9 +94,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
         return (
             <div className={htmlClass}>
-                <Collapsible trigger={testCase.header} transitionTime={100}>
-                    {testCase.content}
-                </Collapsible>
+                {testCase.render()}
             </div>
         );
     }

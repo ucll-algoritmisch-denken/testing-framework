@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { ITestCase } from '../test-case';
+import { ITestCase, CollapsibleTestCase } from '../test-case';
 import { Exercise } from './exercise';
 import { IFunctionCallResults } from '../../../../function-util';
 import { IAssertion } from '../../../../assertions';
@@ -8,6 +8,7 @@ import * as Assertions from '../../../../assertions';
 import { code } from '../../../../formatters/jsx-formatters';
 import { convertToString } from '../../../../formatters/string-formatters';
 import { Maybe } from '../../../../monad';
+import { Outcome } from 'outcome';
 
 
 export abstract class ReturnValue<META = {}> extends Exercise<META>
@@ -62,10 +63,25 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
         }
         else
         {
-            return {
-                header,
-                outcome,
-                content
+            // Needed lest TypeScript forgets about it being nonnull
+            const nonNullContent = content;
+
+            return new class extends CollapsibleTestCase 
+            {
+                protected get header() : JSX.Element
+                {
+                    return header;
+                }
+
+                protected get content() : JSX.Element
+                {
+                    return nonNullContent;
+                }
+
+                public get outcome() : Outcome
+                {
+                    return outcome;
+                }
             };
         }
     }

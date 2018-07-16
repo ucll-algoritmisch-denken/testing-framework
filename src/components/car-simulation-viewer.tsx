@@ -97,7 +97,7 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
                 }
                 else if ( cell instanceof CarSim.Destination )
                 {
-                    return '#AAF';
+                    return '#AFA';
                 }
                 else if ( cell instanceof CarSim.Empty )
                 {
