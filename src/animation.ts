@@ -6,12 +6,29 @@ export interface IAnimation<T>
     at(t : number) : T;
 
     readonly duration : number;
+
+    readonly endValue : T;
+}
+
+abstract class Animation<T> implements IAnimation<T>
+{
+    abstract at(t : number) : T;
+
+    abstract readonly duration : number;
+
+    get endValue() : T
+    {
+        return this.at(this.duration);
+    }
 }
 
 
-class Constant<T> implements IAnimation<T>
+class Constant<T> extends Animation<T>
 {
-    constructor(private value : T, public duration : number) { }
+    constructor(private value : T, public duration : number)
+    {
+        super();
+    }
 
     at(t : number) : T
     {
@@ -24,11 +41,19 @@ class Constant<T> implements IAnimation<T>
             return this.value;
         }
     }
+
+    get endValue() : T
+    {
+        return this.value;
+    }
 }
 
-class LinearAnimation implements IAnimation<number>
+class LinearAnimation extends Animation<number>
 {
-    constructor(private readonly from : number, public readonly to : number, public readonly duration : number) { }
+    constructor(private readonly from : number, public readonly to : number, public readonly duration : number)
+    {
+        super();
+    }
 
     at(t : number) : number
     {
@@ -43,10 +68,12 @@ class LinearAnimation implements IAnimation<number>
     }
 }
 
-class Delay<T> implements IAnimation<T>
+class Delay<T> extends Animation<T>
 {
     constructor(private delayed : IAnimation<T>, private delay : number)
     {
+        super();
+
         this.duration = delayed.duration + delay;
     }
 
@@ -65,14 +92,23 @@ class Delay<T> implements IAnimation<T>
     duration : number;
 }
 
-class Sequence<T> implements IAnimation<T>
+class Sequence<T> extends Animation<T>
 {
     constructor(private readonly children : IAnimation<T>[])
     {
+        super();
+
         this.duration = _.sum(children.map(child => child.duration));
     }
 
-    readonly duration : number;
+    readonly duration : number
+    
+    get endValue() : T
+    {
+        const lastChild = this.children[this.children.length - 1];
+
+        return lastChild.endValue;
+    }
 
     at(t : number) : T
     {
@@ -84,21 +120,40 @@ class Sequence<T> implements IAnimation<T>
         {
             let i = 0;
 
-            while ( t > this.children[i].duration )
+            // Extra i < length check necessary for rounding errors. t might be slightly too large
+            while ( i < this.children.length && t > this.children[i].duration )
             {
                 t -= this.children[i].duration;
                 ++i;
             }
 
-            return this.children[i].at(t);
+            if ( i === this.children.length )
+            {
+                if ( t > 0.00001 )
+                {
+                    throw new Error(`Bug, should not happen`);
+                }
+                else
+                {
+                    const lastChild = this.children[this.children.length - 1];
+
+                    return lastChild.at( lastChild.duration );
+                }
+            }
+            else
+            {
+                return this.children[i].at(t);
+            }
         }
     }
 }
 
-class Map<U> implements IAnimation<U>
+class Map<U> extends Animation<U>
 {
     constructor(private f : (...animations : IAnimation<any>[]) => U, private animations : IAnimation<any>[])
     {
+        super();
+
         for ( let i = 1; i < animations.length; ++i )
         {
             if ( animations[i].duration !== animations[0].duration )
@@ -111,6 +166,11 @@ class Map<U> implements IAnimation<U>
     }
 
     readonly duration : number;
+
+    get endValue() : U
+    {
+        return this.f(...this.animations.map(animation => animation.endValue));
+    }
 
     at(t : number) : U
     {
@@ -130,9 +190,16 @@ export function constant<T>(value : T, duration : number) : IAnimation<T>
     return new Constant<T>(value, duration);
 }
 
+export function appendJump<T>(animation : IAnimation<T>, value : T) : IAnimation<T>
+{
+    const appended = constant(value, 0);
+
+    return sequence(animation, appended);
+}
+
 export function appendConstant<T>(animation : IAnimation<T>, duration : number) : IAnimation<T>
 {
-    const value = animation.at(animation.duration);
+    const value = animation.endValue;
     const appended = constant(value, duration);
 
     return sequence(animation, appended);
@@ -145,7 +212,7 @@ export function linear(from : number, to : number, duration : number) : IAnimati
 
 export function appendLinear(animation : IAnimation<number>, to : number, duration : number) : IAnimation<number>
 {
-    const from = animation.at(animation.duration);
+    const from = animation.endValue;
     const appended = linear(from, to, duration);
 
     return sequence(animation, appended);
@@ -193,6 +260,11 @@ export class NumberAnimationBuilder
     constant(duration : number)
     {
         this.animation = appendConstant(this.animation, duration);
+    }
+
+    jump(to : number)
+    {
+        this.animation = appendJump(this.animation, to);
     }
 
     build() : IAnimation<number>
