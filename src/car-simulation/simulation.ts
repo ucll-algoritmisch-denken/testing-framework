@@ -8,7 +8,6 @@ import { ForwardTraceStep, TurnLeftTraceStep, TurnRightTraceStep } from './trace
 import { CarSimulationException } from './car-exception';
 
 
-
 export class Simulation
 {
     public readonly history : Trace;
@@ -164,6 +163,5 @@ export class Simulation
                 }
             }
         }
-        
     }
 }

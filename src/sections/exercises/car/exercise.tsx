@@ -142,7 +142,9 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
         return (
             <React.Fragment>
                 {this.renderTestCases()}
+                {this.renderAvailableFunctionality()}
                 {this.renderDescription()}
+                {this.renderHint()}
             </React.Fragment>
         );
     }

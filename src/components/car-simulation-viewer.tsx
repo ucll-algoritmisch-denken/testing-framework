@@ -4,6 +4,7 @@ import * as Animation from 'animation';
 import * as CarSim from 'car-simulation';
 import { IAnimation } from 'animation';
 import { Position2D } from 'position2d';
+import { approximately } from 'equality';
 
 
 export interface IProps
@@ -42,8 +43,10 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
 
     public render()
     {
+        const duration = Math.min( this.x.duration, this.y.duration, this.theta.duration );
+
         return (
-            <AnimationViewer duration={this.x.duration} renderFrame={t => this.renderFrame(t)} animationSpeed={4} />
+            <AnimationViewer duration={duration} renderFrame={t => this.renderFrame(t)} animationSpeed={4} />
         );
     }
 
@@ -147,7 +150,19 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
             {
                 x.constant(stepDuration);
                 y.constant(stepDuration);
-                theta.absoluteTo(trace.to.angleInDegrees, stepDuration);
+
+                if ( trace.from.angleInDegrees > trace.to.angleInDegrees )
+                {
+                    theta.absoluteTo(trace.to.angleInDegrees, stepDuration);
+                }
+                else
+                {
+                    const from = trace.from.angleInDegrees + 360;
+                    const to = trace.to.angleInDegrees;
+
+                    theta.jump(from);
+                    theta.absoluteTo(to, stepDuration);
+                }
             }
         }
 
@@ -159,6 +174,13 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
             step.visit(visitor);
         }
 
-        return { x: x.build(), y: y.build(), theta: theta.build() };
+        const result = { x: x.build(), y: y.build(), theta: theta.build() };
+
+        if ( !approximately(result.x.duration, result.y.duration) || !approximately(result.y.duration, result.theta.duration) )
+        {
+            throw new Error(`Bug: animations for x, y and theta do not have equal duration`);
+        }
+
+        return result;
     }
 }
