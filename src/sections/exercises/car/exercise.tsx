@@ -30,6 +30,10 @@ function createCarLibrary(symbol : Symbol, simulation : Simulation) : { [key : s
         sensor: function(car : Symbol) {
             validateCar(car);
             return simulation.sensor();
+        },
+        destinationReached: function(car : Symbol) {
+            validateCar(car);
+            return simulation.destinationReached();
         }
     };
 
@@ -42,7 +46,7 @@ function createCarLibrary(symbol : Symbol, simulation : Simulation) : { [key : s
     }
 }
 
-function executeInstructions(simulation : Simulation, testedFunction : (symbol : Symbol) => void, functionality : string[])
+function executeInstructions(simulation : Simulation, testedFunction : (symbol : Symbol) => void, functionality : functionality[])
 {
     const carSymbol = Symbol();
     const library = createCarLibrary(carSymbol, simulation);
@@ -145,6 +149,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
                 {this.renderAvailableFunctionality()}
                 {this.renderDescription()}
                 {this.renderHint()}
+                {this.renderSolution()}
             </React.Fragment>
         );
     }

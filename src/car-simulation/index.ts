@@ -3,4 +3,4 @@ export { TurnLeftTraceStep, TurnRightTraceStep, ForwardTraceStep, ITraceStepVisi
 export { Simulation } from './simulation';
 export { CarSimulationException } from './car-exception';
 
-export type functionality = "forward" | "turnLeft" | "turnRight" | "sensor";
+export type functionality = "forward" | "turnLeft" | "turnRight" | "sensor" | "destinationReached";

@@ -51,6 +51,10 @@ export class CarFunctionalitySymbol extends React.Component<IProps, IState>
             {
                 return String.fromCharCode(0x21B7);
             }
+            else if ( functionality === 'destinationReached')
+            {
+                return String.fromCharCode(0x2690);
+            }
             else
             {
                 throw new Error("Invalid functionality");

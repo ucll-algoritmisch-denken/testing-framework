@@ -71,6 +71,13 @@ export class Simulation
         return this.world.at(sensorPosition).isSensed();
     }
 
+    destinationReached() : boolean
+    {
+        const { position } = this.carState;
+
+        return this.world.at(position).isDestination();
+    }
+
     get isSuccessful() : boolean
     {
         return !this.crashed && this.world.at(this.carState.position).isDestination();

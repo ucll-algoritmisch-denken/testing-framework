@@ -101,7 +101,7 @@ class Sequence<T> extends Animation<T>
         this.duration = _.sum(children.map(child => child.duration));
     }
 
-    readonly duration : number
+    readonly duration : number;
     
     get endValue() : T
     {
