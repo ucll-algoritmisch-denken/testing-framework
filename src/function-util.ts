@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 import _ from 'lodash';
 import { IType } from 'type';
 import { deepEqual } from 'equality';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 
 
 export class FunctionInformation

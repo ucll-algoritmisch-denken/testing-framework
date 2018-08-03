@@ -1,7 +1,7 @@
 import { IAssertion } from './assertion';
 import { IResult } from './result';
 import { Outcome } from 'outcome';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 
 
 class Decorator<T> implements IAssertion<T>

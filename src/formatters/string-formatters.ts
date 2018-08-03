@@ -50,9 +50,9 @@ export function convertToString(x : any) : string
 
     function formatString(x : string) : string
     {
-        const nonBreakingSpaces = x.replace(/ /g, "&#9251;");
+        const visibleWhitespace = x.replace(/ /g, `␣`).replace(/\n/g, `↵`);
 
-        return `"${nonBreakingSpaces}"`;
+        return `"${visibleWhitespace}"`;
     }
 
     function formatObject(x : { [key : string] : any }) : string

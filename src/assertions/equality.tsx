@@ -1,7 +1,7 @@
 import { IAssertion } from '.';
-import { deepEqual } from 'equality';
+import { deepEqual } from '../equality';
 import { ComparisonAssertion } from './comparison';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 
 
 export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
@@ -16,16 +16,16 @@ export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
         {
             throw new Error(`Bug detected in testing framework`);
         }
-    }
+    }    
 }
 
-export function equality<T>(expected : T) : IAssertion<T>
+export function equality<T>(expected : T, original : Maybe<T>) : IAssertion<T>
 {
     return new class extends EqualityAssertion<T>
     {
         protected get original() : Maybe<T>
         {
-            return Maybe.nothing();
+            return original;
         }
         
         protected get expected() : Maybe<T>

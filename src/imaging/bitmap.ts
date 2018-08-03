@@ -1,3 +1,6 @@
+import { Color } from './color';
+
+
 export class Bitmap
 {
     constructor(public width : number, public height : number, private pixelData : Uint8ClampedArray) { }
@@ -12,55 +15,63 @@ export class Bitmap
         }
     }
     
-    toRgb() : number[][][]
+    toColor() : Color[][]
     {
-        const result = new Array<number[][]>(this.height);
+        return this.toMatrix<Color>( (r, g, b, a) => new Color(r, g, b) );
+    }
+
+    toGrayscale() : number[][]
+    {
+        return this.toMatrix<number>( (r, g, b, a) => (r + g + b) / 255 );
+    }
+
+    toBlackAndWhite() : boolean[][]
+    {
+        return this.toMatrix<boolean>( (r, g, b, a) => (r + g + b) / 255 < 128 );
+    }
+
+    private toMatrix<T>(f : (r : number, g : number, b : number, a : number) => T) : T[][]
+    {
+        const result = new Array<T[]>(this.height);
         let index = 0;
 
         for ( let y = 0; y !== this.height; ++y )
         {
-            result[y] = new Array<number[]>(this.width);
+            result[y] = new Array<T>(this.width);
 
             for ( let x = 0; x !== this.width; ++x )
             {
                 const r = this.pixelData[index++];
                 const g = this.pixelData[index++];
                 const b = this.pixelData[index++];
-                index++;
+                const a = this.pixelData[index++];
 
-                result[y][x] = [r, g, b];
+                result[y][x] = f(r, g, b, a);
             }
         }
 
         return result;
     }
 
+    static fromBlackAndWhite(pixels : boolean[][]) : Bitmap
+    {
+        return this.fromMatrix(pixels, b => b ? new Color(255, 255, 255) : new Color(0, 0, 0));
+    }
+
     static fromGrayscale(pixels : number[][]) : Bitmap
     {
-        const width = pixels[0].length;
-        const height = pixels.length;
-        
-        return Bitmap.fromFunction(width, height, (x, y) => {
-            const c = pixels[y][x];
-
-            return new Color(c, c, c);
-        });
+        return this.fromMatrix(pixels, c => new Color(c, c, c));
     }
 
-    static fromRgb(pixels : number[][][]) : Bitmap
+    static fromColors(pixels : Color[][]) : Bitmap
     {
-        const width = pixels[0].length;
-        const height = pixels.length;
-        
-        return Bitmap.fromFunction(width, height, (x, y) => {
-            const [r, g, b] = pixels[y][x];
-
-            return new Color(r, g, b);
-        });
+        return this.fromMatrix(pixels, c => c);
     }
 
-    static fromFunction(width : number, height : number, f : (x : number, y : number) => Color) : Bitmap
+    static fromMatrix<T>(matrix : T[][], f : (t : T) => Color) : Bitmap
     {
+        const width = matrix[0].length;
+        const height = matrix.length;
         const totalSize = width * height * 4;
         const pixelData = new Uint8ClampedArray(totalSize);
         let i = 0;
@@ -69,7 +80,7 @@ export class Bitmap
         {
             for ( let x = 0; x !== width; ++x )
             {
-                const color = f(x, y);
+                const color = f(matrix[y][x]);
 
                 pixelData[i++] = color.r;
                 pixelData[i++] = color.g;
@@ -80,11 +91,6 @@ export class Bitmap
 
         return new Bitmap(width, height, pixelData);
     }
-}
-
-export class Color
-{
-    constructor(public r : number, public g : number, public b : number) { }
 }
 
 export function loadImage(path : string) : Promise<Bitmap>

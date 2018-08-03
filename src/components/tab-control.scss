@@ -1,0 +1,35 @@
+.tab-control {
+    & > .tab-labels {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-left: 5px;
+
+        & > .tab-label {
+            background: #AAA;
+            padding: 5px 1em;
+            margin: 0em -0.2em;
+            cursor: default;
+            user-select: none;
+            font-variant: small-caps;
+
+            &:hover {
+                background: #CCC;
+            }
+
+            &.selected {
+                padding-bottom: 8px;
+                z-index: 1;
+                color: white;
+                background: #AAF;
+            }
+        }
+    }
+
+    & > .container {
+        border-top: 1px solid black;
+        background: #AAA;
+        padding: 0.5em;
+    }
+}

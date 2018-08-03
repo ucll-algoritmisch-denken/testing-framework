@@ -60,12 +60,3 @@ export class App extends React.Component<IProps, IState> {
         this.setState( { currentSectionIndex: index } );
     }
 }
-
-// async function main()
-// {
-//     const functionRepository = FunctionRepository.fromWindow();
-//     const chapter = await createChapter(functionRepository);
-//     (window as any).shell = createShell(chapter);
-    
-//     ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
-// }

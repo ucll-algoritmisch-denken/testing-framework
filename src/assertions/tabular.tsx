@@ -2,7 +2,7 @@ import React from 'react';
 import { Outcome, outcomeToHtmlClass } from 'outcome';
 import classNames from 'classnames';
 import { Assertion } from './assertion';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 import './tabular.scss';
 
 

@@ -9,7 +9,7 @@ import { evalm } from '../../evalm';
 import { deepEqual } from '../../equality';
 
 
-export abstract class InputCase<META>
+export abstract class InputCase<META = {}>
 {
     abstract readonly args : any[];
     
@@ -331,12 +331,15 @@ export class Form<META> extends React.Component<IProps<META>, IState>
     }
 }
 
-export abstract class FormBuilder<META>
+export abstract class FormBuilder<META = {}>
 {
     protected abstract readonly func : (...args : any[]) => any;
 
     protected abstract generateCases() : Iterable<InputCase<META>>;
 
+    /**
+     * To be overriden to provide information about parameters.
+     */
     protected abstract readonly parameters : { [key : string] : Parameter<META> };
 
     protected abstract readonly returnValue : ReturnValue<META> | null;

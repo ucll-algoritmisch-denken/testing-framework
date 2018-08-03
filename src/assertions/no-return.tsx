@@ -3,7 +3,7 @@ import { IAssertion } from '.';
 import * as Type from 'type';
 import { IFunctionCallResults } from 'function-util';
 import { ComparisonAssertion } from './comparison';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 import { returnValue } from './return-value';
 import './no-return.scss';
 import { Outcome } from 'outcome';

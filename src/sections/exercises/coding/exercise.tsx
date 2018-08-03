@@ -72,7 +72,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
     }
 
     protected renderTestCases() : JSX.Element
-    {        
+    {
         const testCases = Array.from(this.generateTestCases()).map( (testCase, testCaseIndex) => {
             return (
                 <React.Fragment key={`test-case-${testCaseIndex}`}>

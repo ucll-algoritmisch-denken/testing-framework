@@ -1,6 +1,6 @@
 import { IAssertion } from '.';
 import { ComparisonAssertion } from './comparison';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 
 
 export abstract class ApproximatelyAssertion extends ComparisonAssertion<number>

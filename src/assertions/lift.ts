@@ -1,6 +1,6 @@
 import { IAssertion } from "./assertion";
 import { IResult } from "./result";
-import { Maybe } from "monad";
+import { Maybe } from "maybe";
 
 
 class LiftAssertion<T, U> implements IAssertion<T>

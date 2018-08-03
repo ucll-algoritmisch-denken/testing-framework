@@ -3,7 +3,7 @@ import { Exercise as CodingExercise } from '../exercise';
 import { ITestCase } from '../test-case';
 import { ITestCaseInput } from './test-case-input';
 import { FunctionInformation, IFunctionCallResults, callFunction, parseFunction } from '../../../../function-util';
-import { Maybe } from '../../../../monad';
+import { Maybe } from 'maybe';
 import { code } from '../../../../formatters/jsx-formatters';
 
 
@@ -63,18 +63,6 @@ export abstract class Exercise<META = {}> extends CodingExercise
     protected get referenceInformation() : FunctionInformation
     {
         return this.__referenceInformation = (this.__referenceInformation || parseFunction(this.referenceImplementation));
-    }
-
-    // TODO Remove
-    protected get referenceName() : string
-    {
-        return this.referenceInformation.functionName;
-    }
-
-    // TODO Remove
-    protected get referenceSignature() : string
-    {
-        return this.referenceInformation.format();
     }
 
     protected referenceParameterName(parameterIndex : number) : string

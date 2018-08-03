@@ -9,7 +9,7 @@ import { CarSimulationSummary } from 'components/car-simulation-summary';
 import { functionality, Simulation, CarSimulationException } from 'car-simulation';
 import { Lazy } from 'lazy';
 import { CarSimulationViewer } from 'components/car-simulation-viewer';
-import { Maybe } from 'monad';
+import { Maybe } from 'maybe';
 
 
 function createCarLibrary(symbol : Symbol, simulation : Simulation) : { [key : string] : (car : Symbol) => void }

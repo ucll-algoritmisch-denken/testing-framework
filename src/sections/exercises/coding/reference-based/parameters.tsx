@@ -6,43 +6,49 @@ import * as Assertions from '../../../../assertions';
 import { IAssertion } from '../../../../assertions';
 import { convertToString } from '../../../../formatters/string-formatters';
 import { code } from '../../../../formatters/jsx-formatters';
-import { Maybe } from '../../../../monad';
+import { Maybe } from 'maybe';
 import { Outcome } from '../../../../outcome';
 
 
-export interface IParameterChecker<META>
+export interface IParameterChecker<META = {}>
 {
-    (expected : any, meta : META) : IAssertion<any>;
+    (original : any, expected : any, meta : META) : IAssertion<any>;
 }
 
-export interface IParameterCheckers<META>
+export interface IParameterCheckers<META = {}>
 {
     [key : string] : IParameterChecker<META>;
 }
 
 export abstract class Parameters<META = {}> extends Exercise<META>
 {
+    /**
+     * Checkers that define which assertion to create for each parameter.
+     * If no checker is defined for a parameter, an unmodified assertion is created.
+     */
     protected abstract readonly parameterCheckers : IParameterCheckers<META>;
 
     protected createAssertion(expected : IFunctionCallResults, metadata : META) : IAssertion<IFunctionCallResults>
     {
+        // Create assertion for return value; by default this assertion is "must be undefined"
         const returnValueAssertion = Assertions.returnValue( this.createReturnValueAssertion() );
 
         const argumentAssertions = this.referenceInformation.parameterNames.map( (parameterName, parameterIndex) => {
             const checker = this.parameterCheckers[parameterName];
+            const originalArgumentValue = expected.argumentsBeforeCall[parameterIndex];
 
             if ( checker )
             {
+                // Ask checker to create assertion for current parameter
                 const expectedArgumentValue = expected.argumentsAfterCall[parameterIndex];
-                const assertion = checker(expectedArgumentValue, metadata);
+                const assertion = checker(originalArgumentValue, expectedArgumentValue, metadata);
 
                 return Assertions.parameter(parameterIndex, parameterName, assertion);
             }
             else
             {
-                const originalValue = expected.argumentsBeforeCall[parameterIndex];
-
-                return Assertions.parameter(parameterIndex, parameterName, Assertions.unmodified(originalValue));
+                // No checker found for current parameter, create default assertion, i.e. unmodified
+                return Assertions.parameter(parameterIndex, parameterName, Assertions.unmodified(originalArgumentValue));
             }
         });
 
@@ -57,7 +63,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
     protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : META) : JSX.Element
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
-        const call = code(`${this.referenceName}(${argumentsString})`);
+        const call = code(`${this.referenceInformation.functionName}(${argumentsString})`);
 
         return (
             <React.Fragment>

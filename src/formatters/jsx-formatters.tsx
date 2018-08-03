@@ -1,13 +1,15 @@
 import React from 'react';
 import * as Type from 'type';
 import { allEqual } from 'atf-util';
-import { Bitmap } from 'bitmap';
+import { Bitmap, Color } from '../imaging';
 import { BitmapViewer } from 'components/bitmap-viewer';
 import { Invalid } from 'components/invalid';
 import { convertToString } from './string-formatters';
 import _ from 'lodash';
 import { DiceViewer } from 'components/dice-viewer';
 import { InlineCode } from 'components/inline-code';
+import { all } from 'js-algorithms';
+import { Maybe } from 'maybe';
 
 
 export function jsxify(x : JSX.Element | string)
@@ -46,86 +48,111 @@ export function code(str : string) : JSX.Element
     );
 }
 
-export function grayscaleBitmap(x : any) : JSX.Element
+function invalid(message : string)
 {
-    if ( !Type.array(Type.any).hasType(x) )
+    return (
+        <Invalid message={message} value={message} />
+    );
+}
+
+function isRectangle2DArray<T>(xss : T[][]) : Maybe<string>
+{
+    if ( !Type.array(Type.any).hasType(xss) )
     {
-        return invalid("Should be an array");
+        return Maybe.just("Should be an array");
     }
-    else if ( !_.every(x, y => Type.array(Type.any).hasType(y) ) )
+    else if ( !all(xss, xs => Type.array(Type.any).hasType(xs) ) )
     {
-        return invalid("All elements should be arrays");
+        return Maybe.just("All elements should be arrays");
     }
     else 
     {
-        const grid : any[][] = x;
-
-        if ( !allEqual( x.map(y => y.length) ) )
+        if ( !allEqual( xss.map(y => y.length) ) )
         {
-            return invalid("All rows should have the same length");
-        }
-        else if ( !_.every(grid, row => _.every( row, x => isValidPixelValue(x) ) ) )
-        {
-            return invalid("All values should be integers between 0 and 255");
+            return Maybe.just("All rows should have the same length");
         }
         else
         {
-            const bitmap = Bitmap.fromGrayscale(grid);
-
-            return (
-                <BitmapViewer bitmap={bitmap} />
-            );
+            return Maybe.nothing();
         }
     }
+}
 
+export function grayscaleBitmap(xss : number[][]) : JSX.Element
+{
+    return isRectangle2DArray(xss).caseOf({
+        just: error => invalid(error),
+        nothing: () => {
+            if ( !all(xss, xs => all( xs, x => isValidPixelValue(x) ) ) )
+            {
+                return invalid("All values should be integers between 0 and 255");
+            }
+            else
+            {
+                const bitmap = Bitmap.fromGrayscale(xss);
+    
+                return (
+                    <BitmapViewer bitmap={bitmap} />
+                );
+            }
+        }
+    });
 
     function isValidPixelValue(x : any)
     {
         return Type.number.hasType(x) && 0 <= x && x <= 255 && Math.floor(x) === x;
     }
+}
 
-    function invalid(message : string)
+export function rgbBitmap(xss : Color[][]) : JSX.Element
+{
+    return isRectangle2DArray(xss).caseOf({
+        just: error => invalid(error),
+        nothing: () => {
+            if ( !all(xss, xs => all( xs, x => isValidPixelValue(x) ) ) )
+            {
+                return invalid("All values should be color objects");
+            }
+            else
+            {
+                const bitmap = Bitmap.fromColors(xss);
+    
+                return (
+                    <BitmapViewer bitmap={bitmap} />
+                );
+            }
+        }
+    });
+
+    function isValidPixelValue(x : any)
     {
-        return (
-            <Invalid message={message} value={x} />
-        );
+        return Type.object.hasType(x) && Type.number.hasType(x.r) && Type.number.hasType(x.g) && Type.number.hasType(x.b);
     }
 }
 
-export function rgbBitmap(x : any) : JSX.Element
+export function blackAndWhiteBitmap(xss : boolean[][]) : JSX.Element
 {
-    if ( !Type.array(Type.any).hasType(x) )
-    {        
-        return invalid("Should be an array");
-    }
-    else if ( !_.every(x, elt => Type.array(Type.any).hasType(elt)) )
-    {
-        return invalid("All elements should be arrays");
-    }
-    else 
-    {
-        const grid : any[][] = x;
-
-        if ( !allEqual( x.map(y => y.length) ) )
-        {
-            return invalid("All rows should have the same length");
+    return isRectangle2DArray(xss).caseOf({
+        just: error => invalid(error),
+        nothing: () => {
+            if ( !all(xss, xs => all( xs, x => isValidPixelValue(x) ) ) )
+            {
+                return invalid("All values should be booleans");
+            }
+            else
+            {
+                const bitmap = Bitmap.fromBlackAndWhite(xss);
+    
+                return (
+                    <BitmapViewer bitmap={bitmap} />
+                );
+            }
         }
-        // TODO More thorough checking
-        else
-        {
-            const bitmap = Bitmap.fromRgb(grid);
+    });
 
-            return (
-                <BitmapViewer bitmap={bitmap} />
-            );
-        }
-    }
-
-    function invalid(message : string)
+    function isValidPixelValue(x : any)
     {
-        return (
-            <Invalid message={message} value={x} />
-        );
+        return Type.boolean.hasType(x) ;
     }
 }
 

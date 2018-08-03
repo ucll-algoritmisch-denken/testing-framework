@@ -7,7 +7,7 @@ import { IAssertion } from '../../../../assertions';
 import * as Assertions from '../../../../assertions';
 import { code } from '../../../../formatters/jsx-formatters';
 import { convertToString } from '../../../../formatters/string-formatters';
-import { Maybe } from '../../../../monad';
+import { Maybe } from 'maybe';
 import { Outcome } from 'outcome';
 
 
@@ -27,9 +27,9 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
         return Assertions.sequence( [ returnValueAssertion ].concat(parameterAssertions) );
     }
 
-    protected createReturnValueAssertion(returnValue : any, _metadata : META) : IAssertion<any>
+    protected createReturnValueAssertion(expectedReturnValue : any, _metadata : META) : IAssertion<any>
     {
-        return Assertions.equality(returnValue);
+        return Assertions.equality(expectedReturnValue, Maybe.nothing());
     }
 
     protected createParameterAssertion(_parameterIndex : number, _parameterName : string, originalValue : any) : IAssertion<any>
@@ -41,7 +41,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
         const returnValue = code(convertToString(expected.returnValue));
-        const call = code(`${this.referenceName}(${argumentsString})`);
+        const call = code(`${this.referenceInformation.functionName}(${argumentsString})`);
 
         return (
             <React.Fragment>
