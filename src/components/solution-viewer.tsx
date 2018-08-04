@@ -1,8 +1,8 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import { SourceCodeViewer } from './sourcecode-viewer';
-import './solution-viewer.scss';
 import { SourceCode, Language } from '../source-code';
+import './solution-viewer.scss';
 
 
 export interface IProps
