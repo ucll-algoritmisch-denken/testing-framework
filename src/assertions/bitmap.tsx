@@ -5,86 +5,68 @@ import { Maybe } from 'maybe';
 import { Color } from '../imaging';
 
 
-export function blackAndWhiteBitmap(expected : boolean[][], original ?: boolean[][]) : IAssertion<boolean[][]>
+export class BlackAndWhiteBitmap extends EqualityAssertion<boolean[][]>
 {
-    return new class extends EqualityAssertion<boolean[][]>
+    constructor(expected : boolean[][])
     {
-        protected get original() : Maybe<boolean[][]>
-        {
-            if ( original )
-            {
-                return Maybe.just(original);
-            }
-            else
-            {
-                return Maybe.nothing();
-            }
-        }
+        super();
 
-        protected get expected() : Maybe<boolean[][]>
-        {
-            return Maybe.just(expected);
-        }
+        this.expected = Maybe.just(expected);
+    }
 
-        protected renderValue(pixels : boolean[][]) : JSX.Element
-        {
-            return Formatters.blackAndWhiteBitmap(pixels);
-        }
-    };
+    protected renderValue(pixels : boolean[][]) : JSX.Element
+    {
+        return Formatters.blackAndWhiteBitmap(pixels);
+    }
+
+    protected get original() : Maybe<boolean[][]>
+    {
+        return Maybe.nothing();
+    }
+
+    public expected : Maybe<boolean[][]>;
 }
 
-export function grayscaleBitmap(expected : number[][], original ?: number[][]) : IAssertion<number[][]>
+export class GrayscaleBitmap extends EqualityAssertion<number[][]>
 {
-    return new class extends EqualityAssertion<number[][]>
+    constructor(expected : number[][])
     {
-        protected get original() : Maybe<number[][]>
-        {
-            if ( original )
-            {
-                return Maybe.just(original);
-            }
-            else
-            {
-                return Maybe.nothing();
-            }
-        }
+        super();
 
-        protected get expected() : Maybe<number[][]>
-        {
-            return Maybe.just(expected);
-        }
+        this.expected = Maybe.just(expected);
+    }
 
-        protected renderValue(pixels : number[][]) : JSX.Element
-        {
-            return Formatters.grayscaleBitmap(pixels);
-        }
-    };
+    protected renderValue(pixels : number[][]) : JSX.Element
+    {
+        return Formatters.grayscaleBitmap(pixels);
+    }
+
+    protected get original() : Maybe<number[][]>
+    {
+        return Maybe.nothing();
+    }
+
+    public expected : Maybe<number[][]>;
 }
 
-export function colorBitmap(expected : Color[][], original ?: Color[][]) : IAssertion<Color[][]>
+export class ColorBitmap extends EqualityAssertion<Color[][]>
 {
-    return new class extends EqualityAssertion<Color[][]>
+    constructor(expected : Color[][])
     {
-        protected get original() : Maybe<Color[][]>
-        {
-            if ( original )
-            {
-                return Maybe.just(original);
-            }
-            else
-            {
-                return Maybe.nothing();
-            }
-        }
+        super();
 
-        protected get expected() : Maybe<Color[][]>
-        {
-            return Maybe.just(expected);
-        }
+        this.expected = Maybe.just(expected);
+    }
 
-        protected renderValue(pixels : Color[][]) : JSX.Element
-        {
-            return Formatters.rgbBitmap(pixels);
-        }
-    };
+    protected renderValue(pixels : Color[][]) : JSX.Element
+    {
+        return Formatters.rgbBitmap(pixels);
+    }
+
+    protected get original() : Maybe<Color[][]>
+    {
+        return Maybe.nothing();
+    }
+
+    public expected : Maybe<Color[][]>;
 }

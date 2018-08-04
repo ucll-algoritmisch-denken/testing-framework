@@ -9,4 +9,4 @@ export { returnValue } from './return-value';
 export { parameter } from './parameter';
 export { decorate } from './decorator';
 export { sequence } from './sequence';
-export { blackAndWhiteBitmap, grayscaleBitmap, colorBitmap } from './bitmap';
+export { BlackAndWhiteBitmap, GrayscaleBitmap, ColorBitmap} from './bitmap';
