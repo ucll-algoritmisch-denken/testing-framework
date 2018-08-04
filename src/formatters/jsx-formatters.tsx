@@ -78,7 +78,7 @@ function isRectangle2DArray<T>(xss : T[][]) : Maybe<string>
     }
 }
 
-export function grayscaleBitmap(xss : number[][]) : JSX.Element
+export function grayscaleBitmap(xss : number[][], resize ?: { width: number, height: number }) : JSX.Element
 {
     return isRectangle2DArray(xss).caseOf({
         just: error => invalid(error),
@@ -92,7 +92,7 @@ export function grayscaleBitmap(xss : number[][]) : JSX.Element
                 const bitmap = Bitmap.fromGrayscale(xss);
     
                 return (
-                    <BitmapViewer bitmap={bitmap} />
+                    <BitmapViewer bitmap={bitmap} resize={resize} />
                 );
             }
         }
@@ -104,7 +104,7 @@ export function grayscaleBitmap(xss : number[][]) : JSX.Element
     }
 }
 
-export function rgbBitmap(xss : Color[][]) : JSX.Element
+export function rgbBitmap(xss : Color[][], resize ?: { width: number, height: number }) : JSX.Element
 {
     return isRectangle2DArray(xss).caseOf({
         just: error => invalid(error),
@@ -118,7 +118,7 @@ export function rgbBitmap(xss : Color[][]) : JSX.Element
                 const bitmap = Bitmap.fromColors(xss);
     
                 return (
-                    <BitmapViewer bitmap={bitmap} />
+                    <BitmapViewer bitmap={bitmap} resize={resize} />
                 );
             }
         }
@@ -130,7 +130,7 @@ export function rgbBitmap(xss : Color[][]) : JSX.Element
     }
 }
 
-export function blackAndWhiteBitmap(xss : boolean[][]) : JSX.Element
+export function blackAndWhiteBitmap(xss : boolean[][], resize ?: { width: number, height: number }) : JSX.Element
 {
     return isRectangle2DArray(xss).caseOf({
         just: error => invalid(error),
@@ -144,7 +144,7 @@ export function blackAndWhiteBitmap(xss : boolean[][]) : JSX.Element
                 const bitmap = Bitmap.fromBlackAndWhite(xss);
     
                 return (
-                    <BitmapViewer bitmap={bitmap} />
+                    <BitmapViewer bitmap={bitmap} resize={resize} />
                 );
             }
         }
