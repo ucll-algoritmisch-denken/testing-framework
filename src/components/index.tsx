@@ -9,6 +9,7 @@ export { MultiView } from './multiview';
 export { PlayPauseButton } from './play-pause-button';
 export { ScoreViewer } from './score-viewer';
 export { SolutionViewer } from './solution-viewer';
+export { MultiSolutionViewer } from './multi-solution-viewer';
 export { SourceCodeViewer } from './sourcecode-viewer';
 export { TableOfContents } from './table-of-contents';
 export { ValidatedInput } from './validated-input';
