@@ -5,6 +5,7 @@ import { Bitmap } from '../imaging';
 export interface IProps
 {
     bitmap : Bitmap;
+    resize ?: { width : number, height : number };
 }
 
 export interface IState
@@ -29,33 +30,13 @@ export class BitmapViewer extends React.Component<IProps, IState>
     }
 
     render() {
-        const me = this;
-        const width = this.props.bitmap.width;
-        const height = this.props.bitmap.height;
-
-        renderImage();
-        
-        return (
-            <canvas ref={this.canvas} width={width} height={height} />
-        );
-
-        function renderImage()
+        if ( this.props.resize )
         {
-            const canvas = me.canvas.current;
-
-            if ( canvas )
-            {
-                const context = canvas.getContext('2d');
-                
-                if ( context )
-                {
-                    const imageData = context.createImageData(width, height);
-                    const pixelData = imageData.data;
-                    me.props.bitmap.writeTo(pixelData);
-                    context.putImageData(imageData, 0, 0);
-                    context.scale(2, 2);
-                }
-            }
+            return <img src={this.props.bitmap.toDataURL()} width={this.props.resize.width} height={this.props.resize.height} style={{imageRendering: 'pixelated'}} />;
+        }
+        else
+        {
+            return <img src={this.props.bitmap.toDataURL()} />;
         }
     }
 }

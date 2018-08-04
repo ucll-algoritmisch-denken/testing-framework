@@ -14,6 +14,29 @@ export class Bitmap
             xs[i] = this.pixelData[i];
         }
     }
+
+    toDataURL() : string
+    {
+        const canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        
+        const context = canvas.getContext('2d');
+        
+        if ( !context )
+        {
+            throw new Error(`Failing to get context`);
+        }
+        else
+        {
+            const imageData = context.createImageData(this.width, this.height);
+            const pixelData = imageData.data;
+            this.writeTo(pixelData);
+            context.putImageData(imageData, 0, 0);
+
+            return canvas.toDataURL();
+        }
+    }
     
     toColor() : Color[][]
     {
