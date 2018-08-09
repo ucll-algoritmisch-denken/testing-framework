@@ -29,7 +29,8 @@ export class BitmapViewer extends React.Component<IProps, IState>
         this.forceUpdate();
     }
 
-    render() {
+    render()
+    {
         if ( this.props.resize )
         {
             return <img src={this.props.bitmap.toDataURL()} width={this.props.resize.width} height={this.props.resize.height} style={{imageRendering: 'pixelated'}} />;

@@ -7,7 +7,7 @@ import './solution-viewer.scss';
 
 export interface IProps
 {
-    sourceCode : string;
+    sourceCode : SourceCode;
 }
 
 export interface IState
@@ -24,7 +24,7 @@ export class SolutionViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const sourceCode = new SourceCode(Language.JavaScript, this.props.sourceCode).beautify();
+        const sourceCode = this.props.sourceCode;
 
         return (
             <div className="solution-viewer">

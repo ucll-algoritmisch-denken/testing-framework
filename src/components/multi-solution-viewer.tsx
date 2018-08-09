@@ -2,6 +2,7 @@ import React from 'react';
 import { SourceCode } from '../source-code';
 import { TabbedSourceCodeViewer } from './tabbed-source-code-viewer';
 import Collapsible from 'react-collapsible';
+import { SolutionViewer } from './solution-viewer';
 
 
 export interface IProps
@@ -14,6 +15,11 @@ export interface IState
 
 }
 
+/**
+ * Shows multiple solutions. Each solution is associated with a label.
+ * 
+ * If zero solutions are given, the component renders to nothing.
+ */
 export class MultiSolutionViewer extends React.Component<IProps, IState>
 {
     constructor(props : IProps)
@@ -23,22 +29,40 @@ export class MultiSolutionViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const tabs = Object.keys(this.props.solutions).map( key => {
-            return {
-                sourceCode: this.props.solutions[key],
-                label: key
-            };
-        });
+        const labels = Object.keys(this.props.solutions);
 
-        return (
-            <div className="solution-viewer">
-                <Collapsible trigger={createHeader()} transitionTime={100}>
-                    <TabbedSourceCodeViewer>
-                        {tabs}
-                    </TabbedSourceCodeViewer>
-                </Collapsible>
-            </div>
-        );
+        if ( labels.length > 1 )
+        {
+            const tabs = labels.map( label => {
+                return {
+                    sourceCode: this.props.solutions[label],
+                    label: label
+                };
+            });
+
+            return (
+                <div className="solution-viewer">
+                    <Collapsible trigger={createHeader()} transitionTime={100}>
+                        <TabbedSourceCodeViewer>
+                            {tabs}
+                        </TabbedSourceCodeViewer>
+                    </Collapsible>
+                </div>
+            );
+        }
+        else if ( labels.length == 1 )
+        {
+            const label = labels[0];
+            const solution = this.props.solutions[label];
+
+            return (
+                <SolutionViewer sourceCode={solution} />
+            );
+        }
+        else
+        {
+            return <React.Fragment />;
+        }
 
 
         function createHeader()

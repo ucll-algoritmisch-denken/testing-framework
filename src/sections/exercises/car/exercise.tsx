@@ -10,6 +10,7 @@ import { functionality, Simulation, CarSimulationException } from 'car-simulatio
 import { Lazy } from 'lazy';
 import { CarSimulationViewer } from 'components/car-simulation-viewer';
 import { Maybe } from 'maybe';
+import { SourceCode } from '../../../source-code';
 
 
 function createCarLibrary(symbol : Symbol, simulation : Simulation) : { [key : string] : (car : Symbol) => void }
@@ -90,7 +91,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get hint() : JSX.Element | null { return null; }
 
-    protected get solution() : string | null { return null; }
+    protected get solutions() : { [key : string] : SourceCode } { return { }; }
 
     public abstract readonly difficulty : difficulty;
 

@@ -18,7 +18,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
         const returnValueAssertion = Assertions.returnValue(this.createReturnValueAssertion(expected.returnValue, metadata));
 
         const parameterAssertions = _.range(0, expected.argumentsBeforeCall.length).map( parameterIndex => {
-            const parameterName = this.referenceParameterName(parameterIndex);
+            const parameterName = this.referenceInformation.parameterNames[parameterIndex];
             const originalValue = expected.argumentsBeforeCall[parameterIndex];
 
             return Assertions.parameter(parameterIndex, parameterName, this.createParameterAssertion(parameterIndex, parameterName, originalValue));

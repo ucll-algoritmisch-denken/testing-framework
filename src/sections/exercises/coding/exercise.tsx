@@ -5,7 +5,8 @@ import { ITestCase } from './test-case';
 import { IScored, Score } from '../../../score';
 import { IHasDifficulty, difficulty } from '../../../difficulty';
 import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../../outcome';
-import { HintViewer, SolutionViewer } from '../../../components';
+import { HintViewer, SolutionViewer, MultiSolutionViewer } from '../../../components';
+import { SourceCode } from '../../../source-code';
 
 
 export abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored
@@ -16,7 +17,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get hint() : JSX.Element | null { return null; }
 
-    protected get solution() : string | null { return null; }
+    protected abstract readonly solutions : { [key : string] : SourceCode };
 
     public abstract readonly difficulty : difficulty;
     
@@ -117,16 +118,9 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected renderSolution() : JSX.Element
     {
-        if ( this.solution )
-        {
-            return (
-                <SolutionViewer sourceCode={this.solution} />
-            );
-        }
-        else
-        {
-            return <React.Fragment />;
-        }
+        return (
+            <MultiSolutionViewer solutions={this.solutions} />
+        );
     }
 
     protected get htmlClasses() : string[]

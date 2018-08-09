@@ -5,7 +5,7 @@ import { ITestCaseInput } from './test-case-input';
 import { FunctionInformation, IFunctionCallResults, callFunction, parseFunction } from '../../../../function-util';
 import { Maybe } from 'maybe';
 import { code } from '../../../../formatters/jsx-formatters';
-
+import { SourceCode, Language } from '../../../../source-code';
 
 
 export abstract class Exercise<META = {}> extends CodingExercise
@@ -19,10 +19,10 @@ export abstract class Exercise<META = {}> extends CodingExercise
     protected abstract generateTestCaseInputs() : Iterable<ITestCaseInput<META>>;
 
     protected abstract createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase;
-    
-    protected get solution() : string | null
+
+    protected get solutions() : { [key : string] : SourceCode }
     {
-        return this.referenceImplementation.toString();
+        return { 'solution': new SourceCode(Language.JavaScript, this.referenceImplementation.toString() ) };
     }
 
     protected get htmlClasses() : string[]
@@ -63,20 +63,5 @@ export abstract class Exercise<META = {}> extends CodingExercise
     protected get referenceInformation() : FunctionInformation
     {
         return this.__referenceInformation = (this.__referenceInformation || parseFunction(this.referenceImplementation));
-    }
-
-    protected referenceParameterName(parameterIndex : number) : string
-    {
-        const minimum = 0;
-        const maximum = this.referenceInformation.parameterNames.length;
-
-        if ( minimum <= parameterIndex && parameterIndex < maximum )
-        {
-            return this.referenceInformation.parameterNames[parameterIndex];
-        }
-        else
-        {
-            throw new Error(`Invalid parameter index: should be ${minimum} <= i < ${maximum}`);
-        }
     }
 }
