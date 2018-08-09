@@ -16,7 +16,7 @@ export class SourceCode
 {
     constructor(public language : Language, public sourceCode : string) { }
 
-    public beautify()
+    public beautify() : SourceCode
     {
         if ( this.language === Language.JavaScript )
         {
@@ -26,6 +26,18 @@ export class SourceCode
         {
             // TODO
             return this;
+        }
+    }
+
+    public join(other : SourceCode, separator : string = "\n\n") : SourceCode
+    {
+        if ( this.language !== other.language )
+        {
+            throw new Error(`Cannot append source code written in different languages`);
+        }
+        else
+        {
+            return new SourceCode(this.language, this.sourceCode + separator + other.sourceCode);
         }
     }
 }
