@@ -1,5 +1,5 @@
 import React from 'react';
-import { SourceCode } from 'source-code';
+import { SourceCode } from '../source-code';
 import './existing-implementations.scss';
 export interface IProps {
     children: SourceCode[];

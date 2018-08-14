@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import { Exercise as BaseExercise, ITestCase } from "../coding";
-import { IHasDifficulty, difficulty } from 'difficulty';
-import { IScored } from 'score';
-import { functionality, Simulation } from 'car-simulation';
+import { IHasDifficulty, difficulty } from '../../../difficulty';
+import { IScored } from '../../../score';
+import { functionality, Simulation } from '../../../car-simulation';
 import { Maybe } from 'maybe';
 import { SourceCode } from '../../../source-code';
 export declare abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored {

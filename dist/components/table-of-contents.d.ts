@@ -1,5 +1,5 @@
 import React from 'react';
-import { ISection } from 'chapter';
+import { ISection } from '../chapter';
 import './table-of-contents.scss';
 export interface IProps {
     sections: ISection[];

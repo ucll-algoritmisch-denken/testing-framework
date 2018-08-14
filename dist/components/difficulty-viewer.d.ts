@@ -1,6 +1,6 @@
 import React from 'react';
 import './difficulty-viewer.scss';
-import { difficulty } from 'difficulty';
+import { difficulty } from '../difficulty';
 export interface IProps {
     difficulty: difficulty | null;
 }

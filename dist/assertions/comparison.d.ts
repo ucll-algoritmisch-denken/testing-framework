@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 import './comparison.scss';
 import { TabularAssertion, IRow } from './tabular';
 import { Maybe } from 'maybe';

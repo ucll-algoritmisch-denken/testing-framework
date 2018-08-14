@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 import { Assertion } from './assertion';
 import { Maybe } from 'maybe';
 import './tabular.scss';

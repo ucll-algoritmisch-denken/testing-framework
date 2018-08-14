@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { IScored } from 'score';
-import { IHasDifficulty } from 'difficulty';
+import { IScored } from './score';
+import { IHasDifficulty } from './difficulty';
 export interface IChapter {
     readonly title: string;
     readonly sections: ISection[];

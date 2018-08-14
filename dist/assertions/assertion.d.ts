@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { IResult } from "./result";
-import { Outcome } from "outcome";
+import { Outcome } from "../outcome";
 import { Maybe } from "maybe";
 export interface IAssertion<T> {
     check(actual: Maybe<T>): IResult;

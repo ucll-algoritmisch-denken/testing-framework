@@ -1,5 +1,5 @@
 import React from 'react';
-import { IChapter } from 'chapter';
+import { IChapter } from './chapter';
 import './view.scss';
 export interface IProps {
     chapter: IChapter;

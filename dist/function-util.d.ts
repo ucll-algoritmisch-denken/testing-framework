@@ -1,4 +1,4 @@
-import { IType } from 'type';
+import { IType } from './type';
 import { Maybe } from 'maybe';
 export declare class FunctionInformation {
     readonly functionName: string;

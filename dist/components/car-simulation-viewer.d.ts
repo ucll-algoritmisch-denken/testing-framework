@@ -1,6 +1,6 @@
 import React from 'react';
-import * as CarSim from 'car-simulation';
-import { IAnimation } from 'animation';
+import * as CarSim from '../car-simulation';
+import { IAnimation } from '../animation';
 export interface IProps {
     carImage: string;
     simulation: CarSim.Simulation;

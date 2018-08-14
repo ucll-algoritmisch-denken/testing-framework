@@ -1,7 +1,7 @@
 /// <reference types="react" />
-import { ISection } from 'chapter';
+import { ISection } from '../chapter';
 import './explanations.scss';
-import { IScored } from 'score';
+import { IScored } from '../score';
 export declare abstract class Explanations implements ISection {
     abstract readonly id: string;
     abstract readonly tocEntry: JSX.Element;

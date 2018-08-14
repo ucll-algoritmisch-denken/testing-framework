@@ -1,4 +1,4 @@
-import { IChapter } from "chapter";
+import { IChapter } from "./chapter";
 export declare class Shell {
     private chapter;
     constructor(chapter: IChapter);
