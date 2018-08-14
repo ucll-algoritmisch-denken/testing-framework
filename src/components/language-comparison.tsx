@@ -1,5 +1,5 @@
 import React from 'react';
-import { SourceCode, Language } from 'source-code';
+import { SourceCode, Language } from '../source-code';
 import { TabbedSourceCodeViewer } from './tabbed-source-code-viewer';
 
 

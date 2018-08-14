@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { NumberAnimationBuilder } from 'animation';
+import { NumberAnimationBuilder } from '../animation';
 
 
 describe('NumberAnimationBuilder', () => {

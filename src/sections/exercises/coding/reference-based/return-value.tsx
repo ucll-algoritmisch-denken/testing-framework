@@ -8,7 +8,7 @@ import * as Assertions from '../../../../assertions';
 import { code } from '../../../../formatters/jsx-formatters';
 import { convertToString } from '../../../../formatters/string-formatters';
 import { Maybe } from 'maybe';
-import { Outcome } from 'outcome';
+import { Outcome } from '../../../../outcome';
 
 
 export abstract class ReturnValue<META = {}> extends Exercise<META>

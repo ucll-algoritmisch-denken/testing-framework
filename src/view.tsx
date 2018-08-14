@@ -1,8 +1,8 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
-import { ISection } from 'chapter';
-import { TableOfContents } from 'components/table-of-contents';
-import { IChapter } from 'chapter';
+import { ISection } from './chapter';
+import { TableOfContents } from './components/table-of-contents';
+import { IChapter } from './chapter';
 import './view.scss';
 
 

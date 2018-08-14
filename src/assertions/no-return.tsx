@@ -1,12 +1,11 @@
 import React from 'react';
 import { IAssertion } from '.';
-import * as Type from 'type';
-import { FunctionCallResults } from 'function-util';
+import * as Type from '../type';
+import { FunctionCallResults } from '../function-util';
 import { ComparisonAssertion } from './comparison';
 import { Maybe } from 'maybe';
-import { returnValue } from './return-value';
+import { Outcome } from '../outcome';
 import './no-return.scss';
-import { Outcome } from 'outcome';
 
 
 class NoReturnAssertion extends ComparisonAssertion<any>

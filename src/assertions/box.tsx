@@ -2,7 +2,7 @@ import React from 'react';
 import { IAssertion } from "./assertion";
 import { decorate } from './decorator';
 import './box.scss';
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 
 
 export function box<T>(header : JSX.Element, assertion : IAssertion<T>) : IAssertion<T>

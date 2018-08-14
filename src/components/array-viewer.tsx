@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertToString as str } from 'formatters/string-formatters';
+import { convertToString as str } from '../formatters/string-formatters';
 import './array-viewer.scss'; 
 
 

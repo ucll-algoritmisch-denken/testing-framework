@@ -1,5 +1,5 @@
 import React from 'react';
-import { SourceCode } from 'source-code';
+import { SourceCode } from '../source-code';
 import { LanguageComparison } from './language-comparison';
 import './existing-implementations.scss';
 

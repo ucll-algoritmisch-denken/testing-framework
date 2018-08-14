@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import _ from 'lodash';
-import { IType } from 'type';
+import { IType } from './type';
 import { Maybe } from 'maybe';
 import { deepEqual } from './equality';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as _ from 'lodash';
 import './difficulty-viewer.scss';
-import { difficulty } from 'difficulty';
+import { difficulty } from '../difficulty';
 
 
 export interface IProps

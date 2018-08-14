@@ -1,6 +1,6 @@
 import { IAssertion } from './assertion';
 import { IResult } from './result';
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 import { Maybe } from 'maybe';
 
 

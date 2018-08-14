@@ -1,14 +1,12 @@
 import React from 'react';
-import classNames from 'classnames';
-import Collapsible from 'react-collapsible';
 import { Exercise as BaseExercise, ITestCase } from "../coding";
-import { outcomeToHtmlClass, combineAssertionOutcomes, Outcome } from 'outcome';
-import { IHasDifficulty, difficulty } from 'difficulty';
-import { IScored, Score } from 'score';
-import { CarSimulationSummary } from 'components/car-simulation-summary';
-import { functionality, Simulation, CarSimulationException } from 'car-simulation';
-import { Lazy } from 'lazy';
-import { CarSimulationViewer } from 'components/car-simulation-viewer';
+import { Outcome } from '../../../outcome';
+import { IHasDifficulty, difficulty } from '../../../difficulty';
+import { IScored, Score } from '../../../score';
+import { CarSimulationSummary } from '../../../components/car-simulation-summary';
+import { functionality, Simulation, CarSimulationException } from '../../../car-simulation';
+import { Lazy } from '../../../lazy';
+import { CarSimulationViewer } from '../../../components/car-simulation-viewer';
 import { Maybe } from 'maybe';
 import { SourceCode } from '../../../source-code';
 

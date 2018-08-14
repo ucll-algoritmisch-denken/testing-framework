@@ -1,10 +1,10 @@
 import React from 'react';
 import { AnimationViewer } from './animation-viewer';
-import * as Animation from 'animation';
-import * as CarSim from 'car-simulation';
-import { IAnimation } from 'animation';
+import * as Animation from '../animation';
+import * as CarSim from '../car-simulation';
+import { IAnimation } from '../animation';
 import { Position } from 'js-algorithms';
-import { approximately } from 'equality';
+import { approximately } from '../equality';
 
 
 export interface IProps

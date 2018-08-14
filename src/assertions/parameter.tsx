@@ -1,6 +1,6 @@
 import React from 'react';
 import { IAssertion } from "./assertion";
-import { FunctionCallResults } from "function-util";
+import { FunctionCallResults } from "../function-util";
 import { lift } from './lift';
 import { box } from './box';
 

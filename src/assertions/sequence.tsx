@@ -1,7 +1,7 @@
 import React from 'react';
 import { IAssertion } from './assertion';
 import { IResult } from './result';
-import { Outcome, combineAssertionOutcomes } from 'outcome';
+import { Outcome, combineAssertionOutcomes } from '../outcome';
 import { Maybe } from 'maybe';
 
 

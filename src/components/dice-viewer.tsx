@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Type from 'type';
+import * as Type from '../type';
 import { DieViewer } from './die-viewer';
 
 

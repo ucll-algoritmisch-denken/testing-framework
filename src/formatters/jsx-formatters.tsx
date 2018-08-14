@@ -1,12 +1,12 @@
 import React from 'react';
-import * as Type from 'type';
+import * as Type from '../type';
 import { allEqual } from 'js-algorithms';
 import { Bitmap, Color } from '../imaging';
-import { BitmapViewer } from 'components/bitmap-viewer';
-import { Invalid } from 'components/invalid';
+import { BitmapViewer } from '../components/bitmap-viewer';
+import { Invalid } from '../components/invalid';
 import { convertToString } from './string-formatters';
-import { DiceViewer } from 'components/dice-viewer';
-import { InlineCode } from 'components/inline-code';
+import { DiceViewer } from '../components/dice-viewer';
+import { InlineCode } from '../components/inline-code';
 import { all } from 'js-algorithms';
 import { Maybe } from 'maybe';
 
