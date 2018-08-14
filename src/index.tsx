@@ -50,7 +50,7 @@ export { Maybe };
 export { Lazy } from './lazy';
 
 export * from './source-code';
-
+export * from './solution-pack';
 
 export async function initialize(chapter : IChapter, configuration ?: IConfiguration)
 {

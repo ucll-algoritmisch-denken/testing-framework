@@ -29,4 +29,5 @@ import { IConfiguration } from './configuration';
 export { Maybe };
 export { Lazy } from './lazy';
 export * from './source-code';
+export * from './solution-pack';
 export declare function initialize(chapter: IChapter, configuration?: IConfiguration): Promise<void>;
