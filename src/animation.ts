@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-
+import { sum } from 'js-algorithms';
 
 export interface IAnimation<T>
 {
@@ -98,7 +97,7 @@ class Sequence<T> extends Animation<T>
     {
         super();
 
-        this.duration = _.sum(children.map(child => child.duration));
+        this.duration = sum(children.map(child => child.duration));
     }
 
     readonly duration : number;

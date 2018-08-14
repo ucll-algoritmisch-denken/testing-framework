@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash';
-import _ from 'lodash';
 import { IType } from './type';
 import { Maybe } from 'maybe';
 import { deepEqual } from './equality';
+import { contains } from 'js-algorithms';
 
 
 export class FunctionInformation
@@ -23,7 +23,7 @@ export class FunctionInformation
 
     parameterWithNameExists(parameterName : string) : boolean
     {
-        return _.includes(this.parameterNames, parameterName);
+        return contains(this.parameterNames, parameterName);
     }
 
     specifyTypes(parameterTypes : IType<any>[], returnType : IType<any>) : TypedFunctionInformation
@@ -42,7 +42,7 @@ export class FunctionInformation
         else
         {
             return this.parameterNames.every( (parameterName, parameterIndex) => {
-                if ( _.includes(ignoredParameters, parameterName) )
+                if ( contains(ignoredParameters, parameterName) )
                 {
                     return true;
                 }

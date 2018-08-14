@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Form as ColumnBasedForm, IRow as IBaseRow, IColumn as IBaseColumn } from './column-based-form';
 import { InlineCode } from '../inline-code';
 import { code } from '../../formatters/jsx-formatters';
@@ -7,6 +6,7 @@ import { convertToString } from '../../formatters/string-formatters';
 import { FunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
 import { evalm } from '../../evalm';
 import { deepEqual } from '../../equality';
+import { range } from 'js-algorithms';
 
 
 export abstract class InputCase<META = {}>
@@ -116,7 +116,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
 
     protected *generateInputColumns() : Iterable<IColumn<META>>
     {
-        for ( let i of _.range(0, this.functionInformation.parameterCount) )
+        for ( let i of range(0, this.functionInformation.parameterCount) )
         {
             yield this.createInputColumn(i);
         }
@@ -239,7 +239,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
 
     protected *generateOutputColumns() : Iterable<IColumn<META>>
     {
-        for ( let i of _.range(0, this.functionInformation.parameterCount) )
+        for ( let i of range(0, this.functionInformation.parameterCount) )
         {
             const parameterName = this.functionInformation.parameterNames[i];
             const parameterInfo = this.props.parameters[parameterName];

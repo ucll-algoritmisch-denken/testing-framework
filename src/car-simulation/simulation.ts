@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { World } from './world';
 import { Empty, Wall, Destination } from './cell';
 import { Direction } from 'js-algorithms';
@@ -6,6 +5,7 @@ import { Trace } from './trace';
 import { CarState } from './car-state';
 import { ForwardTraceStep, TurnLeftTraceStep, TurnRightTraceStep } from './trace-step';
 import { CarSimulationException } from './car-exception';
+import { all } from 'js-algorithms';
 
 
 export class Simulation
@@ -89,7 +89,7 @@ export class Simulation
         const height = lines.length;
         const width = lines[0].length;
 
-        if ( ! _.every(lines, s => s.length === width) )
+        if ( ! all(lines, s => s.length === width) )
         {
             throw new Error("Invalid world");
         }

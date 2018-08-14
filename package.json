@@ -65,6 +65,7 @@
     "js-beautify": "^1.7.5",
     "lodash": "^4.17.10",
     "maybe": "github:UCLeuvenLimburg/maybe",
+    "predicates": "^2.0.3",
     "rc-slider": "^8.6.1",
     "react-codemirror2": "^5.0.1",
     "react-collapsible": "^2.2.0",

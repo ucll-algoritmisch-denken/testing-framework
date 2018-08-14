@@ -1,5 +1,5 @@
 import React from 'react';
-import { isArray } from 'lodash';
+import * as is from 'predicates';
 
 
 export interface IProps
@@ -44,7 +44,7 @@ export class MultiView extends React.Component<IProps, IState>
         dice: function(props : any, propName : string, componentName : string) : Error | undefined {
             const value = props[propName];
 
-            if ( !isArray(value) )
+            if ( !is.array(value) )
             {
                 return new Error(`${propName} should be assigned an array of components`);
             }

@@ -1,7 +1,7 @@
 import React from 'react';
-import * as _ from 'lodash';
 import './difficulty-viewer.scss';
 import { difficulty } from '../difficulty';
+import { repeat } from 'js-algorithms';
 
 
 export interface IProps
@@ -25,7 +25,7 @@ export class DifficultyViewer extends React.Component<IProps, IState>
     {
         const star = String.fromCharCode(0x2605);
         const difficulty : number = this.props.difficulty || 0;
-        const difficultyString = _.repeat(star, difficulty);
+        const difficultyString = repeat(difficulty, star);
 
         return (
             <span className="difficulty-viewer">

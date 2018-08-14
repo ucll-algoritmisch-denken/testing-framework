@@ -1,5 +1,5 @@
 import * as Type from "../type";
-import _ from 'lodash';
+import { map } from 'js-algorithms';
 
 
 export function convertToString(x : any) : string
@@ -43,7 +43,7 @@ export function convertToString(x : any) : string
 
     function formatArray(xs : any[]) : string
     {
-        const formattedElements : string = _.map(xs, x => convertToString(x)).join(", ");
+        const formattedElements : string = map(xs, x => convertToString(x)).join(", ");
 
         return `[${formattedElements}]`;
     }

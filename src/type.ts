@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import * as is from 'predicates';
 
 
 export interface IType<T>
@@ -13,7 +13,7 @@ export const string = new class implements IType<string>
 {
     hasType(x : any) : x is string
     {
-        return _.isString(x);
+        return is.string(x);
     }
 
     get isMutable() : boolean
@@ -26,7 +26,7 @@ export const number = new class implements IType<number>
 {
     hasType(x : any) : x is number
     {
-        return _.isNumber(x);
+        return is.number(x);
     }
 
     get isMutable() : boolean
@@ -39,7 +39,7 @@ export const boolean = new class implements IType<boolean>
 {
     hasType(x : any) : x is boolean
     {
-        return _.isBoolean(x);
+        return is.boolean(x);
     }
 
     get isMutable() : boolean
@@ -52,7 +52,7 @@ export const undef = new class implements IType<undefined>
 {
     hasType(x : any) : x is undefined
     {
-        return _.isUndefined(x);
+        return is.undefined(x);
     }
 
     get isMutable() : boolean
@@ -93,7 +93,7 @@ export function array<T>(elementType : IType<T>) : IType<T[]>
     {
         hasType(x : any) : x is T[]
         {
-            return _.isArray(x) && x.every(elt => elementType.hasType(elt));
+            return is.array(x) && x.every(elt => elementType.hasType(elt));
         }
 
         get isMutable() : boolean
@@ -107,7 +107,7 @@ export const func = new class implements IType<(...args : any[]) => any>
 {
     hasType(x : any) : x is (...args : any[]) => any
     {
-        return _.isFunction(x);
+        return is.function(x);
     }
 
     get isMutable() : boolean
@@ -120,7 +120,7 @@ export const object = new class implements IType< { [key : string] : any } >
 {
     hasType(x : any) : x is { [key : string] : any }
     {
-        return _.isObject(x);
+        return is.object(x);
     }
 
     get isMutable() : boolean

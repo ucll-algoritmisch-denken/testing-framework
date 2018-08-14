@@ -1,7 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
 import { Form as FormBase } from './form';
 import { ValidatedInput } from '../validated-input';
+import { contains } from 'js-algorithms';
 
 
 export interface IColumn<COLUMN, INPUT>
@@ -75,7 +75,7 @@ export class Form<COLUMN, INPUT> extends React.Component<IProps<COLUMN, INPUT>, 
 
     protected renderCell(row : IRow<COLUMN, INPUT>, column : IColumn<COLUMN, INPUT>) : JSX.Element
     {
-        if ( _.includes(row.blankColumns, column.name) )
+        if ( contains(row.blankColumns, column.name) )
         {
             return this.renderBlankCell(row, column);
         }

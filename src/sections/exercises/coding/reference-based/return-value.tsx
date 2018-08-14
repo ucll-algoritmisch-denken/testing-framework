@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { ITestCase, CollapsibleTestCase } from '../test-case';
 import { Exercise } from './exercise';
 import { FunctionCallResults } from '../../../../function-util';
@@ -9,6 +8,7 @@ import { code } from '../../../../formatters/jsx-formatters';
 import { convertToString } from '../../../../formatters/string-formatters';
 import { Maybe } from 'maybe';
 import { Outcome } from '../../../../outcome';
+import { range } from 'js-algorithms';
 
 
 export abstract class ReturnValue<META = {}> extends Exercise<META>
@@ -17,7 +17,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
     {
         const returnValueAssertion = Assertions.returnValue(this.createReturnValueAssertion(expected.returnValue, metadata));
 
-        const parameterAssertions = _.range(0, expected.argumentsBeforeCall.length).map( parameterIndex => {
+        const parameterAssertions = range(0, expected.argumentsBeforeCall.length).map( parameterIndex => {
             const parameterName = this.referenceInformation.parameterNames[parameterIndex];
             const originalValue = expected.argumentsBeforeCall[parameterIndex];
 

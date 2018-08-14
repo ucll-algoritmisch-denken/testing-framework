@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { Maybe } from 'maybe';
 
 
@@ -13,7 +12,7 @@ class ObjectFunctionRepository implements IFunctionRepository
 
     fetch(name : string) : Maybe<((...args : any[]) => any)>
     {
-        if ( _.has(this.obj, name) )
+        if ( this.obj[name] )
         {
             return Maybe.just( this.obj[name] );
         }
