@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash';
 import _ from 'lodash';
 import { IType } from 'type';
-import { deepEqual } from 'equality';
 import { Maybe } from 'maybe';
+import { deepEqual } from './equality';
 
 
 export class FunctionInformation
@@ -37,7 +37,7 @@ export class FunctionInformation
         return new TypedFunctionInformation(this.functionName, this.parameterNames, parameterTypes, returnType);
     }
 
-    verifyCall(fcr : IFunctionCallResults, ignoredParameters : string[] = []) : boolean
+    verifyCall(fcr : FunctionCallResults, ignoredParameters : string[] = []) : boolean
     {
         const r = callFunction(fcr.func, ...fcr.argumentsBeforeCall);
 
@@ -108,28 +108,30 @@ export function parameterNames(func : (...args : any[]) => any) : string[]
     return parseFunction(func).parameterNames;
 }
 
-export interface IFunctionCallResults
+export class FunctionCallResults
 {
-    readonly func : (...args : any[]) => any;
-    readonly argumentsBeforeCall : any[];
-    readonly argumentsAfterCall : any[];
-    readonly returnValue : any;
+    constructor(
+        public readonly func : (...args : any[]) => any,
+        public readonly argumentsBeforeCall : any[],
+        public readonly argumentsAfterCall : any[],
+        public returnValue : any
+    ) { }
+
+    public sameAs(that : FunctionCallResults) : boolean
+    {
+        return deepEqual(this.argumentsAfterCall, this.argumentsAfterCall) && deepEqual(this.returnValue, that.returnValue);
+    }
 }
 
-export function callFunction(func : (...args : any[]) => any, ...args : any[]) : IFunctionCallResults
+export function callFunction(func : (...args : any[]) => any, ...args : any[]) : FunctionCallResults
 {
     const copiedArguments = cloneDeep(args);
     const returnValue = func(...copiedArguments);
 
-    return {
-        func,
-        argumentsBeforeCall: args,
-        argumentsAfterCall: copiedArguments,
-        returnValue
-    };
+    return new FunctionCallResults(func, args, copiedArguments, returnValue);
 }
 
-export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<IFunctionCallResults>
+export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<FunctionCallResults>
 {
     return func.bind(f => Maybe.just(callFunction(f, ...args)));
 }
@@ -141,7 +143,7 @@ export interface INamedFunctionCallResults
     readonly returnValue : any;
 }
 
-export function nameResults(results : IFunctionCallResults, info : FunctionInformation)
+export function nameResults(results : FunctionCallResults, info : FunctionInformation)
 {
     const argumentsBeforeCall = nameArguments(results.argumentsBeforeCall, info.parameterNames);
     const argumentsAfterCall = nameArguments(results.argumentsAfterCall, info.parameterNames);

@@ -3,7 +3,7 @@ import { AnimationViewer } from './animation-viewer';
 import * as Animation from 'animation';
 import * as CarSim from 'car-simulation';
 import { IAnimation } from 'animation';
-import { Position2D } from 'position2d';
+import { Position } from 'js-algorithms';
 import { approximately } from 'equality';
 
 
@@ -79,7 +79,7 @@ export class CarSimulationViewer extends React.Component<IProps, IState>
             {
                 for ( let y = 0; y !== world.height; ++y )
                 {
-                    const position = new Position2D(x, y);
+                    const position = new Position(x, y);
                     const cell = world.at(position);
                     const margin = 1;
 

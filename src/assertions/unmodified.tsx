@@ -1,8 +1,8 @@
 import React from 'react';
 import { IAssertion } from '.';
-import { deepEqual } from 'equality';
+import { deepEqual } from '../equality';
 import { ComparisonAssertion } from './comparison';
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 import { Maybe } from 'maybe';
 import './unmodified.scss';
 

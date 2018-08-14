@@ -1,6 +1,5 @@
-import { Grid } from '../grid';
 import { Cell } from './cell';
-import { Position2D } from "../position2d";
+import { createGrid, Grid, Position } from "js-algorithms";
 
 
 
@@ -8,12 +7,12 @@ export class World
 {
     private readonly grid : Grid<Cell>;
 
-    constructor(width : number, height : number, initializer : (p : Position2D) => Cell)
+    constructor(width : number, height : number, initializer : (p : Position) => Cell)
     {
-        this.grid = new Grid<Cell>(width, height, initializer);
+        this.grid = createGrid<Cell>(width, height, initializer);
     }
 
-    at(position : Position2D) : Cell
+    at(position : Position) : Cell
     {
         return this.grid.at(position);
     }
@@ -28,7 +27,7 @@ export class World
         return this.grid.height;
     }
 
-    isValidPosition(position : Position2D) : boolean
+    isValidPosition(position : Position) : boolean
     {
         return 0 <= position.x && position.x < this.width && 0 <= position.y && position.y < this.height;
     }

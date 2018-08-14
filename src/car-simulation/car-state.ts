@@ -1,8 +1,7 @@
-import { Position2D } from "../position2d";
-import { Direction2D } from "../direction2d";
+import { Position, Direction } from "js-algorithms";
 
 
 export class CarState
 {
-    constructor(public readonly position : Position2D, public readonly direction : Direction2D) { }
+    constructor(public readonly position : Position, public readonly direction : Direction) { }
 }

@@ -91,7 +91,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get hint() : JSX.Element | null { return null; }
 
-    protected get solutions() : { [key : string] : SourceCode } { return { }; }
+    protected abstract get solutions() : { [key : string] : SourceCode };
 
     public abstract readonly difficulty : difficulty;
 

@@ -42,7 +42,7 @@ export class MultiSolutionViewer extends React.Component<IProps, IState>
 
             return (
                 <div className="solution-viewer">
-                    <Collapsible trigger={createHeader()} transitionTime={100}>
+                    <Collapsible trigger={header()} transitionTime={100}>
                         <TabbedSourceCodeViewer>
                             {tabs}
                         </TabbedSourceCodeViewer>
@@ -61,11 +61,11 @@ export class MultiSolutionViewer extends React.Component<IProps, IState>
         }
         else
         {
-            return <React.Fragment />;
+            return null;
         }
 
 
-        function createHeader()
+        function header()
         {
             return (
                 <React.Fragment>

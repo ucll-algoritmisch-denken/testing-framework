@@ -1,11 +1,11 @@
 import React from 'react';
 import { IAssertion } from "./assertion";
-import { IFunctionCallResults } from "function-util";
+import { FunctionCallResults } from "function-util";
 import { lift } from "./lift";
 import { box } from './box';
 
 
-export function returnValue(assertion : IAssertion<any>) : IAssertion<IFunctionCallResults>
+export function returnValue(assertion : IAssertion<any>) : IAssertion<FunctionCallResults>
 {
     const header = (
         <React.Fragment>
@@ -13,10 +13,10 @@ export function returnValue(assertion : IAssertion<any>) : IAssertion<IFunctionC
         </React.Fragment>
     );
 
-    return box(header, lift<IFunctionCallResults, any>(lifter, assertion));
+    return box(header, lift<FunctionCallResults, any>(lifter, assertion));
 
 
-    function lifter(fcr : IFunctionCallResults)
+    function lifter(fcr : FunctionCallResults)
     {
         return fcr.returnValue;
     }

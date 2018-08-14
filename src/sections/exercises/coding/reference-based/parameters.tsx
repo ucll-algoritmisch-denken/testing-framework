@@ -1,7 +1,7 @@
 import React from 'react';
 import { ITestCase, CollapsibleTestCase } from '../test-case';
 import { Exercise } from './exercise';
-import { IFunctionCallResults } from '../../../../function-util';
+import { FunctionCallResults } from '../../../../function-util';
 import * as Assertions from '../../../../assertions';
 import { IAssertion } from '../../../../assertions';
 import { convertToString } from '../../../../formatters/string-formatters';
@@ -28,7 +28,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
      */
     protected abstract readonly parameterCheckers : IParameterCheckers<META>;
 
-    protected createAssertion(expected : IFunctionCallResults, metadata : META) : IAssertion<IFunctionCallResults>
+    protected createAssertion(expected : FunctionCallResults, metadata : META) : IAssertion<FunctionCallResults>
     {
         // Create assertion for return value; by default this assertion is "must be undefined"
         const returnValueAssertion = Assertions.returnValue( this.createReturnValueAssertion() );
@@ -55,12 +55,12 @@ export abstract class Parameters<META = {}> extends Exercise<META>
         return Assertions.sequence( [ returnValueAssertion ].concat(argumentAssertions) );
     }
 
-    protected createReturnValueAssertion() : IAssertion<IFunctionCallResults>
+    protected createReturnValueAssertion() : IAssertion<FunctionCallResults>
     {
         return Assertions.noReturn();
     }
 
-    protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : META) : JSX.Element
+    protected renderTestCaseHeader(expected : FunctionCallResults, _metadata : META) : JSX.Element
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
         const call = code(`${this.referenceInformation.functionName}(${argumentsString})`);
@@ -72,7 +72,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
         );
     }
 
-    protected createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase
+    protected createTestCaseFromInputs(expected : FunctionCallResults, actual : Maybe<FunctionCallResults>, metadata : META) : ITestCase
     {
         const assertion = this.createAssertion(expected, metadata);
         const result = assertion.check(actual);

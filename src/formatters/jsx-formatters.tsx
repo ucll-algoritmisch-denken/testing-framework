@@ -1,11 +1,10 @@
 import React from 'react';
 import * as Type from 'type';
-import { allEqual } from 'atf-util';
+import { allEqual } from 'js-algorithms';
 import { Bitmap, Color } from '../imaging';
 import { BitmapViewer } from 'components/bitmap-viewer';
 import { Invalid } from 'components/invalid';
 import { convertToString } from './string-formatters';
-import _ from 'lodash';
 import { DiceViewer } from 'components/dice-viewer';
 import { InlineCode } from 'components/inline-code';
 import { all } from 'js-algorithms';
@@ -160,5 +159,60 @@ export function dice(ns : number[]) : JSX.Element
 {
     return (
         <DiceViewer dice={ns} />
+    );
+}
+
+export function asHorizontalTable<T>(elements : T[], subformatter : (x : T) => JSX.Element, className : string) : JSX.Element
+{
+    const formattedElements = elements.map( (element, i) => <td key={i}>{subformatter(element)}</td> );
+
+    return (
+        <table className={className}>
+            <tbody>
+                <tr>
+                    {formattedElements}
+                </tr>
+            </tbody>
+        </table>
+    );
+}
+
+export function asVerticalTable<T>(elements : T[], subformatter : (x : T) => JSX.Element, className : string) : JSX.Element
+{
+    const formattedElements = elements.map( (element, i) => <tr key={i}><td>{subformatter(element)}</td></tr> );
+
+    return (
+        <table className={className}>
+            <tbody>
+                {formattedElements}
+            </tbody>
+        </table>
+    );
+}
+
+export function asTable<T>(rows : T[][], subformatter : (x : T) => JSX.Element, className : string) : JSX.Element
+{
+    const formattedRows = rows.map( (row, i) => {
+        const formattedRow = row.map( (element, j) => {
+            return (
+                <td key={j}>
+                    {subformatter(element)}
+                </td>
+            );
+        });
+
+        return (
+            <tr key={i}>
+                {formattedRow}
+            </tr>
+        );
+    });
+
+    return (
+        <table className={className}>
+            <tbody>
+                {formattedRows}
+            </tbody>
+        </table>
     );
 }

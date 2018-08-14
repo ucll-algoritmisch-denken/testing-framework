@@ -2,27 +2,36 @@ import React from 'react';
 import { Exercise as CodingExercise } from '../exercise';
 import { ITestCase } from '../test-case';
 import { ITestCaseInput } from './test-case-input';
-import { FunctionInformation, IFunctionCallResults, callFunction, parseFunction } from '../../../../function-util';
+import { FunctionInformation, FunctionCallResults, callFunction, parseFunction } from '../../../../function-util';
 import { Maybe } from 'maybe';
 import { code } from '../../../../formatters/jsx-formatters';
 import { SourceCode, Language } from '../../../../source-code';
+import { Outcome } from '../../../../outcome';
+import { configuration } from '../../../../configuration';
 
 
 export abstract class Exercise<META = {}> extends CodingExercise
 {
     private __referenceInformation ?: FunctionInformation;
 
-    protected abstract referenceImplementation : (...args : any[]) => any;
+    protected abstract referenceImplementations : ((...args : any[]) => any)[];
 
     protected abstract testedImplementation : Maybe<(...args : any[]) => any>;
 
     protected abstract generateTestCaseInputs() : Iterable<ITestCaseInput<META>>;
 
-    protected abstract createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase;
+    protected abstract createTestCaseFromInputs(expected : FunctionCallResults, actual : Maybe<FunctionCallResults>, metadata : META) : ITestCase;
 
     protected get solutions() : { [key : string] : SourceCode }
     {
-        return { 'solution': new SourceCode(Language.JavaScript, this.referenceImplementation.toString() ) };
+        if ( this.referenceImplementations.length === 0 )
+        {
+            throw new Error(`Need at least one reference implementation`);
+        }
+        else
+        {
+            return { 'solution': new SourceCode(Language.JavaScript, this.referenceImplementations[0].toString() ) };
+        }
     }
 
     protected get htmlClasses() : string[]
@@ -32,12 +41,23 @@ export abstract class Exercise<META = {}> extends CodingExercise
 
     protected *generateTestCases() : Iterable<ITestCase>
     {
-        for ( let testCaseInput of this.generateTestCaseInputs() )
+        if ( this.referenceImplementations.length === 0 )
         {
-            const expected = callFunction(this.referenceImplementation, ...testCaseInput.args);
-            const actual = this.testedImplementation.lift( f => callFunction(f, ...testCaseInput.args) );
+            throw new Error(`Need at least one reference implementation`);
+        }
+        else
+        {
+            const referenceImplementation = this.referenceImplementations[0];
 
-            yield this.createTestCaseFromInputs(expected, actual, testCaseInput.meta);
+            for ( let testCaseInput of this.generateTestCaseInputs() )
+            {
+                this.checkThatSolutionsYieldSameResults(testCaseInput);
+
+                const expected = callFunction(referenceImplementation, ...testCaseInput.args);
+                const actual = this.testedImplementation.lift( f => callFunction(f, ...testCaseInput.args) );
+
+                yield this.createTestCaseFromInputs(expected, actual, testCaseInput.meta);
+            }
         }
     }
 
@@ -62,6 +82,41 @@ export abstract class Exercise<META = {}> extends CodingExercise
 
     protected get referenceInformation() : FunctionInformation
     {
-        return this.__referenceInformation = (this.__referenceInformation || parseFunction(this.referenceImplementation));
+        if ( this.referenceImplementations.length === 0 )
+        {
+            throw new Error(`Need at least one reference implementation`);
+        }
+        else
+        {
+            const referenceImplementation = this.referenceImplementations[0];
+
+            return this.__referenceInformation = (this.__referenceInformation || parseFunction(referenceImplementation));
+        }
+    }
+
+    protected checkThatSolutionsYieldSameResults(testCaseInput : ITestCaseInput<META>) : void
+    {
+        if ( configuration.verifySolutions )
+        {
+            const referenceImplementation = this.referenceImplementations[0];
+            const expected = callFunction(referenceImplementation, ...testCaseInput.args);
+
+            for ( let i = 1; i < this.referenceImplementations.length; ++i )
+            {
+                const alternativeImplementation = this.referenceImplementations[i];
+                const actual = callFunction(alternativeImplementation, ...testCaseInput.args);
+                const testCase = this.createTestCaseFromInputs(expected, Maybe.just(actual), testCaseInput.meta);
+
+                if ( testCase.outcome !== Outcome.Pass )
+                {
+                    const referenceSourceCode = new SourceCode(Language.JavaScript, referenceImplementation.toString()).beautify();
+                    const alternativeSourceCode  = new SourceCode(Language.JavaScript, alternativeImplementation.toString()).beautify();
+
+                    console.log(`${referenceSourceCode.sourceCode}\ndisagrees with\n${alternativeSourceCode.sourceCode}`);
+
+                    throw new Error(`Solutions don't agree!`);
+                }
+            }
+        }
     }
 }

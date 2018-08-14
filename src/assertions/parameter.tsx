@@ -1,11 +1,11 @@
 import React from 'react';
 import { IAssertion } from "./assertion";
-import { IFunctionCallResults } from "function-util";
+import { FunctionCallResults } from "function-util";
 import { lift } from './lift';
 import { box } from './box';
 
 
-export function parameter(parameterIndex : number, parameterName : string, assertion : IAssertion<any>) : IAssertion<IFunctionCallResults>
+export function parameter(parameterIndex : number, parameterName : string, assertion : IAssertion<any>) : IAssertion<FunctionCallResults>
 {
     const header = (
         <React.Fragment>
@@ -13,10 +13,10 @@ export function parameter(parameterIndex : number, parameterName : string, asser
         </React.Fragment>
     );
 
-    return box(header, lift<IFunctionCallResults, any>(lifter, assertion));
+    return box(header, lift<FunctionCallResults, any>(lifter, assertion));
 
 
-    function lifter(fcr : IFunctionCallResults)
+    function lifter(fcr : FunctionCallResults)
     {
         if ( 0 <= parameterIndex && parameterIndex < fcr.argumentsAfterCall.length )
         {

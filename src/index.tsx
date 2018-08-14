@@ -37,14 +37,6 @@ export { Imaging };
 
 import { IChapter } from './chapter';
 
-export async function initialize(chapter : IChapter)
-{
-    document.title = chapter.title;
-    (window as any).shell = createShell(chapter);
-    
-    ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
-}
-
 import * as Components from './components';
 export { Components };
 
@@ -52,11 +44,25 @@ export { IHasDifficulty, difficulty } from './difficulty';
 export { IScored, Score } from './score';
 
 import { Maybe } from 'maybe';
+import { IConfiguration, configure } from './configuration';
 export { Maybe };
-
-export { Position2D } from './position2d';
-export { Grid } from './grid';
 
 export { Lazy } from './lazy';
 
 export * from './source-code';
+
+
+export async function initialize(chapter : IChapter, configuration ?: IConfiguration)
+{
+    document.title = chapter.title;
+    (window as any).shell = createShell(chapter);
+
+    if ( configuration )
+    {
+        console.log(`Verify: ${configuration.verifySolutions}`);
+        
+        configure(configuration);
+    }
+    
+    ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
+}

@@ -1,5 +1,4 @@
-import { Position2D } from '../position2d';
-import { Direction2D } from '../direction2d';
+import { Position, Direction } from 'js-algorithms';
 import { CarState } from './car-state';
 
 
@@ -21,7 +20,7 @@ export abstract class TraceStep
 
 export class ForwardTraceStep extends TraceStep
 {
-    constructor(public readonly from : Position2D, public readonly to : Position2D, public readonly direction : Direction2D)
+    constructor(public readonly from : Position, public readonly to : Position, public readonly direction : Direction)
     {
         super( new CarState(from, direction), new CarState(to, direction) );
     }
@@ -34,7 +33,7 @@ export class ForwardTraceStep extends TraceStep
 
 export class TurnLeftTraceStep extends TraceStep
 {
-    constructor(public readonly position : Position2D, public readonly from : Direction2D, public readonly to : Direction2D)
+    constructor(public readonly position : Position, public readonly from : Direction, public readonly to : Direction)
     {
         super( new CarState(position, from), new CarState(position, to) );
     }
@@ -47,7 +46,7 @@ export class TurnLeftTraceStep extends TraceStep
 
 export class TurnRightTraceStep extends TraceStep
 {
-    constructor(public readonly position : Position2D, public readonly from : Direction2D, public readonly to : Direction2D)
+    constructor(public readonly position : Position, public readonly from : Direction, public readonly to : Direction)
     {
         super( new CarState(position, from), new CarState(position, to) );
     }

@@ -5,8 +5,9 @@ import { ITestCase } from './test-case';
 import { IScored, Score } from '../../../score';
 import { IHasDifficulty, difficulty } from '../../../difficulty';
 import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../../outcome';
-import { HintViewer, SolutionViewer, MultiSolutionViewer } from '../../../components';
+import { HintViewer, MultiSolutionViewer } from '../../../components';
 import { SourceCode } from '../../../source-code';
+import { Lazy } from '../../../lazy';
 
 
 export abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored
@@ -20,6 +21,15 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
     protected abstract readonly solutions : { [key : string] : SourceCode };
 
     public abstract readonly difficulty : difficulty;
+
+    private _score : Lazy<Score>;
+
+    constructor()
+    {
+        super();
+
+        this._score = new Lazy(() => this.computeScore());
+    }
     
     public hasDifficulty() : this is IHasDifficulty
     {
@@ -36,7 +46,15 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
         return 1;
     }
 
+    /**
+     * Do not override! Override computeScore() instead.
+     */
     public get score() : Score
+    {
+        return this._score.value;
+    }
+
+    protected computeScore() : Score
     {
         const outcomes = Array.from(this.generateTestCases()).map(testCase => testCase.outcome);
         const outcome = combineAssertionOutcomes(outcomes);

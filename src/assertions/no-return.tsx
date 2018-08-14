@@ -1,7 +1,7 @@
 import React from 'react';
 import { IAssertion } from '.';
 import * as Type from 'type';
-import { IFunctionCallResults } from 'function-util';
+import { FunctionCallResults } from 'function-util';
 import { ComparisonAssertion } from './comparison';
 import { Maybe } from 'maybe';
 import { returnValue } from './return-value';
@@ -41,7 +41,7 @@ class NoReturnAssertion extends ComparisonAssertion<any>
     }
 }
 
-export function noReturn() : IAssertion<IFunctionCallResults>
+export function noReturn() : IAssertion<FunctionCallResults>
 {
     return new NoReturnAssertion();
 }

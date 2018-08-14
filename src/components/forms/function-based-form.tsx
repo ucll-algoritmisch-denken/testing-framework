@@ -4,7 +4,7 @@ import { Form as ColumnBasedForm, IRow as IBaseRow, IColumn as IBaseColumn } fro
 import { InlineCode } from '../inline-code';
 import { code } from '../../formatters/jsx-formatters';
 import { convertToString } from '../../formatters/string-formatters';
-import { IFunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
+import { FunctionCallResults, callFunction, FunctionInformation, parseFunction } from '../../function-util';
 import { evalm } from '../../evalm';
 import { deepEqual } from '../../equality';
 
@@ -41,7 +41,7 @@ export interface IParameters<META = {}>
     [id : string] : Parameter<META>;
 }
 
-type Data<META> = { fcr : IFunctionCallResults, meta : META };
+type Data<META> = { fcr : FunctionCallResults, meta : META };
 
 export type IRow<META> = IBaseRow<string, Data<META>>;
 
@@ -93,7 +93,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
         const fcr = callFunction(this.props.func, ...input.args);
 
         return new class implements IRow<META> {
-            get data() : { fcr : IFunctionCallResults, meta : META }
+            get data() : { fcr : FunctionCallResults, meta : META }
             {
                 return { fcr, meta: input.meta };
             }
@@ -155,7 +155,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                         );
                     }
 
-                    validate(data : { fcr: IFunctionCallResults, meta: META }, value : string) : boolean
+                    validate(data : { fcr: FunctionCallResults, meta: META }, value : string) : boolean
                     {
                         return evalm(value).caseOf({
                             just: validate,
@@ -168,12 +168,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                             const args = data.fcr.argumentsBeforeCall.slice();
                             args.splice(parameterIndex, 1, x);
 
-                            const toBeChecked = {
-                                func: me.props.func,
-                                argumentsBeforeCall: args,
-                                argumentsAfterCall: data.fcr.argumentsAfterCall,
-                                returnValue: data.fcr.returnValue
-                            };
+                            const toBeChecked = new FunctionCallResults(me.props.func, args, data.fcr.argumentsAfterCall, data.fcr.returnValue);
 
                             const ignoredParameters = me.functionInformation.parameterNames.filter( (pn, i) => {
                                 const info = me.props.parameters[pn];
@@ -185,7 +180,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                         }
                     }
 
-                    render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+                    render(data : { fcr : FunctionCallResults, meta : META }) : JSX.Element
                     {
                         return parameterInfo.render(data.fcr.argumentsBeforeCall[parameterIndex], data.meta);
                     }
@@ -215,7 +210,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                     );
                 }
 
-                validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
+                validate(data : { fcr : FunctionCallResults, meta : META }, value : string) : boolean
                 {
                     const expected = data.fcr.returnValue;
 
@@ -225,7 +220,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                     });
                 }
 
-                render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+                render(data : { fcr : FunctionCallResults, meta : META }) : JSX.Element
                 {
                     if ( me.props.returnValue )
                     {
@@ -296,7 +291,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                         );
                     }
 
-                    validate(data : { fcr : IFunctionCallResults, meta : META }, value : string) : boolean
+                    validate(data : { fcr : FunctionCallResults, meta : META }, value : string) : boolean
                     {
                         const expected = data.fcr.argumentsAfterCall[parameterIndex];
 
@@ -306,7 +301,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
                         });
                     }
 
-                    render(data : { fcr : IFunctionCallResults, meta : META }) : JSX.Element
+                    render(data : { fcr : FunctionCallResults, meta : META }) : JSX.Element
                     {
                         return parameterInfo.render(data.fcr.argumentsAfterCall[parameterIndex], data.meta);
                     }

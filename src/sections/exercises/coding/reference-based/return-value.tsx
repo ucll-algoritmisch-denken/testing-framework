@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { ITestCase, CollapsibleTestCase } from '../test-case';
 import { Exercise } from './exercise';
-import { IFunctionCallResults } from '../../../../function-util';
+import { FunctionCallResults } from '../../../../function-util';
 import { IAssertion } from '../../../../assertions';
 import * as Assertions from '../../../../assertions';
 import { code } from '../../../../formatters/jsx-formatters';
@@ -13,7 +13,7 @@ import { Outcome } from 'outcome';
 
 export abstract class ReturnValue<META = {}> extends Exercise<META>
 {
-    protected createAssertion(expected : IFunctionCallResults, metadata : META) : IAssertion<IFunctionCallResults>
+    protected createAssertion(expected : FunctionCallResults, metadata : META) : IAssertion<FunctionCallResults>
     {
         const returnValueAssertion = Assertions.returnValue(this.createReturnValueAssertion(expected.returnValue, metadata));
 
@@ -37,7 +37,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
         return Assertions.unmodified(originalValue);
     }
 
-    protected renderTestCaseHeader(expected : IFunctionCallResults, _metadata : META) : JSX.Element
+    protected renderTestCaseHeader(expected : FunctionCallResults, _metadata : META) : JSX.Element
     {
         const argumentsString = expected.argumentsBeforeCall.map( convertToString ).join(", ");
         const returnValue = code(convertToString(expected.returnValue));
@@ -50,7 +50,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
         );
     }
 
-    protected createTestCaseFromInputs(expected : IFunctionCallResults, actual : Maybe<IFunctionCallResults>, metadata : META) : ITestCase
+    protected createTestCaseFromInputs(expected : FunctionCallResults, actual : Maybe<FunctionCallResults>, metadata : META) : ITestCase
     {
         const assertion = this.createAssertion(expected, metadata);
         const result = assertion.check(actual);
