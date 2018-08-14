@@ -8,6 +8,7 @@ import { code } from '../../../../formatters/jsx-formatters';
 import { SourceCode, Language } from '../../../../source-code';
 import { Outcome } from '../../../../outcome';
 import { configuration } from '../../../../configuration';
+import { retrieveSolutions } from '../../../../solution-pack';
 
 
 export abstract class Exercise<META = {}> extends CodingExercise
