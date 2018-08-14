@@ -97,11 +97,6 @@ export function parseFunction(func : (...args : any[]) => any) : FunctionInforma
     }
 }
 
-export function parameterNames(func : (...args : any[]) => any) : string[]
-{
-    return parseFunction(func).parameterNames;
-}
-
 export class FunctionCallResults
 {
     constructor(

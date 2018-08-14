@@ -16,7 +16,6 @@ export declare class TypedFunctionInformation extends FunctionInformation {
     constructor(functionName: string, parameterNames: string[], parameterTypes: IType<any>[], returnType: IType<any>);
 }
 export declare function parseFunction(func: (...args: any[]) => any): FunctionInformation;
-export declare function parameterNames(func: (...args: any[]) => any): string[];
 export declare class FunctionCallResults {
     readonly func: (...args: any[]) => any;
     readonly argumentsBeforeCall: any[];
