@@ -4,7 +4,6 @@ export declare class FunctionInformation {
     readonly functionName: string;
     readonly parameterNames: string[];
     constructor(functionName: string, parameterNames: string[]);
-    format(): string;
     readonly signature: string;
     readonly parameterCount: number;
     parameterWithNameExists(parameterName: string): boolean;

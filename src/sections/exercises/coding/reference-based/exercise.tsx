@@ -68,7 +68,7 @@ export abstract class Exercise<META = {}> extends CodingExercise
 
     public get header() : JSX.Element
     {
-        return code(this.referenceInformation.format());
+        return code(this.referenceInformation.signature);
     }
 
     public get tocEntry() : JSX.Element
