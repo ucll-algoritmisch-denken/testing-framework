@@ -1,14 +1,15 @@
 .object-viewer {
-    font-size: 0.75em;
     border-collapse: collapse;
     border: #88F 2px solid;
-    fill-opacity: 0.8;
 
     td {
         background: #AAF; 
         border: #88F 1px solid;
         padding: 0.2em 0.5em;
-        min-width: 5em;
+
+        &:first-child {
+            background: #AAA;
+        }
     }
 
     .key {
