@@ -1,10 +1,9 @@
 .object-viewer {
     border-collapse: collapse;
-    border: #88F 2px solid;
+    border: #888 1px solid;
 
     td {
-        background: #AAF; 
-        border: #88F 1px solid;
+        border: #888 1px solid;
         padding: 0.2em 0.5em;
 
         &:first-child {
