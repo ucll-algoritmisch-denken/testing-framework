@@ -48,9 +48,11 @@ export class ObjectViewer extends React.Component<IProps, IState>
         // TODO Use classNames
         return (
             <table className={this.htmlClasses.join(" ")}>
-                <tr>
-                    <td className="empty">Empty</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td className="empty">Empty</td>
+                    </tr>
+                </tbody>
             </table>
         );
     }
@@ -60,7 +62,9 @@ export class ObjectViewer extends React.Component<IProps, IState>
         // TODO Use classNames
         return (
             <table className={this.htmlClasses.join(" ")}>
-                {this.renderRows(keys)}
+                <tbody>
+                    {this.renderRows(keys)}
+                </tbody>
             </table>
         );
     }
