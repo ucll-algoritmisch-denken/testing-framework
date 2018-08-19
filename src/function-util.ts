@@ -110,6 +110,40 @@ export class FunctionCallResults
     {
         return deepEqual(this.argumentsAfterCall, this.argumentsAfterCall) && deepEqual(this.returnValue, that.returnValue);
     }
+
+    public get namedArgumentsBeforeCall() : { [key : string] : any }
+    {
+        return this.nameParameters(this.argumentsBeforeCall);
+    }
+
+    public get namedArgumentsAfterCall() : { [key : string] : any }
+    {
+        return this.nameParameters(this.argumentsAfterCall);
+    }
+
+    private nameParameters(parameterValues : any[]) : { [key : string] : any }
+    {
+        const parameterNames = parseFunction(this.func).parameterNames;
+
+        if ( parameterNames.length !== parameterValues.length )
+        {
+            throw new Error(`Inconsistent number of parameters`);
+        }
+        else
+        {
+            const result : { [ key : string ] : any } = {};
+
+            for ( let i = 0; i !== parameterNames.length; ++i )
+            {
+                const parameterName = parameterNames[i];
+                const parameterValue = parameterValues[i];
+
+                result[parameterName] = parameterValue;
+            }
+
+            return result;
+        }
+    }
 }
 
 export function callFunction(func : (...args : any[]) => any, ...args : any[]) : FunctionCallResults

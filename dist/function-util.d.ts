@@ -23,6 +23,13 @@ export declare class FunctionCallResults {
     returnValue: any;
     constructor(func: (...args: any[]) => any, argumentsBeforeCall: any[], argumentsAfterCall: any[], returnValue: any);
     sameAs(that: FunctionCallResults): boolean;
+    readonly namedArgumentsBeforeCall: {
+        [key: string]: any;
+    };
+    readonly namedArgumentsAfterCall: {
+        [key: string]: any;
+    };
+    private nameParameters;
 }
 export declare function callFunction(func: (...args: any[]) => any, ...args: any[]): FunctionCallResults;
 export declare function monadicCallFunction(func: Maybe<(...args: any[]) => any>, ...args: any[]): Maybe<FunctionCallResults>;
