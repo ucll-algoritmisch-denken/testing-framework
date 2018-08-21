@@ -1,7 +1,7 @@
 import React from 'react';
 import { IExercise } from './exercise';
-import { Score } from 'score';
-import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from 'outcome';
+import { Score } from '../score';
+import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../outcome';
 import { Lazy } from 'lazy';
 import classNames from 'classnames';
 import { ITestCase } from './test-case';

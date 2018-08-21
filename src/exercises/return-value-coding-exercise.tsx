@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
 import { Maybe } from 'maybe';
 import { TypedFunctionCallResults, parseFunction } from '../function-util';
 import { ITestCase } from './test-case';

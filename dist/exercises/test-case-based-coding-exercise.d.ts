@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { IExercise } from './exercise';
-import { Score } from 'score';
+import { Score } from '../score';
 import { ITestCase } from './test-case';
 import './test-case-based-coding-exercise.scss';
 export declare abstract class TestCaseBasedCodingExercise implements IExercise {
