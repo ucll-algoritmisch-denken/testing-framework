@@ -24,10 +24,6 @@ export interface ISolutionPack<Ps extends any[], R>
     [pack] : Solution<Ps, R>[];
 }
 
-// export type ParameterTypes<T> = T extends ISolutionPack<infer Ps, infer R> ? Ps : never;
-
-// export type ReturnType<T> = T extends ISolutionPack<infer Ps, infer R> ? R : never;
-
 export type ParameterTypes<T> = T extends (...args : infer Ps) => infer R ? Ps : never;
 
 export type ReturnType<T> = T extends (...args : infer Ps) => infer R ? R : never;
