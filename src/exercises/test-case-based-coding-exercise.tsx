@@ -5,6 +5,7 @@ import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from 'outcome';
 import { Lazy } from 'lazy';
 import classNames from 'classnames';
 import { ITestCase } from './test-case';
+import './test-case-based-coding-exercise.scss';
 
 
 export abstract class TestCaseBasedCodingExercise implements IExercise
