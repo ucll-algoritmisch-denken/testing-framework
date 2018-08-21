@@ -4,14 +4,12 @@ import { typedCallFunction, TypedFunctionCallResults } from '../function-util';
 import { ITestCase } from './test-case';
 
 
-
 export interface ITestCaseInput<Ps extends any[], META = {}>
 {
     readonly parameterValues : Ps;
 
     readonly metadata : META;
 }
-
 
 export abstract class ReferenceImplementationBasedCodingExercise<Ps extends any[], R, META = {}> extends TestCaseBasedCodingExercise
 {

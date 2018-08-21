@@ -66,3 +66,6 @@ export async function initialize(chapter : IChapter, configuration ?: IConfigura
     
     ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
 }
+
+import * as Exercise from './exercises';
+export { Exercise };

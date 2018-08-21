@@ -18,7 +18,7 @@ export abstract class TestCaseBasedCodingExercise implements IExercise
     
     constructor()
     {
-        this.cachedScore = new Lazy<Score>(() => this.computeScore())
+        this.cachedScore = new Lazy<Score>(() => this.computeScore());
     }
 
     private cachedScore : Lazy<Score>;

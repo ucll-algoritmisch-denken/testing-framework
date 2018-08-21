@@ -1,12 +1,7 @@
 import React from 'react';
-import { IExercise } from './exercise';
-import { Score } from 'score';
-import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from 'outcome';
-import { Lazy } from 'lazy';
-import classNames from 'classnames';
-import { TestCaseBasedCodingExercise } from './test-case-based-coding-exercise';
+import { Outcome } from 'outcome';
 import { Maybe } from 'maybe';
-import { typedCallFunction, TypedFunctionCallResults, parseFunction } from '../function-util';
+import { TypedFunctionCallResults, parseFunction } from '../function-util';
 import { ITestCase } from './test-case';
 import { CollapsibleTestCase } from './collapsible-test-case';
 import * as Assertions from '../assertions';
@@ -108,3 +103,4 @@ export abstract class ReturnValueCodingExercise<Ps extends any[], R, META = {}> 
         );
     }
 }
+
