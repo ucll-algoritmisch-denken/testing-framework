@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { ISection } from '../../chapter';
 import { IHasDifficulty } from '../../difficulty';
 import { IScored } from '../../score';
-import './exercise.scss';
 import { DifficultyViewer } from '../../components';
+import './exercise.scss';
 
 
 export abstract class Exercise implements ISection
