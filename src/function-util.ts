@@ -68,7 +68,7 @@ export class TypedFunctionInformation extends FunctionInformation
     }
 }
 
-export function parseFunction(func : (...args : any[]) => any) : FunctionInformation
+export function parseFunction<Ps extends any[], R>(func : (...args : Ps) => R) : FunctionInformation
 {
     let regex = /function (\w+)\((.*?)\)/;
     let groups = regex.exec(func.toString());
@@ -146,12 +146,69 @@ export class FunctionCallResults
     }
 }
 
+export class TypedFunctionCallResults<Ps extends any[], R>
+{
+    constructor(
+        public readonly func : (...args : Ps) => R,
+        public readonly argumentsBeforeCall : Ps,
+        public readonly argumentsAfterCall : Ps,
+        public returnValue : R
+    ) { }
+
+    public sameAs(that : TypedFunctionCallResults<Ps, R>) : boolean
+    {
+        return deepEqual(this.argumentsAfterCall, this.argumentsAfterCall) && deepEqual(this.returnValue, that.returnValue);
+    }
+
+    public get namedArgumentsBeforeCall() : { [key : string] : any }
+    {
+        return this.nameParameters(this.argumentsBeforeCall);
+    }
+
+    public get namedArgumentsAfterCall() : { [key : string] : any }
+    {
+        return this.nameParameters(this.argumentsAfterCall);
+    }
+
+    private nameParameters(parameterValues : any[]) : { [key : string] : any }
+    {
+        const parameterNames = parseFunction(this.func as any).parameterNames;
+
+        if ( parameterNames.length !== parameterValues.length )
+        {
+            throw new Error(`Inconsistent number of parameters`);
+        }
+        else
+        {
+            const result : { [ key : string ] : any } = {};
+
+            for ( let i = 0; i !== parameterNames.length; ++i )
+            {
+                const parameterName = parameterNames[i];
+                const parameterValue = parameterValues[i];
+
+                result[parameterName] = parameterValue;
+            }
+
+            return result;
+        }
+    }
+}
+
 export function callFunction(func : (...args : any[]) => any, ...args : any[]) : FunctionCallResults
 {
     const copiedArguments = cloneDeep(args);
     const returnValue = func(...copiedArguments);
 
     return new FunctionCallResults(func, args, copiedArguments, returnValue);
+}
+
+export function typedCallFunction<Ps extends any[], R>(func : (...args : Ps) => R, ...args : Ps) : TypedFunctionCallResults<Ps, R>
+{
+    const copiedArguments = cloneDeep(args);
+    const returnValue = func(...copiedArguments);
+
+    return new TypedFunctionCallResults(func, args, copiedArguments, returnValue);
 }
 
 export function monadicCallFunction(func : Maybe<(...args : any[]) => any>, ...args : any[]) : Maybe<FunctionCallResults>
