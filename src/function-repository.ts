@@ -4,6 +4,8 @@ import { Maybe } from 'maybe';
 export interface IFunctionRepository
 {
     fetch(name : string) : Maybe<((...args : any[]) => any)>;
+
+    typedFetch<T>(name : string) : Maybe<T>;
 }
 
 class ObjectFunctionRepository implements IFunctionRepository
