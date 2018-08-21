@@ -10,7 +10,20 @@ class ObjectFunctionRepository implements IFunctionRepository
 {
     constructor(private obj : any) { }
 
+    // TODO Remove untyped fetch
     fetch(name : string) : Maybe<((...args : any[]) => any)>
+    {
+        if ( this.obj[name] )
+        {
+            return Maybe.just( this.obj[name] );
+        }
+        else
+        {
+            return Maybe.nothing();
+        }
+    }
+
+    typedFetch<T>(name : string) : Maybe<T>
     {
         if ( this.obj[name] )
         {

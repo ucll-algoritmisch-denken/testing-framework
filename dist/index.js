@@ -4535,7 +4535,7 @@ eval("\r\nvar __importStar = (this && this.__importStar) || function (mod) {\r\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst maybe_1 = __webpack_require__(/*! maybe */ \"./node_modules/maybe/dist/index.js\");\r\nclass ObjectFunctionRepository {\r\n    constructor(obj) {\r\n        this.obj = obj;\r\n    }\r\n    fetch(name) {\r\n        if (this.obj[name]) {\r\n            return maybe_1.Maybe.just(this.obj[name]);\r\n        }\r\n        else {\r\n            return maybe_1.Maybe.nothing();\r\n        }\r\n    }\r\n}\r\nfunction fromWindow() {\r\n    return new ObjectFunctionRepository(window);\r\n}\r\nexports.fromWindow = fromWindow;\r\n\n\n//# sourceURL=webpack:///./src/function-repository.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst maybe_1 = __webpack_require__(/*! maybe */ \"./node_modules/maybe/dist/index.js\");\r\nclass ObjectFunctionRepository {\r\n    constructor(obj) {\r\n        this.obj = obj;\r\n    }\r\n    // TODO Remove untyped fetch\r\n    fetch(name) {\r\n        if (this.obj[name]) {\r\n            return maybe_1.Maybe.just(this.obj[name]);\r\n        }\r\n        else {\r\n            return maybe_1.Maybe.nothing();\r\n        }\r\n    }\r\n    typedFetch(name) {\r\n        if (this.obj[name]) {\r\n            return maybe_1.Maybe.just(this.obj[name]);\r\n        }\r\n        else {\r\n            return maybe_1.Maybe.nothing();\r\n        }\r\n    }\r\n}\r\nfunction fromWindow() {\r\n    return new ObjectFunctionRepository(window);\r\n}\r\nexports.fromWindow = fromWindow;\r\n\n\n//# sourceURL=webpack:///./src/function-repository.ts?");
 
 /***/ }),
 
