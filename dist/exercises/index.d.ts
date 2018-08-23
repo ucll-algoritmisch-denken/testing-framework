@@ -10,7 +10,7 @@ export declare namespace Coding {
         type ITestCase = _ITestCase;
         const CollapsibleTestCase: typeof _CollapsibleTestCase;
         namespace ReferenceBased {
-            type ITestCaseInput<Ps extends any[], R> = _ITestCaseInput<Ps, R>;
+            type ITestCaseInput<Ps extends any[], Meta = {}> = _ITestCaseInput<Ps, Meta>;
             const Exercise: typeof ReferenceImplementationBasedCodingExercise;
             namespace ReturnValue {
                 const Exercise: typeof ReturnValueCodingExercise;

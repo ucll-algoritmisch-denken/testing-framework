@@ -18,7 +18,7 @@ export namespace Coding
 
         export namespace ReferenceBased
         {
-            export type ITestCaseInput<Ps extends any[], R> = _ITestCaseInput<Ps, R>;
+            export type ITestCaseInput<Ps extends any[], Meta = {}> = _ITestCaseInput<Ps, Meta>;
 
             export const Exercise = ReferenceImplementationBasedCodingExercise;
 
