@@ -43,9 +43,8 @@ export { Components };
 export { IHasDifficulty, difficulty } from './difficulty';
 export { IScored, Score } from './score';
 
-import { Maybe } from 'maybe';
 import { IConfiguration, configure } from './configuration';
-export { Maybe };
+export * from 'maybe';
 
 export { Lazy } from './lazy';
 
