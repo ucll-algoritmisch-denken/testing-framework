@@ -68,3 +68,6 @@ export async function initialize(chapter : IChapter, configuration ?: IConfigura
 
 import * as Exercise from './exercises';
 export { Exercise };
+
+import * as Sections from './sections';
+export { Sections };
