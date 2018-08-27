@@ -8,9 +8,9 @@ export declare abstract class TestCaseBasedCodingExercise implements IExercise {
      * Generates test cases.
      */
     protected abstract generateTestCases(): Iterable<ITestCase>;
-    protected abstract readonly maximumScore: number;
     constructor();
     private cachedScore;
+    protected readonly maximumScore: number;
     /**
      * Returns maximum score if all test cases succeed, 0 otherwise.
      *

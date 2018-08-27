@@ -15,8 +15,6 @@ export abstract class TestCaseBasedCodingExercise implements IExercise
      */
     protected abstract generateTestCases() : Iterable<ITestCase>;
 
-    protected abstract readonly maximumScore : number;
-    
     constructor()
     {
         this.cachedScore = new Lazy<Score>(() => this.computeScore());
@@ -24,6 +22,11 @@ export abstract class TestCaseBasedCodingExercise implements IExercise
 
     private cachedScore : Lazy<Score>;
 
+    protected get maximumScore() : number
+    {
+        return 1;
+    }
+    
     /**
      * Returns maximum score if all test cases succeed, 0 otherwise.
      * 
