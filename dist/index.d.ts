@@ -32,3 +32,5 @@ export * from './solution-pack';
 export declare function initialize(chapter: IChapter, configuration?: IConfiguration): Promise<void>;
 import * as Exercise from './exercises';
 export { Exercise };
+import * as Sections from './sections';
+export { Sections };
