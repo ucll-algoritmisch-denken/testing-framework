@@ -9,6 +9,7 @@ import { Lazy } from '../../../lazy';
 import { CarSimulationViewer } from '../../../components/car-simulation-viewer';
 import { Maybe } from 'maybe';
 import { SourceCode } from '../../../source-code';
+import { Solution } from '../../../solution-pack';
 
 
 function createCarLibrary(symbol : Symbol, simulation : Simulation) : { [key : string] : (car : Symbol) => void }
@@ -89,7 +90,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get hint() : JSX.Element | null { return null; }
 
-    protected abstract get solutions() : { [key : string] : SourceCode };
+    protected abstract get solutions() : Solution<any[], any>[];
 
     public abstract readonly difficulty : difficulty;
 

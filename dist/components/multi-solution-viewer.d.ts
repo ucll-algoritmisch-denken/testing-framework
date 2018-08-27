@@ -1,9 +1,7 @@
 import React from 'react';
-import { SourceCode } from '../source-code';
+import { Solution } from '../solution-pack';
 export interface IProps {
-    solutions: {
-        [key: string]: SourceCode;
-    };
+    solutions: Solution<any[], any>[];
 }
 export interface IState {
 }

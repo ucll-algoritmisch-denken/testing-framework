@@ -3,11 +3,12 @@ import { SourceCode } from '../source-code';
 import { TabbedSourceCodeViewer } from './tabbed-source-code-viewer';
 import Collapsible from 'react-collapsible';
 import { SolutionViewer } from './solution-viewer';
+import { Solution } from '../solution-pack';
 
 
 export interface IProps
 {
-    solutions : { [key : string] : SourceCode };
+    solutions : Solution<any[], any>[];
 }
 
 export interface IState
@@ -29,14 +30,14 @@ export class MultiSolutionViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const labels = Object.keys(this.props.solutions);
+        const solutions = this.props.solutions;
 
-        if ( labels.length > 1 )
+        if ( solutions.length > 1 )
         {
-            const tabs = labels.map( label => {
+            const tabs = solutions.map( solution => {
                 return {
-                    sourceCode: this.props.solutions[label],
-                    label: label
+                    sourceCode: solution.sourceCode,
+                    label: solution.label
                 };
             });
 
@@ -50,13 +51,13 @@ export class MultiSolutionViewer extends React.Component<IProps, IState>
                 </div>
             );
         }
-        else if ( labels.length == 1 )
+        else if ( solutions.length == 1 )
         {
-            const label = labels[0];
-            const solution = this.props.solutions[label];
+            const solution = solutions[0];
+            const sourceCode = solution.sourceCode;
 
             return (
-                <SolutionViewer sourceCode={solution} />
+                <SolutionViewer sourceCode={sourceCode} />
             );
         }
         else

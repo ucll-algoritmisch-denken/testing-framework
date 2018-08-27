@@ -4,13 +4,11 @@ import { IHasDifficulty, difficulty } from '../../../difficulty';
 import { IScored } from '../../../score';
 import { functionality, Simulation } from '../../../car-simulation';
 import { Maybe } from 'maybe';
-import { SourceCode } from '../../../source-code';
+import { Solution } from '../../../solution-pack';
 export declare abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored {
     protected abstract readonly description: JSX.Element;
     protected readonly hint: JSX.Element | null;
-    protected abstract readonly solutions: {
-        [key: string]: SourceCode;
-    };
+    protected abstract readonly solutions: Solution<any[], any>[];
     abstract readonly difficulty: difficulty;
     protected abstract readonly availableFunctionality: functionality[];
     protected abstract generateSimulations(): Iterable<Simulation>;

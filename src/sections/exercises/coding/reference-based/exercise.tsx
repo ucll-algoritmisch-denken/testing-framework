@@ -8,7 +8,7 @@ import { code } from '../../../../formatters/jsx-formatters';
 import { SourceCode, Language } from '../../../../source-code';
 import { Outcome } from '../../../../outcome';
 import { configuration } from '../../../../configuration';
-import { retrieveSolutions } from '../../../../solution-pack';
+import { Solution } from '../../../../solution-pack';
 
 
 export abstract class Exercise<META = {}> extends CodingExercise
@@ -23,7 +23,7 @@ export abstract class Exercise<META = {}> extends CodingExercise
 
     protected abstract createTestCaseFromInputs(expected : FunctionCallResults, actual : Maybe<FunctionCallResults>, metadata : META) : ITestCase;
 
-    protected get solutions() : { [key : string] : SourceCode }
+    protected get solutions() : Solution<any[], any>[]
     {
         if ( this.referenceImplementations.length === 0 )
         {
@@ -31,7 +31,17 @@ export abstract class Exercise<META = {}> extends CodingExercise
         }
         else
         {
-            return { 'solution': new SourceCode(Language.JavaScript, this.referenceImplementations[0].toString() ) };
+            const label = 'solution';
+            const implementation : (...args : any[]) => any = this.referenceImplementations[0];
+            
+            const solution = new class extends Solution<any[], any>
+            {
+                label = label;
+                
+                implementation = implementation;
+            };
+
+            return [ solution ];
         }
     }
 

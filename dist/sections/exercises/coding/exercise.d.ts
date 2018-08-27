@@ -3,14 +3,12 @@ import { Exercise as BaseExercise } from "../exercise";
 import { ITestCase } from './test-case';
 import { IScored, Score } from '../../../score';
 import { IHasDifficulty, difficulty } from '../../../difficulty';
-import { SourceCode } from '../../../source-code';
+import { Solution } from '../../../solution-pack';
 export declare abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored {
     protected abstract readonly description: JSX.Element;
     protected abstract generateTestCases(): Iterable<ITestCase>;
     protected readonly hint: JSX.Element | null;
-    protected abstract readonly solutions: {
-        [key: string]: SourceCode;
-    };
+    protected abstract readonly solutions: Solution<any[], any>[];
     abstract readonly difficulty: difficulty;
     private _score;
     constructor();

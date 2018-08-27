@@ -13,7 +13,7 @@ export interface ITestCaseInput<Ps extends any[], META = {}>
 
 export abstract class ReferenceImplementationBasedCodingExercise<Ps extends any[], R, META = {}> extends TestCaseBasedCodingExercise
 {
-    protected abstract readonly referenceImplementation : (...args : Ps) => R;
+    public abstract readonly referenceImplementation : (...args : Ps) => R;
     
     protected abstract readonly testedImplementation : Maybe<(...args : Ps) => R>;
 

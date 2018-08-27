@@ -8,6 +8,7 @@ import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../../
 import { HintViewer, MultiSolutionViewer } from '../../../components';
 import { SourceCode } from '../../../source-code';
 import { Lazy } from '../../../lazy';
+import { Solution } from '../../../solution-pack';
 
 
 export abstract class Exercise extends BaseExercise implements IHasDifficulty, IScored
@@ -18,7 +19,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get hint() : JSX.Element | null { return null; }
 
-    protected abstract readonly solutions : { [key : string] : SourceCode };
+    protected abstract readonly solutions : Solution<any[], any>[];
 
     public abstract readonly difficulty : difficulty;
 
