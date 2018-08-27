@@ -131,4 +131,13 @@ export abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, M
 
         return solutions;
     }
+
+    protected get header() : JSX.Element
+    {
+        return (
+            <React.Fragment>
+                {parseFunction(this.exercise.referenceImplementation).signature}
+            </React.Fragment>
+        );
+    }
 }

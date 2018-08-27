@@ -27,5 +27,6 @@ export declare abstract class ReferenceBasedCodingExerciseSection<Ps extends any
     protected readonly htmlClasses: string[];
     protected readonly hint: JSX.Element | null;
     protected readonly solutions: Solution<Ps, R>[];
+    protected readonly header: JSX.Element;
 }
 export {};
