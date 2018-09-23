@@ -1,5 +1,5 @@
 import { js_beautify } from 'js-beautify';
-
+import { firstIndexOf, lastIndexOf } from 'js-algorithms';
 
 export enum Language
 {
@@ -9,7 +9,8 @@ export enum Language
     CSharp,
     CPP,
     CommonLisp,
-    Factor
+    Factor,
+    Pseudocode,
 }
 
 export class SourceCode
@@ -24,8 +25,27 @@ export class SourceCode
         }
         else
         {
-            // TODO
-            return this;
+            const lines = this.sourceCode.split("\n").map(line => line.trimRight());
+            const indentationLevel = Math.min(...lines.map(indentation));
+            const unindentedLines = lines.map(line => line.substr(indentationLevel));
+            const firstNonemptyIndex = firstIndexOf(lines, line => line.length > 0).useDefault(0).value;
+            const lastNonemptyIndex = lastIndexOf(lines, line => line.length > 0).useDefault(lines.length - 1).value;
+            
+            return new SourceCode(this.language, unindentedLines.slice(firstNonemptyIndex, lastNonemptyIndex + 1).join("\n"));
+        }
+
+
+        function indentation(line : string) : number
+        {
+            for ( let i = 0; i !== line.length; ++i )
+            {
+                if ( line[i] !== ' ' )
+                {
+                    return i;
+                }
+            }
+
+            return Infinity;
         }
     }
 
