@@ -61,6 +61,9 @@ export class SourceCodeViewer extends React.Component<IProps, IState>
                 case Language.Factor:
                     return 'text/plain';
 
+                case Language.Pseudocode:
+                    return 'text/plain';
+
                 default:
                     throw new Error(`Unknown language`);
             }

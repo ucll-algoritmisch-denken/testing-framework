@@ -57,6 +57,9 @@ export class LanguageComparison extends React.Component<IProps, IState>
         case Language.JavaScript:
             return 'JavaScript';
 
+        case Language.Pseudocode:
+            return 'Pseudocode';
+
         default:
             throw new Error(`Unknown language`);
         }
