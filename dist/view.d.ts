@@ -3,6 +3,7 @@ import { IChapter } from './chapter';
 import './view.scss';
 export interface IProps {
     chapter: IChapter;
+    version: string;
 }
 export interface IState {
     currentSectionIndex: number;
