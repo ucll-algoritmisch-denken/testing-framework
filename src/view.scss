@@ -8,7 +8,9 @@
 
 .title {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: fixed;
     left: 0px;
     top: 0px;
@@ -21,8 +23,12 @@
     margin: 0px;
     z-index: 1;
 
-    span {
-        font-size: 6vmin;
+    .caption {
+        font-size: 5vmin;
+    }
+
+    .version {
+        font-size: 2vmin;
     }
 }
 

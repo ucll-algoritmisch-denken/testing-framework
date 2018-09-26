@@ -51,19 +51,17 @@ export { Lazy } from './lazy';
 export * from './source-code';
 export * from './solution-pack';
 
-export async function initialize(chapter : IChapter, configuration ?: IConfiguration)
+export async function initialize(chapter : IChapter, version : string, configuration : IConfiguration)
 {
     document.title = chapter.title;
     (window as any).shell = createShell(chapter);
 
     if ( configuration )
     {
-        console.log(`Verify: ${configuration.verifySolutions}`);
-        
         configure(configuration);
     }
     
-    ReactDOM.render(<App chapter={chapter} />, document.getElementById('app'));
+    ReactDOM.render(<App chapter={chapter} version={version} />, document.getElementById('app'));
 }
 
 import * as Exercise from './exercises';

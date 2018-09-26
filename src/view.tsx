@@ -9,6 +9,8 @@ import './view.scss';
 export interface IProps
 {
     chapter : IChapter;
+
+    version : string;
 }
 
 export interface IState
@@ -36,7 +38,10 @@ export class App extends React.Component<IProps, IState> {
         
         return (
             <React.Fragment>
-                <div className="title"><span>{this.props.chapter.title}</span></div>
+                <div className="title">
+                    <span className="caption">{this.props.chapter.title}</span>
+                    <span className="version">{this.props.version}</span>
+                </div>
                 <div className="top-container">
                     <Sidebar sidebar={createSidebarContent()} docked={true}>
                         <div className="section-container" key={`section-${this.state.currentSectionIndex}`}>
