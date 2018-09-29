@@ -29,7 +29,7 @@ export * from 'maybe';
 export { Lazy } from './lazy';
 export * from './source-code';
 export * from './solution-pack';
-export declare function initialize(chapter: IChapter, version: string, configuration: IConfiguration): Promise<void>;
+export declare function initialize(chapter: IChapter, configuration: IConfiguration): Promise<void>;
 import * as Exercise from './exercises';
 export { Exercise };
 import * as Sections from './sections';
