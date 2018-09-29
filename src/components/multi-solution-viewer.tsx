@@ -21,7 +21,7 @@ export interface IState
  * 
  * If zero solutions are given, the component renders to nothing.
  */
-export class MultiSolutionViewer extends React.Component<IProps, IState>
+export class MultiSolutionViewer extends React.Component<IProps, IState> // TODO Add types
 {
     constructor(props : IProps)
     {

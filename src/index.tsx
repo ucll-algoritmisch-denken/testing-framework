@@ -51,17 +51,26 @@ export { Lazy } from './lazy';
 export * from './source-code';
 export * from './solution-pack';
 
-export async function initialize(chapter : IChapter, version : string, configuration : IConfiguration)
+export async function initialize(chapter : IChapter, configuration : IConfiguration)
 {
-    document.title = chapter.title;
-    (window as any).shell = createShell(chapter);
+    const version = document.getElementsByTagName('head')[0].getAttribute('data-version');
 
-    if ( configuration )
+    if ( !version )
     {
-        configure(configuration);
+        console.error("Missing version! Please add data-version attribute to the html's head element.");
     }
-    
-    ReactDOM.render(<App chapter={chapter} version={version} />, document.getElementById('app'));
+    else
+    {
+        document.title = chapter.title;
+        (window as any).shell = createShell(chapter);
+
+        if ( configuration )
+        {
+            configure(configuration);
+        }
+        
+        ReactDOM.render(<App chapter={chapter} version={version} />, document.getElementById('app'));
+    }
 }
 
 import * as Exercise from './exercises';
