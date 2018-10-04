@@ -4593,7 +4593,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nco
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nclass Color {\r\n    constructor(r, g, b) {\r\n        this.r = r;\r\n        this.g = g;\r\n        this.b = b;\r\n    }\r\n}\r\nexports.Color = Color;\r\n\n\n//# sourceURL=webpack:///./src/imaging/color.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nclass Color {\r\n    constructor(r, g, b) {\r\n        this.r = r;\r\n        this.g = g;\r\n        this.b = b;\r\n    }\r\n}\r\nexports.Color = Color;\r\nexports.Colors = {\r\n    black: new Color(0, 0, 0),\r\n    red: new Color(255, 0, 0),\r\n    green: new Color(0, 255, 0),\r\n    blue: new Color(0, 0, 255),\r\n    yellow: new Color(255, 255, 0),\r\n    magenta: new Color(255, 0, 255),\r\n    cyan: new Color(0, 255, 255),\r\n    white: new Color(255, 255, 255)\r\n};\r\n\n\n//# sourceURL=webpack:///./src/imaging/color.ts?");
 
 /***/ }),
 
@@ -4605,7 +4605,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\ncl
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar color_1 = __webpack_require__(/*! ./color */ \"./src/imaging/color.ts\");\r\nexports.Color = color_1.Color;\r\nvar bitmap_1 = __webpack_require__(/*! ./bitmap */ \"./src/imaging/bitmap.ts\");\r\nexports.Bitmap = bitmap_1.Bitmap;\r\nexports.loadImage = bitmap_1.loadImage;\r\n\n\n//# sourceURL=webpack:///./src/imaging/index.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar color_1 = __webpack_require__(/*! ./color */ \"./src/imaging/color.ts\");\r\nexports.Color = color_1.Color;\r\nexports.Colors = color_1.Colors;\r\nvar bitmap_1 = __webpack_require__(/*! ./bitmap */ \"./src/imaging/bitmap.ts\");\r\nexports.Bitmap = bitmap_1.Bitmap;\r\nexports.loadImage = bitmap_1.loadImage;\r\n\n\n//# sourceURL=webpack:///./src/imaging/index.ts?");
 
 /***/ }),
 

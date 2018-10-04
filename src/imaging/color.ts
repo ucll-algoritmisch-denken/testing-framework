@@ -12,4 +12,4 @@ export const Colors = {
     magenta: new Color(255, 0, 255),
     cyan: new Color(0, 255, 255),
     white: new Color(255, 255, 255)
-}
+};
