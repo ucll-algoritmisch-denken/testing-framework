@@ -37,6 +37,18 @@ export function packSolutions<Ps extends any[], R>(...solutions : Solution<Ps, R
     return result;
 }
 
+export function fromFunction<Ps extends any[], R>(solution : (...args : Ps) => R) : ISolutionPack<Ps, R>
+{
+    return packSolutions(
+        new class extends Solution<Ps, R>
+        {
+            label = 'solution';
+
+            implementation = solution;
+        }
+    );
+}
+
 export function isSolutionPack<Ps extends any[], R>(f : Func<Ps, R>) : f is ISolutionPack<Ps, R>
 {
     return (f as any)[pack];
