@@ -13,7 +13,7 @@ export interface ISolutionPack<Ps extends any[], R> {
 export declare type ParameterTypes<T> = T extends (...args: infer Ps) => infer R ? Ps : never;
 export declare type ReturnType<T> = T extends (...args: infer Ps) => infer R ? R : never;
 export declare function packSolutions<Ps extends any[], R>(...solutions: Solution<Ps, R>[]): ISolutionPack<Ps, R>;
-export declare function fromFunction<Ps extends any[], R>(solution: (...args: Ps) => R): ISolutionPack<Ps, R>;
+export declare function packSingleSolution<Ps extends any[], R>(solution: (...args: Ps) => R, label?: string): ISolutionPack<Ps, R>;
 export declare function isSolutionPack<Ps extends any[], R>(f: Func<Ps, R>): f is ISolutionPack<Ps, R>;
 export declare function retrieveSolutions<Ps extends any[], R>(f: Func<Ps, R>): Solution<Ps, R>[];
 export declare function convertSolutionsToSourceCodeMap<Ps extends any[], R>(solutions: Solution<Ps, R>[]): {

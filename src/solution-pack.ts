@@ -37,12 +37,12 @@ export function packSolutions<Ps extends any[], R>(...solutions : Solution<Ps, R
     return result;
 }
 
-export function fromFunction<Ps extends any[], R>(solution : (...args : Ps) => R) : ISolutionPack<Ps, R>
+export function packSingleSolution<Ps extends any[], R>(solution : (...args : Ps) => R, label ?: string) : ISolutionPack<Ps, R>
 {
     return packSolutions(
         new class extends Solution<Ps, R>
         {
-            label = 'solution';
+            label = label || 'solution';
 
             implementation = solution;
         }
