@@ -6,7 +6,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "start": "npm run build",
+    "start": "echo 'Building in PRODUCTION mode' && npm run production",
     "clean": "rm -rf dist",
     "build": "webpack --mode development",
     "production": "webpack --mode production",
