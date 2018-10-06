@@ -13,7 +13,16 @@ export abstract class Solution<Ps extends any[], R>
 
     public get sourceCode() : SourceCode
     {
-        return new SourceCode(Language.JavaScript, this.implementation.toString()).beautify();
+        const implementationString = this.implementation.toString();
+
+        if ( /exports\./.exec(implementationString) )
+        {
+            throw new Error(`Error: exports. detected in solution\n${implementationString}`);
+        }
+        else
+        {
+            return new SourceCode(Language.JavaScript, implementationString).beautify();
+        }
     }
 }
 
