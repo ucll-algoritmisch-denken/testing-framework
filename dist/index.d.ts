@@ -25,7 +25,6 @@ export { Components };
 export { IHasDifficulty, difficulty } from './difficulty';
 export { IScored, Score } from './score';
 import { IConfiguration } from './configuration';
-export * from 'maybe';
 export { Lazy } from './lazy';
 export * from './source-code';
 export * from './solution-pack';
