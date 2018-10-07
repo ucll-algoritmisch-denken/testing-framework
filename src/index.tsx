@@ -44,7 +44,6 @@ export { IHasDifficulty, difficulty } from './difficulty';
 export { IScored, Score } from './score';
 
 import { IConfiguration, configure } from './configuration';
-export * from 'maybe';
 
 export { Lazy } from './lazy';
 
