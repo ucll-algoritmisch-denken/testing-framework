@@ -4,10 +4,9 @@ import { CollapsibleTestCase as _CollapsibleTestCase } from './collapsible-test-
 import { TestCaseBasedCodingExercise } from './test-case-based-coding-exercise';
 import { ReferenceImplementationBasedCodingExercise, ITestCaseInput as _ITestCaseInput } from './reference-implementation-based-coding-exercise';
 import { ReturnValueCodingExercise } from './return-value-coding-exercise';
-import { verifySolutions as _verifySolutions } from './verify-solutions';
+export { verifySolutions } from './verify-solutions';
 export declare namespace Coding {
     const Exercise: typeof TestCaseBasedCodingExercise;
-    const verifySolutions: typeof _verifySolutions;
     namespace TestCaseBased {
         type ITestCase = _ITestCase;
         const CollapsibleTestCase: typeof _CollapsibleTestCase;
