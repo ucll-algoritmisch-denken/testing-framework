@@ -17,7 +17,8 @@ export abstract class Solution<Ps extends any[], R>
 
         if ( /exports\./.exec(implementationString) )
         {
-            throw new Error(`Error: exports. detected in solution\n${implementationString}`);
+            console.error(`Error: exports. detected in solution\n${implementationString}`);
+            alert('Bug found! Please inform a lecturer.')
         }
         else
         {
