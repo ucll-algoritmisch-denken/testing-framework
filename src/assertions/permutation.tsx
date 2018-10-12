@@ -5,6 +5,7 @@ import { IToJsxElement, simple } from '../formatters/jsx-formatters';
 import { isPermutation } from 'js-algorithms';
 import { Maybe } from 'maybe';
 import './permutation.scss';
+import { deepEqual } from '../equality';
 
 
 export class PermutationAssertion<T> implements IAssertion<T>
@@ -18,7 +19,7 @@ export class PermutationAssertion<T> implements IAssertion<T>
 
     protected areEqual(x : T, y : T) : boolean
     {
-        return x === y;
+        return deepEqual(x, y);
     }
 }
 
