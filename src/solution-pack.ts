@@ -18,12 +18,10 @@ export abstract class Solution<Ps extends any[], R>
         if ( /exports\./.exec(implementationString) )
         {
             console.error(`Error: exports. detected in solution\n${implementationString}`);
-            alert('Bug found! Please inform a lecturer.')
+            alert('Bug found! Please inform a lecturer.');
         }
-        else
-        {
-            return new SourceCode(Language.JavaScript, implementationString).beautify();
-        }
+        
+        return new SourceCode(Language.JavaScript, implementationString).beautify();
     }
 }
 

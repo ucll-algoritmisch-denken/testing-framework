@@ -7,24 +7,29 @@ import { Maybe } from 'maybe';
 import './permutation.scss';
 
 
-class PermutationAssertion<T> implements IAssertion<T>
+export class PermutationAssertion<T> implements IAssertion<T>
 {
     constructor(private expected : any, private formatter : IToJsxElement<any>) {  }
 
     check(actual : any) : IResult
     {
-        return new PermutationAssertionResult(this.expected, actual, this.formatter);
+        return new PermutationAssertionResult(this.expected, actual, this.formatter, (x, y) => this.areEqual(x, y));
+    }
+
+    protected areEqual(x : T, y : T) : boolean
+    {
+        return x === y;
     }
 }
 
 class PermutationAssertionResult implements IResult
 {
-    constructor(private expected : any, private actual : Maybe<any>, private formatter : IToJsxElement<any>) { }
+    constructor(private expected : any, private actual : Maybe<any>, private formatter : IToJsxElement<any>, private equality : (x : any, y : any) => boolean) { }
 
     get outcome(): Outcome
     {
         return this.actual.caseOf({
-            just: value => isPermutation(this.expected, value) ? Outcome.Pass : Outcome.Fail,
+            just: value => isPermutation(this.expected, value, this.equality) ? Outcome.Pass : Outcome.Fail,
             nothing: () => Outcome.Skip
         });
     }
