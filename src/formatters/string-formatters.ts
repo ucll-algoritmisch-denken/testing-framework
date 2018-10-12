@@ -22,7 +22,14 @@ export function convertToString(x : any) : string
     }
     else if ( Type.number.hasType(x) )
     {
-        return x.toPrecision(4).toString();
+        if ( Number.isInteger(x) )
+        {
+            return x.toString();
+        }
+        else
+        {
+            return x.toPrecision(4).toString();
+        }
     }
     else if ( Type.boolean.hasType(x) )
     {
