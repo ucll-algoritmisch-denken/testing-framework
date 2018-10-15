@@ -1,13 +1,13 @@
 .array-viewer {
     font-size: 0.75em;
     border-collapse: collapse;
-    border: #5AA 2px solid;
+    border: #AAA 2px solid;
     fill-opacity: 0.8;
 
     & > tr {
         & > td {
             background: #8AF;
-            border: #5AA 1px solid;
+            border: #BBB 1px solid;
             padding: 0.2em 0.5em;
             min-width: 2em;
         }
