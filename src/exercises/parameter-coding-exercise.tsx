@@ -34,26 +34,17 @@ export abstract class ParameterCodingExercise<Ps extends any[], R, META = {}> ex
 
     protected createParameterAssertion(parameterIndex : number, parameterName : string, originalValue : any, expectedValue : any, metadata : META) : IAssertion<any>
     {
-        const me = this;
-        const parameterAssertion = createParameterAssertion();
+        const checker = this.parameterCheckers[parameterName];
 
-        return Assertions.parameter(parameterIndex, parameterName, parameterAssertion);
-
-
-        function createParameterAssertion()
+        if ( checker )
         {
-            const checker = me.parameterCheckers[parameterName];
-
-            if ( checker )
-            {
-                // Ask checker to create assertion for current parameter
-                return checker(originalValue, expectedValue, metadata);
-            }
-            else
-            {
-                // No checker found for current parameter, create default assertion, i.e. unmodified
-                return Assertions.unmodified(originalValue);
-            }
+            // Ask checker to create assertion for current parameter
+            return checker(originalValue, expectedValue, metadata);
+        }
+        else
+        {
+            // No checker found for current parameter, create default assertion, i.e. unmodified
+            return Assertions.unmodified(originalValue);
         }
     }
 
