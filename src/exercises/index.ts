@@ -4,6 +4,7 @@ import { CollapsibleTestCase as _CollapsibleTestCase } from './collapsible-test-
 import { TestCaseBasedCodingExercise } from './test-case-based-coding-exercise';
 import { ReferenceImplementationBasedCodingExercise, ITestCaseInput as _ITestCaseInput } from './reference-implementation-based-coding-exercise';
 import { ReturnValueCodingExercise } from './return-value-coding-exercise';
+import { ParameterCodingExercise } from './parameter-coding-exercise';
 export { verifySolutions } from './verify-solutions';
 
 
@@ -26,6 +27,11 @@ export namespace Coding
             export namespace ReturnValue
             {
                 export const Exercise = ReturnValueCodingExercise;
+            }
+
+            export namespace Parameters
+            {
+                export const Exercise = ParameterCodingExercise
             }
         }
     }
