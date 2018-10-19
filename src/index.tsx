@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { createShell } from './shell';
-import { App } from './view';
+import { App } from 'app';
 
 export { IChapter, ISection } from './chapter';
 export { IFunctionRepository, fromWindow as createFunctionRepositoryFromWindow } from './function-repository';

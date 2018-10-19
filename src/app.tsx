@@ -1,9 +1,9 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
-import { ISection } from './chapter';
-import { TableOfContents } from './components/table-of-contents';
-import { IChapter } from './chapter';
-import './view.scss';
+import { ISection } from 'chapter';
+import { TableOfContents } from 'components/table-of-contents';
+import { IChapter } from 'chapter';
+import './app.scss';
 
 
 export interface IProps
@@ -15,6 +15,8 @@ export interface IProps
 
 export interface IState
 {
+    sidebarOpen : boolean;
+
     currentSectionIndex : number;
 }
 
@@ -29,7 +31,7 @@ export class App extends React.Component<IProps, IState> {
         }
         else
         {
-            this.state = { currentSectionIndex: 0 };
+            this.state = { currentSectionIndex: 0, sidebarOpen: true };
         }
     }
     
@@ -43,7 +45,7 @@ export class App extends React.Component<IProps, IState> {
                     <span className="version">{this.props.version}</span>
                 </div>
                 <div className="top-container">
-                    <Sidebar sidebar={createSidebarContent()} docked={true}>
+                    <Sidebar sidebar={createSidebarContent()} onSetOpen={(b) => this.setState({sidebarOpen: b})}>
                         <div className="section-container" key={`section-${this.state.currentSectionIndex}`}>
                             {this.props.chapter.sections[this.state.currentSectionIndex].content}
                         </div>
