@@ -38,13 +38,14 @@ export class App extends React.Component<IProps, IState> {
     render() {
         const me = this;
         
+        // tabindex required to receive key events
         return (
             <React.Fragment>
                 <div className="title">
                     <span className="caption">{this.props.chapter.title}</span>
                     <span className="version">{this.props.version}</span>
                 </div>
-                <div className="top-container" onKeyDown={(e) => onKeyDown(e)}>
+                <div className="top-container" onKeyDown={(e) => onKeyDown(e)} tabIndex={0}>
                     <Sidebar sidebar={createSidebarContent()} docked={this.state.sidebarOpen}>
                         <div className="section-container" key={`section-${this.state.currentSectionIndex}`}>
                             {this.props.chapter.sections[this.state.currentSectionIndex].content}
@@ -63,9 +64,7 @@ export class App extends React.Component<IProps, IState> {
 
         function onKeyDown(e : React.KeyboardEvent<HTMLDivElement>)
         {
-            console.log(`key down ${e}`);
-
-            if ( e.key === 'S' && e.ctrlKey )
+            if ( e.key === ' ' && e.ctrlKey )
             {
                 me.setState( { sidebarOpen: !me.state.sidebarOpen } );
             }
