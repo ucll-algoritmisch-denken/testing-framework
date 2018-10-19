@@ -44,8 +44,8 @@ export class App extends React.Component<IProps, IState> {
                     <span className="caption">{this.props.chapter.title}</span>
                     <span className="version">{this.props.version}</span>
                 </div>
-                <div className="top-container">
-                    <Sidebar sidebar={createSidebarContent()} onSetOpen={(b) => this.setState({sidebarOpen: b})}>
+                <div className="top-container" onKeyDown={(e) => onKeyDown(e)}>
+                    <Sidebar sidebar={createSidebarContent()} docked={this.state.sidebarOpen}>
                         <div className="section-container" key={`section-${this.state.currentSectionIndex}`}>
                             {this.props.chapter.sections[this.state.currentSectionIndex].content}
                         </div>
@@ -59,6 +59,14 @@ export class App extends React.Component<IProps, IState> {
             return (
                 <TableOfContents sections={me.props.chapter.sections} onSectionSelected={(index, section) => me.onSectionSelected(index, section)} />
             );
+        }
+
+        function onKeyDown(e : React.KeyboardEvent<HTMLDivElement>)
+        {
+            if ( e.key === 'S' && e.ctrlKey )
+            {
+                me.setState( { sidebarOpen: !me.state.sidebarOpen } );
+            }
         }
     }
 

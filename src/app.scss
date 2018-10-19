@@ -22,6 +22,8 @@
     height: 5em;
     margin: 0px;
     z-index: 1;
+    user-select: none;
+    cursor: pointer;
 
     .caption {
         font-size: 5vmin;
