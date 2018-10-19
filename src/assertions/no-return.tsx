@@ -40,7 +40,7 @@ class NoReturnAssertion extends ComparisonAssertion<any>
     }
 }
 
-export function noReturn() : IAssertion<FunctionCallResults>
+export function noReturn() : IAssertion<any>
 {
     return new NoReturnAssertion();
 }
