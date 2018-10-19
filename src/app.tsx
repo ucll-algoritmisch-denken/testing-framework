@@ -63,6 +63,8 @@ export class App extends React.Component<IProps, IState> {
 
         function onKeyDown(e : React.KeyboardEvent<HTMLDivElement>)
         {
+            console.log(`key down ${e}`);
+
             if ( e.key === 'S' && e.ctrlKey )
             {
                 me.setState( { sidebarOpen: !me.state.sidebarOpen } );
