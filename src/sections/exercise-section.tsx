@@ -59,6 +59,4 @@ export abstract class ExerciseSection extends ISection
             );
         }
     }
-
-    
 }

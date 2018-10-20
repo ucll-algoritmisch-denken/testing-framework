@@ -7,6 +7,7 @@ import { DifficultyViewer } from '../../components';
 import './exercise.scss';
 
 
+// TODO Get rid of this class
 export abstract class Exercise implements ISection
 {
     public abstract readonly id : string;
