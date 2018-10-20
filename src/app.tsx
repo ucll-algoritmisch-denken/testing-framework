@@ -47,7 +47,7 @@ export class App extends React.Component<IProps, IState> {
                 </div>
                 <div className="top-container" onKeyDown={(e) => onKeyDown(e)} tabIndex={0}>
                     <Sidebar sidebar={createSidebarContent()} docked={this.state.sidebarOpen}>
-                        <div className="section-container" key={`section-${this.state.currentSectionIndex}`}>
+                        <div className="section-container" key={`section-${this.state.currentSectionIndex}`} tabIndex={0}>
                             {this.props.chapter.sections[this.state.currentSectionIndex].content}
                         </div>
                     </Sidebar>
