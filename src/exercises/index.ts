@@ -35,7 +35,7 @@ export namespace Coding
 
                 export type IParameterCheckers<META={}> = _IParameterCheckers<META>;
 
-                export const Exercise = ParameterCodingExercise
+                export const Exercise = ParameterCodingExercise;
             }
         }
     }
