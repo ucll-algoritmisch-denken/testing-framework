@@ -28,7 +28,7 @@ export abstract class ExerciseSection extends ISection
     public get content() : JSX.Element
     {
         return (
-            <section className={classNames(this.htmlClasses)}>
+            <section className={classNames(this.htmlClasses)} tabIndex={0}>
                 <header>
                     {this.renderDifficultyViewer()} {this.header}
                 </header>
