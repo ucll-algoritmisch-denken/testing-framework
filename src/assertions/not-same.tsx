@@ -22,11 +22,18 @@ export abstract class NotSameAssertion<T> implements IAssertion<T>
 
             get content()
             {
-                return (
-                    <React.Fragment>
-                        Objects should not be them same.
-                    </React.Fragment>
-                );
+                if ( outcome !== Outcome.Pass )
+                {
+                    return (
+                        <React.Fragment>
+                            Objects should not be the same.
+                        </React.Fragment>
+                    );
+                }
+                else
+                {
+                    return <React.Fragment />;
+                }
             }
         };
     }
