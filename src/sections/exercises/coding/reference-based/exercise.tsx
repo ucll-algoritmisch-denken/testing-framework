@@ -47,7 +47,7 @@ export abstract class Exercise<META = {}> extends CodingExercise
 
     protected get htmlClasses() : string[]
     {
-        return super.htmlClasses.concat('reference-based');
+        return [ ...super.htmlClasses, 'reference-based' ];
     }
 
     protected *generateTestCases() : Iterable<ITestCase>

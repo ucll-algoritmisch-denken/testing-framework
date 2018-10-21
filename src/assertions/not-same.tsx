@@ -2,17 +2,29 @@ import React from 'react';
 import { IAssertion } from '.';
 import { Maybe } from 'maybe';
 import { IResult } from './result';
-import { Outcome } from 'outcome';
+import { Outcome } from '../outcome';
+import { FunctionCallResults } from '../function-util';
 
 
-export abstract class NotSameAssertion<T> implements IAssertion<T>
+export abstract class NotSameAssertion<T> implements IAssertion<FunctionCallResults>
 {
-    protected abstract readonly original : T;
+    protected abstract findFirstValue(fcr : FunctionCallResults) : T;
 
-    check(actual: Maybe<T>) : IResult
+    protected abstract findSecondValue(fcr : FunctionCallResults) : T;
+
+    protected abstract readonly message : JSX.Element;
+
+    check(actual: Maybe<FunctionCallResults>) : IResult
     {
+        const me = this;
+
         const outcome = actual.caseOf({
-            just: x => x !== this.original ? Outcome.Pass : Outcome.Fail,
+            just: x => {
+                const firstValue = this.findFirstValue(x);
+                const secondValue = this.findSecondValue(x);
+
+                return firstValue !== secondValue ? Outcome.Pass : Outcome.Fail
+            },
             nothing: () => Outcome.Skip
         });
         
@@ -24,11 +36,7 @@ export abstract class NotSameAssertion<T> implements IAssertion<T>
             {
                 if ( outcome !== Outcome.Pass )
                 {
-                    return (
-                        <React.Fragment>
-                            Objects should not be the same.
-                        </React.Fragment>
-                    );
+                    return me.message;
                 }
                 else
                 {
@@ -37,15 +45,4 @@ export abstract class NotSameAssertion<T> implements IAssertion<T>
             }
         };
     }
-}
-
-export function notSame<T>(original : T) : IAssertion<T>
-{
-    return new class extends NotSameAssertion<T>
-    {
-        protected get original() : T
-        {
-            return original;
-        }
-    };
 }

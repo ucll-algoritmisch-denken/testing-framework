@@ -20,7 +20,7 @@ export abstract class ComparisonAssertion<T> extends TabularAssertion<T>
 
     protected get htmlClasses() : string[]
     {
-        return super.htmlClasses.concat('comparison');
+        return [ ...super.htmlClasses, 'comparison' ];
     }
 
     protected *generateRows(actual : Maybe<any>, outcome : Outcome) : Iterable<IRow>

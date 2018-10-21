@@ -173,7 +173,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
     protected get htmlClasses() : string[]
     {
-        return super.htmlClasses.concat('car');
+        return [ ...super.htmlClasses, 'car' ];
     }
 
     protected *generateTestCases() : Iterable<ITestCase>

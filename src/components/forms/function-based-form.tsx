@@ -111,7 +111,7 @@ export class Form<META> extends React.Component<IProps<META>, IState>
         const returnValueColumn : IColumn<META>[] = Array.from(this.generateReturnValueColumn());
         const outputColumns : IColumn<META>[] = Array.from(this.generateOutputColumns());
 
-        return inputColumns.concat(returnValueColumn, outputColumns);
+        return [ ...inputColumns, ...returnValueColumn, ...outputColumns ];
     }
 
     protected *generateInputColumns() : Iterable<IColumn<META>>

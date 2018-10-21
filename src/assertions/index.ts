@@ -10,5 +10,4 @@ export * from './parameter';
 export * from './decorator';
 export * from './sequence';
 export * from './bitmap';
-export * from './conjunction';
 export * from './not-same';

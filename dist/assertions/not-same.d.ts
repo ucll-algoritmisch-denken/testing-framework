@@ -1,8 +1,11 @@
+/// <reference types="react" />
 import { IAssertion } from '.';
 import { Maybe } from 'maybe';
 import { IResult } from './result';
-export declare abstract class NotSameAssertion<T> implements IAssertion<T> {
-    protected abstract readonly original: T;
-    check(actual: Maybe<T>): IResult;
+import { FunctionCallResults } from '../function-util';
+export declare abstract class NotSameAssertion<T> implements IAssertion<FunctionCallResults> {
+    protected abstract findFirstValue(fcr: FunctionCallResults): T;
+    protected abstract findSecondValue(fcr: FunctionCallResults): T;
+    protected abstract readonly message: JSX.Element;
+    check(actual: Maybe<FunctionCallResults>): IResult;
 }
-export declare function notSame<T>(original: T): IAssertion<T>;

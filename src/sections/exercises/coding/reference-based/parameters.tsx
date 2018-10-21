@@ -52,7 +52,7 @@ export abstract class Parameters<META = {}> extends Exercise<META>
             }
         });
 
-        return Assertions.sequence( [ returnValueAssertion ].concat(argumentAssertions) );
+        return Assertions.sequence( [ returnValueAssertion, ...argumentAssertions ] );
     }
 
     protected createReturnValueAssertion() : IAssertion<FunctionCallResults>

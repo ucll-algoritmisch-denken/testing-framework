@@ -24,7 +24,7 @@ export abstract class ReturnValue<META = {}> extends Exercise<META>
             return Assertions.parameter(parameterIndex, parameterName, this.createParameterAssertion(parameterIndex, parameterName, originalValue));
         });
 
-        return Assertions.sequence( [ returnValueAssertion ].concat(parameterAssertions) );
+        return Assertions.sequence( [ returnValueAssertion, ...parameterAssertions ] );
     }
 
     protected createReturnValueAssertion(expectedReturnValue : any, _metadata : META) : IAssertion<any>

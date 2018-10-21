@@ -119,7 +119,7 @@ export abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, M
 
     protected get htmlClasses() : string[]
     {
-        return super.htmlClasses.concat('coding');
+        return [ ...super.htmlClasses, 'coding' ];
     }
 
     protected get hint() : JSX.Element | null { return null; }
