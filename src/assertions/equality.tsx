@@ -16,7 +16,7 @@ export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
         {
             throw new Error(`Bug detected in testing framework`);
         }
-    }    
+    }
 }
 
 export function equality<T>(expected : T, original : Maybe<T>) : IAssertion<T>
