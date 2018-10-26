@@ -5,6 +5,7 @@ import { TestCaseBasedCodingExercise } from './test-case-based-coding-exercise';
 import { ReferenceImplementationBasedCodingExercise, ITestCaseInput as _ITestCaseInput } from './reference-implementation-based-coding-exercise';
 import { ReturnValueCodingExercise } from './return-value-coding-exercise';
 import { ParameterCodingExercise, IParameterChecker as _IParameterChecker, IParameterCheckers as _IParameterCheckers } from './parameter-coding-exercise';
+import { ReturnValueInterpretationExercise } from './return-value-interpretation-exercise';
 export { verifySolutions } from './verify-solutions';
 
 
@@ -38,5 +39,13 @@ export namespace Coding
                 export const Exercise = ParameterCodingExercise;
             }
         }
+    }
+}
+
+export namespace Interpretation
+{
+    export namespace ReturnValue
+    {
+        export const Exercise = ReturnValueInterpretationExercise;
     }
 }
