@@ -4,11 +4,17 @@ import { Form as FormBase } from './form';
 
 export interface IColumn
 {
+    /**
+     * Shown in the header row of the form.
+     */
     header : JSX.Element;
 }
 
 export interface IRow<COLUMN>
 {
+    /**
+     * Render the cell in the given column.
+     */
     render(column : COLUMN) : JSX.Element
 }
 
@@ -46,11 +52,6 @@ export class Form<COLUMN extends IColumn> extends React.Component<IProps<COLUMN>
     }
 
     protected get rows() : JSX.Element[][]
-    {
-        return Array.from(this.renderRows());
-    }
-
-    protected renderRows() : JSX.Element[][]
     {
         return this.props.rows.map(row => {
             return this.props.columns.map(column => row.render(column))

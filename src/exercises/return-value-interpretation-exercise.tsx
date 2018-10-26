@@ -107,12 +107,14 @@ export abstract class ReturnValueInterpretationExercise<Ps extends any[], R>
 
     protected createReturnValueColumn() : Column<Ps, R>
     {
+        const me = this;
+
         return new class extends ReturnValueColumn<Ps, R>
         {
             protected equality(input: string, expected: R): boolean
             {
                 return evalm(input).caseOf({
-                    just: x => this.equality(x, expected),
+                    just: x => me.equality(x, expected),
                     nothing: () => false
                 });
             }

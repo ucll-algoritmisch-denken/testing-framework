@@ -1,8 +1,14 @@
 import React from 'react';
 export interface IColumn {
+    /**
+     * Shown in the header row of the form.
+     */
     header: JSX.Element;
 }
 export interface IRow<COLUMN> {
+    /**
+     * Render the cell in the given column.
+     */
     render(column: COLUMN): JSX.Element;
 }
 export interface IProps<COLUMN extends IColumn> {
@@ -17,5 +23,4 @@ export declare class Form<COLUMN extends IColumn> extends React.Component<IProps
     render(): JSX.Element;
     protected readonly headers: JSX.Element[];
     protected readonly rows: JSX.Element[][];
-    protected renderRows(): JSX.Element[][];
 }
