@@ -430,7 +430,7 @@ export abstract class FormBuilder<META = {}>
         const func = this.func;
         const parameters = this.parameters;
         const returnValue = this.returnValue;
-        const inputCases = Array.from(this.generateCases());       
+        const inputCases = Array.from(this.generateCases());
 
         return (
             <Form className={this.className} {...{func, parameters, returnValue, inputCases}} />
