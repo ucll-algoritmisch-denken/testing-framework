@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { IColumn, IRow } from 'components/forms/row-based-form';
-import { TypedFunctionCallResults } from '../function-util';
+import { TypedFunctionCallResults } from 'function-util';
 declare abstract class Column<Ps extends any[], R> implements IColumn {
     abstract readonly header: JSX.Element;
     abstract renderCell(fcr: TypedFunctionCallResults<Ps, R>): JSX.Element;

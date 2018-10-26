@@ -1,10 +1,10 @@
 import React from 'react';
 import { IColumn, IRow } from 'components/forms/row-based-form';
-import { TypedFunctionCallResults, parseFunction, typedCallFunction } from '../function-util';
-import { ValidatedInput } from '../components/validated-input';
-import { Form } from '../components/forms/row-based-form';
-import { deepEqual } from '../equality';
-import { evalm } from '../evalm';
+import { TypedFunctionCallResults, parseFunction, typedCallFunction } from 'function-util';
+import { ValidatedInput } from 'components/validated-input';
+import { Form } from 'components/forms/row-based-form';
+import { deepEqual } from 'equality';
+import { evalm } from 'evalm';
 
 
 abstract class Column<Ps extends any[], R> implements IColumn
