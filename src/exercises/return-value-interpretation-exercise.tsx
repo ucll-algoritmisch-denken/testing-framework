@@ -18,18 +18,9 @@ abstract class Column<Ps extends any[], R> implements IColumn
 /**
  * Column corresponding to a parameter.
  */
-class ParameterColumn<Ps extends any[], R> extends Column<Ps, R>
+abstract class ParameterColumn<Ps extends any[], R> extends Column<Ps, R>
 {
-    constructor(private parameterName : string) { super(); }
-
-    get header()
-    {
-        return (
-            <React.Fragment>
-                {this.parameterName}
-            </React.Fragment>
-        );
-    }
+    protected abstract readonly parameterName : string;
 
     public renderCell(fcr : TypedFunctionCallResults<Ps, R>) : JSX.Element
     {
@@ -43,15 +34,6 @@ class ParameterColumn<Ps extends any[], R> extends Column<Ps, R>
 abstract class ReturnValueColumn<Ps extends any[], R> extends Column<Ps, R>
 {
     protected abstract equality(input : string, expected : R) : boolean;
-
-    get header()
-    {
-        return (
-            <React.Fragment>
-                return value
-            </React.Fragment>
-        );
-    }
 
     public renderCell(fcr : TypedFunctionCallResults<Ps, R>) : JSX.Element
     {
@@ -77,41 +59,74 @@ export abstract class ReturnValueInterpretationExercise<Ps extends any[], R>
 
     protected abstract generateInputs() : Iterable<Ps>;
 
-    protected get rows() : Row<Ps, R>[]
+    private get rows() : Row<Ps, R>[]
     {
         const inputs = Array.from(this.generateInputs());
 
         return inputs.map( input => this.createRow(input) );
     }
 
-    protected createRow(input : Ps) : Row<Ps, R>
+    private createRow(input : Ps) : Row<Ps, R>
     {
         const fcr : TypedFunctionCallResults<Ps, R> = typedCallFunction(this.function, ...input);
 
         return new Row<Ps, R>(fcr);
     }
 
-    protected get columns()
+    private get columns()
     {
         return [ ...this.createParameterColumns(), this.createReturnValueColumn() ];
     }
 
-    protected createParameterColumns() : Column<Ps, R>[]
+    private createParameterColumns() : Column<Ps, R>[]
     {
         return parseFunction(this.function).parameterNames.map(parameterName => this.createParameterColumn(parameterName));
     }
 
-    protected createParameterColumn(parameterName : string) : Column<Ps, R>
+    private createParameterColumn(parameterName : string) : Column<Ps, R>
     {
-        return new ParameterColumn(parameterName);
+        const me = this;
+
+        return new class extends ParameterColumn<Ps, R>
+        {
+            protected parameterName = parameterName;
+
+            public get header()
+            {
+                return me.createParameterColumnHeader(parameterName);
+            }
+        };
     }
 
-    protected createReturnValueColumn() : Column<Ps, R>
+    protected createParameterColumnHeader(parameterName : string) : JSX.Element
+    {
+        return (
+            <React.Fragment>
+                {parameterName}
+            </React.Fragment>
+        );
+    }
+
+    protected createReturnValueColumnHeader() : JSX.Element
+    {
+        return (
+            <React.Fragment>
+                return value
+            </React.Fragment>
+        );
+    }
+
+    private createReturnValueColumn() : Column<Ps, R>
     {
         const me = this;
 
         return new class extends ReturnValueColumn<Ps, R>
         {
+            public get header()
+            {
+                return me.createReturnValueColumnHeader();
+            }
+
             protected equality(input: string, expected: R): boolean
             {
                 return evalm(input).caseOf({
