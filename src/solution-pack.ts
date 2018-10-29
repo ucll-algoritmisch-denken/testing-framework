@@ -11,16 +11,21 @@ export abstract class Solution<Ps extends any[], R>
 
     public abstract readonly implementation : Func<Ps, R>;
 
+    public get dependencies() : ((...args : any[]) => any)[]
+    {
+        return [];
+    }
+
     public get sourceCode() : SourceCode
     {
-        const implementationString = this.implementation.toString();
+        const implementationString = this.implementation.toString() + this.dependencies.map(dependency => dependency.toString()).join("\n");
 
         if ( /exports\./.exec(implementationString) )
         {
             console.error(`Error: exports. detected in solution\n${implementationString}`);
             alert('Bug found! Please inform a lecturer.');
         }
-        
+
         return new SourceCode(Language.JavaScript, implementationString).beautify();
     }
 }
@@ -73,7 +78,7 @@ export function retrieveSolutions<Ps extends any[], R>(f : Func<Ps, R>) : Soluti
         const solution = new class extends Solution<Ps, R>
         {
             public label: string = '';
-            
+
             public implementation: Func<Ps, R> = f;
         };
 
