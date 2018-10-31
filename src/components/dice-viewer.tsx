@@ -6,6 +6,8 @@ import { DieViewer } from './die-viewer';
 export interface IProps
 {
     dice : number[];
+
+    className ?: string;
 }
 
 export interface IState
@@ -25,7 +27,7 @@ export class DiceViewer extends React.Component<IProps, IState>
         const me = this;
 
         return (
-            <span className="dice-viewer">
+            <span className={this.props.className}>
                 {createDice()}
             </span>
         );

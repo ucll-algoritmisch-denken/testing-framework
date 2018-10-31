@@ -1,6 +1,7 @@
 import React from 'react';
 export interface IProps {
     dice: number[];
+    className?: string;
 }
 export interface IState {
 }
