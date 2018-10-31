@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import * as Type from '../type';
 
 
 export interface IProps
 {
+    children?: React.ReactChild;
+
+    className ?: string;
+
     die : number;
 }
 
@@ -12,7 +17,7 @@ export interface IState
 
 }
 
-export class DieViewer extends React.Component<IProps, IState>
+class UnstyledDieViewer extends React.PureComponent<IProps, IState>
 {
     constructor(props : IProps)
     {
@@ -22,24 +27,13 @@ export class DieViewer extends React.Component<IProps, IState>
     render()
     {
         return (
-            <span className="die-viewer">
+            <span className={this.props.className}>
                 {String.fromCharCode(0x2680 - 1 + this.props.die)}
             </span>
         );
     }
-
-    static propTypes = {
-        die: function(props : any, propName : string, componentName : string) : Error | undefined {
-            const value = props[propName];
-
-            if ( !Type.number.hasType(value) || value < 1 || value > 6 )
-            {
-                return new Error(`${propName} should be assigned a value between 1 and 6`);
-            }
-            else
-            {
-                return undefined;
-            }
-        }
-    };
 }
+
+export const DieViewer = styled<IProps>(UnstyledDieViewer)`
+    font-size: 1.5em;
+`;

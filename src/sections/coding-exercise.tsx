@@ -23,9 +23,9 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
      * Will be put into a DescriptionBox.
      */
     protected abstract readonly description : JSX.Element;
-    
+
     protected abstract readonly solutionPack : ISolutionPack<Ps, R>;
-    
+
     protected abstract readonly testedImplementation : Maybe<(...args : Ps) => R>;
 
     /**
@@ -133,6 +133,6 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
     {
         return (
             <MultiSolutionViewer solutions={retrieveSolutions(this.solutionPack) as any} />
-        )
+        );
     }
 }

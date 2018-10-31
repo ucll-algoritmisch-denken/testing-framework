@@ -23,11 +23,11 @@ export abstract class NotSameAssertion<T> implements IAssertion<FunctionCallResu
                 const firstValue = this.findFirstValue(x);
                 const secondValue = this.findSecondValue(x);
 
-                return firstValue !== secondValue ? Outcome.Pass : Outcome.Fail
+                return firstValue !== secondValue ? Outcome.Pass : Outcome.Fail;
             },
             nothing: () => Outcome.Skip
         });
-        
+
         return new class implements IResult
         {
             outcome = outcome;

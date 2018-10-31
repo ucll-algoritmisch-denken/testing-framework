@@ -15,7 +15,7 @@ export interface IRow<COLUMN>
     /**
      * Render the cell in the given column.
      */
-    render(column : COLUMN) : JSX.Element
+    render(column : COLUMN) : JSX.Element;
 }
 
 export interface IProps<COLUMN extends IColumn>
@@ -53,8 +53,6 @@ export class Form<COLUMN extends IColumn> extends React.Component<IProps<COLUMN>
 
     protected get rows() : JSX.Element[][]
     {
-        return this.props.rows.map(row => {
-            return this.props.columns.map(column => row.render(column))
-        });
+        return this.props.rows.map(row => this.props.columns.map(column => row.render(column)));
     }
 }

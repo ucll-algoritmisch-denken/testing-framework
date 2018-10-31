@@ -39,7 +39,7 @@ abstract class ReturnValueColumn<Ps extends any[], R> extends Column<Ps, R>
     {
         return (
             <ValidatedInput validator={(input) => this.equality(input, fcr.returnValue)} />
-        )
+        );
     }
 }
 
@@ -134,7 +134,7 @@ export abstract class ReturnValueInterpretationExercise<Ps extends any[], R>
                     nothing: () => false
                 });
             }
-        }
+        };
     }
 
     public render() : JSX.Element
