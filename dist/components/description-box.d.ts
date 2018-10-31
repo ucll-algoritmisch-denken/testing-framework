@@ -1,5 +1,4 @@
 import React from 'react';
-import './description-box.scss';
 export interface IProps {
 }
 export interface IState {

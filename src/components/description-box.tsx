@@ -1,5 +1,5 @@
 import React from 'react';
-import './description-box.scss';
+import styled from 'styled-components';
 
 
 export interface IProps
@@ -12,6 +12,14 @@ export interface IState
 
 }
 
+const StyledBox = styled.div`
+    margin: 1em auto;
+    width: 80%;
+    background: #DDD;
+    box-shadow: 0px 0px 20px 2px gray;
+    padding: 0.5em 1em;
+`;
+
 export class DescriptionBox extends React.Component<IProps, IState>
 {
     constructor(props : IProps)
@@ -22,9 +30,9 @@ export class DescriptionBox extends React.Component<IProps, IState>
     public render()
     {
         return (
-            <div className="description">
+            <StyledBox>
                 {this.props.children}
-            </div>
+            </StyledBox>
         );
     }
 }
