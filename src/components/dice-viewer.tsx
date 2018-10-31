@@ -42,18 +42,18 @@ export class DiceViewer extends React.Component<IProps, IState>
         }
     }
 
-    public static propTypes = {
-        dice: function(props : any, propName : string, componentName : string) : Error | undefined {
-            const value = props[propName];
+    // public static propTypes = {
+    //     dice: function(props : any, propName : string, componentName : string) : Error | undefined {
+    //         const value = props[propName];
 
-            if ( !Type.array(Type.number).hasType(value) || !value.every(x => 1 <= x && x <= 6) )
-            {
-                return new Error(`${propName} should be assigned an array of values between 1 and 6`);
-            }
-            else
-            {
-                return undefined;
-            }
-        }
-    };
+    //         if ( !Type.array(Type.number).hasType(value) || !value.every(x => 1 <= x && x <= 6) )
+    //         {
+    //             return new Error(`${propName} should be assigned an array of values between 1 and 6`);
+    //         }
+    //         else
+    //         {
+    //             return undefined;
+    //         }
+    //     }
+    // };
 }
