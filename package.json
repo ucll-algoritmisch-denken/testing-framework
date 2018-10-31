@@ -1,6 +1,6 @@
 {
   "name": "algo-testing-framework",
-  "version": "1.16.3",
+  "version": "1.16.4",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
