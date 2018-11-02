@@ -49,5 +49,6 @@ export const ScoreViewer = styled(UnstyledScoreViewer)`
         border: 1px solid #888;
         user-select: none;
         cursor: default;
+        width: 50%;
     }
 `;
