@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
 import { ISection } from 'chapter';
-import { TableOfContents } from 'components/table-of-contents';
+import { SectionOverview } from 'components/section-overview';
 import { IChapter } from 'chapter';
 import './app.scss';
 
@@ -34,10 +34,10 @@ export class App extends React.Component<IProps, IState> {
             this.state = { currentSectionIndex: 0, sidebarOpen: true };
         }
     }
-    
+
     render() {
         const me = this;
-        
+
         // tabindex required to receive key events
         return (
             <React.Fragment>
@@ -58,7 +58,7 @@ export class App extends React.Component<IProps, IState> {
         function createSidebarContent()
         {
             return (
-                <TableOfContents sections={me.props.chapter.sections} onSectionSelected={(index, section) => me.onSectionSelected(index, section)} />
+                <SectionOverview sections={me.props.chapter.sections} onSectionSelected={(index, section) => me.onSectionSelected(index, section)} />
             );
         }
 

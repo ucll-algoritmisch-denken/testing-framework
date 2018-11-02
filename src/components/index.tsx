@@ -11,7 +11,7 @@ export { ScoreViewer } from './score-viewer';
 export { SolutionViewer } from './solution-viewer';
 export { MultiSolutionViewer } from './multi-solution-viewer';
 export { SourceCodeViewer } from './sourcecode-viewer';
-export { TableOfContents } from './table-of-contents';
+export { SectionOverview } from './section-overview';
 export { ValidatedInput } from './validated-input';
 export { ArrayViewer } from './array-viewer';
 export { ObjectViewer } from './object-viewer';
