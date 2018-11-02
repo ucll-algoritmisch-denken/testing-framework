@@ -1,8 +1,7 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
-import { ISection } from 'chapter';
-import { SectionOverview } from 'components/section-overview';
-import { IChapter } from 'chapter';
+import { ISection, IChapter } from './chapter';
+import { SectionOverview } from './components/section-overview';
 import './app.scss';
 
 
@@ -17,7 +16,7 @@ export interface IState
 {
     sidebarOpen : boolean;
 
-    currentSectionIndex : number;
+    selectedSectionIndex : number;
 }
 
 export class App extends React.Component<IProps, IState> {
@@ -31,7 +30,7 @@ export class App extends React.Component<IProps, IState> {
         }
         else
         {
-            this.state = { currentSectionIndex: 0, sidebarOpen: true };
+            this.state = { selectedSectionIndex: 0, sidebarOpen: true };
         }
     }
 
@@ -46,19 +45,19 @@ export class App extends React.Component<IProps, IState> {
                     <span className="version">{this.props.version}</span>
                 </div>
                 <div className="top-container" onKeyDown={(e) => onKeyDown(e)} tabIndex={0}>
-                    <Sidebar sidebar={createSidebarContent()} docked={this.state.sidebarOpen}>
-                        <div className="section-container" key={`section-${this.state.currentSectionIndex}`} tabIndex={0}>
-                            {this.props.chapter.sections[this.state.currentSectionIndex].content}
+                    <Sidebar sidebar={renderSidebarContent()} docked={this.state.sidebarOpen}>
+                        <div className="section-container" key={`section-${this.state.selectedSectionIndex}`} tabIndex={0}>
+                            {this.props.chapter.sections[this.state.selectedSectionIndex].content}
                         </div>
                     </Sidebar>
                 </div>
             </React.Fragment>
         );
 
-        function createSidebarContent()
+        function renderSidebarContent()
         {
             return (
-                <SectionOverview sections={me.props.chapter.sections} onSectionSelected={(index, section) => me.onSectionSelected(index, section)} />
+                <SectionOverview sections={me.props.chapter.sections} onSectionSelected={(index, section) => me.onSectionSelected(index, section)} selectedSectionIndex={me.state.selectedSectionIndex} />
             );
         }
 
@@ -73,6 +72,6 @@ export class App extends React.Component<IProps, IState> {
 
     private onSectionSelected(index : number, _section : ISection)
     {
-        this.setState( { currentSectionIndex: index } );
+        this.setState( { selectedSectionIndex: index } );
     }
 }
