@@ -3,9 +3,18 @@ import classNames from 'classnames';
 import { ISection } from '../../chapter';
 import { IHasDifficulty } from '../../difficulty';
 import { IScored } from '../../score';
-import { DifficultyViewer } from '../../components';
+import { DifficultyViewer as UnstyledDifficultyViewer } from '../../components';
 import './exercise.scss';
+import styled from 'styled-components';
 
+
+const DifficultyViewer = styled(UnstyledDifficultyViewer)`
+    width: 4em;
+`;
+
+const InvisibleDifficultyViewer = styled(DifficultyViewer)`
+    visibility: hidden;
+`;
 
 // TODO Get rid of this class
 export abstract class Exercise implements ISection
@@ -47,7 +56,7 @@ export abstract class Exercise implements ISection
         else
         {
             return (
-                <DifficultyViewer difficulty={null} />
+                <InvisibleDifficultyViewer difficulty={null} />
             );
         }
     }

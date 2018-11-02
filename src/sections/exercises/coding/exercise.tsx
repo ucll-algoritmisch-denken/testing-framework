@@ -5,7 +5,7 @@ import { ITestCase } from './test-case';
 import { IScored, Score } from '../../../score';
 import { IHasDifficulty, difficulty } from '../../../difficulty';
 import { Outcome, combineAssertionOutcomes, outcomeToHtmlClass } from '../../../outcome';
-import { HintViewer, MultiSolutionViewer } from '../../../components';
+import { HintViewer, MultiSolutionViewer, DescriptionBox } from '../../../components';
 import { SourceCode } from '../../../source-code';
 import { Lazy } from '../../../lazy';
 import { Solution } from '../../../solution-pack';
@@ -31,7 +31,7 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
 
         this._score = new Lazy(() => this.computeScore());
     }
-    
+
     public hasDifficulty() : this is IHasDifficulty
     {
         return true;
@@ -85,9 +85,9 @@ export abstract class Exercise extends BaseExercise implements IHasDifficulty, I
     protected renderDescription() : JSX.Element
     {
         return (
-            <div className="description">
+            <DescriptionBox>
                 {this.description}
-            </div>
+            </DescriptionBox>
         );
     }
 
