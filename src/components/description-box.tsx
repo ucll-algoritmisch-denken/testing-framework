@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export interface IProps
 {
-
+    className ?: string;
 }
 
 export interface IState
@@ -30,7 +30,7 @@ export class DescriptionBox extends React.Component<IProps, IState>
     public render()
     {
         return (
-            <StyledBox>
+            <StyledBox className={this.props.className}>
                 {this.props.children}
             </StyledBox>
         );
