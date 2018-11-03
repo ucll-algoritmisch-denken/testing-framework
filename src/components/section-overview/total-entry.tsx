@@ -3,8 +3,8 @@ import { Score } from 'score';
 import { ISection, selectScoredSections } from 'chapter';
 import styled from 'styled-components';
 import { ScoreViewer } from './score-viewer';
-import { IEntry } from '../table-of-contents';
 import { SectionEntry } from './section-entry';
+import { Entry } from './entry';
 
 
 const Container = styled.div`
@@ -57,9 +57,9 @@ class TotalEntryComponent extends React.Component<IProps, IState>
 }
 
 
-export class TotalEntry implements IEntry
+export class TotalEntry extends Entry
 {
-    constructor(public totalScore : Score) { }
+    constructor(public totalScore : Score) { super(); }
 
     render() : JSX.Element
     {

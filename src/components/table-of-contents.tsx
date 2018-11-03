@@ -2,14 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-export interface IEntry
-{
-    render() : JSX.Element;
-}
-
-export interface IProps<T extends IEntry>
+export interface IProps<T>
 {
     entries : T[];
+
+    renderEntry(entry : T) : JSX.Element;
 
     onEntrySelected : (entry : T, index : number) => void;
 
@@ -29,7 +26,7 @@ const TopLevelContainer = styled.div`
     align-items: stretch;
 `;
 
-export class TableOfContents<T extends IEntry> extends React.Component<IProps<T>, IState>
+export class TableOfContents<T> extends React.Component<IProps<T>, IState>
 {
     constructor(props : IProps<T>)
     {
@@ -50,7 +47,7 @@ export class TableOfContents<T extends IEntry> extends React.Component<IProps<T>
         {
             return (
                 <div key={index} onClick={onClick}>
-                    {entry.render()}
+                    {me.props.renderEntry(entry)}
                 </div>
             );
 

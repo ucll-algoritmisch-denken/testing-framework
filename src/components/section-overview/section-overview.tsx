@@ -3,7 +3,7 @@ import { Score } from '../../score';
 import { ISection, selectScoredSections } from '../../chapter';
 import styled from 'styled-components';
 import { SectionEntry } from './section-entry';
-import { TableOfContents, IEntry } from '../table-of-contents';
+import { TableOfContents } from '../table-of-contents';
 import { TotalEntry } from './total-entry';
 import { Entry } from './entry';
 
@@ -39,7 +39,7 @@ export class SectionOverview extends React.Component<IProps, IState>
         const entries : Entry[] = [ ...sectionEntries, totalEntry ];
 
         return (
-            <TableOfContents<Entry> entries={entries} onEntrySelected={onEntrySelected} selectedIndex={this.props.selectedSectionIndex} />
+            <TableOfContents<Entry> entries={entries} onEntrySelected={onEntrySelected} selectedIndex={this.props.selectedSectionIndex} renderEntry={renderEntry} />
         );
 
 
@@ -49,6 +49,11 @@ export class SectionOverview extends React.Component<IProps, IState>
             {
                 me.props.onSectionSelected(index, entry.section);
             }
+        }
+
+        function renderEntry(entry : Entry)
+        {
+            return entry.render();
         }
     }
 }

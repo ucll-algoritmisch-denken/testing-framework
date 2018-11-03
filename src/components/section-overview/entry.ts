@@ -1,8 +1,7 @@
 import { SectionEntry } from "./section-entry";
-import { IEntry } from "../table-of-contents";
 
 
-export abstract class Entry implements IEntry
+export abstract class Entry
 {
     public abstract isSection() : this is SectionEntry;
 
