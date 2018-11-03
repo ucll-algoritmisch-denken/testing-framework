@@ -15,7 +15,7 @@ import { DescriptionBox, HintViewer, MultiSolutionViewer } from '../components';
  * Assumes one exercise (created by createExercise method). Shows description, test results,
  * hint and solutions.
  */
-export abstract class CodingExerciseSection<Ps extends any[], R> extends ExerciseSection implements IHasDifficulty, IScored
+export abstract class CodingExerciseSection<Ps extends any[], R> extends ExerciseSection
 {
     protected abstract createExercise(testedImplementation : Maybe<(...args : Ps) => R>) : IExercise;
 
@@ -57,13 +57,9 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
         return this.referenceImplementationInformation.functionName;
     }
 
-    public get tocEntry()
+    public get caption()
     {
-        return (
-            <React.Fragment>
-                {this.referenceImplementationInformation.functionName}
-            </React.Fragment>
-        );
+        return this.referenceImplementationInformation.functionName;
     }
 
     /**
@@ -82,10 +78,6 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
             </React.Fragment>
         );
     }
-
-    public isScored() : this is IScored { return true; }
-
-    public hasDifficulty() : this is IHasDifficulty { return true; }
 
     public get score()
     {

@@ -2,20 +2,19 @@ import React from 'react';
 import { Score } from '../../score';
 import { ISection, selectScoredSections } from '../../chapter';
 import styled from 'styled-components';
-import { SectionEntry } from './section-entry';
+import { ExerciseEntry } from './exercise-entry';
 import { TableOfContents } from '../table-of-contents';
-import { TotalEntry } from './total-entry';
-import { Entry } from './entry';
+import { TotalScoreSection } from '../../sections/total-score-section';
 
 export interface IProps
 {
-    sections : ISection[];
+    sections: ISection[];
 
-    onSectionSelected : (index : number, section : ISection) => void;
+    onSectionSelected: (index: number, section: ISection) => void;
 
-    selectedSectionIndex : number;
+    selectedSectionIndex: number;
 
-    className ?: string;
+    className?: string;
 }
 
 export interface IState
@@ -24,7 +23,7 @@ export interface IState
 
 export class SectionOverview extends React.Component<IProps, IState>
 {
-    constructor(props : IProps)
+    constructor(props: IProps)
     {
         super(props);
     }
@@ -33,27 +32,17 @@ export class SectionOverview extends React.Component<IProps, IState>
     {
         const me = this;
 
-        const sectionEntries = this.props.sections.map(section => new SectionEntry(section));
-        const total = Score.summate( ...selectScoredSections(me.props.sections).map(section => section.score) );
-        const totalEntry = new TotalEntry(total);
-        const entries : Entry[] = [ ...sectionEntries, totalEntry ];
-
         return (
-            <TableOfContents<Entry> entries={entries} onEntrySelected={onEntrySelected} selectedIndex={this.props.selectedSectionIndex} renderEntry={renderEntry} />
+            <TableOfContents<ISection> entries={this.props.sections}
+                onEntrySelected={onEntrySelected}
+                selectedIndex={this.props.selectedSectionIndex}
+                renderEntry={(section) => section.tocEntry} />
         );
 
 
-        function onEntrySelected(entry : Entry, index : number)
+        function onEntrySelected(section: ISection, index: number)
         {
-            if ( entry.isSection() )
-            {
-                me.props.onSectionSelected(index, entry.section);
-            }
-        }
-
-        function renderEntry(entry : Entry)
-        {
-            return entry.render();
+            me.props.onSectionSelected(index, section);
         }
     }
 }

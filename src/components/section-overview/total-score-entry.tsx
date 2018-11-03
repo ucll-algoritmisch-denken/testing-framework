@@ -3,8 +3,6 @@ import { Score } from 'score';
 import { ISection, selectScoredSections } from 'chapter';
 import styled from 'styled-components';
 import { ScoreViewer } from './score-viewer';
-import { SectionEntry } from './section-entry';
-import { Entry } from './entry';
 
 
 const Container = styled.div`
@@ -36,7 +34,7 @@ interface IState
 
 }
 
-class TotalEntryComponent extends React.Component<IProps, IState>
+export class TotalScoreEntry extends React.Component<IProps, IState>
 {
     constructor(props: IProps)
     {
@@ -45,31 +43,11 @@ class TotalEntryComponent extends React.Component<IProps, IState>
 
     render()
     {
-        const me = this;
-
         return (
             <Container>
                 <Caption>Total</Caption>
                 <ScoreViewer score={this.props.totalScore} />
             </Container>
         );
-    }
-}
-
-
-export class TotalEntry extends Entry
-{
-    constructor(public totalScore : Score) { super(); }
-
-    render() : JSX.Element
-    {
-        return (
-            <TotalEntryComponent totalScore={this.totalScore} />
-        );
-    }
-
-    public isSection() : this is SectionEntry
-    {
-        return false;
     }
 }

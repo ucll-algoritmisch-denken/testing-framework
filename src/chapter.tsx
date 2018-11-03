@@ -10,17 +10,17 @@ export interface IChapter
     readonly sections : ISection[];
 }
 
-export abstract class ISection
+export interface ISection
 {
-    readonly abstract id : string;
+    readonly id : string;
 
-    readonly abstract tocEntry: JSX.Element;
+    readonly tocEntry: JSX.Element;
 
-    get content() : JSX.Element { return <React.Fragment />; }
+    content : JSX.Element;
 
-    abstract isScored() : this is IScored;
+    isScored() : this is IScored;
 
-    abstract hasDifficulty() : this is IHasDifficulty;
+    hasDifficulty() : this is IHasDifficulty;
 }
 
 export function selectScoredSections(sections : ISection[]) : (ISection & IScored)[]

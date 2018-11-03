@@ -9,6 +9,7 @@ import { SourceCode, Language } from '../../../../source-code';
 import { Outcome } from '../../../../outcome';
 import { configuration } from '../../../../configuration';
 import { Solution } from '../../../../solution-pack';
+import { ExerciseEntry } from '../../../../components/section-overview';
 
 
 export abstract class Exercise<META = {}> extends CodingExercise
@@ -33,11 +34,11 @@ export abstract class Exercise<META = {}> extends CodingExercise
         {
             const label = 'solution';
             const implementation : (...args : any[]) => any = this.referenceImplementations[0];
-            
+
             const solution = new class extends Solution<any[], any>
             {
                 label = label;
-                
+
                 implementation = implementation;
             };
 
@@ -86,7 +87,7 @@ export abstract class Exercise<META = {}> extends CodingExercise
     {
         return (
             <React.Fragment>
-                {this.referenceInformation.functionName}
+                <ExerciseEntry caption={this.referenceInformation.functionName} difficulty={this.difficulty} score={this.score} />
             </React.Fragment>
         );
     }

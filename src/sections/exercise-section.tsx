@@ -1,25 +1,26 @@
 import React from 'react';
 import { ISection } from '../chapter';
-import { ISolutionPack } from '../solution-pack';
-import { parseFunction } from '../function-util';
-import { IHasDifficulty } from '../difficulty';
+import { IHasDifficulty, difficulty } from '../difficulty';
 import { IScored, Score } from '../score';
-import { IExercise } from '../exercises';
 import classNames from 'classnames';
-import { DifficultyViewer } from '../components';
+import { DifficultyViewer as UnstyledDifficultyViewer } from '../components';
+import { ExerciseEntry } from 'components/section-overview';
+import styled from 'styled-components';
 
 
-export abstract class ExerciseSection extends ISection
+const DifficultyViewer = styled(UnstyledDifficultyViewer)`
+    width: 4em;
+`;
+
+export abstract class ExerciseSection implements ISection, IHasDifficulty, IScored
 {
+    public abstract readonly score: Score;
+
     public abstract readonly id: string;
 
-    public abstract readonly difficulty : number;
+    public abstract readonly difficulty : difficulty;
 
-    public abstract isScored(): this is IScored;
-
-    public abstract hasDifficulty(): this is IHasDifficulty;
-
-    public abstract get tocEntry() : JSX.Element;
+    public abstract readonly caption : string;
 
     protected abstract readonly header : JSX.Element;
 
@@ -37,6 +38,23 @@ export abstract class ExerciseSection extends ISection
                 </div>
             </section>
         );
+    }
+
+    public get tocEntry() : JSX.Element
+    {
+        return (
+            <ExerciseEntry difficulty={this.difficulty} score={this.score} caption={this.caption} />
+        );
+    }
+
+    public isScored(): this is IScored
+    {
+        return true;
+    }
+
+    public hasDifficulty(): this is IHasDifficulty
+    {
+        return true;
     }
 
     protected get htmlClasses() : string[]

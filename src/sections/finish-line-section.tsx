@@ -1,18 +1,18 @@
 import React from 'react';
 import { Explanations } from './explanations';
 import { DescriptionBox } from '../components/description-box';
+import { FinishLineEntry } from '../components/section-overview/finish-line-entry';
+import { ISection } from '../chapter';
 
 
-export class FinishLineSection extends Explanations
+export class FinishLineSection implements ISection
 {
     id = 'finish';
-    
+
     get tocEntry() : JSX.Element
     {
         return (
-            <React.Fragment>
-            🏁
-            </React.Fragment>
+            <FinishLineEntry />
         );
     }
 
@@ -32,7 +32,7 @@ export class FinishLineSection extends Explanations
         </React.Fragment>
     );
 
-    protected get explanations() : JSX.Element
+    public get content() : JSX.Element
     {
         return (
             <React.Fragment>

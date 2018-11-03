@@ -26,6 +26,11 @@ const TopLevelContainer = styled.div`
     align-items: stretch;
 `;
 
+const EntryContainer = styled.div<{isSelected : boolean}>`
+    border-left: 5px solid ${props => props.isSelected ? 'black' : 'transparent'};
+    border-right: 5px solid ${props => props.isSelected ? 'black' : 'transparent'};
+`;
+
 export class TableOfContents<T> extends React.Component<IProps<T>, IState>
 {
     constructor(props : IProps<T>)
@@ -46,9 +51,9 @@ export class TableOfContents<T> extends React.Component<IProps<T>, IState>
         function renderEntry(entry : T, index : number) : JSX.Element
         {
             return (
-                <div key={index} onClick={onClick}>
+                <EntryContainer key={index} onClick={onClick} isSelected={me.props.selectedIndex === index}>
                     {me.props.renderEntry(entry)}
-                </div>
+                </EntryContainer>
             );
 
 

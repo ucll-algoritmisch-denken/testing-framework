@@ -62,13 +62,9 @@ export abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, M
         return this.exercise.score;
     }
 
-    public get tocEntry() : JSX.Element
+    public get caption() : string
     {
-        return (
-            <React.Fragment>
-                {this.id}
-            </React.Fragment>
-        );
+        return this.id;
     }
 
     protected get exerciseContent() : JSX.Element
