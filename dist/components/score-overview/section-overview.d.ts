@@ -1,6 +1,5 @@
 import React from 'react';
-import { ISection } from 'chapter';
-import './section-overview.scss';
+import { ISection } from '../../chapter';
 export interface IProps {
     sections: ISection[];
     onSectionSelected: (index: number, section: ISection) => void;

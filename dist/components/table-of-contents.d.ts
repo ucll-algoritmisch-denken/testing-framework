@@ -1,15 +1,14 @@
 import React from 'react';
-import { ISection } from '../chapter';
-import './table-of-contents.scss';
-export interface IProps {
-    sections: ISection[];
-    onSectionSelected: (index: number, section: ISection) => void;
+export interface IProps<T> {
+    entries: T[];
+    renderEntry(entry: T): JSX.Element;
+    onEntrySelected: (entry: T, index: number) => void;
+    selectedIndex: number;
+    className?: string;
 }
 export interface IState {
-    selectedIndex: number;
 }
-export declare class TableOfContents extends React.Component<IProps, IState> {
-    constructor(props: IProps);
+export declare class TableOfContents<T> extends React.Component<IProps<T>, IState> {
+    constructor(props: IProps<T>);
     render(): JSX.Element;
-    private onClick;
 }

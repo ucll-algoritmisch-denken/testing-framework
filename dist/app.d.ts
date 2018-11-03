@@ -1,13 +1,12 @@
 import React from 'react';
-import { IChapter } from 'chapter';
-import './app.scss';
+import { IChapter } from './chapter';
 export interface IProps {
     chapter: IChapter;
     version: string;
 }
 export interface IState {
     sidebarOpen: boolean;
-    currentSectionIndex: number;
+    selectedSectionIndex: number;
 }
 export declare class App extends React.Component<IProps, IState> {
     constructor(props: IProps);

@@ -19,7 +19,7 @@ export declare abstract class ReferenceBasedCodingExerciseSection<Ps extends any
     isScored(): this is IScored;
     hasDifficulty(): this is IHasDifficulty;
     readonly score: Score;
-    readonly tocEntry: JSX.Element;
+    readonly caption: string;
     protected readonly exerciseContent: JSX.Element;
     protected renderDescription(): JSX.Element;
     protected renderHint(): JSX.Element;
