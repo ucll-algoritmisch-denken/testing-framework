@@ -33,3 +33,5 @@ import * as Exercise from './exercises';
 export { Exercise };
 import * as Sections from './sections';
 export { Sections };
+import styled from 'styled-components';
+export { styled };

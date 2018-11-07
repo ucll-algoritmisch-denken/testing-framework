@@ -67,7 +67,7 @@ export async function initialize(chapter : IChapter, configuration : IConfigurat
         {
             configure(configuration);
         }
-        
+
         ReactDOM.render(<App chapter={chapter} version={version} />, document.getElementById('app'));
     }
 }
@@ -77,3 +77,6 @@ export { Exercise };
 
 import * as Sections from './sections';
 export { Sections };
+
+import styled from 'styled-components';
+export { styled };
