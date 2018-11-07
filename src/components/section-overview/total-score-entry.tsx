@@ -1,6 +1,5 @@
 import React from 'react';
 import { Score } from 'score';
-import { ISection, selectScoredSections } from 'chapter';
 import styled from 'styled-components';
 import { ScoreViewer } from './score-viewer';
 
