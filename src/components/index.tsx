@@ -9,7 +9,6 @@ export { ScoreViewer } from './score-viewer';
 export { SolutionViewer } from './solution-viewer';
 export { MultiSolutionViewer } from './multi-solution-viewer';
 export { SourceCodeViewer } from './sourcecode-viewer';
-export { SectionOverview, ExerciseEntry, ExplanationEntry } from './section-overview';
 export { ValidatedInput } from './validated-input';
 export { ArrayViewer } from './array-viewer';
 export { ObjectViewer } from './object-viewer';
@@ -22,3 +21,5 @@ export { TabControl, Tab } from './tab-control';
 
 import * as Forms from './forms';
 export { Forms };
+
+export { SectionOverview, ExerciseEntry, ExplanationEntry } from './section-overview';
