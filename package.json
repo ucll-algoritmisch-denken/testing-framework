@@ -6,11 +6,12 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "start": "echo 'Building in PRODUCTION mode' && npm run production",
+    "start": "echo 'Building in PRODUCTION mode' && npm run production && npm run beep",
     "clean": "rm -rf dist",
-    "build": "webpack --mode development",
+    "build": "webpack --mode development && npm run beep",
     "production": "webpack --mode production",
-    "test": "mocha -r ts-node/register -r tsconfig-paths/register src/tests/*"
+    "test": "mocha -r ts-node/register -r tsconfig-paths/register src/tests/*",
+    "beep": "echo -ne '\u0007'"
   },
   "keywords": [],
   "author": "",

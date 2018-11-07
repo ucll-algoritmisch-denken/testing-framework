@@ -15,8 +15,6 @@ import * as Functional from './function-util';
 export { Functional };
 import * as Assertions from './assertions';
 export { Assertions };
-import * as CarSimulation from './car-simulation';
-export { CarSimulation };
 import * as Imaging from './imaging';
 export { Imaging };
 import { IChapter } from './chapter';

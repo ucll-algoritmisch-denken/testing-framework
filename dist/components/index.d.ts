@@ -1,4 +1,3 @@
-export { AnimationViewer } from './animation-viewer';
 export { BitmapViewer } from './bitmap-viewer';
 export { DieViewer } from './die-viewer';
 export { DiceViewer } from './dice-viewer';
