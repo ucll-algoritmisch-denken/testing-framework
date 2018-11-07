@@ -77,3 +77,6 @@ export { Sections };
 
 import styled from 'styled-components';
 export { styled };
+
+import * as Animation from './animation';
+export { Animation };

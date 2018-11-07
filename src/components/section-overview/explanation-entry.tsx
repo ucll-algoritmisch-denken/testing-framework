@@ -1,9 +1,5 @@
 import React from 'react';
-import { Score } from 'score';
 import styled from 'styled-components';
-import { DifficultyViewer, InvisibleDifficultyViewer } from './difficulty-viewer';
-import { ScoreViewer, InvisibleScoreViewer } from './score-viewer';
-import { difficulty } from '../../difficulty';
 
 
 const Container = styled.div`

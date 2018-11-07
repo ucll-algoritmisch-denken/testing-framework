@@ -1,5 +1,5 @@
 import React from 'react';
-import { Score } from 'score';
+import { Score } from '../../score';
 import { difficulty } from '../../difficulty';
 interface IProps {
     difficulty: difficulty;

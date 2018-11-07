@@ -1,10 +1,6 @@
 import React from 'react';
-import { Score } from '../../score';
-import { ISection, selectScoredSections } from '../../chapter';
-import styled from 'styled-components';
-import { ExerciseEntry } from './exercise-entry';
+import { ISection } from '../../chapter';
 import { TableOfContents } from '../table-of-contents';
-import { TotalScoreSection } from '../../sections/total-score-section';
 
 export interface IProps
 {
