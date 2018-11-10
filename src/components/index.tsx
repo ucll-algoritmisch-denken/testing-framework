@@ -18,6 +18,7 @@ export { LanguageComparison } from './language-comparison';
 export { ExistingImplementations } from './existing-implementations';
 export { InlineCode } from './inline-code';
 export { TabControl, Tab } from './tab-control';
+export { SvgColorGrid } from './svg-color-grid';
 
 import * as Forms from './forms';
 export { Forms };
