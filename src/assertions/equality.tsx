@@ -8,7 +8,7 @@ export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
 {
     protected isCorrect(actual: T): boolean
     {
-        if ( this.expected.isJust() )
+        if (this.expected.isJust())
         {
             return deepEqual(this.expected.value, actual);
         }
@@ -19,16 +19,16 @@ export abstract class EqualityAssertion<T> extends ComparisonAssertion<T>
     }
 }
 
-export function equality<T>(expected : T, original : Maybe<T>) : IAssertion<T>
+export function equality<T>(expected: T, original: Maybe<T>): IAssertion<T>
 {
     return new class extends EqualityAssertion<T>
     {
-        protected get original() : Maybe<T>
+        protected get original(): Maybe<T>
         {
             return original;
         }
-        
-        protected get expected() : Maybe<T>
+
+        protected get expected(): Maybe<T>
         {
             return Maybe.just(expected);
         }
