@@ -1,9 +1,9 @@
 import React from 'react';
 import { Maybe, MaybePartial } from 'maybe';
-import { IExercise } from 'exercises/exercise';
+import { IExercise } from '../exercises/exercise';
 import { ExerciseSection } from './exercise-section';
 import { Lazy } from 'lazy';
-import { Score } from 'score';
+import { Score } from '../score';
 
 
 
