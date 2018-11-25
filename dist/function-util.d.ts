@@ -68,3 +68,4 @@ export declare function nameResults(results: FunctionCallResults, info: Function
     returnValue: any;
 };
 export declare function namedCallFunction(func: (...args: any[]) => any, ...args: any[]): INamedFunctionCallResults;
+export declare function callIfDefined<Ps extends any[], R>(f: ((...args: Ps) => R) | undefined, ...args: Ps): (R | undefined);

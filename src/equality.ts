@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import isEqual from 'lodash.isequal';
 
 
 export function deepEqual(x : any, y : any) : boolean

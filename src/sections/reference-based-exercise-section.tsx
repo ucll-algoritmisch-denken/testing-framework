@@ -15,7 +15,7 @@ import { ReferenceImplementationBasedCodingExercise } from '../exercises/referen
 type Exercise<Ps extends any[], R, META> = ReferenceImplementationBasedCodingExercise<Ps, R, META>;
 
 
-export abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, META = {}> extends ExerciseSection implements IScored, IHasDifficulty
+export abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, META = {}> extends ExerciseSection
 {
     public abstract readonly difficulty : number;
 

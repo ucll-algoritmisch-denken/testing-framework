@@ -1,7 +1,5 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import { Maybe } from 'maybe';
-import { IHasDifficulty } from '../difficulty';
-import { IScored } from '../score';
 import { IExercise } from '../exercises/exercise';
 import { ExerciseSection } from './exercise-section';
 import { ISolutionPack, retrieveSolutions } from '../solution-pack';

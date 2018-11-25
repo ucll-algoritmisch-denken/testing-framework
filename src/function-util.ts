@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash.clonedeep';
 import { IType } from './type';
 import { Maybe } from 'maybe';
 import { deepEqual } from './equality';
@@ -262,4 +262,16 @@ export function namedCallFunction(func : (...args : any[]) => any, ...args : any
     const named = nameResults(unnamed, info);
 
     return named;
+}
+
+export function callIfDefined<Ps extends any[], R>(f : ((...args : Ps) => R) | undefined, ...args : Ps) : (R | undefined)
+{
+    if ( f )
+    {
+        return f(...args);
+    }
+    else
+    {
+        return undefined;
+    }
 }
