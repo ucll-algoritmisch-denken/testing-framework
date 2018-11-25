@@ -1,5 +1,5 @@
 import React from 'react';
-import { Maybe } from 'maybe';
+import { Maybe, MaybePartial } from 'maybe';
 import { IExercise } from 'exercises/exercise';
 import { ExerciseSection } from './exercise-section';
 import { Lazy } from 'lazy';
@@ -7,15 +7,11 @@ import { Score } from 'score';
 
 
 
-type TestedImplementations<T> = {
-    readonly [P in keyof T] : Maybe<T[P]>;
-};
-
 export abstract class MultiCodingExerciseSection<T> extends ExerciseSection
 {
     protected abstract createExercises() : { [key in keyof T] : IExercise };
 
-    protected abstract readonly testedImplementations : TestedImplementations<T>;
+    protected abstract readonly testedImplementations : MaybePartial<T>;
 
     constructor()
     {
