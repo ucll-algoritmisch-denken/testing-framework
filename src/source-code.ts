@@ -21,7 +21,7 @@ export class SourceCode
     {
         if ( this.language === Language.JavaScript )
         {
-            return new SourceCode(Language.JavaScript, js_beautify(this.sourceCode, { brace_style: 'expand' }));
+            return new SourceCode(Language.JavaScript, js_beautify(this.sourceCode, { brace_style: 'collapse-preserve-inline' }));
         }
         else
         {
@@ -30,7 +30,7 @@ export class SourceCode
             const unindentedLines = lines.map(line => line.substr(indentationLevel));
             const firstNonemptyIndex = firstIndexOf(lines, line => line.length > 0).useDefault(0).value;
             const lastNonemptyIndex = lastIndexOf(lines, line => line.length > 0).useDefault(lines.length - 1).value;
-            
+
             return new SourceCode(this.language, unindentedLines.slice(firstNonemptyIndex, lastNonemptyIndex + 1).join("\n"));
         }
 
