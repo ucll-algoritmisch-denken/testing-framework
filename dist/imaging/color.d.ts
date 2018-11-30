@@ -1,9 +1,9 @@
-export declare class Color {
+export declare type Color = {
     r: number;
     g: number;
     b: number;
-    constructor(r: number, g: number, b: number);
-}
+};
+export declare function color(r: number, g: number, b: number): Color;
 export declare const Colors: {
     black: Color;
     red: Color;

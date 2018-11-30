@@ -1,4 +1,4 @@
-import { Color } from './color';
+import { Color, color } from './color';
 
 
 export class Bitmap
@@ -20,9 +20,9 @@ export class Bitmap
         const canvas = document.createElement('canvas');
         canvas.width = this.width;
         canvas.height = this.height;
-        
+
         const context = canvas.getContext('2d');
-        
+
         if ( !context )
         {
             throw new Error(`Failing to get context`);
@@ -37,10 +37,10 @@ export class Bitmap
             return canvas.toDataURL();
         }
     }
-    
+
     toColor() : Color[][]
     {
-        return this.toMatrix<Color>( (r, g, b, a) => new Color(r, g, b) );
+        return this.toMatrix<Color>( (r, g, b, a) => color(r, g, b) );
     }
 
     toGrayscale() : number[][]
@@ -78,12 +78,12 @@ export class Bitmap
 
     static fromBlackAndWhite(pixels : boolean[][]) : Bitmap
     {
-        return this.fromMatrix(pixels, b => b ? new Color(255, 255, 255) : new Color(0, 0, 0));
+        return this.fromMatrix(pixels, b => b ? color(255, 255, 255) : color(0, 0, 0));
     }
 
     static fromGrayscale(pixels : number[][]) : Bitmap
     {
-        return this.fromMatrix(pixels, c => new Color(c, c, c));
+        return this.fromMatrix(pixels, c => color(c, c, c));
     }
 
     static fromColors(pixels : Color[][]) : Bitmap
@@ -98,7 +98,7 @@ export class Bitmap
         const totalSize = width * height * 4;
         const pixelData = new Uint8ClampedArray(totalSize);
         let i = 0;
-        
+
         for ( let y = 0; y !== height; ++y )
         {
             for ( let x = 0; x !== width; ++x )
@@ -121,15 +121,15 @@ export function loadImage(path : string) : Promise<Bitmap>
     const image = new Image();
     image.src = path;
     image.crossOrigin = "Anonymous";
-    
+
     return new Promise((resolve, reject) => {
         image.onload = () => {
             const canvas = document.createElement('canvas');
             canvas.width = image.width;
             canvas.height = image.height;
-            
+
             const context = canvas.getContext('2d');
-            
+
             if ( !context )
             {
                 reject('Failed to get canvas context');
@@ -139,7 +139,7 @@ export function loadImage(path : string) : Promise<Bitmap>
                 context.drawImage(image, 0, 0);
                 const imageData = context.getImageData(0, 0, image.width, image.height);
                 const bitmap = new Bitmap(imageData.width, imageData.height, imageData.data);
-                
+
                 resolve(bitmap);
             }
         };
