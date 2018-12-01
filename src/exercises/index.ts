@@ -7,6 +7,7 @@ import { ReturnValueCodingExercise } from './return-value-coding-exercise';
 import { ParameterCodingExercise, IParameterChecker as _IParameterChecker, IParameterCheckers as _IParameterCheckers } from './parameter-coding-exercise';
 import { ReturnValueInterpretationExercise } from './return-value-interpretation-exercise';
 export { verifySolutions } from './verify-solutions';
+import { ExerciseGroup as _ExerciseGroup } from './exercise-group';
 
 
 export namespace Coding
@@ -24,6 +25,8 @@ export namespace Coding
             export type ITestCaseInput<Ps extends any[], Meta = {}> = _ITestCaseInput<Ps, Meta>;
 
             export const Exercise = ReferenceImplementationBasedCodingExercise;
+
+            export const ExerciseGroup = _ExerciseGroup;
 
             export namespace ReturnValue
             {

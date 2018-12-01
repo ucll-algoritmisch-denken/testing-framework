@@ -6,6 +6,7 @@ import { Lazy } from 'lazy';
 import { Score } from '../score';
 
 
+// TODO Should make use of ExerciseGroup
 
 export abstract class MultiCodingExerciseSection<T> extends ExerciseSection
 {
