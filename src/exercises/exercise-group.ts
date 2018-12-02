@@ -15,8 +15,7 @@ export abstract class ExerciseGroup<T>
 
     public get score()
     {
-        const me = this;
-        const exerciseIds : (keyof T)[] = Object.keys(me.cachedExercises.value) as any;
+        const exerciseIds : (keyof T)[] = Object.keys(this.cachedExercises.value) as any;
 
         return Score.summate(...exerciseIds.map(id => this.exercise(id).score));
     }
