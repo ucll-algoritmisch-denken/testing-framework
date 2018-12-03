@@ -1,6 +1,7 @@
 import React from 'react';
 export interface IProps {
     className?: string;
+    header?: string;
 }
 export interface IState {
 }
