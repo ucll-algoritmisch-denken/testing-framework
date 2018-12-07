@@ -35,3 +35,5 @@ import styled from 'styled-components';
 export { styled };
 import * as Animation from './animation';
 export { Animation };
+import * as Type from './type';
+export { Type };
