@@ -28,7 +28,11 @@ export abstract class MvcCodingExerciseSection<M, V, C> extends ExerciseSection
     {
         return testedImplementations.caseOf({
             nothing: () => {
-                return { model: maybePartial<M>({}), view: maybePartial<V>({}), controller: maybePartial<C>({}) };
+                return {
+                    model: supplement<M>(referenceImplementations.model, {}),
+                    view: supplement<V>(referenceImplementations.view, {}),
+                    controller: supplement<C>(referenceImplementations.controller, {})
+                };
             },
             just: testedImplementations => {
                 const model = supplement<M>(referenceImplementations.model, testedImplementations.model || {});
