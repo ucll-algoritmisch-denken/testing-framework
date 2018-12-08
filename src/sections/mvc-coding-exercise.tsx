@@ -24,22 +24,43 @@ export abstract class MvcCodingExerciseSection<M, V, C> extends ExerciseSection
 
     protected get controllerExerciseGroup() { return this.cachedControllerExerciseGroup.value; }
 
-    public static repackTestedImplementations<M, V, C>(testedImplementations : Maybe<Partial<{ model: Partial<M>, view: Partial<V>, controller: Partial<C> }>>) : { model: MaybePartial<M>, view: MaybePartial<V>, controller: MaybePartial<C> }
+    public static repackTestedImplementations<M, V, C>(referenceImplementations : { model: M, view: V, controller: C }, testedImplementations : Maybe<Partial<{ model: Partial<M>, view: Partial<V>, controller: Partial<C> }>>) : { model: MaybePartial<M>, view: MaybePartial<V>, controller: MaybePartial<C> }
     {
         return testedImplementations.caseOf({
             nothing: () => {
                 return { model: maybePartial<M>({}), view: maybePartial<V>({}), controller: maybePartial<C>({}) };
             },
             just: testedImplementations => {
-                const { model, view, controller } = testedImplementations;
+                const model = supplement<M>(referenceImplementations.model, testedImplementations.model || {});
+                const view = supplement<V>(referenceImplementations.view, testedImplementations.view || {});
+                const controller = supplement<C>(referenceImplementations.controller, testedImplementations.controller || {});
 
-                return {
-                    model: model ? maybePartial<M>(model) : maybePartial<M>({}),
-                    view: view ? maybePartial<V>(view) : maybePartial<V>({}),
-                    controller: controller ? maybePartial<C>(controller) : maybePartial<C>({}),
-                };
+                return { model, view, controller };
             }
         });
+
+
+        function supplement<T>(reference : T, actual : Partial<T>) : MaybePartial<T>
+        {
+            const result : { [P in keyof T] ?: Maybe<T[P]> } = {};
+
+            for ( const key of Object.keys(reference) )
+            {
+                const tkey = key as keyof T;
+                const val : T[typeof tkey] | undefined = actual[tkey];
+
+                if ( val )
+                {
+                    result[tkey] = Maybe.just(val);
+                }
+                else
+                {
+                    result[tkey] = Maybe.nothing();
+                }
+            }
+
+            return result as MaybePartial<T>;
+        }
     }
 
     constructor()

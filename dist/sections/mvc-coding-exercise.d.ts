@@ -22,7 +22,11 @@ export declare abstract class MvcCodingExerciseSection<M, V, C> extends Exercise
     protected readonly modelExerciseGroup: ExerciseGroup<M>;
     protected readonly viewExerciseGroup: ExerciseGroup<V>;
     protected readonly controllerExerciseGroup: ExerciseGroup<C>;
-    static repackTestedImplementations<M, V, C>(testedImplementations: Maybe<Partial<{
+    static repackTestedImplementations<M, V, C>(referenceImplementations: {
+        model: M;
+        view: V;
+        controller: C;
+    }, testedImplementations: Maybe<Partial<{
         model: Partial<M>;
         view: Partial<V>;
         controller: Partial<C>;

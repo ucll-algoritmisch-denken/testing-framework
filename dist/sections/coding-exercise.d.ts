@@ -30,7 +30,7 @@ export declare abstract class CodingExerciseSection<Ps extends any[], R> extends
      */
     protected readonly hint: JSX.Element | null;
     protected readonly header: JSX.Element;
-    readonly score: import("score").Score;
+    readonly score: import("..").Score;
     protected readonly exerciseContent: JSX.Element;
     protected renderHint(): JSX.Element;
     private cachedExercise;
