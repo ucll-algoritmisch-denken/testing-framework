@@ -25,3 +25,4 @@ export { Forms };
 
 export { SectionOverview, ExerciseEntry, ExplanationEntry } from './section-overview';
 export { Important } from './important';
+export { HeaderBox } from './header-box';
