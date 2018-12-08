@@ -22,3 +22,4 @@ export { SvgColorGrid } from './svg-color-grid';
 import * as Forms from './forms';
 export { Forms };
 export { SectionOverview, ExerciseEntry, ExplanationEntry } from './section-overview';
+export { Important } from './important';
