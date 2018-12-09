@@ -1,20 +1,51 @@
 import React from 'react';
 import { convertToString as str } from '../formatters/string-formatters';
-import './object-viewer.scss'; 
+import styled from 'styled-components';
 
 
 
 export interface IProps
 {
     object : { [key : string] : any };
+
     renderer ?: (key : string, value : any) => JSX.Element;
-    classNames ?: string[];
+
+    className ?: string;
 }
 
 export interface IState
 {
 
 }
+
+const Table = styled.table`
+    border-collapse: collapse;
+    border: #888 1px solid;
+
+    td {
+        border: #888 1px solid;
+        padding: 0.2em 0.5em;
+
+        &:first-child {
+            background: #AAA;
+        }
+    }
+
+    .key {
+        font-variant: small-caps;
+        text-align: right;
+    }
+
+    .value {
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .empty {
+        text-align: center;
+        font-style: italic;
+    }
+`;
 
 export class ObjectViewer extends React.Component<IProps, IState>
 {
@@ -38,34 +69,27 @@ export class ObjectViewer extends React.Component<IProps, IState>
         }
     }
 
-    protected get htmlClasses() : string[]
-    {
-        return ["object-viewer", ...(this.props.classNames || [])];
-    }
-
     protected renderEmptyObject() : JSX.Element
     {
-        // TODO Use classNames
         return (
-            <table className={this.htmlClasses.join(" ")}>
+            <Table className={this.props.className}>
                 <tbody>
                     <tr>
                         <td className="empty">Empty</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
         );
     }
 
     protected renderNonEmptyObject(keys : string[]) : JSX.Element
     {
-        // TODO Use classNames
         return (
-            <table className={this.htmlClasses.join(" ")}>
+            <Table className={this.props.className}>
                 <tbody>
                     {this.renderRows(keys)}
                 </tbody>
-            </table>
+            </Table>
         );
     }
 

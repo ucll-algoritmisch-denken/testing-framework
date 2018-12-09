@@ -1,18 +1,16 @@
 import React from 'react';
-import './object-viewer.scss';
 export interface IProps {
     object: {
         [key: string]: any;
     };
     renderer?: (key: string, value: any) => JSX.Element;
-    classNames?: string[];
+    className?: string;
 }
 export interface IState {
 }
 export declare class ObjectViewer extends React.Component<IProps, IState> {
     constructor(props: IProps);
     render(): JSX.Element;
-    protected readonly htmlClasses: string[];
     protected renderEmptyObject(): JSX.Element;
     protected renderNonEmptyObject(keys: string[]): JSX.Element;
     protected renderRows(keys: string[]): JSX.Element[];
