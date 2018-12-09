@@ -6,10 +6,12 @@ import { ReferenceImplementationBasedCodingExercise, ITestCaseInput as _ITestCas
 import { ReturnValueCodingExercise } from './return-value-coding-exercise';
 import { ParameterCodingExercise, IParameterChecker as _IParameterChecker, IParameterCheckers as _IParameterCheckers } from './parameter-coding-exercise';
 import { ReturnValueInterpretationExercise } from './return-value-interpretation-exercise';
+import { TrivialExercise as _TrivialExercise } from './trivial-exercise';
 export { verifySolutions } from './verify-solutions';
 import { ExerciseGroup as _ExerciseGroup } from './exercise-group';
 export declare namespace Coding {
     const Exercise: typeof TestCaseBasedCodingExercise;
+    const TrivialExercise: typeof _TrivialExercise;
     namespace TestCaseBased {
         type ITestCase = _ITestCase;
         const CollapsibleTestCase: typeof _CollapsibleTestCase;
