@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const Container = styled.div`
+const StyledDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -37,7 +37,7 @@ export class FinishLineEntry extends React.Component<IProps, IState>
     render()
     {
         return (
-            <Container className={this.props.className} />
+            <StyledDiv className={this.props.className} />
         );
     }
 }
