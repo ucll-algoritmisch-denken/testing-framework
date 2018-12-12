@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import './inline-code.scss';
 
 
@@ -12,14 +13,18 @@ export interface IState
 
 }
 
+const StyledSpan = styled.span`
+    font-family: 'Courier New', Courier, monospace;
+`;
+
 export class InlineCode extends React.Component<IProps, IState>
 {
     public render()
     {
         return (
-            <span className="inline-code">
+            <StyledSpan className="inline-code">
                 {this.props.content}
-            </span>
+            </StyledSpan>
         );
     }
 }
