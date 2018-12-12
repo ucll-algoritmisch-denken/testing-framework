@@ -36,11 +36,8 @@ export class FinishLineEntry extends React.Component<IProps, IState>
 
     render()
     {
-        const me = this;
-
         return (
-            <Container className={this.props.className}>
-            </Container>
+            <Container className={this.props.className} />
         );
     }
 }
