@@ -1,5 +1,4 @@
 import React from 'react';
-import './inline-code.scss';
 export interface IProps {
     content: string;
 }
