@@ -3,7 +3,7 @@ import { map } from 'js-algorithms';
 
 
 export function convertToString(x : any) : string
-{    
+{
     if ( Type.array(Type.any).hasType(x) )
     {
         return formatArray(x);
@@ -28,7 +28,7 @@ export function convertToString(x : any) : string
         }
         else
         {
-            return x.toPrecision(4).toString();
+            return x.toFixed(2).toString();
         }
     }
     else if ( Type.boolean.hasType(x) )

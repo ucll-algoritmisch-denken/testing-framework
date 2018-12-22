@@ -2,7 +2,6 @@
 import { Maybe } from 'maybe';
 import { IExercise } from '../exercises/exercise';
 import { ExerciseSection } from './exercise-section';
-import { ISolutionPack } from '../solution-pack';
 import { FunctionInformation } from '../function-util';
 /**
  * Assumes one exercise (created by createExercise method). Shows description, test results,
@@ -14,7 +13,7 @@ export declare abstract class CodingExerciseSection<Ps extends any[], R> extends
      * Will be put into a DescriptionBox.
      */
     protected abstract readonly description: JSX.Element;
-    protected abstract readonly solutionPack: ISolutionPack<Ps, R>;
+    protected abstract readonly solutionPack: (...args: Ps) => R;
     protected abstract readonly testedImplementation: Maybe<(...args: Ps) => R>;
     /**
      * If true, solutions will be checked for consistency.

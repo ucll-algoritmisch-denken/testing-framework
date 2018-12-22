@@ -2,11 +2,12 @@ import React from 'react';
 import { Maybe } from 'maybe';
 import { IExercise } from '../exercises/exercise';
 import { ExerciseSection } from './exercise-section';
-import { ISolutionPack, retrieveSolutions } from '../solution-pack';
+import { ISolutionPack, retrieveSolutions, isSolutionPack, Solution } from '../solution-pack';
 import { Lazy } from '../lazy';
 import { verifySolutions } from '../exercises/verify-solutions';
 import { parseFunction, FunctionInformation } from '../function-util';
-import { DescriptionBox, HintViewer, MultiSolutionViewer } from '../components';
+import { DescriptionBox, HintViewer, MultiSolutionViewer, SolutionViewer } from '../components';
+import { SourceCode, Language } from 'source-code';
 
 
 /**
@@ -22,7 +23,7 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
      */
     protected abstract readonly description : JSX.Element;
 
-    protected abstract readonly solutionPack : ISolutionPack<Ps, R>;
+    protected abstract readonly solutionPack : (...args : Ps) => R; // TODO Rename to solution
 
     protected abstract readonly testedImplementation : Maybe<(...args : Ps) => R>;
 
@@ -36,7 +37,11 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
         super();
 
         this.cachedExercise = new Lazy( () => {
-            verifySolutions(f => this.createExercise(Maybe.just(f)), this.solutionPack);
+            if ( isSolutionPack(this.solutionPack) )
+            {
+                verifySolutions(f => this.createExercise(Maybe.just(f)), this.solutionPack);
+            }
+
             return this.createExercise(this.testedImplementation);
         });
 
@@ -121,8 +126,21 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
 
     protected get solutions() : JSX.Element
     {
-        return (
-            <MultiSolutionViewer solutions={retrieveSolutions(this.solutionPack) as any} />
-        );
+        if ( isSolutionPack(this.solutionPack) )
+        {
+            return (
+                <MultiSolutionViewer solutions={retrieveSolutions(this.solutionPack) as any} />
+            );
+        }
+        else
+        {
+            const me = this;
+
+            const sourceCode = new SourceCode(Language.JavaScript, this.solutionPack.toString());
+
+            return (
+                <SolutionViewer sourceCode={sourceCode} />
+            );
+        }
     }
 }
