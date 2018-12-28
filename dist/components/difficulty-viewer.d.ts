@@ -1,7 +1,7 @@
 import React from 'react';
 import { difficulty } from '../difficulty';
 export interface IProps {
-    difficulty: difficulty | null;
+    difficulty: difficulty;
     className?: string;
 }
 export interface IState {

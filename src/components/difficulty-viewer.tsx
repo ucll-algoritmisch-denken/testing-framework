@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export interface IProps
 {
-    difficulty : difficulty | null;
+    difficulty : difficulty;
 
     className ?: string;
 }
@@ -16,7 +16,7 @@ export interface IState
 
 }
 
-const Component = styled.span`
+const StyledSpan = styled.span`
     display: inline-block;
     text-align: center;
     user-select: none;
@@ -33,14 +33,15 @@ export class DifficultyViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const star = String.fromCharCode(0x2605);
-        const difficulty : number = this.props.difficulty || 0;
-        const difficultyString = repeat(difficulty, star);
+        const difficulty = this.props.difficulty;
+        const star = '★';
+        const smallStar = '⭑';
+        const text = repeat<string>(difficulty, difficulty < 4 ? star : smallStar).join('');
 
         return (
-            <Component className={this.props.className}>
-                {difficultyString}
-            </Component>
+            <StyledSpan className={this.props.className}>
+                {text}
+            </StyledSpan>
         );
     }
 }

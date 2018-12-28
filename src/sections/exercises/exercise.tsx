@@ -56,7 +56,7 @@ export abstract class Exercise implements ISection
         else
         {
             return (
-                <InvisibleDifficultyViewer difficulty={null} />
+                <InvisibleDifficultyViewer difficulty={1} />
             );
         }
     }

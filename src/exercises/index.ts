@@ -23,6 +23,8 @@ export namespace Coding
 
         export const CollapsibleTestCase = _CollapsibleTestCase;
 
+        export const Exercise = TestCaseBasedCodingExercise;
+
         export namespace ReferenceBased
         {
             export type ITestCaseInput<Ps extends any[], Meta = {}> = _ITestCaseInput<Ps, Meta>;

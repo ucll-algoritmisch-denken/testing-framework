@@ -73,7 +73,7 @@ export abstract class ExerciseSection implements ISection, IHasDifficulty, IScor
         else
         {
             return (
-                <DifficultyViewer difficulty={null} />
+                <React.Fragment />
             );
         }
     }

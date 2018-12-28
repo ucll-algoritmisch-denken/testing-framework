@@ -15,6 +15,7 @@ export declare namespace Coding {
     namespace TestCaseBased {
         type ITestCase = _ITestCase;
         const CollapsibleTestCase: typeof _CollapsibleTestCase;
+        const Exercise: typeof TestCaseBasedCodingExercise;
         namespace ReferenceBased {
             type ITestCaseInput<Ps extends any[], Meta = {}> = _ITestCaseInput<Ps, Meta>;
             const Exercise: typeof ReferenceImplementationBasedCodingExercise;
