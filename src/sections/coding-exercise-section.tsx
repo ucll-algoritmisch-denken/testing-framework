@@ -16,6 +16,7 @@ import { SourceCode, Language } from 'source-code';
  */
 export abstract class CodingExerciseSection<Ps extends any[], R> extends ExerciseSection
 {
+    // testedImplementation parameter is needed for solution verification
     protected abstract createExercise(testedImplementation : Maybe<(...args : Ps) => R>) : IExercise;
 
     /**

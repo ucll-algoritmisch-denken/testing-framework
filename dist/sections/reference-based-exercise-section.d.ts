@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import { Solution } from '../solution-pack';
 import { IHasDifficulty } from '../difficulty';
-import { IScored, Score } from '../score';
-import { ExerciseSection } from './exercise-section';
 import { ReferenceImplementationBasedCodingExercise } from '../exercises/reference-implementation-based-coding-exercise';
+import { IScored, Score } from '../score';
+import { Solution } from '../solution-pack';
+import { ExerciseSection } from './exercise-section';
 declare type Exercise<Ps extends any[], R, META> = ReferenceImplementationBasedCodingExercise<Ps, R, META>;
 export declare abstract class ReferenceBasedCodingExerciseSection<Ps extends any[], R, META = {}> extends ExerciseSection {
     abstract readonly difficulty: number;

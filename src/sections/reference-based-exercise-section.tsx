@@ -1,15 +1,12 @@
 import React from 'react';
-import { ISection } from '../chapter';
-import { ISolutionPack, isSolutionPack, retrieveSolutions, convertSolutionsToSourceCodeMap, Solution } from '../solution-pack';
-import { parseFunction } from '../function-util';
+import { HintViewer, MultiSolutionViewer } from '../components';
 import { IHasDifficulty } from '../difficulty';
-import { IScored, Score } from '../score';
-import classNames from 'classnames';
-import { DifficultyViewer, MultiSolutionViewer, HintViewer } from '../components';
-import { ExerciseSection } from './exercise-section';
-import { Lazy } from '../lazy';
-import { SourceCode } from '../source-code';
 import { ReferenceImplementationBasedCodingExercise } from '../exercises/reference-implementation-based-coding-exercise';
+import { parseFunction } from '../function-util';
+import { Lazy } from '../lazy';
+import { IScored, Score } from '../score';
+import { retrieveSolutions, Solution } from '../solution-pack';
+import { ExerciseSection } from './exercise-section';
 
 
 type Exercise<Ps extends any[], R, META> = ReferenceImplementationBasedCodingExercise<Ps, R, META>;
