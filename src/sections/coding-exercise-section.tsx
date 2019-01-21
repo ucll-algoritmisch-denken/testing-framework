@@ -2,7 +2,7 @@ import React from 'react';
 import { Maybe } from 'maybe';
 import { IExercise } from '../exercises/exercise';
 import { ExerciseSection } from './exercise-section';
-import { ISolutionPack, retrieveSolutions, isSolutionPack, Solution } from '../solution-pack';
+import { ISolutionPack, retrieveSolutions, isSolutionPack, Solution, packSolutions } from '../solution-pack';
 import { Lazy } from '../lazy';
 import { verifySolutions } from '../exercises/verify-solutions';
 import { parseFunction, FunctionInformation } from '../function-util';
@@ -127,21 +127,21 @@ export abstract class CodingExerciseSection<Ps extends any[], R> extends Exercis
 
     protected get solutions() : JSX.Element
     {
-        if ( isSolutionPack(this.solutionPack) )
-        {
-            return (
-                <MultiSolutionViewer solutions={retrieveSolutions(this.solutionPack) as any} />
-            );
-        }
-        else
-        {
-            const me = this;
+        const originalSolutionPack = this.solutionPack;
+        let solutionPack = this.solutionPack;
 
-            const sourceCode = new SourceCode(Language.JavaScript, this.solutionPack.toString());
+        if ( !isSolutionPack(solutionPack) )
+        {
+            solutionPack = packSolutions( new class extends Solution<Ps, R>
+            {
+                implementation = originalSolutionPack;
 
-            return (
-                <SolutionViewer sourceCode={sourceCode} />
-            );
+                label = '';
+            } );
         }
+
+        return (
+            <MultiSolutionViewer solutions={retrieveSolutions(this.solutionPack) as any} />
+        );
     }
 }
