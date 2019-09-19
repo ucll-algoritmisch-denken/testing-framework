@@ -68,7 +68,7 @@ const SectionContainer = styled.div`
 
 const SectionOverviewContainer = styled.div`
     position: relative;
-    height: calc(100% - 50px);
+    height: calc(100% - 100px);
     overflow-y: scroll;
 `;
 
