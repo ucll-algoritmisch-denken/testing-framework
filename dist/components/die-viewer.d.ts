@@ -1,4 +1,3 @@
-/// <reference types="styled-components" />
 import React from 'react';
 export interface IProps {
     children?: React.ReactChild;
@@ -7,6 +6,9 @@ export interface IProps {
 }
 export interface IState {
 }
-export declare const DieViewer: import("styled-components").StyledComponentClass<IProps, any, Pick<IProps, "children" | "className" | "die"> & {
-    theme?: any;
-}>;
+declare class UnstyledDieViewer extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps);
+    render(): JSX.Element;
+}
+export declare const DieViewer: import("styled-components").StyledComponent<typeof UnstyledDieViewer, any, {}, never>;
+export {};
