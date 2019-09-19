@@ -34,6 +34,6 @@ class UnstyledDieViewer extends React.PureComponent<IProps, IState>
     }
 }
 
-export const DieViewer = styled<IProps>(UnstyledDieViewer)`
+export const DieViewer = styled(UnstyledDieViewer)`
     font-size: 1.5em;
 `;
