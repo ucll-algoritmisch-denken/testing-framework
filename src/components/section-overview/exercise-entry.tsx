@@ -14,6 +14,10 @@ const Container = styled.div`
 `;
 
 const Caption = styled.div`
+    display: flex;
+    flex-orientation: column;
+    align-items: center;
+    justify-content: center;
     min-width: 10em;
     text-align: center;
     font-variant: small-caps;

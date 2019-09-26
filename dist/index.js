@@ -190,6 +190,10 @@ object-assign
     justify-content: space-between;
     align-items: stretch;
 `,l=o.default.div`
+    display: flex;
+    flex-orientation: column;
+    align-items: center;
+    justify-content: center;
     min-width: 10em;
     text-align: center;
     font-variant: small-caps;
