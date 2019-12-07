@@ -160,7 +160,7 @@ object-assign
     outline: none;
 `,m=u.default.div`
     position: relative;
-    height: calc(100% - 100px);
+    height: calc(100% - 50px);
     overflow-y: scroll;
 `,g=u.default.div`
     padding: 5px;
