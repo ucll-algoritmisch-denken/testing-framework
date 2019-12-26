@@ -21,30 +21,30 @@ export interface IState
 const Table = styled.table`
     border-collapse: collapse;
     border: #888 1px solid;
+`;
 
-    td {
-        border: #888 1px solid;
-        padding: 0.2em 0.5em;
+const TableTd = styled.td`
+    border: #888 1px solid;
+    padding: 0.2em 0.5em;
 
-        &:first-child {
-            background: #AAA;
-        }
+    &:first-child {
+        background: #AAA;
     }
+`;
 
-    .key {
-        font-variant: small-caps;
-        text-align: right;
-    }
+const KeyTd = styled(TableTd)`
+    font-variant: small-caps;
+    text-align: right;
+`;
 
-    .value {
-        text-align: center;
-        font-family: 'Courier New', Courier, monospace;
-    }
+const ValueTd = styled(TableTd)`
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+`;
 
-    .empty {
-        text-align: center;
-        font-style: italic;
-    }
+const EmptyTd = styled(TableTd)`
+    text-align: center;
+    font-style: italic;
 `;
 
 export class ObjectViewer extends React.Component<IProps, IState>
@@ -75,7 +75,7 @@ export class ObjectViewer extends React.Component<IProps, IState>
             <Table className={this.props.className}>
                 <tbody>
                     <tr>
-                        <td className="empty">Empty</td>
+                        <EmptyTd>Empty</EmptyTd>
                     </tr>
                 </tbody>
             </Table>
@@ -110,8 +110,8 @@ export class ObjectViewer extends React.Component<IProps, IState>
     {
         return (
             <React.Fragment>
-                <td className="key">{this.renderKey(key)}</td>
-                <td className="value">{this.renderValue(key, value)}</td>
+                <KeyTd>{this.renderKey(key)}</KeyTd>
+                <ValueTd>{this.renderValue(key, value)}</ValueTd>
             </React.Fragment>
         );
     }
