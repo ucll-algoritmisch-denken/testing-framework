@@ -19,8 +19,8 @@ export interface IState {
 export declare class Form<COLUMN, INPUT> extends React.Component<IProps<COLUMN, INPUT>, IState> {
     constructor(props: IProps<COLUMN, INPUT>);
     render(): JSX.Element;
-    protected readonly headers: JSX.Element[];
-    protected readonly rows: JSX.Element[][];
+    protected get headers(): JSX.Element[];
+    protected get rows(): JSX.Element[][];
     protected renderRows(): Iterable<JSX.Element[]>;
     protected renderRow(row: IRow<COLUMN, INPUT>): JSX.Element[];
     protected renderCell(row: IRow<COLUMN, INPUT>, column: IColumn<COLUMN, INPUT>): JSX.Element;

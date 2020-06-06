@@ -35,9 +35,9 @@ export declare class Form<META> extends React.Component<IProps<META>, IState> {
     private readonly functionInformation;
     constructor(props: IProps<META>);
     render(): JSX.Element;
-    protected readonly rows: IRow<META>[];
+    protected get rows(): IRow<META>[];
     protected createRow(input: InputCase<META>): IRow<META>;
-    protected readonly columns: IColumn<META>[];
+    protected get columns(): IColumn<META>[];
     protected generateInputColumns(): Iterable<IColumn<META>>;
     protected createInputColumn(parameterIndex: number): IColumn<META>;
     protected generateReturnValueColumn(): Iterable<IColumn<META>>;
@@ -45,7 +45,7 @@ export declare class Form<META> extends React.Component<IProps<META>, IState> {
     protected createOutputColumn(parameterIndex: number): IColumn<META>;
     static nameInputParameter(parameterName: string): string;
     static nameOutputParameter(parameterName: string): string;
-    static readonly nameReturnValue: string;
+    static get nameReturnValue(): string;
 }
 export declare abstract class FormBuilder<META = {}> {
     protected abstract readonly func: (...args: any[]) => any;
@@ -57,8 +57,8 @@ export declare abstract class FormBuilder<META = {}> {
         [key: string]: Parameter<META>;
     };
     protected abstract readonly returnValue: ReturnValue<META> | null;
-    protected readonly className: string;
-    private readonly functionInformation;
+    protected get className(): string;
+    private get functionInformation();
     protected forwardInputCase(args: any[], meta: META): InputCase<META>;
     protected backwardInputCase(args: any[], meta: META, parameterName: string): InputCase<META>;
     build(): JSX.Element;

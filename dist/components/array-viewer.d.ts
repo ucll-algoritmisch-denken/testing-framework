@@ -12,7 +12,7 @@ export interface IState {
 export declare class ArrayViewer extends React.Component<IProps, IState> {
     constructor(props: IProps);
     render(): JSX.Element;
-    protected readonly htmlClasses: string[];
+    protected get htmlClasses(): string[];
     protected renderEmptyObject(): JSX.Element;
     protected renderNonEmptyObject(keys: string[]): JSX.Element;
     protected renderRows(keys: string[]): JSX.Element[];

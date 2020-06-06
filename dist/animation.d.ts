@@ -6,13 +6,13 @@ export interface IAnimation<T> {
 declare abstract class Animation<T> implements IAnimation<T> {
     abstract at(t: number): T;
     abstract readonly duration: number;
-    readonly endValue: T;
+    get endValue(): T;
 }
 declare class Sequence<T> extends Animation<T> {
     private readonly children;
     constructor(children: IAnimation<T>[]);
     readonly duration: number;
-    readonly endValue: T;
+    get endValue(): T;
     at(t: number): T;
 }
 export declare function constant<T>(value: T, duration: number): IAnimation<T>;

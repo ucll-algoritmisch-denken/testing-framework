@@ -4,8 +4,8 @@ export declare class TotalScoreSection implements ISection {
     private sections;
     constructor(sections: ISection[]);
     id: string;
-    readonly tocEntry: JSX.Element;
+    get tocEntry(): JSX.Element;
     isScored(): boolean;
     hasDifficulty(): boolean;
-    readonly content: JSX.Element;
+    get content(): JSX.Element;
 }

@@ -5,7 +5,7 @@ export declare abstract class ExerciseGroup<T> {
         [key in keyof T]: IExercise;
     };
     constructor();
-    readonly score: Score;
+    get score(): Score;
     private cachedExercises;
     exercise(id: keyof T): IExercise;
 }

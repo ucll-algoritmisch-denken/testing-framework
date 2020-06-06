@@ -3,8 +3,8 @@ declare const pack: unique symbol;
 export declare abstract class Solution<Ps extends any[], R> {
     abstract readonly label: string;
     abstract readonly implementation: (...args: Ps) => R;
-    readonly dependencies: ((...args: any[]) => any)[];
-    readonly sourceCode: SourceCode;
+    get dependencies(): ((...args: any[]) => any)[];
+    get sourceCode(): SourceCode;
 }
 export interface ISolutionPack<Ps extends any[], R> {
     (...args: Ps): R;

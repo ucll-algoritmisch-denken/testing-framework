@@ -7,8 +7,8 @@ export declare abstract class Explanations implements ISection {
     protected abstract readonly caption: string;
     protected abstract readonly header: JSX.Element;
     protected abstract readonly explanations: JSX.Element;
-    readonly tocEntry: JSX.Element;
+    get tocEntry(): JSX.Element;
     isScored(): this is IScored;
     hasDifficulty(): boolean;
-    readonly content: JSX.Element;
+    get content(): JSX.Element;
 }

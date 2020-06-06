@@ -14,19 +14,19 @@ export declare abstract class ReferenceBasedCodingExerciseSection<Ps extends any
     /**
      * Do not override. Override createExercise() instead.
      */
-    protected readonly exercise: Exercise<Ps, R, META>;
-    readonly id: string;
+    protected get exercise(): Exercise<Ps, R, META>;
+    get id(): string;
     isScored(): this is IScored;
     hasDifficulty(): this is IHasDifficulty;
-    readonly score: Score;
-    readonly caption: string;
-    protected readonly exerciseContent: JSX.Element;
+    get score(): Score;
+    get caption(): string;
+    protected get exerciseContent(): JSX.Element;
     protected renderDescription(): JSX.Element;
     protected renderHint(): JSX.Element;
     protected renderSolution(): JSX.Element;
-    protected readonly htmlClasses: string[];
-    protected readonly hint: JSX.Element | null;
-    protected readonly solutions: Solution<Ps, R>[];
-    protected readonly header: JSX.Element;
+    protected get htmlClasses(): string[];
+    protected get hint(): JSX.Element | null;
+    protected get solutions(): Solution<Ps, R>[];
+    protected get header(): JSX.Element;
 }
 export {};

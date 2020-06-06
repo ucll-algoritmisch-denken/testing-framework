@@ -9,10 +9,10 @@ export declare abstract class MultiCodingExerciseSection<T> extends ExerciseSect
     };
     protected abstract readonly testedImplementations: MaybePartial<T>;
     constructor();
-    readonly id: string;
-    protected readonly header: JSX.Element;
-    readonly score: Score;
+    get id(): string;
+    protected get header(): JSX.Element;
+    get score(): Score;
     private cachedExercises;
     protected exercise(id: keyof T): IExercise;
-    protected readonly exerciseIds: (keyof T)[];
+    protected get exerciseIds(): (keyof T)[];
 }

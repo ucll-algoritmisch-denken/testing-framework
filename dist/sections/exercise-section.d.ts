@@ -9,10 +9,10 @@ export declare abstract class ExerciseSection implements ISection, IHasDifficult
     abstract readonly caption: string;
     protected abstract readonly header: JSX.Element;
     protected abstract readonly exerciseContent: JSX.Element;
-    readonly content: JSX.Element;
-    readonly tocEntry: JSX.Element;
+    get content(): JSX.Element;
+    get tocEntry(): JSX.Element;
     isScored(): this is IScored;
     hasDifficulty(): this is IHasDifficulty;
-    protected readonly htmlClasses: string[];
+    protected get htmlClasses(): string[];
     protected renderDifficultyViewer(): JSX.Element;
 }

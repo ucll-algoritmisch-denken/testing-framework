@@ -8,7 +8,7 @@ export declare abstract class ComparisonAssertion<T> extends TabularAssertion<T>
     protected abstract readonly expected: Maybe<T>;
     protected abstract isCorrect(actual: T): boolean;
     protected renderValue(x: T): JSX.Element;
-    protected readonly htmlClasses: string[];
+    protected get htmlClasses(): string[];
     protected generateRows(actual: Maybe<any>, outcome: Outcome): Iterable<IRow>;
     protected renderOriginalRow(original: any): JSX.Element;
     protected renderExpectedRow(expected: any): JSX.Element;

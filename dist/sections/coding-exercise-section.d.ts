@@ -21,18 +21,18 @@ export declare abstract class CodingExerciseSection<Ps extends any[], R> extends
     protected abstract readonly verifySolutions: boolean;
     constructor();
     private readonly cachedReferenceImplementationInformation;
-    protected readonly referenceImplementationInformation: FunctionInformation;
-    readonly id: string;
-    readonly caption: string;
+    protected get referenceImplementationInformation(): FunctionInformation;
+    get id(): string;
+    get caption(): string;
     /**
      * If not null, will be put in HintViewer.
      */
-    protected readonly hint: JSX.Element | null;
-    protected readonly header: JSX.Element;
-    readonly score: import("..").Score;
-    protected readonly exerciseContent: JSX.Element;
+    protected get hint(): JSX.Element | null;
+    protected get header(): JSX.Element;
+    get score(): import("..").Score;
+    protected get exerciseContent(): JSX.Element;
     protected renderHint(): JSX.Element;
     private cachedExercise;
-    protected readonly exercise: IExercise;
-    protected readonly solutions: JSX.Element;
+    protected get exercise(): IExercise;
+    protected get solutions(): JSX.Element;
 }

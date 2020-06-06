@@ -3,6 +3,6 @@ export declare class Lazy<T> {
     private forced;
     private __value;
     constructor(fetch: () => T);
-    readonly value: T;
+    get value(): T;
     private force;
 }

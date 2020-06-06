@@ -19,9 +19,9 @@ export declare abstract class MvcCodingExerciseSection<M, V, C> extends Exercise
     private cachedModelExerciseGroup;
     private cachedViewExerciseGroup;
     private cachedControllerExerciseGroup;
-    protected readonly modelExerciseGroup: ExerciseGroup<M>;
-    protected readonly viewExerciseGroup: ExerciseGroup<V>;
-    protected readonly controllerExerciseGroup: ExerciseGroup<C>;
+    protected get modelExerciseGroup(): ExerciseGroup<M>;
+    protected get viewExerciseGroup(): ExerciseGroup<V>;
+    protected get controllerExerciseGroup(): ExerciseGroup<C>;
     static repackTestedImplementations<M, V, C>(referenceImplementations: {
         model: M;
         view: V;
@@ -36,7 +36,7 @@ export declare abstract class MvcCodingExerciseSection<M, V, C> extends Exercise
         controller: MaybePartial<C>;
     };
     constructor();
-    readonly id: string;
-    protected readonly header: JSX.Element;
-    readonly score: Score;
+    get id(): string;
+    protected get header(): JSX.Element;
+    get score(): Score;
 }

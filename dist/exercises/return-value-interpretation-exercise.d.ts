@@ -2,9 +2,9 @@
 export declare abstract class ReturnValueInterpretationExercise<Ps extends any[], R> {
     protected abstract readonly function: (...args: Ps) => R;
     protected abstract generateInputs(): Iterable<Ps>;
-    private readonly rows;
+    private get rows();
     private createRow;
-    private readonly columns;
+    private get columns();
     private createParameterColumns;
     private createParameterColumn;
     protected createParameterColumnHeader(parameterName: string): JSX.Element;

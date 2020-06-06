@@ -4,8 +4,8 @@ export declare class FunctionInformation {
     readonly functionName: string;
     readonly parameterNames: string[];
     constructor(functionName: string, parameterNames: string[]);
-    readonly signature: string;
-    readonly parameterCount: number;
+    get signature(): string;
+    get parameterCount(): number;
     parameterWithNameExists(parameterName: string): boolean;
     specifyTypes(parameterTypes: IType<any>[], returnType: IType<any>): TypedFunctionInformation;
     verifyCall(fcr: FunctionCallResults, ignoredParameters?: string[]): boolean;
@@ -23,10 +23,10 @@ export declare class FunctionCallResults {
     returnValue: any;
     constructor(func: (...args: any[]) => any, argumentsBeforeCall: any[], argumentsAfterCall: any[], returnValue: any);
     sameAs(that: FunctionCallResults): boolean;
-    readonly namedArgumentsBeforeCall: {
+    get namedArgumentsBeforeCall(): {
         [key: string]: any;
     };
-    readonly namedArgumentsAfterCall: {
+    get namedArgumentsAfterCall(): {
         [key: string]: any;
     };
     private nameParameters;
@@ -38,10 +38,10 @@ export declare class TypedFunctionCallResults<Ps extends any[], R> {
     returnValue: R;
     constructor(func: (...args: Ps) => R, argumentsBeforeCall: Ps, argumentsAfterCall: Ps, returnValue: R);
     sameAs(that: TypedFunctionCallResults<Ps, R>): boolean;
-    readonly namedArgumentsBeforeCall: {
+    get namedArgumentsBeforeCall(): {
         [key: string]: any;
     };
-    readonly namedArgumentsAfterCall: {
+    get namedArgumentsAfterCall(): {
         [key: string]: any;
     };
     private nameParameters;

@@ -14,11 +14,11 @@ export declare abstract class BasicCodingExerciseSection<Ps extends any[], R> ex
     protected abstract readonly description: JSX.Element;
     protected abstract readonly prototypeFunctionInformation: FunctionInformation;
     constructor();
-    readonly id: string;
-    readonly caption: string;
-    protected readonly header: JSX.Element;
-    readonly score: import("..").Score;
-    protected readonly exerciseContent: JSX.Element;
+    get id(): string;
+    get caption(): string;
+    protected get header(): JSX.Element;
+    get score(): import("..").Score;
+    protected get exerciseContent(): JSX.Element;
     private cachedExercise;
-    protected readonly exercise: IExercise;
+    protected get exercise(): IExercise;
 }

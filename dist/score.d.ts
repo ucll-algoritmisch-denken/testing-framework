@@ -4,7 +4,7 @@ export declare class Score {
     constructor(grade: number, maximum: number);
     add(other: Score): Score;
     scale(newMaximum: number): Score;
-    readonly isPerfect: boolean;
+    get isPerfect(): boolean;
     static summate(...scores: Score[]): Score;
 }
 export interface IScored {
