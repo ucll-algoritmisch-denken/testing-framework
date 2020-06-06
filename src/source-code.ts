@@ -21,7 +21,7 @@ export class SourceCode
     {
         if ( this.language === Language.JavaScript )
         {
-            return new SourceCode(Language.JavaScript, js_beautify(this.sourceCode, { brace_style: 'collapse-preserve-inline' }));
+            return new SourceCode(Language.JavaScript, js_beautify(this.sourceCode, { brace_style: 'collapse', keep_array_indentation: true }));
         }
         else
         {
