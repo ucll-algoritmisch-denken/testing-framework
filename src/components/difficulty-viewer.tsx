@@ -1,6 +1,6 @@
 import React from 'react';
 import { difficulty } from '../difficulty';
-import { repeat } from 'js-algorithms';
+import Rating from 'react-rating';
 import styled from 'styled-components';
 
 
@@ -16,13 +16,25 @@ export interface IState
 
 }
 
-const StyledSpan = styled.span`
-    display: inline-block;
-    text-align: center;
+
+const Star = styled.span`
+    background: black;
+    color: white;
     user-select: none;
-    cursor: default;
 `;
 
+const empty = (
+    <Star>☆</Star>
+);
+
+const filled = (
+    <Star>★</Star>
+);
+
+const StyledRating = styled(Rating)`
+    background: black;
+    margin: 1px;
+`;
 
 export class DifficultyViewer extends React.Component<IProps, IState>
 {
@@ -33,15 +45,10 @@ export class DifficultyViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const difficulty = this.props.difficulty;
-        const star = '★';
-        const smallStar = '⭑';
-        const text = repeat<string>(difficulty, difficulty < 4 ? star : smallStar).join('');
+        const difficulty = this.props.difficulty / 2;
 
         return (
-            <StyledSpan className={this.props.className}>
-                {text}
-            </StyledSpan>
+            <StyledRating start={0} stop={3} fractions={2} readonly={true} emptySymbol={empty} fullSymbol={filled} initialRating={difficulty} className='difficulty' />
         );
     }
 }

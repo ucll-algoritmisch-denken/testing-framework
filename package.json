@@ -72,11 +72,14 @@
     "predicates": "^2.0.3",
     "react-codemirror2": "^7.2.0",
     "react-collapsible": "^2.8.0",
+    "react-rating": "^2.0.5",
     "react-sidebar": "^3.0.2",
     "react-tabs": "^3.1.1",
     "styled-components": "^5.1.1"
   },
   "peerDependencies": {
-    "maybe": "github:UCLeuvenLimburg/maybe"
+    "maybe": "github:UCLeuvenLimburg/maybe",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
