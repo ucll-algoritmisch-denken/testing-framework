@@ -9,4 +9,5 @@ export interface IState {
 export declare class DifficultyViewer extends React.Component<IProps, IState> {
     constructor(props: IProps);
     render(): JSX.Element;
+    private get difficultySymbol();
 }
