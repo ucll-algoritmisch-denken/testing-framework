@@ -1,6 +1,5 @@
 import React from 'react';
 import { difficulty } from '../difficulty';
-import Rating from 'react-rating';
 import styled from 'styled-components';
 
 
@@ -17,24 +16,29 @@ export interface IState
 }
 
 
-const Star = styled.span`
+function difficultyToNumberColor(difficulty : number) : string
+{
+    return [
+        '#AFA',
+        '#0F0',
+        '#FF0',
+        '#F80',
+        '#F00',
+    ][difficulty-1];
+}
+
+const Container = styled.span<{ difficulty : number }>`
     background: black;
-    color: white;
+    text-align: center;
+    color: ${props => difficultyToNumberColor(props.difficulty)};
+    padding-top: 0.1em;
+    font-size: 170%;
+    font-weight: normal;
     user-select: none;
+    cursor: default;
+    padding: 0.1em;
 `;
 
-const empty = (
-    <Star>☆</Star>
-);
-
-const filled = (
-    <Star>★</Star>
-);
-
-const StyledRating = styled(Rating)`
-    background: black;
-    margin: 1px;
-`;
 
 export class DifficultyViewer extends React.Component<IProps, IState>
 {
@@ -45,10 +49,17 @@ export class DifficultyViewer extends React.Component<IProps, IState>
 
     public render()
     {
-        const difficulty = this.props.difficulty / 2;
+        const difficulty = this.props.difficulty;
 
         return (
-            <StyledRating start={0} stop={3} fractions={2} readonly={true} emptySymbol={empty} fullSymbol={filled} initialRating={difficulty} className='difficulty' />
+            <Container difficulty={difficulty}>
+                {this.difficultySymbol}
+            </Container>
         );
+    }
+
+    private get difficultySymbol()
+    {
+        return "❶❷❸❹❺".charAt(this.props.difficulty - 1);
     }
 }
