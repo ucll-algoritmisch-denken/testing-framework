@@ -16,6 +16,12 @@ const InvisibleDifficultyViewer = styled(DifficultyViewer)`
     visibility: hidden;
 `;
 
+const Header = styled.header`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`;
+
 // TODO Get rid of this class
 export abstract class Exercise implements ISection
 {
@@ -35,9 +41,9 @@ export abstract class Exercise implements ISection
     {
         return (
             <section className={classNames(this.htmlClasses)}>
-                <header>
+                <Header>
                     {this.renderDifficultyViewer()} {this.header}
-                </header>
+                </Header>
                 <div className="content">
                     {this.exerciseContent}
                 </div>
