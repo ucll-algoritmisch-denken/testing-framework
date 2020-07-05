@@ -10,7 +10,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
+    background: black;
+    padding: 2px;
+    margin: 2px;
 `;
 
 const Caption = styled.div`

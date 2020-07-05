@@ -27,8 +27,8 @@ const TopLevelContainer = styled.div`
 `;
 
 const EntryContainer = styled.div<{isSelected : boolean}>`
-    border-left: 5px solid ${props => props.isSelected ? 'black' : 'transparent'};
-    border-right: 5px solid ${props => props.isSelected ? 'black' : 'transparent'};
+    background: ${props => props.isSelected ? '#77F' : 'white'};
+    padding: 2px 4px;
 `;
 
 export class TableOfContents<T> extends React.Component<IProps<T>, IState>
