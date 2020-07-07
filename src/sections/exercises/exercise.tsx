@@ -22,7 +22,7 @@ const Header = styled.header`
     align-items: center;
 `;
 
-// TODO Get rid of this class
+// TODO Get rid of this class, has been replaced by ExerciseSection
 export abstract class Exercise implements ISection
 {
     public abstract readonly id : string;
