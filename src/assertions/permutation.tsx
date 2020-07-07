@@ -6,6 +6,7 @@ import { isPermutation } from 'js-algorithms';
 import { Maybe } from 'maybe';
 import './permutation.scss';
 import { deepEqual } from '../equality';
+import isArray from 'predicates/array';
 
 
 export class PermutationAssertion<T> implements IAssertion<T>
@@ -30,7 +31,7 @@ class PermutationAssertionResult implements IResult
     get outcome(): Outcome
     {
         return this.actual.caseOf({
-            just: value => isPermutation(this.expected, value, this.equality) ? Outcome.Pass : Outcome.Fail,
+            just: value => isArray(value) && isPermutation(this.expected, value, this.equality) ? Outcome.Pass : Outcome.Fail,
             nothing: () => Outcome.Skip
         });
     }
