@@ -12,6 +12,12 @@ const DifficultyViewer = styled(UnstyledDifficultyViewer)`
     width: 4em;
 `;
 
+const Header = styled.header`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`;
+
 export abstract class ExerciseSection implements ISection, IHasDifficulty, IScored
 {
     public abstract readonly score: Score;
@@ -30,9 +36,9 @@ export abstract class ExerciseSection implements ISection, IHasDifficulty, IScor
     {
         return (
             <section className={classNames(this.htmlClasses)}>
-                <header>
+                <Header>
                     {this.renderDifficultyViewer()} {this.header}
-                </header>
+                </Header>
                 <div className="content">
                     {this.exerciseContent}
                 </div>
