@@ -1,7 +1,4 @@
 import React from 'react';
-import * as ATF from 'algo-testing-framework';
-import { range } from 'js-algorithms';
-import { styled } from 'algo-testing-framework';
 import { Box } from './box';
 
 
