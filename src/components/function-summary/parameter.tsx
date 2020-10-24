@@ -12,7 +12,6 @@ export interface Props
 }
 
 
-
 export class Parameter extends React.Component<Props>
 {
     render() : JSX.Element

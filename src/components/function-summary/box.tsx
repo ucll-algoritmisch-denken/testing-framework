@@ -32,13 +32,20 @@ const Category = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     font-variant: small-caps;
     font-weight: bold;
     background: #77F;
     width: 7em;
+    user-select: none;
+    pointer:
 `;
 
 const Name = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding-left: 1em;
     font-family: 'Courier New', Courier, monospace;
 `;
@@ -51,6 +58,8 @@ const Type = styled.div`
     color: white;
     font-family: 'Courier New', Courier, monospace;
     min-width: 8em;
+    padding: 0.2em 1em;
+    user-select: none;
 `;
 
 const Description = styled.div`
