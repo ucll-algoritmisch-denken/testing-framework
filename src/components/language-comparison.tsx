@@ -60,6 +60,9 @@ export class LanguageComparison extends React.Component<IProps, IState>
         case Language.Pseudocode:
             return 'Pseudocode';
 
+        case Language.Ruby:
+                return 'Ruby';
+
         default:
             throw new Error(`Unknown language`);
         }

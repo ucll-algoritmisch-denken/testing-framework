@@ -11,6 +11,7 @@ export enum Language
     CommonLisp,
     Factor,
     Pseudocode,
+    Ruby,
 }
 
 export class SourceCode

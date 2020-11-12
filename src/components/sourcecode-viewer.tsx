@@ -26,7 +26,7 @@ export class SourceCodeViewer extends React.Component<IProps, IState>
     render()
     {
         const me = this;
-        
+
         return (
             <CodeMirror value={this.props.sourceCode.sourceCode} onBeforeChange={() => {}} options={options()} className='source-code-viewer' />
         );
@@ -54,7 +54,7 @@ export class SourceCodeViewer extends React.Component<IProps, IState>
 
                 case Language.CPP:
                     return 'text/x-c++src';
-                    
+
                 case Language.CommonLisp:
                     return 'text/plain';
 
@@ -63,6 +63,9 @@ export class SourceCodeViewer extends React.Component<IProps, IState>
 
                 case Language.Pseudocode:
                     return 'text/plain';
+
+                case Language.Ruby:
+                    return 'text/x-ruby';
 
                 default:
                     throw new Error(`Unknown language`);

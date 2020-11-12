@@ -6,7 +6,8 @@ export declare enum Language {
     CPP = 4,
     CommonLisp = 5,
     Factor = 6,
-    Pseudocode = 7
+    Pseudocode = 7,
+    Ruby = 8
 }
 export declare class SourceCode {
     language: Language;
