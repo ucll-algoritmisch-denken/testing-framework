@@ -40,6 +40,6 @@ export class FunctionSummary extends React.Component<Props>
                 </Header>
                 {this.props.children}
             </Container>
-        )
+        );
     }
 }
