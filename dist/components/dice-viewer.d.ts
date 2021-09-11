@@ -1,11 +1,6 @@
-import React from 'react';
-export interface IProps {
+/// <reference types="react" />
+export interface Props {
     dice: number[];
     className?: string;
 }
-export interface IState {
-}
-export declare class DiceViewer extends React.Component<IProps, IState> {
-    constructor(props: IProps);
-    render(): JSX.Element;
-}
+export declare function DiceViewer({ dice, className }: Props): JSX.Element;
